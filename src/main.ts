@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, ref } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createI18n, type LocaleMessages, type VueMessageType } from 'vue-i18n';
@@ -23,6 +23,9 @@ const i18n = createI18n({
  } as const);
 
 const app = createApp(App)
+
+const darkmode = ref(false);
+app.provide('darkmode', darkmode);
 
 app.use(router)
    .use(surveyPlugin)

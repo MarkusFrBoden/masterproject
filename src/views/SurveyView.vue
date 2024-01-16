@@ -3,6 +3,8 @@
         <h3>{{ $t('survey.h1') }}</h3>
     </div>
 
+    <br>
+
     <div class="btn-group">
         <button class="btn btn-outline-secondary"
             @click="ViewSurveyOverview = true; ViewSurvey = false; ViewSurveyCreator = false">{{ $t('survey.button1')
@@ -16,7 +18,7 @@
     </div>
 
 
-    <br><br><br>
+    <br><br>
     <div v-if="ViewSurveyOverview === true">
         <SurveyOverviewComp/>
     </div>

@@ -3,6 +3,10 @@ import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import "survey-core/i18n/german";
 import  { EUSurveyJSON, type Survey } from "../components/EUSurvey_json";
+import { watch, inject } from 'vue'; 
+import { ContrastDark } from "survey-core/themes";
+import { ContrastLight } from "survey-core/themes";
+
 
 const surveyJson: Survey = EUSurveyJSON;
 
@@ -15,7 +19,18 @@ const survey = new Model(surveyJson);
 
 survey.locale = "de";
 
-//survey.applyTheme(DefaultDark);
+const darkmode = inject('darkmode');
+
+// Watcher for isDark
+watch(
+darkmode,(newValue, oldValue) => {
+    if (!newValue) {
+      survey.applyTheme(ContrastLight);
+    } else {
+      survey.applyTheme(ContrastDark);
+    }
+  }
+);
 
 survey.onComplete.add(alertResults);
 </script>

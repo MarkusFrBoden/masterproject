@@ -9,7 +9,7 @@
   
   .dark {
     background: #16171d; 
-    color: #eba307;
+    color: #42b983;
   }
   
   button {
@@ -49,7 +49,7 @@
   }
   
   .dark nav a.router-link-exact-active {
-    color: #afb12e;
+    color: #42b983;
   }
 
   #logout {
@@ -59,7 +59,7 @@
   
   select {
       border: none; 
-      color:  #2c3e50; 
+      color:  #119432; 
       cursor: pointer; 
       background-color: transparent;
       border-radius: 4px;
@@ -67,3 +67,4 @@
       padding: 5px;
       -webkit-appearance: none;
     }
+
