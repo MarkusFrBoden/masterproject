@@ -1,7 +1,7 @@
 import { createApp, ref } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { createI18n, type LocaleMessages, type VueMessageType } from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
 import { useDark } from "@vueuse/core";
 
 //import survey components
@@ -13,9 +13,7 @@ import "survey-core/defaultV2.min.css";
 import en from './locales/en.json';
 import de from './locales/de.json';
 
-// Type-define 'de-DE' as the master schema for the resource
-type MessageSchema = typeof deDE
-
+//type MessageSchema = typeof de
 const i18n = createI18n({
   legacy: false,
   locale: 'de',

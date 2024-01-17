@@ -2,11 +2,13 @@
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import "survey-core/survey.i18n";
-import  { EUSurveyJSON, type Survey } from "../components/EUSurvey_json";
+import  { EUSurveyJSON} from "../components/EUSurvey_json";
+import {type Survey} from "../components/interfaces/surveyInterface.js"
 import { watch, inject, onMounted, ref, type Ref } from 'vue'; 
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 import { useI18n } from 'vue-i18n';
+
 
 
 const surveyJson: Survey = EUSurveyJSON;
