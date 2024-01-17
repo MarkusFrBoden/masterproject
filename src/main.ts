@@ -2,6 +2,7 @@ import { createApp, ref } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createI18n, type LocaleMessages, type VueMessageType } from 'vue-i18n';
+import { useDark } from "@vueuse/core";
 
 //import survey components
 import { surveyPlugin } from "survey-vue3-ui";
@@ -12,20 +13,24 @@ import "survey-core/defaultV2.min.css";
 import en from './locales/en.json';
 import de from './locales/de.json';
 
-//create an i18n instance
+// Type-define 'de-DE' as the master schema for the resource
+type MessageSchema = typeof deDE
+
 const i18n = createI18n({
-   locale: 'de',
-   fallbackLocale: 'en',
-   messages: {
-     en,
-     de,
-   },
- } as const);
+  legacy: false,
+  locale: 'de',
+  fallbackLocale: 'en',
+  messages: {
+    'en': en,
+    'de': de
+  }
+})
+
+const isDark = useDark();
 
 const app = createApp(App)
 
-const darkmode = ref(false);
-app.provide('darkmode', darkmode);
+app.provide('darkmode', isDark);
 
 app.use(router)
    .use(surveyPlugin)

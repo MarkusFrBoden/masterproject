@@ -9,21 +9,33 @@ import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
+import { useI18n } from 'vue-i18n';
+import { watch, onMounted } from 'vue'; 
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
   isAutoSave: true,
-  showTranslationTab: true
+  showTranslationTab: true,
+  showThemeTab: true
 };
 
  //Limited the number of showing locales in survey.locale property editor
 surveyLocalization.supportedLocales = ["de", "en"];
  
-editorLocalization.currentLocale = "de";
-
-
 const creator = new SurveyCreatorModel(creatorOptions);
 const surveyJson: Survey = EUSurveyJSON;
+
+
+const { locale } = useI18n();
+editorLocalization.currentLocale = locale.value;
+
+watch(
+   locale,
+  () => {
+    editorLocalization.currentLocale = locale.value;
+  }
+);
+
 
 creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(surveyJson);
 creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 

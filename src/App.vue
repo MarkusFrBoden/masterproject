@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, reactive, inject} from 'vue';
-import { useDark } from "@vueuse/core";
-import HouseWithDoor from '@/components/icons/HouseWithDoor.svg';
-import ArrowLeftCircle from '@/components/icons/ArrowLeftCircle.svg';
-import ArrowRightCircle from '@/components/icons/ArrowRightCircle.svg';
-import BrightnessHigh from '@/components/icons/BrightnessHigh.svg';
-import BoxWithRightArrowOut from '@/components/icons/BoxWithRightArrowOut.svg';
-import BoxWithRightArrowIn from '@/components/icons/BoxWithRightArrowIn.svg';
+import { ref, inject, type Ref } from 'vue';
+import ArrowLeftCircle from '@/components/icons/ArrowLeftCircle.vue';
+import ArrowRightCircle from '@/components/icons/ArrowRightCircle.vue';
+import BrightnessHigh from '@/components/icons/BrightnessHigh.vue';
+import BoxWithRightArrowOut from '@/components/icons/BoxWithRightArrowOut.vue';
+import BoxWithRightArrowIn from '@/components/icons/BoxWithRightArrowIn.vue';
+import HouseWithDoor from '@/components/icons/HouseWithDoor.vue';
 
 const loggedIn = ref(false);
-const isDark = useDark();
-const darkmode = inject('darkmode');
+
+const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
 
 </script>
 
 <template>
-  <div :class="{ dark: isDark }">
+  <div :class="{ dark: darkmode }">
 
     <header>
 
@@ -25,13 +24,13 @@ const darkmode = inject('darkmode');
           <div id="mouve" class="col">
             <div class="btn-group">
               <button class="btn btn-outline-secondary" @click="$router.push({ name: 'home' })">
-                <img :src="HouseWithDoor" alt="HouseWithDoor" />
+                <HouseWithDoor />
               </button>
               <button class="btn btn-outline-secondary" @click="$router.go(-1)">
-                <img :src="ArrowLeftCircle" alt="Arrow Left Circle" />
+                <ArrowLeftCircle />
               </button>
               <button class="btn btn-outline-secondary" @click="$router.go(1)">
-                <img :src="ArrowRightCircle" alt="Arrow Right Circle" />
+                <ArrowRightCircle />
               </button>
             </div>
           </div>
@@ -46,19 +45,19 @@ const darkmode = inject('darkmode');
 
           <div id="logout" class="col">
             <div class="btn-group">
-              <button class="btn btn-outline-secondary" @click="isDark = !isDark; darkmode = !darkmode">
-                <img :src="BrightnessHigh" alt="Brightness High" />
+              <button class="btn btn-outline-secondary" @click="darkmode = !darkmode">
+                <BrightnessHigh />
               </button>
-              <select class="btn btn-outline-secondary">
+              <select class="btn btn-outline-secondary" v-model="$i18n.locale">
                 <option value="en">EN</option>
                 <option value="de">DE</option>
               </select>
               <button class="btn btn-outline-secondary" @click="loggedIn = !loggedIn">
                 <div v-if="loggedIn">
-                  <img :src="BoxWithRightArrowOut" alt="Box With Right Arrow In" />
+                  <BoxWithRightArrowOut />
                 </div>
                 <div v-else>
-                  <img :src="BoxWithRightArrowIn" alt="Box With Right Arrow Out" />
+                  <BoxWithRightArrowIn />
                 </div>
 
               </button>
