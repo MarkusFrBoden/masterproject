@@ -3,41 +3,41 @@
 import 'survey-core/defaultV2.min.css';
 import "survey-creator-core/survey-creator-core.min.css";
 import "survey-creator-core/survey-creator-core.i18n.js";
-import "survey-creator-core/i18n/german";
-import  { EUSurveyJSON, type Survey } from "../components/EUSurvey_json";
-import type { ICreatorOptions } from "survey-creator-core";
+import "survey-core/survey.i18n.js";
+import  { EUSurveyJSON} from "../components/EUSurvey_json";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
 import { useI18n } from 'vue-i18n';
-import { watch, onMounted } from 'vue'; 
+import { watch } from 'vue';
 
-const creatorOptions: ICreatorOptions = {
+const options = {
   showLogicTab: true,
   isAutoSave: true,
   showTranslationTab: true,
   showThemeTab: true
 };
 
- //Limited the number of showing locales in survey.locale property editor
-surveyLocalization.supportedLocales = ["de", "en"];
- 
-const creator = new SurveyCreatorModel(creatorOptions);
-const surveyJson: Survey = EUSurveyJSON;
-
-
+//Add language option
 const { locale } = useI18n();
 editorLocalization.currentLocale = locale.value;
 
+ //Limited the number of showing locales in survey.locale property editor
+ surveyLocalization.supportedLocales = ["en","de"];
+ 
+const creator = new SurveyCreatorModel(options);
+creator.JSON = EUSurveyJSON;
+
+/* Funktioniert nicht!
 watch(
    locale,
   () => {
     editorLocalization.currentLocale = locale.value;
+    console.log(locale.value)
   }
-);
+);*/
 
-
-creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(surveyJson);
+creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(EUSurveyJSON);
 creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
   window.localStorage.setItem("survey-json", creator.text);
   callback(saveNo, true);

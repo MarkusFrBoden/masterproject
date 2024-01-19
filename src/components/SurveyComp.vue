@@ -3,7 +3,7 @@ import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import "survey-core/survey.i18n";
 import  { EUSurveyJSON} from "../components/EUSurvey_json";
-import {type Survey} from "../components/interfaces/surveyInterface.js"
+import type {Survey} from "../interfaces/surveyInterface.js"
 import { watch, inject, onMounted, ref, type Ref } from 'vue'; 
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
@@ -50,3 +50,4 @@ survey.onComplete.add(alertResults);
 <template>
   <SurveyComponent :model="survey" />
 </template>
+../interfaces/surveyInterface.js

@@ -1,46 +1,100 @@
 <template>
     <div>
-        <h3>{{ $t('survey.h1') }}</h3>
+      <h3>Survey Overview</h3>
     </div>
-
-    <br>
-
-    <div class="btn-group">
-        <button class="btn btn-outline-secondary"
-            @click="ViewSurveyOverview = true; ViewSurvey = false; ViewSurveyCreator = false">{{ $t('survey.button1')
-            }}</button>
-        <button class="btn btn-outline-secondary"
-            @click="ViewSurveyOverview = false; ViewSurvey = false; ViewSurveyCreator = true">{{ $t('survey.button2')
-            }}</button>
-        <button class="btn btn-outline-secondary"
-            @click="ViewSurveyOverview = false; ViewSurvey = true; ViewSurveyCreator = false">{{ $t('survey.button3')
-            }}</button>
-    </div>
-
-
-    <br><br>
-    <div v-if="ViewSurveyOverview === true">
-        <SurveyOverviewComp/>
-    </div>
-    <div v-else-if="ViewSurveyCreator === true">
-        <SurveyCreatorComp/>
-    </div>
-    <div v-else-if="ViewSurvey === true">
-        <SurveyComp/>
-    </div>
-
-</template>
   
-<script setup lang="ts">
-import SurveyOverviewComp from '@/components/SurveyOverviewComp.vue';
-import SurveyCreatorComp from '@/components/SurveyCreatorComp.vue';
-import SurveyComp from '@/components/SurveyComp.vue';
-import { ref } from 'vue';
-
-const ViewSurveyOverview = ref(true);
-const ViewSurvey = ref(false);
-const ViewSurveyCreator = ref(false);
-</script>
+    <div class="survey-list">
+      <transition-group name="list" tag="ul">
+        <div class="row">
+          <div class="col">
+              Bezeichnung
+            </div>
+          <div class="col">
+              Organisation
+            </div>
+            <div class="col">
+              Ersteller
+            </div>
+            <div class="col">
+              Erstellt am
+            </div>
+            <div class="col">
+              Bearbeitet von
+            </div>
+            <div class="col">
+              Bearbeitet am
+            </div>
+        </div>
+        <li v-for="survey in surveys" :key="survey._id">
+          <div class="row">
+            <div class="col">
+                <RouterLink :to="{name:'SurveyDetails', params:{id:survey._id}}">
+                    <a href="">{{ survey.title }}</a>
+                </RouterLink>
+            </div>
+            <div class="col">
+              {{ survey.createdFor }}
+            </div>
+            <div class="col">
+              {{ survey.createdBy }}
+            </div>
+            <div class="col">
+              {{ survey.createdAt }}
+            </div>
+            <div class="col">
+              {{ survey.updatedBy }}
+            </div>
+            <div class="col">
+              {{ survey.updatedAt }}
+            </div>
+          </div>
+        </li>
+      </transition-group>
   
-<style scoped></style>
+    </div>
   
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, inject } from 'vue';
+  
+  const api = inject('api') as any;
+  
+  const surveys = ref([]);
+  
+  const fetchData = async () => {
+    try {
+      const response = await api.get('/surveys');
+      surveys.value = response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
+  fetchData();
+  
+  
+  </script>
+  
+  <style scoped>
+  .survey-list {
+    max-width: 960px;
+    margin: 40px auto;
+  }
+  
+  .survey-list ul {
+    padding: 0
+  }
+  
+  .survey-list li {
+    list-style-type: none;
+    background: white;
+    padding: 16px;
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+  
+  .list-move {
+    transition: all 0.5s;
+  }
+  </style>

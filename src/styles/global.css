@@ -7,6 +7,10 @@
     z-index: 999;
   }
   
+body{
+  background: #dee6ee;
+}
+
   .dark {
     background: #16171d; 
     color: #72bbff;

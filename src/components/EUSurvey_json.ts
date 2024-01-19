@@ -1,6 +1,6 @@
 import imagede from "../assets/EUSurvey-Module_German.png"
 import imageen from "../assets/EUSurvey-Modules_English.png";
-import {type Survey} from "../components/interfaces/surveyInterface.js"
+import type {Survey} from "../interfaces/surveyInterface.js"
 
 const EUSurveyJSON: Survey = {
     "title": {
