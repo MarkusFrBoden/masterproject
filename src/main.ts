@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import { createI18n } from 'vue-i18n';
 import { useDark } from "@vueuse/core";
+import axios from 'axios';
 
 //import survey components
 import { surveyPlugin } from "survey-vue3-ui";
@@ -27,6 +28,11 @@ const i18n = createI18n({
 const isDark = useDark();
 
 const app = createApp(App)
+
+const api = axios.create({
+  baseURL: 'http://localhost:3000',
+});
+app.provide('api', api);
 
 app.provide('darkmode', isDark);
 

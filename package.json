@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
+    "axios": "^1.6.5",
     "bootstrap": "^5.3.2",
     "survey-creator-vue": "^1.9.125",
     "survey-vue3-ui": "^1.9.125",
