@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, inject, type Ref } from 'vue';
-import ArrowLeftCircle from '@/components/icons/ArrowLeftCircle.vue';
-import ArrowRightCircle from '@/components/icons/ArrowRightCircle.vue';
-import BrightnessHigh from '@/components/icons/BrightnessHigh.vue';
-import BoxWithRightArrowOut from '@/components/icons/BoxWithRightArrowOut.vue';
-import BoxWithRightArrowIn from '@/components/icons/BoxWithRightArrowIn.vue';
-import HouseWithDoor from '@/components/icons/HouseWithDoor.vue';
+import ArrowLeftCircle from './components/icons/ArrowLeftCircle.vue';
+import ArrowRightCircle from './components/icons/ArrowRightCircle.vue';
+import BrightnessHigh from './components/icons/BrightnessHigh.vue';
+import BoxWithRightArrowOut from './components/icons/BoxWithRightArrowOut.vue';
+import BoxWithRightArrowIn from './components/icons/BoxWithRightArrowIn.vue';
+import HouseWithDoor from './components/icons/HouseWithDoor.vue';
 
 const loggedIn = ref(false);
 

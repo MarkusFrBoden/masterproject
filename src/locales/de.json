@@ -1,18 +1,23 @@
 {
-    "welcome": "Wilkommen in der Applikation!",
-    "home": {
-      "title": "Start",
-      "h1": "Das ist die Startseite"
-    },
-    "survey": {
-        "title": "Umfrage",
-        "h1": "Das ist die Umfrageseite",
-        "button1":"Umfrage Übersicht",
-        "button2":"Umfragenerstellung",
-        "button3":"EU-Umfrage"
-      },
-    "about": {
-          "title": "Über",
-          "h1": "Dies ist eine Impressum-Seite"
-        }
+  "welcome": "Wilkommen in der Applikation!",
+  "home": {
+    "title": "Start",
+    "h1": "Das ist die Startseite"
+  },
+  "survey": {
+    "title": "Umfragen",
+    "h1": "Übersicht über erstellte Umfragen",
+    "buttonCreateSurvey":"Umfrage erstellen",
+    "buttonDeleteSurvey":"Umfrage löschen",
+    "column1": "Bezeichnung",
+    "column2": "Testorganisation",
+    "column3": "Ersteller",
+    "column4": "Erstellt am",
+    "column5": "Bearbeitet von",
+    "column6": "Bearbeitet am"
+  },
+  "about": {
+    "title": "Über",
+    "h1": "Dies ist eine Impressum-Seite"
   }
+}

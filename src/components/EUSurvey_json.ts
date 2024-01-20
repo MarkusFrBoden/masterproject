@@ -1,8 +1,7 @@
 import imagede from "../assets/EUSurvey-Module_German.png"
 import imageen from "../assets/EUSurvey-Modules_English.png";
-import type {Survey} from "../interfaces/surveyInterface.js"
 
-const EUSurveyJSON: Survey = {
+const EUSurveyJSON = {
     "title": {
         "de": "Fragebogen zur Bewertung der digitalen Reife für EDIH-Kunden",
         "en": "Digital Maturity Assessment Questionnaire for EDIH Customers"
