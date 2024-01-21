@@ -9,7 +9,8 @@
         <button class="btn btn-outline-secondary" @click="showInput = !showInput">
             {{ $t('survey.buttonCreateSurvey') }}
         </button>
-        <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0" @click="showDeleteOptions = !showDeleteOptions">
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
+            @click="showDeleteOptions = !showDeleteOptions">
             <div v-if="!showDeleteOptions">{{ $t('survey.buttonDeleteSurvey') }}</div>
             <div v-else> löschen beenden</div>
         </button>
@@ -37,15 +38,75 @@
             <div v-if="showDeleteOptions" class="col">
                 Delete?
             </div>
-            <div class="col"><b>{{ $t('survey.column1') }}</b></div>
-            <div class="col"><b>{{ $t('survey.column2') }}</b></div>
-            <div class="col"><b>{{ $t('survey.column3') }}</b></div>
-            <div class="col"><b>{{ $t('survey.column4') }}</b></div>
-            <div class="col"><b>{{ $t('survey.column5') }}</b></div>
-            <div class="col"><b>{{ $t('survey.column6') }}</b></div>
+            <div class="col" id="title">
+                <button class="flex-container" @click="handleSort('title')">
+                    <b>{{ $t('survey.column1') }}</b>
+                    <div v-if="OrderIcons.title && !OrderIcons.titleDown">
+                        <SortAlphaDown />
+                    </div>
+                    <div v-if="OrderIcons.title && OrderIcons.titleDown">
+                        <SortAlphaDownAlt />
+                    </div>
+                </button>
+            </div>
+            <div class="col" id="createdFor">
+                <button class="flex-container" @click="handleSort('createdFor')">
+                    <b>{{ $t('survey.column2') }}</b>
+                    <div v-if="OrderIcons.createdFor && !OrderIcons.createdForDown">
+                        <SortAlphaDown />
+                    </div>
+                    <div v-if="OrderIcons.createdFor && OrderIcons.createdForDown">
+                        <SortAlphaDownAlt />
+                    </div>
+                </button>
+            </div>
+            <div class="col" id="createdBy">
+                <button class="flex-container" @click="handleSort('createdBy')">
+                    <b>{{ $t('survey.column3') }}</b>
+                    <div v-if="OrderIcons.createdBy && !OrderIcons.createdByDown">
+                        <SortAlphaDown />
+                    </div>
+                    <div v-if="OrderIcons.createdBy && OrderIcons.createdByDown">
+                        <SortAlphaDownAlt />
+                    </div>
+                </button>
+            </div>
+            <div class="col" id="createdAt">
+                <button class="flex-container" @click="handleSort('createdAt')">
+                    <b>{{ $t('survey.column4') }}</b>
+                    <div v-if="OrderIcons.createdAt && !OrderIcons.createdAtDown">
+                        <SortNumericDown />
+                    </div>
+                    <div v-if="OrderIcons.createdAt && OrderIcons.createdAtDown">
+                        <SortNumericDownAlt />
+                    </div>
+                </button>
+            </div>
+            <div class="col" id="updatedBy">
+                <button class="flex-container" @click="handleSort('updatedBy')">
+                    <b>{{ $t('survey.column5') }}</b>
+                    <div v-if="OrderIcons.updatedBy && !OrderIcons.updatedByDown">
+                        <SortAlphaDown />
+                    </div>
+                    <div v-if="OrderIcons.updatedBy && OrderIcons.updatedByDown">
+                        <SortAlphaDownAlt />
+                    </div>
+                </button>
+            </div>
+            <div class="col" id="updatedAt">
+                <button class="flex-container" @click="handleSort('updatedAt')">
+                    <b>{{ $t('survey.column6') }}</b>
+                    <div v-if="OrderIcons.updatedAt && !OrderIcons.updatedAtDown">
+                        <SortNumericDown />
+                    </div>
+                    <div v-if="OrderIcons.updatedAt && OrderIcons.updatedAtDown">
+                        <SortNumericDownAlt />
+                    </div>
+                </button>
+            </div>
         </div>
 
-        <li v-for="survey in surveys" :key="survey._id.toString()">
+        <li v-for="survey in orderedSurveys" :key="survey._id.toString()">
             <div class="row">
                 <div v-if="showDeleteOptions" class="col">
                     <input type="checkbox" v-model="selectedItems" :value="survey._id" />
@@ -66,8 +127,12 @@
 </template>
   
 <script setup lang="ts">
-import { ref, inject } from 'vue';
+import { ref, inject,computed } from 'vue';
 import type { Survey } from "../interfaces/Survey.js"
+import SortNumericDown from '../components/icons/SortNumericDown.vue';
+import SortNumericDownAlt from '../components/icons/SortNumericDownAlt.vue';
+import SortAlphaDown from '../components/icons/SortAlphaDown.vue';
+import SortAlphaDownAlt from '../components/icons/SortAlphaDownAlt.vue';
 
 //Get first data
 const api = inject('api') as any;
@@ -97,6 +162,60 @@ let showDeleteOptions = ref(false);
 const deleteSelectedItems = () => {
     console.log('Deleting selected items:', selectedItems);
 };
+
+
+//Order Logik
+let order = ref<keyof Survey>('updatedAt');
+let isAscending = ref<boolean>(true);
+
+const orderedSurveys = computed(() => {
+    return [...surveys.value].sort((a: Survey, b: Survey) => {
+        const result = a[order.value] > b[order.value] ? 1 : -1;
+        return isAscending.value ? result : -result;
+    });
+});
+
+type OrderIconsType = {
+    [key: string]: boolean;
+}
+
+const OrderIcons = ref<OrderIconsType>({
+    "title": false,
+    "titleDown": false,
+    "createdFor": false,
+    "createdForDown": false,
+    "createdBy": false,
+    "createdByDown": false,
+    "createdAt": false,
+    "createdAtDown": false,
+    "updatedBy": false,
+    "updatedByDown": false,
+    "updatedAt": true,
+    "updatedAtDown": false,
+});
+
+const handleSort = (columnId: string) => {
+    Object.keys(OrderIcons.value).forEach((key) => {
+        if (key !== columnId && key !== columnId + "Down") {
+            OrderIcons.value[key] = false;
+        }
+    });
+    if (!OrderIcons.value[columnId]) { 
+        OrderIcons.value[columnId] = true; 
+        order.value = columnId;
+        isAscending.value = true;
+    }
+    else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) { 
+        OrderIcons.value[columnId + "Down"] = true;
+        order.value = columnId;
+        isAscending.value = false;
+    }
+    else { 
+        OrderIcons.value[columnId] = false; 
+        OrderIcons.value[columnId + "Down"] = false; 
+        isAscending.value = false;
+    }
+}
 
 </script>
   
@@ -146,5 +265,13 @@ const deleteSelectedItems = () => {
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
+}
+
+.flex-container {
+    background: none;
+}
+
+.flex-container b {
+    margin-right: 8px;
 }
 </style>

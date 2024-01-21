@@ -6,6 +6,7 @@ export interface Survey {
     createdAt: Date;
     updatedBy: String;
     updatedAt: Date;
-    responses: Array<{ [key: string]: any }>
-    SurveyJson: Object
+    responses: Array<{ [key: string]: any }>;
+    SurveyJson: Object;
+    [key: string]: any;
 }
