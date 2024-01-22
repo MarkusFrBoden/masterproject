@@ -1,5 +1,5 @@
 export interface Survey {
-    _id: String;
+    _id?: String;
     title: String;
     createdFor: String;
     createdBy: String;

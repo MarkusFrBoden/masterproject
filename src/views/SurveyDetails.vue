@@ -23,7 +23,7 @@ const survey = ref<Survey>();
 
 const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:3000/surveys/' + props.id);
+        const response = await fetch('http://localhost:3000/SurveyById/' + props.id);
         const data: Survey = await response.json();
         survey.value = data;
     } catch (err: any) {

@@ -6,7 +6,7 @@
     <br>
 
     <div>
-        <button class="btn btn-outline-secondary" @click="showInput = !showInput">
+        <button class="btn btn-outline-secondary" v-if="!showDeleteOptions" @click="showInput = !showInput">
             {{ $t('survey.buttonCreateSurvey') }}
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
@@ -14,8 +14,14 @@
             <div v-if="!showDeleteOptions">{{ $t('survey.buttonDeleteSurvey') }}</div>
             <div v-else> löschen beenden</div>
         </button>
-        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="deleteSelectedItems">
-            Delete Selected
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
+            <div class="delete-selected">
+                Delete Selected
+            </div>
+        </button>
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
+            @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
+            löschen beenden
         </button>
     </div>
 
@@ -29,6 +35,20 @@
             <div class="button-group">
                 <button @click="showInput = false;">Abbrechen</button>
                 <button @click="createSurvey">Erstellen</button>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="showDeleteQuestion" class="overlay">
+        <div class="input-container">
+            <h3>Sollen die folgenden Umfragen wirklich gelöscht werden?</h3>
+            <li v-for="item in selectedItems" :key="item._id?.toString()">
+                Bezeichnung: {{ item.title }}, Organisation: {{ item.title }}
+            </li>
+            <br>
+            <div class="button-group">
+                <button @click="showDeleteQuestion = false;">Abbrechen</button>
+                <button @click="deleteSelectedItems">Löschen</button>
             </div>
         </div>
     </div>
@@ -106,13 +126,14 @@
             </div>
         </div>
 
-        <li v-for="survey in orderedSurveys" :key="survey._id.toString()">
+    <transition-group name="list">
+        <li v-for="survey in orderedSurveys" :key="survey._id?.toString()">
             <div class="row">
                 <div v-if="showDeleteOptions" class="col">
-                    <input type="checkbox" v-model="selectedItems" :value="survey._id" />
+                    <input type="checkbox" v-model="selectedItems" :value="{ _id: survey._id, title: survey.title, createdFor: survey.createdFor }" />
                 </div>
                 <div class="col">
-                    <RouterLink :to="{ name: 'SurveyDetails', params: { id: survey._id.toString() } }">
+                    <RouterLink :to="{ name: 'SurveyDetails', params: { id: survey._id?.toString() } }">
                         <a href="">{{ survey.title }}</a>
                     </RouterLink>
                 </div>
@@ -123,11 +144,12 @@
                 <div class="col">{{ survey.updatedAt }}</div>
             </div>
         </li>
+    </transition-group>
     </div>
 </template>
   
 <script setup lang="ts">
-import { ref, inject,computed } from 'vue';
+import { ref, inject, computed } from 'vue';
 import type { Survey } from "../interfaces/Survey.js"
 import SortNumericDown from '../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../components/icons/SortNumericDownAlt.vue';
@@ -139,7 +161,7 @@ const api = inject('api') as any;
 const surveys = ref<Survey[]>([]);
 const fetchData = async () => {
     try {
-        const response = await api.get('/surveys');
+        const response = await api.get('/SurveysOverview');
         surveys.value = response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -151,16 +173,57 @@ fetchData();
 let showInput = ref(false);
 let newSurveyTitle = "";
 let newSurveyOrganisation = "";
-const createSurvey = () => {
-    showInput.value = false;
+let PostSurvey = ref<Survey>({
+    "title": "",
+    "createdFor": "",
+    "createdBy": "Markus Boden",
+    "createdAt": new Date(),
+    "updatedBy": "Markus Boden",
+    "updatedAt": new Date(),
+    "responses": [],
+    "SurveyJson": {}
+});
+
+const createSurvey = async () => {
+    try {
+        PostSurvey.value.title = newSurveyTitle;
+        PostSurvey.value.createdFor = newSurveyOrganisation;
+        const response = await api.post('/Survey', PostSurvey.value);
+        console.log('POST Response:', response.data);
+        showInput.value = false;
+        fetchData();
+        order.value = "updatedAt";
+        OrderIcons.value["updatedAt"] = true;
+        OrderIcons.value["updatedAtDown"] = true;
+        handleSort('updatedAt');
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 };
 
 
-//Delete Survey
-let selectedItems = ref([]);
+//Delete Surveys
+interface deleteItems {
+  _id: string;
+  title: string;
+  createdFor: string;
+}
+let selectedItems = ref<deleteItems[]>([])
 let showDeleteOptions = ref(false);
-const deleteSelectedItems = () => {
-    console.log('Deleting selected items:', selectedItems);
+let showDeleteQuestion = ref(false);
+const deleteSelectedItems = async () => {
+    try {
+    const IDs = selectedItems.value.map(item => item._id);
+    console.log(IDs);
+    const response = await api.post('/deleteMultipleSurveys', { surveyIds:IDs});
+    console.log('Successfully deleted surveys:', response.data);
+    fetchData();
+    showDeleteQuestion.value = false;
+    showDeleteOptions.value = false;
+    selectedItems.value = [];
+  } catch (error) {
+    console.error('Error deleting surveys:', error);
+  }
 };
 
 
@@ -200,19 +263,19 @@ const handleSort = (columnId: string) => {
             OrderIcons.value[key] = false;
         }
     });
-    if (!OrderIcons.value[columnId]) { 
-        OrderIcons.value[columnId] = true; 
+    if (!OrderIcons.value[columnId]) {
+        OrderIcons.value[columnId] = true;
         order.value = columnId;
         isAscending.value = true;
     }
-    else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) { 
+    else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) {
         OrderIcons.value[columnId + "Down"] = true;
         order.value = columnId;
         isAscending.value = false;
     }
-    else { 
-        OrderIcons.value[columnId] = false; 
-        OrderIcons.value[columnId + "Down"] = false; 
+    else {
+        OrderIcons.value[columnId] = false;
+        OrderIcons.value[columnId + "Down"] = false;
         isAscending.value = false;
     }
 }
@@ -228,6 +291,10 @@ const handleSort = (columnId: string) => {
 .survey-list ul {
     padding: 0
 }
+
+.list-move {
+    transition: all 0.5s;
+  }
 
 .survey-list li {
     list-style-type: none;
@@ -267,7 +334,13 @@ const handleSort = (columnId: string) => {
     backdrop-filter: blur(5px);
 }
 
+.delete-selected {
+  color: rgb(173, 31, 31);
+}
+
 .flex-container {
+    display: flex;
+    align-items: center;
     background: none;
 }
 
