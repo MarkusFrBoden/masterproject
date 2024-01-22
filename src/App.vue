@@ -40,7 +40,7 @@ const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
           <div id="nav" class="col">
             <nav>
               <RouterLink to="/">{{ $t('home.title') }}</RouterLink> |
-              <RouterLink to="/survey">{{ $t('survey.title') }}</RouterLink> |
+              <RouterLink to="/survey">{{ $t('SurveyOverview.title') }}</RouterLink> |
               <RouterLink to="/about">{{ $t('about.title') }}</RouterLink>
             </nav>
           </div>

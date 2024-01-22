@@ -2,22 +2,25 @@
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import "survey-core/survey.i18n";
-import  { EUSurveyJSON} from "../components/EUSurvey_json";
 import { watch, inject, onMounted, ref, type Ref } from 'vue'; 
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 import { useI18n } from 'vue-i18n';
 
-
-
-const surveyJson = EUSurveyJSON;
+//Accept Props
+let props = defineProps({
+  survey: {
+      type: Object,
+      required: true
+    }
+  })
 
 const alertResults = (sender: any) => {
   const results = JSON.stringify(sender.data);
   alert(results);
 }
 
-const survey = new Model(surveyJson);
+const survey = new Model(props.survey.SurveyJson);
 
 const { locale } = useI18n();
 
@@ -47,6 +50,6 @@ survey.onComplete.add(alertResults);
 </script>
 
 <template>
+  {{ props.survey.SurveyJson.pages[3] }}
   <SurveyComponent :model="survey" />
 </template>
-../interfaces/surveyInterface.js

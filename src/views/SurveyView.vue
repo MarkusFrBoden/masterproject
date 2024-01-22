@@ -1,54 +1,58 @@
 <template>
     <div>
-        <h3>{{ $t('survey.h1') }}</h3>
+        <h3>{{ $t('SurveyOverview.h1') }}</h3>
     </div>
 
     <br>
 
     <div>
         <button class="btn btn-outline-secondary" v-if="!showDeleteOptions" @click="showInput = !showInput">
-            {{ $t('survey.buttonCreateSurvey') }}
+            {{ $t('SurveyOverview.buttonCreateSurvey') }}
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
             @click="showDeleteOptions = !showDeleteOptions">
-            <div v-if="!showDeleteOptions">{{ $t('survey.buttonDeleteSurvey') }}</div>
-            <div v-else> löschen beenden</div>
+            <div v-if="!showDeleteOptions">{{ $t('SurveyOverview.buttonDeleteSurvey') }}</div>
+            <div v-else> {{ $t('SurveyOverview.buttonExitDelete') }}</div>
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
             <div class="delete-selected">
-                Delete Selected
+                {{ $t('SurveyOverview.buttonDeleteSelected') }}
             </div>
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
             @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
-            löschen beenden
+            {{ $t('SurveyOverview.buttonExitDelete') }}
         </button>
     </div>
 
+    <br>
+
+    <input v-model="filterText" type="text" placeholder="Filter" :class="{ 'colored-placeholder': darkmode }" />
+
     <div v-if="showInput" class="overlay">
         <div class="input-container">
-            <h3>Neue Umfrage erstellen</h3>
-            Bezeichnung: <input type="text" v-model="newSurveyTitle">
+            <h4>{{ $t('SurveyOverview.createInput.title') }}</h4>
+            {{ $t('SurveyOverview.createInput.name') }}  <input type="text" v-model="newSurveyTitle">
             <br>
-            Organisation: <input type="text" v-model="newSurveyOrganisation">
+            {{ $t('SurveyOverview.createInput.organization') }}  <input type="text" v-model="newSurveyOrganisation">
             <br>
             <div class="button-group">
-                <button @click="showInput = false;">Abbrechen</button>
-                <button @click="createSurvey">Erstellen</button>
+                <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t('SurveyOverview.createInput.cancel') }}</button>
+                <button class="btn btn-outline-secondary"  @click="createSurvey">{{ $t('SurveyOverview.createInput.create') }}</button>
             </div>
         </div>
     </div>
 
     <div v-if="showDeleteQuestion" class="overlay">
         <div class="input-container">
-            <h3>Sollen die folgenden Umfragen wirklich gelöscht werden?</h3>
+            <h4>{{ $t('SurveyOverview.deleteInput.title') }}</h4>
             <li v-for="item in selectedItems" :key="item._id?.toString()">
-                Bezeichnung: {{ item.title }}, Organisation: {{ item.title }}
+                {{ $t('SurveyOverview.deleteInput.name') }} {{ item.title }}, {{ $t('SurveyOverview.deleteInput.organization') }} {{ item.createdFor }}
             </li>
             <br>
             <div class="button-group">
-                <button @click="showDeleteQuestion = false;">Abbrechen</button>
-                <button @click="deleteSelectedItems">Löschen</button>
+                <button class="btn btn-outline-secondary"  @click="showDeleteQuestion = false;">{{ $t('SurveyOverview.deleteInput.cancel') }}</button>
+                <button class="btn btn-outline-secondary"  @click="deleteSelectedItems">{{ $t('SurveyOverview.deleteInput.delete') }}</button>
             </div>
         </div>
     </div>
@@ -56,11 +60,13 @@
     <div class="survey-list">
         <div class="row">
             <div v-if="showDeleteOptions" class="col">
-                Delete?
+                <button class="flex-container">
+                    <b>{{ $t('SurveyOverview.column0') }}</b>
+                </button>
             </div>
             <div class="col" id="title">
                 <button class="flex-container" @click="handleSort('title')">
-                    <b>{{ $t('survey.column1') }}</b>
+                    <b>{{ $t('SurveyOverview.column1') }}</b>
                     <div v-if="OrderIcons.title && !OrderIcons.titleDown">
                         <SortAlphaDown />
                     </div>
@@ -71,7 +77,7 @@
             </div>
             <div class="col" id="createdFor">
                 <button class="flex-container" @click="handleSort('createdFor')">
-                    <b>{{ $t('survey.column2') }}</b>
+                    <b>{{ $t('SurveyOverview.column2') }}</b>
                     <div v-if="OrderIcons.createdFor && !OrderIcons.createdForDown">
                         <SortAlphaDown />
                     </div>
@@ -82,7 +88,7 @@
             </div>
             <div class="col" id="createdBy">
                 <button class="flex-container" @click="handleSort('createdBy')">
-                    <b>{{ $t('survey.column3') }}</b>
+                    <b>{{ $t('SurveyOverview.column3') }}</b>
                     <div v-if="OrderIcons.createdBy && !OrderIcons.createdByDown">
                         <SortAlphaDown />
                     </div>
@@ -93,7 +99,7 @@
             </div>
             <div class="col" id="createdAt">
                 <button class="flex-container" @click="handleSort('createdAt')">
-                    <b>{{ $t('survey.column4') }}</b>
+                    <b>{{ $t('SurveyOverview.column4') }}</b>
                     <div v-if="OrderIcons.createdAt && !OrderIcons.createdAtDown">
                         <SortNumericDown />
                     </div>
@@ -104,7 +110,7 @@
             </div>
             <div class="col" id="updatedBy">
                 <button class="flex-container" @click="handleSort('updatedBy')">
-                    <b>{{ $t('survey.column5') }}</b>
+                    <b>{{ $t('SurveyOverview.column5') }}</b>
                     <div v-if="OrderIcons.updatedBy && !OrderIcons.updatedByDown">
                         <SortAlphaDown />
                     </div>
@@ -115,7 +121,7 @@
             </div>
             <div class="col" id="updatedAt">
                 <button class="flex-container" @click="handleSort('updatedAt')">
-                    <b>{{ $t('survey.column6') }}</b>
+                    <b>{{ $t('SurveyOverview.column6') }}</b>
                     <div v-if="OrderIcons.updatedAt && !OrderIcons.updatedAtDown">
                         <SortNumericDown />
                     </div>
@@ -127,7 +133,7 @@
         </div>
 
     <transition-group name="list">
-        <li v-for="survey in orderedSurveys" :key="survey._id?.toString()">
+        <li v-for="survey in filteredSurveys" :key="survey._id?.toString()">
             <div class="row">
                 <div v-if="showDeleteOptions" class="col">
                     <input type="checkbox" v-model="selectedItems" :value="{ _id: survey._id, title: survey.title, createdFor: survey.createdFor }" />
@@ -149,12 +155,15 @@
 </template>
   
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue';
+import { type Ref, ref, inject, computed } from 'vue';
 import type { Survey } from "../interfaces/Survey.js"
 import SortNumericDown from '../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../components/icons/SortAlphaDownAlt.vue';
+
+//inject darkmode 
+const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
 
 //Get first data
 const api = inject('api') as any;
@@ -189,6 +198,7 @@ const createSurvey = async () => {
         PostSurvey.value.title = newSurveyTitle;
         PostSurvey.value.createdFor = newSurveyOrganisation;
         const response = await api.post('/Survey', PostSurvey.value);
+        
         console.log('POST Response:', response.data);
         showInput.value = false;
         fetchData();
@@ -254,7 +264,7 @@ const OrderIcons = ref<OrderIconsType>({
     "updatedBy": false,
     "updatedByDown": false,
     "updatedAt": true,
-    "updatedAtDown": false,
+    "updatedAtDown": true,
 });
 
 const handleSort = (columnId: string) => {
@@ -279,6 +289,25 @@ const handleSort = (columnId: string) => {
         isAscending.value = false;
     }
 }
+handleSort('updatedAt');
+
+
+//Filter logik
+let filterText = ref('');
+
+let filteredSurveys = computed(() => {
+    if(filterText.value === ''){
+        return orderedSurveys.value;
+    }else{
+        const filterLowerCase = filterText.value.toLowerCase();
+        return orderedSurveys.value.filter(item =>
+            (item.title?.toLowerCase()).includes(filterLowerCase) ||
+            (item.createdFor?.toLowerCase()).includes(filterLowerCase) ||
+            (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
+            (item.updatedBy?.toLowerCase()).includes(filterLowerCase)
+        );
+    }
+    });
 
 </script>
   
@@ -319,10 +348,15 @@ const handleSort = (columnId: string) => {
     border-radius: 12px;
 }
 
+.dark .input-container {
+    background: #16171d; 
+}
+
 .input-container input {
     margin-bottom: 8px;
-    /* Hier kannst du den Abstand zwischen den Inputs anpassen */
 }
+
+
 
 .overlay {
     position: fixed;
@@ -335,9 +369,8 @@ const handleSort = (columnId: string) => {
 }
 
 .delete-selected {
-  color: rgb(173, 31, 31);
+  color: rgb(214, 69, 69);
 }
-
 .flex-container {
     display: flex;
     align-items: center;

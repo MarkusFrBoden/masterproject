@@ -4,11 +4,28 @@
     "title": "Start",
     "h1": "Das ist die Startseite"
   },
-  "survey": {
+  "SurveyOverview": {
     "title": "Umfragen",
     "h1": "Übersicht über erstellte Umfragen",
     "buttonCreateSurvey":"Umfrage erstellen",
     "buttonDeleteSurvey":"Umfrage löschen",
+    "buttonExitDelete":"Löschen beenden",
+    "buttonDeleteSelected":"Ausgewählte löschen",
+    "createInput":{
+      "title":"Neue Umfrage erstellen",
+      "name":"Bezeichnung: ",
+      "organization":"Organisation: ",
+      "cancel":"Abbrechen",
+      "create":"Erstellen"
+    },
+    "deleteInput":{
+      "title":"Sollen die folgenden Umfragen wirklich gelöscht werden?",
+      "name":"Bezeichnung: ",
+      "organization":"Organisation: ",
+      "cancel":"Abbrechen",
+      "delete":"Löschen"
+    },
+    "column0": "Löschen",
     "column1": "Bezeichnung",
     "column2": "Organisation",
     "column3": "Ersteller",

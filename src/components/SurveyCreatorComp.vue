@@ -4,12 +4,23 @@ import 'survey-core/defaultV2.min.css';
 import "survey-creator-core/survey-creator-core.min.css";
 import "survey-creator-core/survey-creator-core.i18n.js";
 import "survey-core/survey.i18n.js";
-import  { EUSurveyJSON} from "../components/EUSurvey_json";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
 import { useI18n } from 'vue-i18n';
-import { watch } from 'vue';
+import { inject } from 'vue';
+
+
+//Accept Props
+let props = defineProps({
+    survey: {
+      type: Object,
+      required: true
+    }
+  })
+
+//Accept Emits
+const emit = defineEmits(['triggerRefresh'])
 
 const options = {
   showLogicTab: true,
@@ -26,7 +37,7 @@ editorLocalization.currentLocale = locale.value;
  surveyLocalization.supportedLocales = ["en","de"];
  
 const creator = new SurveyCreatorModel(options);
-creator.JSON = EUSurveyJSON;
+creator.JSON = props.survey.SurveyJson;
 
 /* Funktioniert nicht!
 watch(
@@ -37,58 +48,39 @@ watch(
   }
 );*/
 
-creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(EUSurveyJSON);
-creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
-  window.localStorage.setItem("survey-json", creator.text);
-  callback(saveNo, true);
-  // saveSurveyJson(
-  //     "https://your-web-service.com/",
-  //     creator.JSON,
-  //     saveNo,
-  //     callback
-  // );
+const api = inject('api') as any;
+
+creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {
+  try {
+    const response = await updateSurvey();
+    if (response.status === 200) {
+      callback(saveNo, true);
+    } else {
+      callback(saveNo, false);
+    }
+  } catch (error) {
+    console.error('Error saving survey:', error);
+    callback(saveNo, false);
+  }
 };
 
-// creator.onUploadFile.add((_, options) => {
-//   const formData = new FormData();
-//   options.files.forEach((file: File) => {
-//     formData.append(file.name, file);
-//   });
-//   fetch("https://example.com/uploadFiles", {
-//     method: "post",
-//     body: formData
-//   }).then(response => response.json())
-//     .then(result => {
-//       options.callback(
-//         "success",
-//         // A link to the uploaded file
-//         "https://example.com/files?name=" + result[options.files[0].name]
-//       );
-//     })
-//     .catch(error => {
-//       options.callback('error');
-//     });
-// });
+const updateSurvey = async () => {
+  try {
+    const updatedData = {
+      "SurveyJson": creator.JSON,
+      "updatedBy":"TestUser",
+      "updatedAt":new Date()
+    };
+    const response = await api.patch(`/surveys/${props.survey._id}`, updatedData);
+    emit('triggerRefresh');
+    return response;
+  } catch (error) {
+    console.error('Error updating survey:', error);
+    throw error;
+  }
+};
 
-// function saveSurveyJson(url: string, json: object, saveNo: number, callback: Function) {
-//   fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json;charset=UTF-8'
-//     },
-//     body: JSON.stringify(json)
-//   })
-//   .then(response => {
-//     if (response.ok) {
-//       callback(saveNo, true);
-//     } else {
-//       callback(saveNo, false);
-//     }
-//   })
-//   .catch(error => {
-//     callback(saveNo, false);
-//   });
-// }
+
 </script>
 
 <template>

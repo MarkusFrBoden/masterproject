@@ -4,11 +4,28 @@
     "title": "Home",
     "h1": "This is the Home side"
   },
-  "survey": {
+  "SurveyOverview": {
     "title": "Surveys",
     "h1": "Overview of Created Surveys",
     "buttonCreateSurvey":"Create Survey",
     "buttonDeleteSurvey":"Delete Survey",
+    "buttonExitDelete":"Exit delete",
+    "buttonDeleteSelected":"Delete selected",
+    "createInput":{
+      "title":"Create new survey",
+      "name":"Title: ",
+      "organization":"Organization: ",
+      "cancel":"Cancel",
+      "create":"Create"
+    },
+    "deleteInput":{
+      "title":"Should the following surveys really be deleted?",
+      "name":"Title: ",
+      "organization":"Organization: ",
+      "cancel":"Cancel",
+      "delete":"Delete"
+    },
+    "column0": "Delete",
     "column1": "Title",
     "column2": "Organization",
     "column3": "Creator",

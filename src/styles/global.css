@@ -22,7 +22,43 @@ body{
     border: none;
     border-radius: 4px;
   }
+
+  .dark button {
+    color: #72bbff;
+    border-color: #72bbff;
+  }
   
+  input {
+    margin: 0 5px;
+    padding: 5px;
+    border: black;
+    border-radius: 2px;
+  }
+
+  .dark input {
+    background: #020b3d; 
+    color: #72bbff;
+    border-color: #72bbff;
+  }
+
+  .colored-placeholder::placeholder {
+    color: #72bbff;
+  }
+  
+
+  select{
+    margin: 0 5px;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .dark select {
+    color: #72bbff;
+    border-color: #72bbff;
+  }
+
+
   #mouve {
     padding: 30px;
     text-align: left;
@@ -55,6 +91,9 @@ body{
   .dark nav a.router-link-exact-active {
     color: #72bbff;
   }
+
+  
+
 
   #logout {
     padding: 30px;
