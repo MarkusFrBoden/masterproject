@@ -9,11 +9,19 @@
   
 body{
   background: #dee6ee;
+  background-image: url('../assets/EuropeanStarsBlue.png');
+  background-position: center top 350px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
   .dark {
-    background: #16171d; 
-    color: #72bbff;
+  background: #16171d; 
+  color: #72bbff;
+  background-image: url('../assets/EuropeanStarsBlack.png');
+  background-position: center top 350px;
+  background-size: cover;
+  background-repeat: no-repeat;
   }
   
   button {
@@ -31,8 +39,9 @@ body{
   input {
     margin: 0 5px;
     padding: 5px;
-    border: black;
-    border-radius: 2px;
+    border: 1px solid #919191;
+    border-radius: 4px;
+    text-align: center;
   }
 
   .dark input {
@@ -40,9 +49,16 @@ body{
     color: #72bbff;
     border-color: #72bbff;
   }
-
+  
   .colored-placeholder::placeholder {
     color: #72bbff;
+    text-align: center;
+    border-radius: 4px;
+  }
+  
+  .noncolored-placeholder {
+    text-align: center;
+    border-radius: 4px;
   }
   
 

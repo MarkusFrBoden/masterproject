@@ -5,6 +5,7 @@
 
     <br>
 
+    <!-- buttons for create and delete survey  -->
     <div>
         <button class="btn btn-outline-secondary" v-if="!showDeleteOptions" @click="showInput = !showInput">
             {{ $t('SurveyOverview.buttonCreateSurvey') }}
@@ -26,9 +27,10 @@
     </div>
 
     <br>
+    <!-- input for filter  -->
+    <input v-model="filterText" type="text" placeholder="Filter" :class="{ 'colored-placeholder': darkmode, 'noncolored-placeholder': !darkmode }" />
 
-    <input v-model="filterText" type="text" placeholder="Filter" :class="{ 'colored-placeholder': darkmode }" />
-
+    <!-- create survey interface  -->
     <div v-if="showInput" class="overlay">
         <div class="input-container">
             <h4>{{ $t('SurveyOverview.createInput.title') }}</h4>
@@ -36,6 +38,8 @@
             <br>
             {{ $t('SurveyOverview.createInput.organization') }}  <input type="text" v-model="newSurveyOrganisation">
             <br>
+            EU-Survey automatisch laden?<input type="checkbox" v-model="addEUSurvey">
+            <br><br>
             <div class="button-group">
                 <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t('SurveyOverview.createInput.cancel') }}</button>
                 <button class="btn btn-outline-secondary"  @click="createSurvey">{{ $t('SurveyOverview.createInput.create') }}</button>
@@ -43,6 +47,7 @@
         </div>
     </div>
 
+    <!-- delete survey interface  -->
     <div v-if="showDeleteQuestion" class="overlay">
         <div class="input-container">
             <h4>{{ $t('SurveyOverview.deleteInput.title') }}</h4>
@@ -57,6 +62,8 @@
         </div>
     </div>
 
+    <!-- survey list, filtered and sorted  -->
+    <!-- header with sort logic part  -->
     <div class="survey-list">
         <div class="row">
             <div v-if="showDeleteOptions" class="col">
@@ -132,6 +139,7 @@
             </div>
         </div>
 
+    <!-- data with transition  -->
     <transition-group name="list">
         <li v-for="survey in filteredSurveys" :key="survey._id?.toString()">
             <div class="row">
@@ -161,6 +169,7 @@ import SortNumericDown from '../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../components/icons/SortAlphaDownAlt.vue';
+import {EUSurveyJSON} from '../components/EUSurvey_json'
 
 //inject darkmode 
 const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
@@ -179,6 +188,7 @@ const fetchData = async () => {
 fetchData();
 
 //Create new Survey
+let addEUSurvey = ref(false);
 let showInput = ref(false);
 let newSurveyTitle = "";
 let newSurveyOrganisation = "";
@@ -197,8 +207,10 @@ const createSurvey = async () => {
     try {
         PostSurvey.value.title = newSurveyTitle;
         PostSurvey.value.createdFor = newSurveyOrganisation;
+        if(addEUSurvey){
+            PostSurvey.value.SurveyJson = EUSurveyJSON
+        };
         const response = await api.post('/Survey', PostSurvey.value);
-        
         console.log('POST Response:', response.data);
         showInput.value = false;
         fetchData();
@@ -344,7 +356,7 @@ let filteredSurveys = computed(() => {
     transform: translate(-50%, -50%);
     background: #fff;
     padding: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #919191;
     border-radius: 12px;
 }
 
@@ -354,9 +366,8 @@ let filteredSurveys = computed(() => {
 
 .input-container input {
     margin-bottom: 8px;
+    border: 1px solid #919191;
 }
-
-
 
 .overlay {
     position: fixed;

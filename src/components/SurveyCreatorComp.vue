@@ -39,15 +39,6 @@ editorLocalization.currentLocale = locale.value;
 const creator = new SurveyCreatorModel(options);
 creator.JSON = props.survey.SurveyJson;
 
-/* Funktioniert nicht!
-watch(
-   locale,
-  () => {
-    editorLocalization.currentLocale = locale.value;
-    console.log(locale.value)
-  }
-);*/
-
 const api = inject('api') as any;
 
 creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {

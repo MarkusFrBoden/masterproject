@@ -50,6 +50,5 @@ survey.onComplete.add(alertResults);
 </script>
 
 <template>
-  {{ props.survey.SurveyJson.pages[3] }}
   <SurveyComponent :model="survey" />
 </template>
