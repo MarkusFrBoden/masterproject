@@ -1,3 +1,6 @@
+import imagede from "../assets/EUSurvey-Module_German.png"
+import imageen from "../assets/EUSurvey-Modules_English.png";
+
 const EUSurveyJSON = {
     "locale": "de",
     "title": {
@@ -416,8 +419,8 @@ const EUSurveyJSON = {
                             "type": "image",
                             "name": "Digital Maturity Assessment Framework for Public Sector Organisations (PSOs)",
                             "imageLink": {
-                                "de": "/src/assets/EUSurvey-Module_German.png",
-                                "en": "/src/assets/EUSurvey-Modules_English.png"
+                                "de": imagede,
+                                "en": imageen
                             },
                             "altText": "Source: EC JRC own elaboration",
                             "imageHeight": 330,
