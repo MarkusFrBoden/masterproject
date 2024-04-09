@@ -29,6 +29,6 @@ const updateExistingAccount = (newValue: boolean)=> {
   width: 100%;
   height: 100%;
   z-index: 1000;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
   }
 </style>

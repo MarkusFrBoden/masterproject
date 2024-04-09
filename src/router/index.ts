@@ -10,12 +10,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/survey',
       name: 'survey',
-      component: SurveyView
+      component: SurveyView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -25,15 +27,38 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/survey/:id',
       name: 'SurveyDetails',
       component: SurveyDetails,
-      props: true
+      props: true,
+      meta: { requiresAuth: true }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const isAuthenticated = checkAuth(); 
+    if (!isAuthenticated) {
+      next({ name: 'login' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+//Authentifizierungsstatus
+function checkAuth() {
+  if(localStorage.getItem('userId')){
+    let isAuthenticated = true
+    return isAuthenticated;
+  }
+}
 
 export default router

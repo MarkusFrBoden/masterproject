@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
+import type { User } from "../interfaces/User.js"
 
 //Accept Props
 let props = defineProps({
@@ -35,7 +36,7 @@ const noAccount = () => {
 };
 
 //Login Logik
-let user = ref([]);
+//let user = ref<User>([]);
 let email = ref('');
 let password = ref('');
 let loginError = ref('');
@@ -46,8 +47,8 @@ const api = inject('api') as any;
 const getUser = async () => {
     try {
         const response = await api.get('/UserByMailAndPassword/'+email.value+'/'+password.value);
-        user.value = response.data;
-        if(user.value){
+        if(response.data){
+            localStorage.setItem('userId', response.data._id);
             router.push({ name: 'home' })
         }else{
             loginError.value = 'Your Email or your Password is wrong';

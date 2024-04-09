@@ -7,14 +7,22 @@ import BrightnessHigh from './components/icons/BrightnessHigh.vue';
 import BoxWithRightArrowOut from './components/icons/BoxWithRightArrowOut.vue';
 import BoxWithRightArrowIn from './components/icons/BoxWithRightArrowIn.vue';
 import HouseWithDoor from './components/icons/HouseWithDoor.vue';
+import { useRouter } from 'vue-router';
 
 const loggedIn = ref(false);
 
 const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
 
+
+let router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem('userId');
+  loggedIn.value = !loggedIn.value;
+  router.push({ name: 'login'  })
+};
+
 </script>
-
-
 
 <template>
   <div :class="{ dark: darkmode }">
@@ -54,7 +62,7 @@ const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
                 <option value="en">EN</option>
                 <option value="de">DE</option>
               </select>
-              <button class="btn btn-outline-secondary" @click="loggedIn = !loggedIn; $router.push({ name: 'login' })">
+              <button class="btn btn-outline-secondary" @click="logout">
                 <div v-if="loggedIn">
                   <BoxWithRightArrowOut />
                 </div>
@@ -77,6 +85,7 @@ const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
 
   </div>
 </template>
+
 
 <style>
 @import "./styles/global.css";
