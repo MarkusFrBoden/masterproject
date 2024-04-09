@@ -54,7 +54,7 @@ const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
                 <option value="en">EN</option>
                 <option value="de">DE</option>
               </select>
-              <button class="btn btn-outline-secondary" @click="loggedIn = !loggedIn">
+              <button class="btn btn-outline-secondary" @click="loggedIn = !loggedIn; $router.push({ name: 'login' })">
                 <div v-if="loggedIn">
                   <BoxWithRightArrowOut />
                 </div>
@@ -80,4 +80,15 @@ const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
 
 <style>
 @import "./styles/global.css";
+
+.input-container {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #919191;
+    border-radius: 12px;
+}
 </style>

@@ -5,19 +5,84 @@ const { connectToDb, getDb } = require('./db');
 const router = express.Router();
 
 connectToDb((err) => {
-  if (!err) {
-    db = getDb();
-  }
+    if (!err) {
+        db = getDb();
+    }
 });
 
-//Get SurveysOverview
+// ---------------------------- User ----------------------------------
+router.get('/UsersOverview', (req, res) => {
+    let users = []
+
+    db.collection('users')
+        .find()
+        .toArray()
+        .then(users => {
+            const formattedUsers = users.map(user => ({
+                _id: user._id,
+                email: user.email,
+                password: user.password,
+                organization: user.organization
+            }));
+            res.status(200).json(formattedUsers);
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the documents' });
+        });
+})
+
+router.get('/UserByMail/:email', (req, res) => {
+    db.collection('users')
+        .findOne({ email: req.params.email})
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the document' });
+        });
+});
+
+router.get('/UserByMailAndPassword/:email/:password', (req, res) => {
+    db.collection('users')
+        .findOne({ email: req.params.email, password: req.params.password })
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the document' });
+        });
+});
+
+
+//Post
+router.post('/User', (req, res) => {
+    const user = req.body
+
+    db.collection('users')
+        .insertOne(user)
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'Could not create the documents' })
+        })
+})
+
+// ------------------------ Organisation -------------------------------
+
+
+
+
+
+// -------------------------- Survey -----------------------------------
+//Get
 router.get('/SurveysOverview', (req, res) => {
     let surveys = []
 
     db.collection('surveys')
         .find()
         .sort({ createdAt: 1 })
-        .forEach(survey => surveys.push({"_id":survey._id,"title":survey.title,"createdFor": survey.createdFor,"createdBy": survey.createdBy,"createdAt": survey.createdAt, "updatedBy":survey.updatedBy, "updatedAt":survey.updatedAt}))
+        .forEach(survey => surveys.push({ "_id": survey._id, "title": survey.title, "createdFor": survey.createdFor, "createdBy": survey.createdBy, "createdAt": survey.createdAt, "updatedBy": survey.updatedBy, "updatedAt": survey.updatedAt }))
         .then(() => {
             res.status(200).json(surveys)
         })
@@ -27,17 +92,17 @@ router.get('/SurveysOverview', (req, res) => {
 })
 
 router.get('/SurveyById/:id', (req, res) => {
-    if (ObjectId.isValid(req.params.id)){
+    if (ObjectId.isValid(req.params.id)) {
         db.collection('surveys')
-        .findOne({ _id: new ObjectId(req.params.id) })
-        .then(survey => {
-              res.status(200).json(survey);
-        })
-        .catch(() => {
-            res.status(500).json({ error: 'Could not fetch the document' });
-        });
+            .findOne({ _id: new ObjectId(req.params.id) })
+            .then(survey => {
+                res.status(200).json(survey);
+            })
+            .catch(() => {
+                res.status(500).json({ error: 'Could not fetch the document' });
+            });
     } else {
-        res.status(500).json({error:'Not a valid doc id'})
+        res.status(500).json({ error: 'Not a valid doc id' })
     }
 });
 
@@ -56,18 +121,18 @@ router.post('/Survey', (req, res) => {
 })
 
 //Delete
-router.delete('/SurveyById/:id', (req, res) =>{
-    if (ObjectId.isValid(req.params.id)){
+router.delete('/SurveyById/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
         db.collection('surveys')
-        .deleteOne({ _id: new ObjectId(req.params.id) })
-        .then(result => {
-              res.status(200).json(result);
-        })
-        .catch(() => {
-            res.status(500).json({ error: 'Could not delete the document' });
-        });
+            .deleteOne({ _id: new ObjectId(req.params.id) })
+            .then(result => {
+                res.status(200).json(result);
+            })
+            .catch(() => {
+                res.status(500).json({ error: 'Could not delete the document' });
+            });
     } else {
-        res.status(500).json({error:'Not a valid doc id'})
+        res.status(500).json({ error: 'Not a valid doc id' })
     }
 })
 
@@ -95,17 +160,17 @@ router.post('/deleteMultipleSurveys', async (req, res) => {
 router.patch('/surveys/:id', (req, res) => {
     const updates = req.body
 
-    if (ObjectId.isValid(req.params.id)){
+    if (ObjectId.isValid(req.params.id)) {
         db.collection('surveys')
-        .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
-        .then(result => {
-              res.status(200).json(result);
-        })
-        .catch(() => {
-            res.status(500).json({ error: 'Could not update the document' });
-        });
+            .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
+            .then(result => {
+                res.status(200).json(result);
+            })
+            .catch(() => {
+                res.status(500).json({ error: 'Could not update the document' });
+            });
     } else {
-        res.status(500).json({error:'Not a valid doc id'})
+        res.status(500).json({ error: 'Not a valid doc id' })
     }
 })
 
