@@ -2,7 +2,7 @@
   "welcome": "Welcome to our application!",
   "home": {
     "title": "Home",
-    "h1": "This is the Home side"
+    "h1": "Hello"
   },
   "SurveyOverview": {
     "title": "Surveys",

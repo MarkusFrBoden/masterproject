@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
-import type { User } from "../interfaces/User.js"
 
 //Accept Props
 let props = defineProps({
@@ -36,7 +35,6 @@ const noAccount = () => {
 };
 
 //Login Logik
-//let user = ref<User>([]);
 let email = ref('');
 let password = ref('');
 let loginError = ref('');

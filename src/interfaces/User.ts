@@ -1,8 +1,30 @@
 export interface User {
     _id?: String;
-    name: String;
+    firstname: String;
+    surname: String;
     email: String;
     password: String;
-    organization: String;
+    organization: {
+        name: String;
+        identificationNumber: String;
+        contactPerson:{
+            name: String;
+            role: String;
+            email:String;
+            telephone:String;
+        };
+        website: String;
+        type: String;
+        size: String;
+        address:{
+            street:String,
+            postalcode:String,
+            city:String,
+            country:String
+        };
+        PIC: String;
+        primarySektor: String;
+        secondarySektor: String; 
+    }
     termsAccepted: Boolean;
 }

@@ -1,52 +1,56 @@
 <script setup lang="ts">
-import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
-import "survey-core/survey.i18n";
-import { watch, inject, onMounted, ref, type Ref } from 'vue'; 
+import { watch, inject, onMounted, ref, type Ref } from 'vue';
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 import { useI18n } from 'vue-i18n';
 
-//Accept Props
+//Accept Props - Request survey
 let props = defineProps({
   survey: {
-      type: Object,
-      required: true
-    }
-  })
+    type: Object,
+    required: true
+  }
+})
 
-const alertResults = (sender: any) => {
-  const results = JSON.stringify(sender.data);
-  alert(results);
-}
+//Define Emits - Send back results
+const emit = defineEmits<{
+  surveyCompleted: [value: any]
+}>()
+const sendResults = () => {
+  const results = survey.data;
+  emit('surveyCompleted', results);
+};
 
+//Create Survey Model
 const survey = new Model(props.survey.SurveyJson);
-
 const { locale } = useI18n();
 
-//Start darkmode and language and watcher for changes
-const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
-onMounted(() => {
+//Define themes and language and watcher for changes
+const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
+const headerchange = () => {
   survey.locale = locale.value;
   if (!darkmode.value) {
-      survey.applyTheme(BorderlessLight);
-    } else {
-      survey.applyTheme(BorderlessDark);
-    }
+    survey.applyTheme(BorderlessLight);
+  } else {
+    survey.applyTheme(BorderlessDark);
+  }
+}
+
+//Use and watch themes and language
+onMounted(() => {
+  headerchange()
 });
 watch(
   [darkmode, locale],
   () => {
-    if (!darkmode.value) {
-      survey.applyTheme(BorderlessLight);
-    } else {
-      survey.applyTheme(BorderlessDark);
-    }
-    survey.locale = locale.value;
+    headerchange()
   }
 );
 
-survey.onComplete.add(alertResults);
+//Use Emit - Reply results
+survey.onComplete.add(sendResults);
+
 </script>
 
 <template>

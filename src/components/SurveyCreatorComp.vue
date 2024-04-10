@@ -2,42 +2,62 @@
 <script setup lang="ts">
 import 'survey-core/defaultV2.min.css';
 import "survey-creator-core/survey-creator-core.min.css";
-import "survey-creator-core/survey-creator-core.i18n.js";
-import "survey-core/survey.i18n.js";
+/* import "survey-core/survey.i18n.js";
+import "survey-creator-core/survey-creator-core.i18n.js"; */
 import { SurveyCreatorModel } from "survey-creator-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
 import { useI18n } from 'vue-i18n';
-import { inject } from 'vue';
-
+import { watch, inject, onMounted, ref, type Ref } from 'vue';
+import { BorderlessDark } from "survey-core/themes";
+import { BorderlessLight } from "survey-core/themes";
 
 //Accept Props
 let props = defineProps({
-    survey: {
-      type: Object,
-      required: true
-    }
-  })
+  survey: {
+    type: Object,
+    required: true
+  }
+})
 
 //Accept Emits
 const emit = defineEmits(['triggerRefresh'])
-
 const options = {
   showLogicTab: true,
   isAutoSave: true,
-  showTranslationTab: true,
-  showThemeTab: true
+  showTranslationTab: true
 };
 
 //Add language option
 const { locale } = useI18n();
 editorLocalization.currentLocale = locale.value;
 
- //Limited the number of showing locales in survey.locale property editor
- surveyLocalization.supportedLocales = ["en","de"];
- 
+//Limited the number of showing locales in survey.locale property editor
+surveyLocalization.supportedLocales = ["en", "de"];
+
 const creator = new SurveyCreatorModel(options);
 creator.JSON = props.survey.SurveyJson;
+
+//Define themes and language and watcher for changes
+const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
+const headerchange = () => {
+  creator.locale = locale.value;
+  if (!darkmode.value) {
+    creator.theme = BorderlessLight;
+  } else {
+    creator.theme = BorderlessDark;
+  }
+}
+//Use and watch themes and language
+onMounted(() => {
+  headerchange();
+});
+watch(
+  [darkmode, locale],
+  () => {
+    headerchange();
+  }
+);
 
 const api = inject('api') as any;
 
@@ -59,8 +79,8 @@ const updateSurvey = async () => {
   try {
     const updatedData = {
       "SurveyJson": creator.JSON,
-      "updatedBy":"TestUser",
-      "updatedAt":new Date()
+      "updatedBy": "TestUser",
+      "updatedAt": new Date()
     };
     const response = await api.patch(`/surveys/${props.survey._id}`, updatedData);
     emit('triggerRefresh');

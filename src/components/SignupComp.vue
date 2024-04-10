@@ -1,16 +1,19 @@
 <template>
-       <form @submit.prevent="handleSubmit">
-            <div v-if="showPopup" class="overlay">
-                <div class="popup">
-                    <p>Neuer Nutzer wurde angelegt!</p>
-                </div>
+    <form @submit.prevent="handleSubmit">
+        <div v-if="showPopup" class="overlay">
+            <div class="popup">
+                <p>Neuer Nutzer wurde angelegt!</p>
             </div>
+        </div>
 
-        <label>Full Name:</label>
-        <input type="text" required v-model="name">
+        <label>First Name:</label>
+        <input type="text" required v-model="firstname">
+
+        <label>Surname:</label>
+        <input type="text" required v-model="surname">
 
         <label>Email:</label>
-        <input type="email" required v-model="email">
+        <input type="email" required v-model="email" >
         <div v-if="emailError" class="error">{{ emailError }}</div>
 
         <label>Password:</label>
@@ -27,10 +30,10 @@
     </form>
 
     <div class="submit">
-            <button  @click="handleSubmit">Create an Account</button>
-            <br><br>
-            <a href="#" @click="Account">You have already an Account?</a>
-        </div>
+        <button @click="handleSubmit">Create an Account</button>
+        <br><br>
+        <a href="#" @click="Account">You have already an Account?</a>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -40,10 +43,10 @@ import type { User } from "../interfaces/User.js"
 //Accept Props
 let props = defineProps({
     existingAccount: {
-      type: Boolean,
-      required: true
+        type: Boolean,
+        required: true
     }
-  })
+})
 
 //Component Emits
 const emit = defineEmits<{
@@ -51,13 +54,15 @@ const emit = defineEmits<{
 }>()
 const Account = () => {
     emit("updateExistingAccount", !props.existingAccount);
+    console.log("Account ausgeführt")
 };
 
 //Create Account Logik
 const api = inject('api') as any;
 
 let ExistingUser = ref<any[]>([]);
-let name = ref('');
+let firstname = ref('');
+let surname = ref('');
 let email = ref('');
 let emailError = ref('');
 let password = ref('');
@@ -68,7 +73,7 @@ let showPopup = ref(false);
 
 const getUser = async () => {
     try {
-        const response = await api.get('/UserByMail/'+email.value);
+        const response = await api.get('/UserByMail/' + email.value);
         ExistingUser.value = response.data;
     } catch (err) {
         console.error('Error fetching data:', err);
@@ -78,12 +83,34 @@ const getUser = async () => {
 const CreateAccount = async () => {
     try {
         let PostUser = ref<User>({
-    "name": name.value,
-    "email": email.value,
-    "password": password.value,
-    "organization": organization.value,
-    "termsAccepted": terms.value
-});
+            firstname: firstname.value,
+            surname: surname.value,
+            email: email.value,
+            password: password.value,
+            organization: {
+                name: organization.value,
+                identificationNumber: "",
+                contactPerson: {
+                    name: "",
+                    role: "",
+                    email: "",
+                    telephone: ""
+                },
+                website: "",
+                type: "",
+                size: "",
+                address: {
+                    street: "",
+                    postalcode: "",
+                    city: "",
+                    country: ""
+                },
+                PIC: "",
+                primarySektor: "",
+                secondarySektor: ""
+            },
+            termsAccepted: terms.value
+        });
         const response = await api.post('/User', PostUser.value);
         return response.data;
     } catch (err) {
@@ -110,8 +137,9 @@ const handleSubmit = async () => {
             try {
                 await CreateAccount();
                 showAndHidePopup();
-                setTimeout(() => {
-                    emit("updateExistingAccount", !props.existingAccount);
+                setTimeout(async () => {
+                    Account();
+                    location.reload();
                 }, 2000);
             } catch (err) {
                 console.log(err);

@@ -61,4 +61,9 @@ function checkAuth() {
   }
 }
 
+// Löschen des LocalStorage beim schließen der Seite
+/*window.addEventListener('beforeunload', function() {
+  localStorage.removeItem('userId');
+});*/
+
 export default router

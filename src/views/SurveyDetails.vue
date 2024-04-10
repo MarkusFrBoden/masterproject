@@ -11,10 +11,10 @@
 
             <br><br>
             <div class="button-group">
-                <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showSurvey = false; fetchData()">
+                <button class="btn btn-outline-secondary" @click="showSurveyCreator = true; showSurvey = false; fetchData()">
                 Edit Survey
                 </button>
-                <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; showSurveyCreator = false; fetchData()">
+                <button class="btn btn-outline-secondary" @click="showSurvey = true; showSurveyCreator = false; fetchData()">
                 Survey Demo
                 </button>
                 <button class="btn btn-outline-secondary">
@@ -64,7 +64,7 @@ const fetchData = async () => {
 fetchData();
 
 //Enable Survey and Survey Creator Comp
-let showSurvey = ref(false);
+let showSurvey = ref(true);
 let showSurveyCreator = ref(false);
 
 

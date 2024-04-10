@@ -42,6 +42,17 @@ router.get('/UserByMail/:email', (req, res) => {
         });
 });
 
+router.get('/UserById/:Id', (req, res) => {
+    db.collection('users')
+        .findOne({ _id: new ObjectId(req.params.Id)})
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the document' });
+        });
+});
+
 router.get('/UserByMailAndPassword/:email/:password', (req, res) => {
     db.collection('users')
         .findOne({ email: req.params.email, password: req.params.password })

@@ -1,17 +1,17 @@
 <template>
     <div class="user-login-view">
         <div v-if="existingAccount === true">
-            <LoginForm :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/> 
+            <LoginComp :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/> 
         </div>
         <div v-else>
-            <SignupForm :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/>
+            <SignupComp :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import LoginForm from '../components/LoginForm.vue';
-import SignupForm from '../components/SignupForm.vue';
+import LoginComp from '../components/LoginComp.vue';
+import SignupComp from '../components/SignupComp.vue';
 
 let existingAccount = true;
 
