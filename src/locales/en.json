@@ -4,22 +4,22 @@
     "title": "Home",
     "h1": "Hello"
   },
-  "SurveyOverview": {
-    "title": "Surveys",
-    "h1": "Overview of Created Surveys",
-    "buttonCreateSurvey":"Create Survey",
-    "buttonDeleteSurvey":"Delete Survey",
+  "EdihDmaView": {
+    "title": "DMAs",
+    "h1": "DMA Overview",
+    "buttonCreateSurvey":"Create DMA",
+    "buttonDeleteSurvey":"Delete DMA",
     "buttonExitDelete":"Exit delete",
     "buttonDeleteSelected":"Delete selected",
     "createInput":{
-      "title":"Create new survey",
+      "title":"Create new DMA",
       "name":"Title: ",
       "organization":"Organization: ",
       "cancel":"Cancel",
       "create":"Create"
     },
     "deleteInput":{
-      "title":"Should the following surveys really be deleted?",
+      "title":"Should the following DMAs really be deleted?",
       "name":"Title: ",
       "organization":"Organization: ",
       "cancel":"Cancel",
@@ -33,8 +33,8 @@
     "column5": "Edited by",
     "column6": "Edited at"
   },
-  "about": {
-    "title": "About",
-    "h1": "This is an about page"
+  "EdihDmmView": {
+    "title": "DMMs",
+    "h1": "DMM overview"
   }
 }

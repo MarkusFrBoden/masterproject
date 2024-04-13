@@ -8,10 +8,10 @@
         <div v-if="loginError" class="error">{{ loginError }}</div>
     </form>
     <div class="submit">
-            <button @click="getUser">Login</button>
-            <br><br>
-            <a href="#" @click="noAccount">New here? Create an Account</a>
-        </div>
+        <button @click="getUser">Login</button>
+        <br><br>
+        <a href="#" @click="noAccount">New here? Create an Account</a>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -21,10 +21,10 @@ import { useRouter } from 'vue-router';
 //Accept Props
 let props = defineProps({
     existingAccount: {
-      type: Boolean,
-      required: true
+        type: Boolean,
+        required: true
     }
-  })
+})
 
 //Component Emits
 const emit = defineEmits<{
@@ -44,11 +44,21 @@ let router = useRouter();
 const api = inject('api') as any;
 const getUser = async () => {
     try {
-        const response = await api.get('/UserByMailAndPassword/'+email.value+'/'+password.value);
-        if(response.data){
+        const response = await api.get('/UserByMailAndPassword/' + email.value + '/' + password.value);
+        if (response.data) {
             localStorage.setItem('userId', response.data._id);
-            router.push({ name: 'home' })
-        }else{
+            localStorage.setItem('organizationName', response.data.organization.name);
+            if (response.data.organization.name === "EDIH Thuringia") {
+                router.push({ name: 'EdihHome' })
+            } else {
+                router.push({ name: 'UserHome' })
+            }
+            setTimeout(async () => {
+                if (response.data.organization.name === "EDIH Thuringia") {
+                    location.reload();
+                }
+            }, 10);
+        } else {
             loginError.value = 'Your Email or your Password is wrong';
         }
     } catch (error) {

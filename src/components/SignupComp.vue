@@ -22,6 +22,7 @@
 
         <label>Organisation:</label>
         <input type="text" required v-model="organization">
+        <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
         <div class="terms">
             <input type="checkbox" required v-model="terms">
@@ -61,6 +62,7 @@ const Account = () => {
 const api = inject('api') as any;
 
 let ExistingUser = ref<any[]>([]);
+let ExistingOrganization = ref<any[]>([]);
 let firstname = ref('');
 let surname = ref('');
 let email = ref('');
@@ -69,12 +71,22 @@ let password = ref('');
 let passwordError = ref('');
 let terms = ref(true);
 let organization = ref('');
+let organizationError = ref('');
 let showPopup = ref(false);
 
 const getUser = async () => {
     try {
         const response = await api.get('/UserByMail/' + email.value);
         ExistingUser.value = response.data;
+    } catch (err) {
+        console.error('Error fetching data:', err);
+    }
+};
+
+const getOrganisation = async () => {
+    try {
+        const response = await api.get('/OrganizationByName/' + organization.value);
+        ExistingOrganization.value = response.data;
     } catch (err) {
         console.error('Error fetching data:', err);
     }
@@ -128,9 +140,13 @@ const showAndHidePopup = () => {
 const handleSubmit = async () => {
     emailError.value = '';
     passwordError.value = '';
-    await getUser();
+    organizationError.value = '';
+    await getUser(); 
+    await getOrganisation();
     if (ExistingUser.value) {
         emailError.value = 'A User with this email exists';
+    } else if(ExistingOrganization.value){
+        organizationError.value = 'This Organization already exists';
     } else {
         passwordError.value = password.value.length > 5 ? '' : 'Password must be at least 6 chars long';
         if (!passwordError.value && !emailError.value) {

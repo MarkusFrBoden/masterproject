@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, inject, type Ref } from 'vue';
+import { ref, inject, watch, type Ref } from 'vue';
 import ArrowLeftCircle from './components/icons/ArrowLeftCircle.vue';
 import ArrowRightCircle from './components/icons/ArrowRightCircle.vue';
 import BrightnessHigh from './components/icons/BrightnessHigh.vue';
@@ -11,16 +11,28 @@ import { useRouter } from 'vue-router';
 
 const loggedIn = ref(false);
 
-const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
-
+const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 
 let router = useRouter();
 
 const logout = () => {
   localStorage.removeItem('userId');
+  localStorage.removeItem('organizationName');
   loggedIn.value = !loggedIn.value;
-  router.push({ name: 'login'  })
+  router.push({ name: 'login' });
+  setTimeout(async () => {
+    location.reload();
+  }, 10);
 };
+const type = ref<string>();
+const typefunkction = () => {
+  if (localStorage.getItem('organizationName') === 'EDIH Thuringia') {
+    type.value = 'Edih'
+  } else {
+    type.value = 'User'
+  };
+};
+typefunkction();
 
 </script>
 
@@ -47,9 +59,9 @@ const logout = () => {
 
           <div id="nav" class="col">
             <nav>
-              <RouterLink to="/">{{ $t('home.title') }}</RouterLink> |
-              <RouterLink to="/survey">{{ $t('SurveyOverview.title') }}</RouterLink> |
-              <RouterLink to="/about">{{ $t('about.title') }}</RouterLink>
+              <router-link :to="{ name: type + 'Home' }">{{ $t(type+'HomeView.title') }}</router-link> |
+              <router-link :to="{ name: type + 'Dma' }">{{ $t(type+'DmaView.title') }}</router-link> |
+              <router-link :to="{ name: type + 'Dmm' }">{{ $t(type+'DmmView.title') }}</router-link>
             </nav>
           </div>
 
@@ -91,13 +103,13 @@ const logout = () => {
 @import "./styles/global.css";
 
 .input-container {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 16px;
-    border: 1px solid #919191;
-    border-radius: 12px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #919191;
+  border-radius: 12px;
 }
 </style>

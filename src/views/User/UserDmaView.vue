@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{ $t('SurveyOverview.h1') }}</h3>
+        <h3>{{ $t(filename+'.h3') }}</h3>
     </div>
 
     <br>
@@ -8,21 +8,21 @@
     <!-- buttons for create and delete survey  -->
     <div>
         <button class="btn btn-outline-secondary" v-if="!showDeleteOptions" @click="showInput = !showInput">
-            {{ $t('SurveyOverview.buttonCreateSurvey') }}
+            {{ $t(filename+'.button.createDma') }}
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
             @click="showDeleteOptions = !showDeleteOptions">
-            <div v-if="!showDeleteOptions">{{ $t('SurveyOverview.buttonDeleteSurvey') }}</div>
-            <div v-else> {{ $t('SurveyOverview.buttonExitDelete') }}</div>
+            <div v-if="!showDeleteOptions">{{ $t(filename+'.button.deleteDma') }}</div>
+            <div v-else> {{ $t(filename+'.button.exitDelete') }}</div>
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
             <div class="delete-selected">
-                {{ $t('SurveyOverview.buttonDeleteSelected') }}
+                {{ $t(filename+'.button.deleteSelected') }}
             </div>
         </button>
         <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
             @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
-            {{ $t('SurveyOverview.buttonExitDelete') }}
+            {{ $t(filename+'.button.exitDelete') }}
         </button>
     </div>
 
@@ -33,16 +33,14 @@
     <!-- create survey interface  -->
     <div v-if="showInput" class="overlay">
         <div class="input-container">
-            <h4>{{ $t('SurveyOverview.createInput.title') }}</h4>
-            {{ $t('SurveyOverview.createInput.name') }}  <input type="text" v-model="newSurveyTitle">
-            <br>
-            {{ $t('SurveyOverview.createInput.organization') }}  <input type="text" v-model="newSurveyOrganisation">
+            <h4>{{ $t(filename+'.createInput.title') }}</h4>
+            {{ $t(filename+'.createInput.name') }}  <input type="text" v-model="newSurveyTitle">
             <br>
             EU-Survey automatisch laden?<input type="checkbox" v-model="addEUSurvey">
             <br><br>
             <div class="button-group">
-                <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t('SurveyOverview.createInput.cancel') }}</button>
-                <button class="btn btn-outline-secondary"  @click="createSurvey">{{ $t('SurveyOverview.createInput.create') }}</button>
+                <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t(filename+'.createInput.cancel') }}</button>
+                <button class="btn btn-outline-secondary"  @click="createSurvey">{{ $t(filename+'.createInput.create') }}</button>
             </div>
         </div>
     </div>
@@ -50,14 +48,14 @@
     <!-- delete survey interface  -->
     <div v-if="showDeleteQuestion" class="overlay">
         <div class="input-container">
-            <h4>{{ $t('SurveyOverview.deleteInput.title') }}</h4>
+            <h4>{{ $t(filename+'.deleteInput.title') }}</h4>
             <li v-for="item in selectedItems" :key="item._id?.toString()">
-                {{ $t('SurveyOverview.deleteInput.name') }} {{ item.title }}, {{ $t('SurveyOverview.deleteInput.organization') }} {{ item.createdFor }}
+                {{ $t(filename+'.deleteInput.name') }} {{ item.title }}, {{ $t(filename+'.deleteInput.organization') }} {{ item.createdFor }}
             </li>
             <br>
             <div class="button-group">
-                <button class="btn btn-outline-secondary"  @click="showDeleteQuestion = false;">{{ $t('SurveyOverview.deleteInput.cancel') }}</button>
-                <button class="btn btn-outline-secondary"  @click="deleteSelectedItems">{{ $t('SurveyOverview.deleteInput.delete') }}</button>
+                <button class="btn btn-outline-secondary"  @click="showDeleteQuestion = false;">{{ $t(filename+'.deleteInput.cancel') }}</button>
+                <button class="btn btn-outline-secondary"  @click="deleteSelectedItems">{{ $t(filename+'.deleteInput.delete') }}</button>
             </div>
         </div>
     </div>
@@ -68,12 +66,12 @@
         <div class="row">
             <div v-if="showDeleteOptions" class="col">
                 <button class="flex-container">
-                    <b>{{ $t('SurveyOverview.column0') }}</b>
+                    <b>{{ $t(filename+'.list.column0') }}</b>
                 </button>
             </div>
             <div class="col" id="title">
                 <button class="flex-container" @click="handleSort('title')">
-                    <b>{{ $t('SurveyOverview.column1') }}</b>
+                    <b>{{ $t(filename+'.list.column1') }}</b>
                     <div v-if="OrderIcons.title && !OrderIcons.titleDown">
                         <SortAlphaDown />
                     </div>
@@ -82,20 +80,9 @@
                     </div>
                 </button>
             </div>
-            <div class="col" id="createdFor">
-                <button class="flex-container" @click="handleSort('createdFor')">
-                    <b>{{ $t('SurveyOverview.column2') }}</b>
-                    <div v-if="OrderIcons.createdFor && !OrderIcons.createdForDown">
-                        <SortAlphaDown />
-                    </div>
-                    <div v-if="OrderIcons.createdFor && OrderIcons.createdForDown">
-                        <SortAlphaDownAlt />
-                    </div>
-                </button>
-            </div>
             <div class="col" id="createdBy">
                 <button class="flex-container" @click="handleSort('createdBy')">
-                    <b>{{ $t('SurveyOverview.column3') }}</b>
+                    <b>{{ $t(filename+'.list.column2') }}</b>
                     <div v-if="OrderIcons.createdBy && !OrderIcons.createdByDown">
                         <SortAlphaDown />
                     </div>
@@ -106,7 +93,7 @@
             </div>
             <div class="col" id="createdAt">
                 <button class="flex-container" @click="handleSort('createdAt')">
-                    <b>{{ $t('SurveyOverview.column4') }}</b>
+                    <b>{{ $t(filename+'.list.column3') }}</b>
                     <div v-if="OrderIcons.createdAt && !OrderIcons.createdAtDown">
                         <SortNumericDown />
                     </div>
@@ -117,7 +104,7 @@
             </div>
             <div class="col" id="updatedBy">
                 <button class="flex-container" @click="handleSort('updatedBy')">
-                    <b>{{ $t('SurveyOverview.column5') }}</b>
+                    <b>{{ $t(filename+'.list.column4') }}</b>
                     <div v-if="OrderIcons.updatedBy && !OrderIcons.updatedByDown">
                         <SortAlphaDown />
                     </div>
@@ -128,7 +115,7 @@
             </div>
             <div class="col" id="updatedAt">
                 <button class="flex-container" @click="handleSort('updatedAt')">
-                    <b>{{ $t('SurveyOverview.column6') }}</b>
+                    <b>{{ $t(filename+'.list.column5') }}</b>
                     <div v-if="OrderIcons.updatedAt && !OrderIcons.updatedAtDown">
                         <SortNumericDown />
                     </div>
@@ -147,11 +134,10 @@
                     <input type="checkbox" v-model="selectedItems" :value="{ _id: survey._id, title: survey.title, createdFor: survey.createdFor }" />
                 </div>
                 <div class="col">
-                    <RouterLink :to="{ name: 'SurveyDetails', params: { id: survey._id?.toString() } }">
+                    <RouterLink :to="{ name: 'EdihDmaDetails', params: { id: survey._id?.toString() } }">
                         <a href="">{{ survey.title }}</a>
                     </RouterLink>
                 </div>
-                <div class="col">{{ survey.createdFor }}</div>
                 <div class="col">{{ survey.createdBy }}</div>
                 <div class="col">{{ survey.createdAt }}</div>
                 <div class="col">{{ survey.updatedBy }}</div>
@@ -164,12 +150,15 @@
   
 <script setup lang="ts">
 import { type Ref, ref, inject, computed } from 'vue';
-import type { Survey } from "../interfaces/Survey.js"
-import SortNumericDown from '../components/icons/SortNumericDown.vue';
-import SortNumericDownAlt from '../components/icons/SortNumericDownAlt.vue';
-import SortAlphaDown from '../components/icons/SortAlphaDown.vue';
-import SortAlphaDownAlt from '../components/icons/SortAlphaDownAlt.vue';
-import {EUSurveyJSON} from '../components/EUSurvey_json'
+import type { Survey } from "../../interfaces/Survey.js"
+import SortNumericDown from '../../components/icons/SortNumericDown.vue';
+import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
+import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
+import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
+import {EUSurveyJSON} from '../../components/EUSurvey_json.js'
+
+//language prefix
+const filename = 'UserDmaView'
 
 //inject darkmode 
 const darkmode: Ref<boolean> = inject('darkmode')|| ref(false);
@@ -179,7 +168,7 @@ const api = inject('api') as any;
 const surveys = ref<Survey[]>([]);
 const fetchData = async () => {
     try {
-        const response = await api.get('/SurveysOverview');
+        const response = await api.get('/SurveyByOrganization/'+localStorage.getItem('organizationName'));
         surveys.value = response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -343,6 +332,8 @@ let filteredSurveys = computed(() => {
     padding: 16px;
     margin: 16px 0;
     border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .dark .survey-list li {

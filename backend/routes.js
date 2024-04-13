@@ -79,10 +79,37 @@ router.post('/User', (req, res) => {
         })
 })
 
+
+//Patch
+router.patch('/UserById/:id', (req, res) => {
+    const updates = req.body
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('users')
+            .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
+            .then(result => {
+                res.status(200).json(result);
+            })
+            .catch(() => {
+                res.status(500).json({ error: 'Could not update the document' });
+            });
+    } else {
+        res.status(500).json({ error: 'Not a valid doc id' })
+    }
+})
+
+
 // ------------------------ Organisation -------------------------------
-
-
-
+router.get('/OrganizationByName/:organizationName', (req, res) => {
+    db.collection('users')
+        .findOne({ 'organization.name': req.params.organizationName})
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the document' });
+        });
+});
 
 
 // -------------------------- Survey -----------------------------------
@@ -94,6 +121,21 @@ router.get('/SurveysOverview', (req, res) => {
         .find()
         .sort({ createdAt: 1 })
         .forEach(survey => surveys.push({ "_id": survey._id, "title": survey.title, "createdFor": survey.createdFor, "createdBy": survey.createdBy, "createdAt": survey.createdAt, "updatedBy": survey.updatedBy, "updatedAt": survey.updatedAt }))
+        .then(() => {
+            res.status(200).json(surveys)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the documents' })
+        })
+})
+
+router.get('/SurveyByOrganization/:organizationName', (req, res) => {
+    let surveys = []
+
+    db.collection('surveys')
+        .find({ createdFor: req.params.organizationName })
+        .sort({ createdAt: 1 })
+        .forEach(survey => surveys.push({ "_id": survey._id, "title": survey.title, "createdBy": survey.createdBy, "createdAt": survey.createdAt, "updatedBy": survey.updatedBy, "updatedAt": survey.updatedAt }))
         .then(() => {
             res.status(200).json(surveys)
         })
@@ -168,7 +210,7 @@ router.post('/deleteMultipleSurveys', async (req, res) => {
 });
 
 //Patch
-router.patch('/surveys/:id', (req, res) => {
+router.patch('/SurveyById/:id', (req, res) => {
     const updates = req.body
 
     if (ObjectId.isValid(req.params.id)) {

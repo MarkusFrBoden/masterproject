@@ -11,10 +11,14 @@ const EUSurveyJSONModul1 = {
                 {
                     "type": "panel",
                     "name": "panel1",
+                    "description": {
+                        "de": "Allgemeine Angaben",
+                        "en": "General Data"
+                    },
                     "elements": [
                         {
                             "type": "text",
-                            "name": "EU.1.1.2",
+                            "name": "EU-1-1-2",
                             "title": {
                                 "de": "Name der vom EDIH unterstützten Einrichtung",
                                 "en": "Name of the organisation supported by the EDIH"
@@ -23,11 +27,12 @@ const EUSurveyJSONModul1 = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.3",
+                            "name": "EU-1-1-3",
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
-                            }
+                            },
+                            "defaultValue": "" 
                         },
                         {
                             "type": "panel",
@@ -36,52 +41,57 @@ const EUSurveyJSONModul1 = {
                             "elements": [
                                 {
                                     "type": "text",
-                                    "name": "EU.1.1.4",
+                                    "name": "EU-1-1-4",
                                     "title": {
                                         "de": "Name",
                                         "en": "Name"
-                                    }
+                                    },
+                                    "defaultValue": "" 
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU.1.1.5",
+                                    "name": "EU-1-1-5",
                                     "title": {
                                         "de": "Funktion in der Einrichtung",
                                         "en": "Role in the organisation"
-                                    }
+                                    },
+                                    "defaultValue": "" 
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU.1.1.6",
+                                    "name": "EU-1-1-6",
                                     "title": {
                                         "de": "E-Mail-Adresse",
                                         "en": "Email address"
                                     },
-                                    "inputType": "email"
+                                    "inputType": "email",
+                                    "defaultValue": "" 
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU.1.1.7",
+                                    "name": "EU-1-1-7",
                                     "title": {
                                         "de": "Telefonnummer",
                                         "en": "Telephone:"
                                     },
-                                    "inputType": "tel"
+                                    "inputType": "tel",
+                                    "defaultValue": "" 
                                 },
                             ]
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.8",
+                            "name": "EU-1-1-8",
                             "title": {
                                 "de": "Website",
                                 "en": "Website"
                             },
-                            "inputType": "url"
+                            "inputType": "url",
+                            "defaultValue": "" 
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU.1.1.9",
+                            "name": "EU-1-1-9",
                             "title": {
                                 "de": "Art der öffentlichen Einrichtung",
                                 "en": "Type of public sector organisation"
@@ -115,11 +125,12 @@ const EUSurveyJSONModul1 = {
                                         "en": "Other"
                                     }
                                 }
-                            ]
+                            ],
+                            "defaultValue": "" 
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU.1.1.10",
+                            "name": "EU-1-1-10",
                             "title": {
                                 "de": "Zahl der Beschäftigten der Einrichtung",
                                 "en": "Organisation’s staff size"
@@ -146,14 +157,21 @@ const EUSurveyJSONModul1 = {
                                         "en": "Large-size (250 or more)"
                                     }
                                 }
-                            ]
+                            ],
+                            "defaultValue": "" 
                         },
                         {
                             "type": "multipletext",
-                            "name": "EU.1.1.11",
+                            "name": "EU-1-1-11",
                             "title": {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
+                            },
+                            "defaultValue": {
+                                "text1": "",
+                                "text2": "",
+                                "text3": "",
+                                "text4": ""
                             },
                             "items": [
                                 {
@@ -161,7 +179,7 @@ const EUSurveyJSONModul1 = {
                                     "title": {
                                         "de": "Straße",
                                         "en": "Street"
-                                    }
+                                    } 
                                 },
                                 {
                                     "name": "text2",
@@ -182,27 +200,31 @@ const EUSurveyJSONModul1 = {
                                     "title": {
                                         "de": "Land",
                                         "en": "Country"
-                                    }
+                                    } 
                                 }
                             ]
                         }
-                    ],
-                    "description": {
-                        "de": "Allgemeine Angaben",
-                        "en": "General Data"
-                    }
+                    ]
                 },
                 {
                     "type": "panel",
                     "name": "panel2",
+                    "description": {
+                        "de": "Tätigkeitssektor",
+                        "en": "Sector of Activity"
+                    },
                     "elements": [
                         {
                             "type": "panel",
-                            "name": "EU.1.2.13",
+                            "name": "EU-1-2-13",
+                            "title": {
+                                "de": "Zu welchem der folgenden großen Regierungsbereiche gehört Ihre Einrichtung? Bitte wählen Sie bis zu zwei Optionen aus",
+                                "en": "In which of the following government broad areas does your organisation belong2? Please select up to two options"
+                            },
                             "elements": [
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU.1.2.13.1",
+                                    "name": "EU-1-2-13-1",
                                     "title": {
                                         "de": "Primär (eine Option obligatorisch)",
                                         "en": "Primary (one mandatory)"
@@ -279,11 +301,12 @@ const EUSurveyJSONModul1 = {
                                             }
                                         }
                                     ],
-                                    "showOtherItem": true
+                                    "showOtherItem": true,
+                                    "defaultValue": "" 
                                 },
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU.1.2.13.2",
+                                    "name": "EU-1-2-13-2",
                                     "title": {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"
@@ -360,19 +383,12 @@ const EUSurveyJSONModul1 = {
                                             }
                                         }
                                     ],
-                                    "showOtherItem": true
+                                    "showOtherItem": true,
+                                    "defaultValue": "" 
                                 }
-                            ],
-                            "title": {
-                                "de": "Zu welchem der folgenden großen Regierungsbereiche gehört Ihre Einrichtung? Bitte wählen Sie bis zu zwei Optionen aus",
-                                "en": "In which of the following government broad areas does your organisation belong2? Please select up to two options"
-                            }
+                            ]
                         }
-                    ],
-                    "description": {
-                        "de": "Tätigkeitssektor",
-                        "en": "Sector of Activity"
-                    }
+                    ]
                 }
             ]
         }

@@ -32,8 +32,8 @@ const app = createApp(App)
 const api = axios.create({
   baseURL: 'http://localhost:3000',
 });
-app.provide('api', api);
 
+app.provide('api', api);
 app.provide('darkmode', isDark);
 
 app.use(router)

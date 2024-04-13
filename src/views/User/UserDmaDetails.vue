@@ -1,24 +1,24 @@
 <template>
     <div v-if="survey">
-        <h3>{{ survey.title }} - Company: {{ survey.createdFor }}</h3>
+        <h3>{{ survey.title }} -  {{ $t(filename+'.organization') }} {{ survey.createdFor }}</h3>
             <br>
     
-            <h5>Survey Data</h5>
-            Created By: {{ survey.createdBy }} ||
-            Created At: {{ survey.createdAt }} ||
-            Updated By: {{ survey.updatedBy }} ||
-            Updated At: {{ survey.updatedAt }} 
+            <h4>{{ $t(filename+'.dmaData') }}</h4>
+            {{ $t(filename+'.creator') }} {{ survey.createdBy }} ||
+            {{ $t(filename+'.createdAt') }} {{ survey.createdAt }} ||
+            {{ $t(filename+'.editor') }} {{ survey.updatedBy }} ||
+            {{ $t(filename+'.editedAt') }} {{ survey.updatedAt }} 
 
             <br><br>
             <div class="button-group">
-                <button class="btn btn-outline-secondary" @click="showSurveyCreator = true; showSurvey = false; fetchData()">
-                Edit Survey
+                <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showSurvey = false; fetchData()">
+                {{ $t(filename+'.button.editDma') }}
                 </button>
-                <button class="btn btn-outline-secondary" @click="showSurvey = true; showSurveyCreator = false; fetchData()">
-                Survey Demo
+                <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; showSurveyCreator = false; fetchData()">
+                {{ $t(filename+'.button.viewDma') }}
                 </button>
                 <button class="btn btn-outline-secondary">
-                Send Survey
+                {{ $t(filename+'.button.sendDma') }}
                 </button>
             </div>
 
@@ -39,9 +39,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Survey } from "../interfaces/Survey.js"
-import SurveyComp from "../components/SurveyComp.vue";
-import SurveyCreatorComp from "../components/SurveyCreatorComp.vue";
+import type { Survey } from "../../interfaces/Survey.js"
+import SurveyComp from "../../components/SurveyComp.vue";
+import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
+
+//language prefix
+const filename = 'UserDmaDetails'
 
 //Import Data for Single Survey by ID
 const props = defineProps({
@@ -64,7 +67,7 @@ const fetchData = async () => {
 fetchData();
 
 //Enable Survey and Survey Creator Comp
-let showSurvey = ref(true);
+let showSurvey = ref(false);
 let showSurveyCreator = ref(false);
 
 

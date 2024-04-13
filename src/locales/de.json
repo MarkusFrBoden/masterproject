@@ -1,30 +1,77 @@
 {
   "welcome": "Wilkommen in der Applikation!",
-  "home": {
+  "EdihHomeView": {
     "title": "Start",
-    "h1": "Hallo"
+    "h3": "Hallo",
+    "h4":"Deine Organisation: ",
+    "OrgaInformations":{
+      "title":"Allgemeine Informationen",
+      "organization":{
+        "title":"Organisation",
+        "name":"Name: ",
+        "id":"ID-Nummer: ",
+        "website":"Website: ",
+        "type":"Organisationsart: ",
+        "size":"Organisationsgröße: ",
+        "primarySector":"Primärer Sektor",
+        "secondarySector":"Sekundärer Sektor"
+      },
+      "address":{
+        "title":"Adresse",
+        "street":"Straße: ",
+        "postalcode":"Postleitzahl: ",
+        "city":"Stadt: ",
+        "country":"Land: "
+      },
+      "contact":{
+        "title":"Kontaktperson",
+        "role":"Funktion: ",
+        "email":"E-Mail-Adresse: ",
+        "tel":"Telefonnummer: "
+      },
+      "notAllInformation":"Nicht alle Informationen vorhanden!"
+    },
+    "DmaInformations":{
+      "title":"Informationen über durchgeführte DMAs",
+      "overview":{
+        "title":"Übersicht"
+      },
+      "maturity":{
+        "title":"Reifegrad nach der EU"
+      },
+      "lastDma":{
+        "title":"Übersicht über letzte DMAs"
+      }
+    },
+    "button":{
+      "editInformation":"Informationen bearbeiten",
+      "endInput":"Beenden"
+    }
   },
-  "SurveyOverview": {
-    "title": "Umfragen",
-    "h1": "Übersicht über erstellte Umfragen",
-    "buttonCreateSurvey":"Umfrage erstellen",
-    "buttonDeleteSurvey":"Umfrage löschen",
-    "buttonExitDelete":"Löschen beenden",
-    "buttonDeleteSelected":"Ausgewählte löschen",
+  "EdihDmaView": {
+    "title": "DMAs",
+    "h3": "DMA-Übersicht",
+    "button":{
+      "createDma":"DMA erstellen",
+      "deleteDma":"DMA löschen",
+      "exitDelete":"Löschen beenden",
+      "deleteSelected":"Ausgewählte löschen"
+    },
     "createInput":{
-      "title":"Neue Umfrage erstellen",
+      "title":"Neues DMA erstellen",
       "name":"Bezeichnung: ",
       "organization":"Organisation: ",
       "cancel":"Abbrechen",
       "create":"Erstellen"
     },
     "deleteInput":{
-      "title":"Sollen die folgenden Umfragen wirklich gelöscht werden?",
+      "title":"Sollen die folgenden DMAs wirklich gelöscht werden?",
       "name":"Bezeichnung: ",
       "organization":"Organisation: ",
       "cancel":"Abbrechen",
       "delete":"Löschen"
     },
+    "list":{
     "column0": "Löschen",
     "column1": "Bezeichnung",
     "column2": "Organisation",
@@ -32,9 +79,121 @@
     "column4": "Erstellt am",
     "column5": "Bearbeitet von",
     "column6": "Bearbeitet am"
+    }
   },
-  "about": {
-    "title": "Über",
-    "h1": "Dies ist eine Impressum-Seite"
+  "EdihDmaDetails": {
+    "organization": "Unternehmen: ",
+    "dmaData": "DMA Details",
+    "creator": "Ersteller: ",
+    "createdAt": "Erstellt am: ",
+    "editor": "Bearbeitet von: ",
+    "editedAt": "Bearbeitet am: ",
+    "button":{
+      "editDma":"DMA bearbeiten",
+      "viewDma":"DMA-Vorschau",
+      "sendDma":"DMA versenden"
+    }
+  },
+  "EdihDmmView": {
+    "title": "DMMs",
+    "h3": "DMM-Übersicht",
+    "list": "Liste mit DMM-Übersicht"
+  },
+  "UserHomeView": {
+    "title": "Start",
+    "h3": "Hallo",
+    "h4":"Deine Organisation: ",
+    "OrgaInformations":{
+      "title":"Allgemeine Informationen",
+      "organization":{
+        "title":"Organisation",
+        "name":"Name: ",
+        "id":"ID-Nummer: ",
+        "website":"Website: ",
+        "type":"Organisationsart: ",
+        "size":"Organisationsgröße: ",
+        "primarySector":"Primärer Sektor",
+        "secondarySector":"Sekundärer Sektor"
+      },
+      "address":{
+        "title":"Adresse",
+        "street":"Straße: ",
+        "postalcode":"Postleitzahl: ",
+        "city":"Stadt: ",
+        "country":"Land: "
+      },
+      "contact":{
+        "title":"Kontaktperson",
+        "role":"Funktion: ",
+        "email":"E-Mail-Adresse: ",
+        "tel":"Telefonnummer: "
+      },
+      "notAllInformation":"Nicht alle Informationen vorhanden!"
+    },
+    "DmaInformations":{
+      "title":"Informationen über durchgeführte DMAs",
+      "overview":{
+        "title":"Übersicht"
+      },
+      "maturity":{
+        "title":"Reifegrad nach der EU"
+      },
+      "lastDma":{
+        "title":"Übersicht über letzte DMAs"
+      }
+    },
+    "button":{
+      "editInformation":"Informationen bearbeiten",
+      "endInput":"Beenden"
+    }
+  },
+  "UserDmaView": {
+    "title": "DMAs",
+    "h3": "DMA-Übersicht",
+    "button":{
+      "createDma":"DMA erstellen",
+      "deleteDma":"DMA löschen",
+      "exitDelete":"Löschen beenden",
+      "deleteSelected":"Ausgewählte löschen"
+    },
+    "createInput":{
+      "title":"Neues DMA erstellen",
+      "name":"Bezeichnung: ",
+      "cancel":"Abbrechen",
+      "create":"Erstellen"
+    },
+    "deleteInput":{
+      "title":"Sollen die folgenden DMAs wirklich gelöscht werden?",
+      "name":"Bezeichnung: ",
+      "organization":"Organisation: ",
+      "cancel":"Abbrechen",
+      "delete":"Löschen"
+    },
+    "list":{
+    "column0": "Löschen",
+    "column1": "Bezeichnung",
+    "column2": "Ersteller",
+    "column3": "Erstellt am",
+    "column4": "Bearbeitet von",
+    "column5": "Bearbeitet am"
+    }
+  },
+  "UserDmaDetails": {
+    "organization": "Unternehmen: ",
+    "dmaData": "DMA Details",
+    "creator": "Ersteller: ",
+    "createdAt": "Erstellt am: ",
+    "editor": "Bearbeitet von: ",
+    "editedAt": "Bearbeitet am: ",
+    "button":{
+      "editDma":"DMA bearbeiten",
+      "viewDma":"DMA-Vorschau",
+      "sendDma":"DMA versenden"
+    }
+  },
+  "UserDmmView": {
+    "title": "About",
+    "h3": "Über das EDIH-DMA-Tool",
+    "list": "Liste mit DMM-Übersicht"
   }
 }
