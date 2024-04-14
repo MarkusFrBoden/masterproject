@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ $t(filename + '.h3') }} {{ ExistingUser?.firstname }}</h3>
+    <h3>{{ $t(filename + '.h3') }} {{ ExistingUser?.name }}</h3>
   </div>
 
   <br>
@@ -13,144 +13,109 @@
   <div class="row">
     <div class="col">
       <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
+
+      <!-- Organisation List  -->
       <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization" :key="key">
-          <div v-if="value && key !== 'contactPerson' && key !== 'address'">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
-              </div>
+        <div class="dma-list">
+          <!-- Header  -->
+          <div class="row">
+            <div class="col" id="name">
+              <button class="custom-button" @click="handleSort('name')">
+                <b>{{ $t(filename + '.OrgaInformations.list.column1') }}</b>
+                <div v-if="OrderIcons.name" class="sort-icon">
+                  <SortAlphaDown v-if="!OrderIcons.nameDown" />
+                  <SortAlphaDownAlt v-if="OrderIcons.nameDown" />
+                </div>
+              </button>
             </div>
+            <div class="col" id="contactMail">
+              <button class="custom-button" @click="handleSort('contactMail')">
+                <b>{{ $t(filename + '.OrgaInformations.list.column2') }}</b>
+                <div v-if="OrderIcons.contactMail" class="sort-icon">
+                  <SortAlphaDown v-if="!OrderIcons.contactMailDown" />
+                  <SortAlphaDownAlt v-if="OrderIcons.contactMailDown" />
+                </div>
+              </button>
+            </div>
+            <div class="col" id="dmaStatus">
+              <button class="custom-button" @click="handleSort('dmaStatus')">
+                <b>{{ $t(filename + '.OrgaInformations.list.column3') }}</b>
+                <div v-if="OrderIcons.dmaStatus" class="sort-icon">
+                  <SortAlphaDown v-if="!OrderIcons.dmaStatusDown" />
+                  <SortAlphaDownAlt v-if="OrderIcons.dmaStatusDown" />
+                </div>
+              </button>
+            </div>
+          </div>
+          <!-- Inhalt  -->
+          <div class="row">
+            <transition-group name="list">
+              <li v-for="organization in orderedOrganizations" :key="organization._id">
+                <div class="row">
+                  <div class="col">
+                    {{ organization._id }}
+                    <!-- <RouterLink :to="{ name: 'EdihOrganizationDetails', params: { id: organization._id?.toString() } }">
+                        <a href="">{{ organization.name }}</a>
+                    </RouterLink> -->
+                  </div>
+                  <div class="col">{{ organization.organization.contactPerson.email }}</div>
+                  <div class="col">{{ organization.organization.euDmaStatus }}</div>
+                </div>
+              </li>
+            </transition-group>
           </div>
         </div>
       </div>
 
       <br>
-
-      <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.address.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization.address" :key="key">
-          <div v-if="value">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.contact.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization.contactPerson" :key="key">
-          <div v-if="value">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br>
-      <div v-if="allInputs === false">
-        <em>{{ $t(filename + '.OrgaInformations.notAllInformation') }}</em>
-      </div>
-
-      <br>
-      <button class="btn btn-outline-secondary" @click="showInput = !showInput">{{
+      <button class="btn btn-outline-secondary " @click="showInput = !showInput">{{
         $t(filename + '.button.editInformation') }}</button>
-      <br><br>
 
-      <!-- Input für Informationen über die Organisation  -->
+      <!-- Input für neue Organisation mit Startnutzer  -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
-          <SurveyComp @surveyCompleted="handleSurveyCompleted" :survey="survey || {}" />
+          <SignupComp :existingAccount="true" :showLoginLink="false"/>
           <br>
           <div class="button-group">
-            <button class="btn btn-outline-secondary custom-button" @click="showInput = false;">{{
+            <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
               $t(filename + '.button.endInput') }}</button>
+            <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
+              $t(filename + '.button.createOrganization') }}</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Dashboard Durchgeführte DMAs  -->
-    <div class="col">
-      <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
 
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-        <br><br><br><br><br><br><br>
-      </div>
-      <br>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.maturity.title') }}</h6>
-        <br><br><br><br>
-      </div>
-      <br>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.lastDma.title') }}</h6>
-        <br><br><br><br>
-      </div>
-
+  <!-- Dashboard Durchgeführte DMAs  -->
+  <div class="col">
+    <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
+    <div class="rightbox">
+      <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
+      Übersicht über Anzahl durchgeführter DMAs auf T0, T1, T2 und weiterer
+      <br><br><br><br><br><br><br>
+    </div>
+    <br>
+    <div class="rightbox">
+      <h6>{{ $t(filename + '.DmaInformations.lastDma.title') }}</h6>
+      Liste mit den letzten drei DMA
+      <br><br><br><br>
     </div>
   </div>
+  </div>
+
 
 </template>
 
 <script setup lang="ts">
-import { ref, inject, watch } from 'vue';
+import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
+import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
+import { ref, inject, computed } from 'vue';
 import type { User } from "../../interfaces/User.js"
-import SurveyComp from "../../components/SurveyComp.vue";
-import { EUSurveyJSONModul1 } from '../../components/EUSurvey_Modul1_json.js'
-import type { Survey } from "../../interfaces/Survey.js"
-import { useI18n } from 'vue-i18n';
-import type { languageMapping } from "../../interfaces/languageMapping.js"
+import SignupComp from '../../components/SignupComp.vue';
 
-
-//language prefix
 const filename = 'EdihHomeView'
 
-//language key mappings
-const { t } = useI18n();
-const languageMappings: languageMapping = {
-  "name": filename + '.OrgaInformations.organization.name',
-  "identificationNumber": filename + '.OrgaInformations.organization.id',
-  "role": filename + '.OrgaInformations.contact.role',
-  "email": filename + '.OrgaInformations.contact.email',
-  "telephone": filename + '.OrgaInformations.contact.tel',
-  "website": filename + '.OrgaInformations.organization.website',
-  "type": filename + '.OrgaInformations.organization.type',
-  "size": filename + '.OrgaInformations.organization.size',
-  "street": filename + '.OrgaInformations.address.street',
-  "postalcode": filename + '.OrgaInformations.address.postalcode',
-  "city": filename + '.OrgaInformations.address.city',
-  "country": filename + '.OrgaInformations.address.street',
-  "primarySektor": filename + '.OrgaInformations.organization.primarySector',
-  "secondarySektor": filename + '.OrgaInformations.organization.secondarySector',
-  "PIC":""
-}
-
-const getLanguageKey = (key: keyof languageMapping) => {
-  if (languageMappings.hasOwnProperty(key)) {
-    return t(languageMappings[key]);
-  }
-  return key;
-}
 
 //Get Start Data
 const api = inject('api') as any;
@@ -165,114 +130,74 @@ const getUser = async () => {
     console.error('Error fetching data:', err);
   }
 };
-getUser()
+getUser();
 
-//Input für Organisationsdaten vorbereiten (Typ Survey)
-let showInput = ref(false);
-let allInputs = ref(false);
-
-const survey = ref<Survey>();
-survey.value = {
-  "title": "",
-  "createdFor": "",
-  "createdBy": "",
-  "createdAt": new Date(),
-  "updatedBy": "",
-  "updatedAt": new Date(),
-  "responses": [],
-  "SurveyJson": {}
-};
-survey.value.SurveyJson = EUSurveyJSONModul1;
-
-
-//Test ob alle Organisationsinformationen befüllt sind - sonst Anzeige im UI
-const checkValues = (obj: any): boolean => {
-  for (const key in obj) {
-    if (key !== 'PIC') {
-      if (typeof obj[key] === 'object') {
-        if (!checkValues(obj[key])) {
-          return false;
-        }
-      } else if (!obj[key] || obj[key] === "") {
-        return false;
-      }
-    }
+let organizations = ref<any>([]);
+const getOrganizations = async () => {
+  try {
+    const response = await api.get('/OrganizationOverview');
+    organizations.value = response.data;
+  } catch (err) {
+    console.error('Error fetching data:', err);
   }
-  return true;
 };
+getOrganizations();
 
-//Bereits befüllte Informationen werden in Bearbeitungsabfrage als DefaultValue gesetzt
-watch([ExistingUser, survey], ([user]) => {
-  if (user && survey.value) {
-    allInputs.value = checkValues(user.organization);
-    survey.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
-    survey.value.SurveyJson.pages[0].elements[0].elements[1].defaultValue = user.organization?.identificationNumber;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[0].defaultValue = user.organization?.contactPerson.name;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[1].defaultValue = user.organization?.contactPerson.role;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[2].defaultValue = user.organization?.contactPerson.email;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[3].defaultValue = user.organization?.contactPerson.telephone;
-    survey.value.SurveyJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.website;
-    survey.value.SurveyJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.type;
-    survey.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue = user.organization?.size;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text1 = user.organization?.address.street;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text2 = user.organization?.address.postalcode;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text3 = user.organization?.address.city;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text4 = user.organization?.address.country;
-    survey.value.SurveyJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
-    survey.value.SurveyJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
-  }
+//Sort List
+const orderedOrganizations = computed(() => {
+  return [...organizations.value].sort((a, b) => {
+    const aValue = a.organization.name;
+    const bValue = b.organization.name;
+    const result = aValue > bValue ? 1 : -1;
+    return isAscending.value ? result : -result;
+  });
 });
 
-//Mapping der Abfragefelder aus der SurveyJS-Antwort auf die Datenbankstruktur der Organisation
-let mapping = (object: any) => {
-  const User: User = ExistingUser.value as User;
-  delete User._id;
 
-  const mappings: any = {
-    "EU-1-1-2": (value: any) => { User.organization.name = value; },
-    "EU-1-1-3": (value: any) => { User.organization.identificationNumber = value; },
-    "EU-1-1-4": (value: any) => { User.organization.contactPerson.name = value; },
-    "EU-1-1-5": (value: any) => { User.organization.contactPerson.role = value; },
-    "EU-1-1-6": (value: any) => { User.organization.contactPerson.email = value; },
-    "EU-1-1-7": (value: any) => { User.organization.contactPerson.telephone = value; },
-    "EU-1-1-8": (value: any) => { User.organization.website = value; },
-    "EU-1-1-9": (value: any) => { User.organization.type = value; },
-    "EU-1-1-10": (value: any) => { User.organization.size = value; },
-    "EU-1-2-13-1": (value: any) => { User.organization.primarySektor = value; },
-    "EU-1-2-13-2": (value: any) => { User.organization.secondarySektor = value; },
-    "text1": (value: any) => { User.organization.address.street = value; },
-    "text2": (value: any) => { User.organization.address.postalcode = value; },
-    "text3": (value: any) => { User.organization.address.city = value; },
-    "text4": (value: any) => { User.organization.address.country = value; }
-  };
+type OrderIconsType = {
+  [key: string]: boolean;
+}
 
-  for (const key in mappings) {
-    if (object.hasOwnProperty(key)) {
-      mappings[key](object[key]);
+const OrderIcons = ref<OrderIconsType>({
+  "name": false,
+  "nameDown": false,
+  "contactMail": false,
+  "contactMailDown": false,
+  "dmaStatus": false,
+  "dmaStatusDown": false
+});
+
+let order = ref<keyof any>('updatedAt');
+let isAscending = ref<boolean>(true);
+
+//Order Logik
+const handleSort = (columnId: string) => {
+  Object.keys(OrderIcons.value).forEach((key) => {
+    if (key !== columnId && key !== columnId + "Down") {
+      OrderIcons.value[key] = false;
     }
-    if (object["EU-1-1-11"] && object["EU-1-1-11"].hasOwnProperty(key)) {
-      mappings[key](object["EU-1-1-11"][key]);
-    }
+  });
+  if (!OrderIcons.value[columnId]) {
+    OrderIcons.value[columnId] = true;
+    order.value = columnId;
+    isAscending.value = true;
   }
-
-  return User;
-};
-
-//PatchUser bei beenden des Inputs, sollten Änderungen vorgenommen worden sein 
-const patchUser = async (data: any) => {
-  try {
-    const response = await api.patch('/UserById/' + UserId, data);
-    console.log('Daten erfolgreich an die Route gesendet:', response.data);
-    getUser()
-  } catch (err) {
-    console.error('Error patchching data:', err);
+  else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) {
+    OrderIcons.value[columnId + "Down"] = true;
+    order.value = columnId;
+    isAscending.value = false;
   }
-};
+  else {
+    OrderIcons.value[columnId] = false;
+    OrderIcons.value[columnId + "Down"] = false;
+    isAscending.value = false;
+  }
+}
+handleSort('name');
 
-const handleSurveyCompleted = (results: any) => {
-  const User: User = mapping(results);
-  patchUser(User)
-};
+//Create Organization and User
+let showInput = ref(false);
+
 
 </script>
 
@@ -323,14 +248,31 @@ const handleSurveyCompleted = (results: any) => {
 }
 
 .custom-button {
-  background-color: white !important;
-}
-
-.custom-button:hover {
   color: black !important;
-  background-color: rgba(255, 255, 255, 0.651) !important;
+  background-color: #ffffff !important;
 }
 
+.custom-button2 {
+  color: black !important;
+  background-color: #eceaea !important;
+}
+
+.custom-button2:hover {
+  color: black !important;
+  background-color: #858484 !important;
+}
+
+.dark .custom-button,
+.dark .custom-button2 {
+  color: #72bbff !important;
+  background-color: #020b3d !important;
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+}
 
 .leftbox {
   background-color: #ffffff;
@@ -366,4 +308,24 @@ const handleSurveyCompleted = (results: any) => {
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+.dma-list li {
+  list-style-type: none;
+  background: rgba(214, 206, 206, 0.692) !important;
+  padding: 16px;
+  margin: 5px 0;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(43, 42, 42, 0.1);
+  text-align: left;
+}
+
+.dark .dma-list li {
+  list-style-type: none;
+  background: rgba(54, 48, 95, 0.692) !important;
+}
+
+.list-move {
+  transition: all 0.5s;
+}
+
 </style>

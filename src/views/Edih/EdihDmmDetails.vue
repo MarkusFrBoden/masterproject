@@ -1,34 +1,31 @@
 <template>
-    <div v-if="dma">
-        <h3>{{ dma.title }} -  {{ $t(filename+'.organization') }} {{ dma.createdFor }}</h3>
+    <div v-if="dmm">
+        <h3>{{ dmm.title }} -  {{ $t(filename+'.organization') }} {{ dmm.createdFor }}</h3>
             <br>
     
-            <h4>{{ $t(filename+'.dmaData') }}</h4>
-            {{ $t(filename+'.creator') }} {{ dma.createdBy }} ||
-            {{ $t(filename+'.createdAt') }} {{ dma.createdAt }} ||
-            {{ $t(filename+'.editor') }} {{ dma.updatedBy }} ||
-            {{ $t(filename+'.editedAt') }} {{ dma.updatedAt }} 
+            <h4>{{ $t(filename+'.dmmData') }}</h4>
+            {{ $t(filename+'.creator') }} {{ dmm.createdBy }} ||
+            {{ $t(filename+'.createdAt') }} {{ dmm.createdAt }} ||
+            {{ $t(filename+'.editor') }} {{ dmm.updatedBy }} ||
+            {{ $t(filename+'.editedAt') }} {{ dmm.updatedAt }} 
 
             <br><br>
             <div class="button-group">
                 <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showSurvey = false; fetchData()">
-                {{ $t(filename+'.button.editDma') }}
+                {{ $t(filename+'.button.editDmm') }}
                 </button>
                 <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; showSurveyCreator = false; fetchData()">
-                {{ $t(filename+'.button.viewDma') }}
-                </button>
-                <button class="btn btn-outline-secondary">
-                {{ $t(filename+'.button.sendDma') }}
+                {{ $t(filename+'.button.viewDmm') }}
                 </button>
             </div>
 
             <br>
 
             <div v-if="showSurvey">
-                <SurveyComp :survey= "dma"/>
+                <SurveyComp :survey= "dmm"/>
             </div>
             <div v-if="showSurveyCreator">
-                <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "dma" :type = "'Dma'"/>
+                <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "dmm" :type = "'Dmm'"/>
             </div>
             
     </div>
@@ -44,21 +41,21 @@ import SurveyComp from "../../components/SurveyComp.vue";
 import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
 
 //language prefix
-const filename = 'EdihDmaDetails'
+const filename = 'EdihDmmDetails'
 
-//Import Data for Single Dma by ID
+//Import Data for Single Dmm by ID
 const props = defineProps({
     id: {
         type: String,
         required: true,
     }
 });
-const dma = ref<DMA>();
+const dmm = ref<DMA>();
 const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:3000/DmaById/' + props.id);
+        const response = await fetch('http://localhost:3000/DmmById/' + props.id);
         const data: DMA = await response.json();
-        dma.value = data;
+        dmm.value = data;
     } catch (err: any) {
         console.error(err.message);
     }

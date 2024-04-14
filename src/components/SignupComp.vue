@@ -6,11 +6,12 @@
             </div>
         </div>
 
-        <label>First Name:</label>
-        <input type="text" required v-model="firstname">
+        <label>Organisation:</label>
+        <input type="text" required v-model="organization">
+        <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
-        <label>Surname:</label>
-        <input type="text" required v-model="surname">
+        <label>Dein Name:</label>
+        <input type="text" required v-model="name">
 
         <label>Email:</label>
         <input type="email" required v-model="email" >
@@ -19,10 +20,6 @@
         <label>Password:</label>
         <input type="password" required v-model="password">
         <div v-if="passwordError" class="error">{{ passwordError }}</div>
-
-        <label>Organisation:</label>
-        <input type="text" required v-model="organization">
-        <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
         <div class="terms">
             <input type="checkbox" required v-model="terms">
@@ -33,7 +30,10 @@
     <div class="submit">
         <button @click="handleSubmit">Create an Account</button>
         <br><br>
-        <a href="#" @click="Account">You have already an Account?</a>
+        <div v-if="showLoginLink">
+            <a href="#" @click="Account">You have already an Account?</a>
+        </div>
+        
     </div>
 </template>
 
@@ -44,6 +44,10 @@ import type { User } from "../interfaces/User.js"
 //Accept Props
 let props = defineProps({
     existingAccount: {
+        type: Boolean,
+        required: true
+    },
+    showLoginLink: {
         type: Boolean,
         required: true
     }
@@ -63,8 +67,7 @@ const api = inject('api') as any;
 
 let ExistingUser = ref<any[]>([]);
 let ExistingOrganization = ref<any[]>([]);
-let firstname = ref('');
-let surname = ref('');
+let name = ref('');
 let email = ref('');
 let emailError = ref('');
 let password = ref('');
@@ -95,17 +98,16 @@ const getOrganisation = async () => {
 const CreateAccount = async () => {
     try {
         let PostUser = ref<User>({
-            firstname: firstname.value,
-            surname: surname.value,
+            name: name.value,
             email: email.value,
             password: password.value,
             organization: {
                 name: organization.value,
                 identificationNumber: "",
                 contactPerson: {
-                    name: "",
+                    name: name.value,
                     role: "",
-                    email: "",
+                    email: email.value,
                     telephone: ""
                 },
                 website: "",
@@ -119,7 +121,8 @@ const CreateAccount = async () => {
                 },
                 PIC: "",
                 primarySektor: "",
-                secondarySektor: ""
+                secondarySektor: "",
+                euDmaStatus:"start"
             },
             termsAccepted: terms.value
         });

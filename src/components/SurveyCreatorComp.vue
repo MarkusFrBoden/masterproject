@@ -17,6 +17,10 @@ let props = defineProps({
   survey: {
     type: Object,
     required: true
+  },
+  type: {
+    type: String,
+    required: true
   }
 })
 
@@ -82,7 +86,7 @@ const updateSurvey = async () => {
       "updatedBy": "TestUser",
       "updatedAt": new Date()
     };
-    const response = await api.patch(`/surveys/${props.survey._id}`, updatedData);
+    const response = await api.patch(`/${props.type}ById/${props.survey._id}`, updatedData);
     emit('triggerRefresh');
     return response;
   } catch (error) {

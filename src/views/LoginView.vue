@@ -4,7 +4,7 @@
             <LoginComp :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/> 
         </div>
         <div v-else>
-            <SignupComp :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/>
+            <SignupComp :existingAccount="existingAccount" :showLoginLink="true" @updateExistingAccount="updateExistingAccount"/>
         </div>
     </div>
 </template>

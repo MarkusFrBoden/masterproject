@@ -1,7 +1,7 @@
-import imagede from "../assets/EUSurvey-Module_German.png"
-import imageen from "../assets/EUSurvey-Modules_English.png";
+import imagede from "../assets/EUDma-Module_German.png"
+import imageen from "../assets/EUDma-Modules_English.png";
 
-const EUSurveyJSON = {
+const EUDmaJSON = {
     "locale": "de",
     "title": {
         "de": "Fragebogen zur Bewertung der digitalen Reife für EDIH-Kunden",
@@ -1389,4 +1389,4 @@ const EUSurveyJSON = {
     "fitToContainer": true
 };
 
-export { EUSurveyJSON };
+export { EUDmaJSON };

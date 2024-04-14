@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import EdihHomeView from '../views/Edih/EdihHomeView.vue'
 import EdihDmaView from '../views/Edih/EdihDmaView.vue'
 import EdihDmaDetails from '../views/Edih/EdihDmaDetails.vue'
+import EdihDmmDetails from '../views/Edih/EdihDmmDetails.vue'
 import UserHomeView from '../views/User/UserHomeView.vue'
 import UserDmaView from '../views/User/UserDmaView.vue'
 import UserDmaDetails from '../views/User/UserDmaDetails.vue'
@@ -31,6 +32,13 @@ const router = createRouter({
       path: '/EdihDmaDetails/:id',
       name: 'EdihDmaDetails',
       component: EdihDmaDetails,
+      props: true,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/EdihDmmDetails/:id',
+      name: 'EdihDmmDetails',
+      component: EdihDmmDetails,
       props: true,
       meta: { requiresAuth: true }
     },

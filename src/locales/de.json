@@ -5,31 +5,11 @@
     "h3": "Hallo",
     "h4":"Deine Organisation: ",
     "OrgaInformations":{
-      "title":"Allgemeine Informationen",
-      "organization":{
-        "title":"Organisation",
-        "name":"Name: ",
-        "id":"ID-Nummer: ",
-        "website":"Website: ",
-        "type":"Organisationsart: ",
-        "size":"Organisationsgröße: ",
-        "primarySector":"Primärer Sektor",
-        "secondarySector":"Sekundärer Sektor"
-      },
-      "address":{
-        "title":"Adresse",
-        "street":"Straße: ",
-        "postalcode":"Postleitzahl: ",
-        "city":"Stadt: ",
-        "country":"Land: "
-      },
-      "contact":{
-        "title":"Kontaktperson",
-        "role":"Funktion: ",
-        "email":"E-Mail-Adresse: ",
-        "tel":"Telefonnummer: "
-      },
-      "notAllInformation":"Nicht alle Informationen vorhanden!"
+      "title":"Organisationen",
+      "list":{
+        "column1": "Name",
+        "column2": "Kontakt-Mail",
+        "column3": "EU-Status"}
     },
     "DmaInformations":{
       "title":"Informationen über durchgeführte DMAs",
@@ -44,8 +24,9 @@
       }
     },
     "button":{
-      "editInformation":"Informationen bearbeiten",
-      "endInput":"Beenden"
+      "editInformation":"Organisation erstellen",
+      "endInput":"Beenden",
+      "createOrganization":"Organisation und Startnutzer anlegen"
     }
   },
   "EdihDmaView": {
@@ -97,7 +78,44 @@
   "EdihDmmView": {
     "title": "DMMs",
     "h3": "DMM-Übersicht",
-    "list": "Liste mit DMM-Übersicht"
+    "button":{
+      "createDmm":"DMM erstellen",
+      "deleteDmm":"DMM löschen",
+      "exitDelete":"Löschen beenden",
+      "deleteSelected":"Ausgewählte löschen"
+    },
+    "createInput":{
+      "title":"Neues DMM erstellen",
+      "name":"Bezeichnung: ",
+      "cancel":"Abbrechen",
+      "create":"Erstellen"
+    },
+    "deleteInput":{
+      "title":"Sollen die folgenden DMMs wirklich gelöscht werden?",
+      "name":"Bezeichnung: ",
+      "cancel":"Abbrechen",
+      "delete":"Löschen"
+    },
+    "list":{
+    "column0": "Löschen",
+    "column1": "Bezeichnung",
+    "column3": "Ersteller",
+    "column4": "Erstellt am",
+    "column5": "Bearbeitet von",
+    "column6": "Bearbeitet am"
+    }
+  },
+  "EdihDmmDetails": {
+    "organization": "Unternehmen: ",
+    "dmmData": "DMM Details",
+    "creator": "Ersteller: ",
+    "createdAt": "Erstellt am: ",
+    "editor": "Bearbeitet von: ",
+    "editedAt": "Bearbeitet am: ",
+    "button":{
+      "editDmm":"DMM bearbeiten",
+      "viewDmm":"DMM-Vorschau"
+    }
   },
   "UserHomeView": {
     "title": "Start",
@@ -150,6 +168,7 @@
   "UserDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
+    "noDma":"Noch kein DMA angelegt",
     "button":{
       "createDma":"DMA erstellen",
       "deleteDma":"DMA löschen",

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ $t(filename + '.h3') }} {{ ExistingUser?.firstname }}</h3>
+    <h3>{{ $t(filename + '.h3') }} {{ ExistingUser?.name }}</h3>
   </div>
 
   <br>
@@ -78,7 +78,7 @@
       <!-- Input für Informationen über die Organisation  -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
-          <SurveyComp @surveyCompleted="handleSurveyCompleted" :survey="survey || {}" />
+          <SurveyComp @dmaCompleted="handleDmaCompleted" :survey="dma || {}" />
           <br>
           <div class="button-group">
             <button class="btn btn-outline-secondary custom-button" @click="showInput = false;">{{
@@ -116,8 +116,8 @@
 import { ref, inject, watch } from 'vue';
 import type { User } from "../../interfaces/User.js"
 import SurveyComp from "../../components/SurveyComp.vue";
-import { EUSurveyJSONModul1 } from '../../components/EUSurvey_Modul1_json.js'
-import type { Survey } from "../../interfaces/Survey.js"
+import { EUDmaJSONModul1 } from '../../components/EUDma_Modul1_json.js'
+import type { DMA } from "../../interfaces/DMA.js"
 import { useI18n } from 'vue-i18n';
 import type { languageMapping } from "../../interfaces/languageMapping.js"
 
@@ -167,12 +167,12 @@ const getUser = async () => {
 };
 getUser()
 
-//Input für Organisationsdaten vorbereiten (Typ Survey)
+//Input für Organisationsdaten vorbereiten (Typ Dma)
 let showInput = ref(false);
 let allInputs = ref(false);
 
-const survey = ref<Survey>();
-survey.value = {
+const dma = ref<DMA>();
+dma.value = {
   "title": "",
   "createdFor": "",
   "createdBy": "",
@@ -182,7 +182,7 @@ survey.value = {
   "responses": [],
   "SurveyJson": {}
 };
-survey.value.SurveyJson = EUSurveyJSONModul1;
+dma.value.DmaJson = EUDmaJSONModul1;
 
 
 //Test ob alle Organisationsinformationen befüllt sind - sonst Anzeige im UI
@@ -202,28 +202,28 @@ const checkValues = (obj: any): boolean => {
 };
 
 //Bereits befüllte Informationen werden in Bearbeitungsabfrage als DefaultValue gesetzt
-watch([ExistingUser, survey], ([user]) => {
-  if (user && survey.value) {
+watch([ExistingUser, dma], ([user]) => {
+  if (user && dma.value) {
     allInputs.value = checkValues(user.organization);
-    survey.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
-    survey.value.SurveyJson.pages[0].elements[0].elements[1].defaultValue = user.organization?.identificationNumber;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[0].defaultValue = user.organization?.contactPerson.name;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[1].defaultValue = user.organization?.contactPerson.role;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[2].defaultValue = user.organization?.contactPerson.email;
-    survey.value.SurveyJson.pages[0].elements[0].elements[2].elements[3].defaultValue = user.organization?.contactPerson.telephone;
-    survey.value.SurveyJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.website;
-    survey.value.SurveyJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.type;
-    survey.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue = user.organization?.size;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text1 = user.organization?.address.street;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text2 = user.organization?.address.postalcode;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text3 = user.organization?.address.city;
-    survey.value.SurveyJson.pages[0].elements[0].elements[6].defaultValue.text4 = user.organization?.address.country;
-    survey.value.SurveyJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
-    survey.value.SurveyJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
+    dma.value.DmaJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
+    dma.value.DmaJson.pages[0].elements[0].elements[1].defaultValue = user.organization?.identificationNumber;
+    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[0].defaultValue = user.organization?.contactPerson.name;
+    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[1].defaultValue = user.organization?.contactPerson.role;
+    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[2].defaultValue = user.organization?.contactPerson.email;
+    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[3].defaultValue = user.organization?.contactPerson.telephone;
+    dma.value.DmaJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.website;
+    dma.value.DmaJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.type;
+    dma.value.DmaJson.pages[0].elements[0].elements[5].defaultValue = user.organization?.size;
+    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text1 = user.organization?.address.street;
+    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text2 = user.organization?.address.postalcode;
+    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text3 = user.organization?.address.city;
+    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text4 = user.organization?.address.country;
+    dma.value.DmaJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
+    dma.value.DmaJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
   }
 });
 
-//Mapping der Abfragefelder aus der SurveyJS-Antwort auf die Datenbankstruktur der Organisation
+//Mapping der Abfragefelder aus der DmaJS-Antwort auf die Datenbankstruktur der Organisation
 let mapping = (object: any) => {
   const User: User = ExistingUser.value as User;
   delete User._id;
@@ -269,7 +269,7 @@ const patchUser = async (data: any) => {
   }
 };
 
-const handleSurveyCompleted = (results: any) => {
+const handleDmaCompleted = (results: any) => {
   const User: User = mapping(results);
   patchUser(User)
 };

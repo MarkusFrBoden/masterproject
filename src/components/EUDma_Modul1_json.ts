@@ -1,4 +1,4 @@
-const EUSurveyJSONModul1 = {
+const EUDmaJSONModul1 = {
     "locale": "de",
     "title": {
         "de": "Kundeninformationen",
@@ -401,4 +401,4 @@ const EUSurveyJSONModul1 = {
     "fitToContainer": true
 }
 
-export { EUSurveyJSONModul1 };
+export { EUDmaJSONModul1 };

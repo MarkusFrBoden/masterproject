@@ -1,13 +1,13 @@
 <template>
-    <div v-if="survey">
-        <h3>{{ survey.title }} -  {{ $t(filename+'.organization') }} {{ survey.createdFor }}</h3>
+    <div v-if="dma">
+        <h3>{{ dma.title }} -  {{ $t(filename+'.organization') }} {{ dma.createdFor }}</h3>
             <br>
     
             <h4>{{ $t(filename+'.dmaData') }}</h4>
-            {{ $t(filename+'.creator') }} {{ survey.createdBy }} ||
-            {{ $t(filename+'.createdAt') }} {{ survey.createdAt }} ||
-            {{ $t(filename+'.editor') }} {{ survey.updatedBy }} ||
-            {{ $t(filename+'.editedAt') }} {{ survey.updatedAt }} 
+            {{ $t(filename+'.creator') }} {{ dma.createdBy }} ||
+            {{ $t(filename+'.createdAt') }} {{ dma.createdAt }} ||
+            {{ $t(filename+'.editor') }} {{ dma.updatedBy }} ||
+            {{ $t(filename+'.editedAt') }} {{ dma.updatedAt }} 
 
             <br><br>
             <div class="button-group">
@@ -25,10 +25,10 @@
             <br>
 
             <div v-if="showSurvey">
-                <SurveyComp :survey = "survey"/>
+                <SurveyComp :survey = "dma"/>
             </div>
             <div v-if="showSurveyCreator">
-                <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "survey"/>
+                <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "dma" :type = "'Dma'"/>
             </div>
             
     </div>
@@ -39,26 +39,26 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Survey } from "../../interfaces/Survey.js"
+import type { DMA } from "../../interfaces/DMA.js"
 import SurveyComp from "../../components/SurveyComp.vue";
 import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
 
 //language prefix
 const filename = 'UserDmaDetails'
 
-//Import Data for Single Survey by ID
+//Import Data for Single Dma by ID
 const props = defineProps({
     id: {
         type: String,
         required: true,
     }
 });
-const survey = ref<Survey>();
+const dma = ref<DMA>();
 const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:3000/SurveyById/' + props.id);
-        const data: Survey = await response.json();
-        survey.value = data;
+        const response = await fetch('http://localhost:3000/DmaById/' + props.id);
+        const data: DMA = await response.json();
+        dma.value = data;
         console.log("Refresh")
     } catch (err: any) {
         console.error(err.message);

@@ -1,7 +1,6 @@
 export interface User {
     _id?: String;
-    firstname: String;
-    surname: String;
+    name: String;
     email: String;
     password: String;
     organization: {
@@ -25,6 +24,7 @@ export interface User {
         PIC: String;
         primarySektor: String;
         secondarySektor: String; 
+        euDmaStatus: string;
     }
     termsAccepted: Boolean;
 }

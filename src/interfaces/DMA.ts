@@ -1,4 +1,4 @@
-export interface Survey {
+export interface DMA {
     _id?: String;
     title: String;
     createdFor: String;
