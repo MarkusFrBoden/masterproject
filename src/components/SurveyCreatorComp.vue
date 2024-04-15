@@ -78,6 +78,18 @@ creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {
     callback(saveNo, false);
   }
 };
+const saveSurveyManually = async () => {
+  try {
+    const response = await updateSurvey();
+    if (response.status === 200) {
+      console.log('Survey saved successfully.');
+    } else {
+      console.error('Error saving survey: Unexpected response status');
+    }
+  } catch (error) {
+    console.error('Error saving survey:', error);
+  }
+};
 
 const updateSurvey = async () => {
   try {
@@ -95,9 +107,33 @@ const updateSurvey = async () => {
   }
 };
 
+creator.onUploadFile.add(async (_, options) => {
+  console.log('Files:', options.files);
+  const formData = new FormData();
+
+  // FormData vorbereiten
+  options.files.forEach((file: File) => {
+    console.log('File:', file);
+    formData.append('file', file);
+  });
+  console.log(formData);
+
+  // FormData wird vor dem await vorbereitet, sodass es vor dem API-Aufruf ausgeführt wird
+  try {
+    const response = await api.post('/upload', formData);
+    console.log('File uploaded successfully:', response.data.filePath);
+    options.callback("success", '/masterproject/backend'+response.data.filePath);
+  } catch (error) {
+    console.error('Error saving Picture:', error);
+  }
+});
+
+
 
 </script>
 
 <template>
+  <button @click="saveSurveyManually">Manually Save Survey</button>
+  <br><br>
   <SurveyCreatorComponent :model="creator" />
 </template>

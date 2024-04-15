@@ -10,6 +10,25 @@
   <h4>{{ $t(filename + '.h4') }} {{ ExistingUser?.organization.name }}</h4>
   <br>
 
+
+<!-- delete organization interface  -->
+<div v-if="showDeleteQuestion" class="overlay">
+        <div class="input-container">
+            <h4>{{ $t(filename + '.deleteInput.title') }}</h4>
+            <li v-for="item in selectedItems" :key="item._id">
+                {{ $t(filename + '.deleteInput.organization') }} {{ item._id }}
+            </li>
+            <br>
+            <div class="button-group">
+                <button class="btn btn-outline-secondary" @click="showDeleteQuestion = false;">{{
+                    $t(filename + '.deleteInput.cancel') }}</button>
+                <button class="btn btn-outline-secondary" @click="deleteSelectedItems">
+                  <div class="delete-selected">{{$t(filename + '.deleteInput.delete') }}</div>
+                  </button>
+            </div>
+        </div>
+    </div>
+
   <div class="row">
     <div class="col">
       <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
@@ -19,6 +38,11 @@
         <div class="dma-list">
           <!-- Header  -->
           <div class="row">
+            <div v-if="showDeleteOptions" class="col">
+                <button class="custom-button">
+                    <b>{{ $t(filename + '.OrgaInformations.list.column0') }}</b>
+                </button>
+            </div>
             <div class="col" id="name">
               <button class="custom-button" @click="handleSort('name')">
                 <b>{{ $t(filename + '.OrgaInformations.list.column1') }}</b>
@@ -48,10 +72,13 @@
             </div>
           </div>
           <!-- Inhalt  -->
-          <div class="row">
             <transition-group name="list">
               <li v-for="organization in orderedOrganizations" :key="organization._id">
                 <div class="row">
+                  <div v-if="showDeleteOptions" class="col">
+                        <input type="checkbox" v-model="selectedItems"
+                            :value="{_id: organization._id}" />
+                    </div>
                   <div class="col">
                     {{ organization._id }}
                     <!-- <RouterLink :to="{ name: 'EdihOrganizationDetails', params: { id: organization._id?.toString() } }">
@@ -63,14 +90,17 @@
                 </div>
               </li>
             </transition-group>
-          </div>
+          
         </div>
       </div>
 
       <br>
       <button class="btn btn-outline-secondary " @click="showInput = !showInput">{{
         $t(filename + '.button.editInformation') }}</button>
-
+      <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
+            @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
+            {{ $t(filename + '.button.exitDelete') }}
+        </button>
       <!-- Input für neue Organisation mit Startnutzer  -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
@@ -79,11 +109,21 @@
           <div class="button-group">
             <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
               $t(filename + '.button.endInput') }}</button>
-            <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
-              $t(filename + '.button.createOrganization') }}</button>
           </div>
         </div>
       </div>
+
+      <!-- Button Organisation und Nutzer löschen  -->
+      <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
+            @click="showDeleteOptions = !showDeleteOptions">
+            <div v-if="!showDeleteOptions">{{ $t(filename + '.button.deleteOrga') }}</div>
+            <div v-else> {{ $t(filename + '.button.exitDelete') }}</div>
+        </button>
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
+            <div class="delete-selected">
+                {{ $t(filename + '.button.deleteSelected') }}
+            </div>
+        </button>
     </div>
 
 
@@ -146,13 +186,25 @@ getOrganizations();
 //Sort List
 const orderedOrganizations = computed(() => {
   return [...organizations.value].sort((a, b) => {
-    const aValue = a.organization.name;
-    const bValue = b.organization.name;
+    let aValue, bValue;
+    switch (sortBy.value) {
+      case 'name':
+        aValue = a.organization.name;
+        bValue = b.organization.name;
+        break;
+      case 'contactMail':
+        aValue = a.organization.contactPerson.email;
+        bValue = b.organization.contactPerson.email;
+        break;
+      case 'dmaStatus':
+        aValue = a.organization.euDmaStatus;
+        bValue = b.organization.euDmaStatus;
+        break;
+    }
     const result = aValue > bValue ? 1 : -1;
     return isAscending.value ? result : -result;
   });
 });
-
 
 type OrderIconsType = {
   [key: string]: boolean;
@@ -167,8 +219,8 @@ const OrderIcons = ref<OrderIconsType>({
   "dmaStatusDown": false
 });
 
-let order = ref<keyof any>('updatedAt');
 let isAscending = ref<boolean>(true);
+const sortBy = ref('name');
 
 //Order Logik
 const handleSort = (columnId: string) => {
@@ -179,12 +231,12 @@ const handleSort = (columnId: string) => {
   });
   if (!OrderIcons.value[columnId]) {
     OrderIcons.value[columnId] = true;
-    order.value = columnId;
+    sortBy.value = columnId;
     isAscending.value = true;
   }
   else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) {
     OrderIcons.value[columnId + "Down"] = true;
-    order.value = columnId;
+    sortBy.value = columnId;
     isAscending.value = false;
   }
   else {
@@ -197,6 +249,28 @@ handleSort('name');
 
 //Create Organization and User
 let showInput = ref(false);
+
+
+//Delete Organization and User
+interface deleteItems {
+    _id: string;
+}
+
+let selectedItems = ref<deleteItems[]>([])
+let showDeleteOptions = ref(false);
+let showDeleteQuestion = ref(false);
+const deleteSelectedItems = async () => {
+    try {
+        const IDs = selectedItems.value.map(item => item._id);
+        const response = await api.post('/deleteMultipleOrganizations', { orgaNames: IDs });
+        getOrganizations();
+        showDeleteQuestion.value = false;
+        showDeleteOptions.value = false;
+        selectedItems.value = [];
+    } catch (error) {
+        console.error('Error deleting Organization:', error);
+    }
+};
 
 
 </script>
@@ -328,4 +402,7 @@ let showInput = ref(false);
   transition: all 0.5s;
 }
 
+.delete-selected {
+    color: rgb(214, 69, 69);
+}
 </style>

@@ -14,4 +14,5 @@ export interface languageMapping {
     primarySektor: string;
     secondarySektor: string;
     PIC: string;
+    euDmaStatus: string;
 }

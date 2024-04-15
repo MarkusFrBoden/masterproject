@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const { ObjectId } = require('mongodb');
 const { connectToDb, getDb } = require('./db');
 
@@ -33,7 +34,7 @@ router.get('/UsersOverview', (req, res) => {
 
 router.get('/UserByMail/:email', (req, res) => {
     db.collection('users')
-        .findOne({ email: req.params.email})
+        .findOne({ email: req.params.email })
         .then(user => {
             res.status(200).json(user);
         })
@@ -44,7 +45,7 @@ router.get('/UserByMail/:email', (req, res) => {
 
 router.get('/UserById/:Id', (req, res) => {
     db.collection('users')
-        .findOne({ _id: new ObjectId(req.params.Id)})
+        .findOne({ _id: new ObjectId(req.params.Id) })
         .then(user => {
             res.status(200).json(user);
         })
@@ -102,7 +103,7 @@ router.patch('/UserById/:id', (req, res) => {
 // ------------------------ Organization -------------------------------
 router.get('/OrganizationByName/:organizationName', (req, res) => {
     db.collection('users')
-        .findOne({ 'organization.name': req.params.organizationName})
+        .findOne({ 'organization.name': req.params.organizationName })
         .then(user => {
             res.status(200).json(user);
         })
@@ -114,7 +115,7 @@ router.get('/OrganizationByName/:organizationName', (req, res) => {
 router.get('/OrganizationOverview', (req, res) => {
     db.collection('users')
         .aggregate([
-            { $match: { 'organization.name': { $ne: 'EDIH Thuringia' } } }, 
+            { $match: { 'organization.name': { $ne: 'EDIH Thuringia' } } },
             { $group: { _id: "$organization.name", organization: { $first: "$organization" } } }
         ])
         .toArray()
@@ -124,6 +125,22 @@ router.get('/OrganizationOverview', (req, res) => {
         .catch(() => {
             res.status(500).json({ error: 'Could not fetch the document' });
         });
+});
+
+router.post('/deleteMultipleOrganizations', async (req, res) => {
+    const orgaNames = req.body.orgaNames;
+    if (!orgaNames || !Array.isArray(orgaNames)) {
+        return res.status(400).json({ error: 'orgaNames is not a valid array.' });
+    }
+    else {
+        try {
+            const result = await db.collection('users').deleteMany({ 'organization.name': { $in: orgaNames } });
+            res.status(200).json(result);
+        } catch (error) {
+            console.error('Error deleting organization:', error);
+            res.status(500).json({ error: 'Could not delete Organization.' });
+        }
+    }
 });
 
 
@@ -328,5 +345,24 @@ router.post('/deleteMultipleDmms', async (req, res) => {
     }
 });
 
+// Enable Picture Upload to backend file System
+// Konfiguration für Multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Speicherort für die hochgeladenen Dateien
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Dateiname für die hochgeladene Datei
+    }
+});
+const upload = multer({ storage: storage });
+
+// Endpunkt für Dateiuploads
+router.post('/upload', upload.single('file'), (req, res) => {
+    // Hier wird die hochgeladene Datei im Dateisystem gespeichert
+    const filename = req.file.filename;
+    // Der Dateipfad oder Dateiname wird zurückgegeben
+    res.json({ filePath: `/uploads/${filename}` });
+});
 
 module.exports = router;

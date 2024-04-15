@@ -10,7 +10,7 @@
         <input type="text" required v-model="organization">
         <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
-        <label>Dein Name:</label>
+        <label>Benutzername:</label>
         <input type="text" required v-model="name">
 
         <label>Email:</label>

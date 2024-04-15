@@ -142,7 +142,8 @@ const languageMappings: languageMapping = {
   "country": filename + '.OrgaInformations.address.street',
   "primarySektor": filename + '.OrgaInformations.organization.primarySector',
   "secondarySektor": filename + '.OrgaInformations.organization.secondarySector',
-  "PIC":""
+  "PIC":"",
+  "euDmaStatus": ""
 }
 
 const getLanguageKey = (key: keyof languageMapping) => {

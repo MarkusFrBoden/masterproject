@@ -7,6 +7,7 @@
     "OrgaInformations":{
       "title":"Organisationen",
       "list":{
+        "column0": "Löschen",
         "column1": "Name",
         "column2": "Kontakt-Mail",
         "column3": "EU-Status"}
@@ -23,10 +24,19 @@
         "title":"Übersicht über letzte DMAs"
       }
     },
+    "deleteInput":{
+      "title":"Sollen die folgenden Organisationen mit ihrem Nutzer wirklich gelöscht werden?",
+      "userMail":"Benutzer: ",
+      "organization":"Name: ",
+      "delete":"Löschen",
+      "cancel":"Abbrechen"
+    },
     "button":{
       "editInformation":"Organisation erstellen",
       "endInput":"Beenden",
-      "createOrganization":"Organisation und Startnutzer anlegen"
+      "deleteOrga":"Organisation löschen",
+      "exitDelete":"Löschen beenden",
+      "deleteSelected":"Löschen"
     }
   },
   "EdihDmaView": {
