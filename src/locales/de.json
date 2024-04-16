@@ -104,11 +104,12 @@
       "title":"Sollen die folgenden DMMs wirklich gelöscht werden?",
       "name":"Bezeichnung: ",
       "cancel":"Abbrechen",
-      "delete":"Löschen"
+      "delete":"Löschen",
+      "organization":"Organisation: "
     },
     "list":{
     "column0": "Löschen",
-    "column1": "Bezeichnung",
+    "column1": "Akronym",
     "column3": "Ersteller",
     "column4": "Erstellt am",
     "column5": "Bearbeitet von",

@@ -17,12 +17,14 @@ const CreateDmmQuestions = {
         "title": {
          "default": "Name of the module",
          "de": "Name des Moduls"
-        }
+        },
+        "isRequired": true
        },
        {
         "type": "text",
         "name": "question2",
-        "title": "Akronym"
+        "title": "Akronym",
+        "isRequired": true
        },
        {
         "type": "comment",
@@ -36,13 +38,21 @@ const CreateDmmQuestions = {
         "type": "comment",
         "name": "question4",
         "title": {
+         "default": "Demand for DMM in the area of application",
+         "de": "DMM-Bedarf für den Anwendungsbereich"
+        }
+       },
+       {
+        "type": "comment",
+        "name": "question5",
+        "title": {
          "default": "Area of application",
          "de": "Anwendungsbereich"
         }
        },
        {
         "type": "comment",
-        "name": "question5",
+        "name": "question6",
         "title": {
          "default": "Important sources and their intended use",
          "de": "Wichtige Quellen und ihr Verwendungszweck"
@@ -50,7 +60,7 @@ const CreateDmmQuestions = {
        },
        {
         "type": "comment",
-        "name": "question6",
+        "name": "question7",
         "title": {
          "default": "Differentiation from similar models and need for a new one",
          "de": "Abgrenzung von ähnlichen Modellen und Notwendigkeit eines neuen Modells"
@@ -58,7 +68,7 @@ const CreateDmmQuestions = {
        },
        {
         "type": "comment",
-        "name": "question7",
+        "name": "question8",
         "title": {
          "default": "Evaluation method",
          "de": "Evaluierungsmethode"
@@ -66,7 +76,7 @@ const CreateDmmQuestions = {
        },
        {
         "type": "text",
-        "name": "question8",
+        "name": "question9",
         "title": {
          "default": "Available languages",
          "de": "Verfügbare Sprachen"
@@ -74,7 +84,7 @@ const CreateDmmQuestions = {
        },
        {
         "type": "text",
-        "name": "question9",
+        "name": "question10",
         "title": {
          "default": "Publication date",
          "de": "Veröffentlichungsdatum"
@@ -83,24 +93,24 @@ const CreateDmmQuestions = {
        },
        {
         "type": "matrixdynamic",
-        "name": "question10",
+        "name": "question11",
         "title": {
          "default": "Authors",
          "de": "Autoren"
         },
         "columns": [
          {
-          "name": "question10-1",
+          "name": "question11-1",
           "title": "Name",
           "cellType": "text"
          },
          {
-          "name": "question10-2",
+          "name": "question11-2",
           "title": "Organisation",
           "cellType": "text"
          },
          {
-          "name": "question10-3",
+          "name": "question11-3",
           "title": "Email",
           "cellType": "text",
           "validators": [
@@ -135,7 +145,7 @@ const CreateDmmQuestions = {
       "elements": [
        {
         "type": "comment",
-        "name": "question11",
+        "name": "question12",
         "title": {
          "default": "Theoretical foundations (optional - link to scientific publication)",
          "de": "Theoretische Grundlagen (optional - Link zu wissenschaftlicher Veröffentlichung)"
@@ -143,11 +153,43 @@ const CreateDmmQuestions = {
        },
        {
         "type": "comment",
-        "name": "question12",
+        "name": "question13",
         "title": {
          "default": "Description of the maturity level, its dimensions and their granularity",
          "de": "Beschreibung des Reifegrads, der Dimensionen und deren Granularität"
         }
+       },
+       {
+        "type": "file",
+        "name": "question14",
+        "title": {
+         "default": "You can upload a graphical overview of your maturity model here",
+         "de": "Hier können Sie eine grafische Übersicht über Ihr Reifegradmodell hochladen"
+        },
+        "acceptedTypes": "image/*",
+        "maxSize": 700000,
+        "storeDataAsText":false,
+        "waitForUpload":true
+       },
+       {
+        "type": "comment",
+        "name": "question15",
+        "title": {
+         "default": "Description of the maturity level, its dimensions and their granularity",
+         "de": "Beschreibung des Reifegrads, der Dimensionen und deren Granularität"
+        }
+       },
+       {
+        "type": "file",
+        "name": "question16",
+        "title": {
+         "default": "Here you can upload a graphical overview of the calculation or a sample evaluation from your tool",
+         "de": "Hier können Sie eine grafische Übersicht über die Berechnung oder eine Musterauswertung aus Ihrem Tool hochladen"
+        },
+        "acceptedTypes": "image/*",
+        "maxSize": 700000,
+        "storeDataAsText":false,
+        "waitForUpload":true
        }
       ],
       "title": {

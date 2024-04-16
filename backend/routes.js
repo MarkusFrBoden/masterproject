@@ -268,7 +268,7 @@ router.get('/DmmOverview', (req, res) => {
     db.collection('DMMs')
         .find()
         .sort({ createdAt: 1 })
-        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt }))
+        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title,"akronym": dma.akronym, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt }))
         .then(() => {
             res.status(200).json(dmas)
         })

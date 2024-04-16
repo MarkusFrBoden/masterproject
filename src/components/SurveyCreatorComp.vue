@@ -12,6 +12,9 @@ import { watch, inject, onMounted, ref, type Ref } from 'vue';
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 
+//get current User
+let UserName = localStorage.getItem('userName');
+
 //Accept Props
 let props = defineProps({
   survey: {
@@ -26,6 +29,7 @@ let props = defineProps({
 
 //Accept Emits
 const emit = defineEmits(['triggerRefresh'])
+
 const options = {
   showLogicTab: true,
   isAutoSave: true,
@@ -83,7 +87,7 @@ const updateSurvey = async () => {
   try {
     const updatedData = {
       "SurveyJson": creator.JSON,
-      "updatedBy": "TestUser",
+      "updatedBy": UserName,
       "updatedAt": new Date()
     };
     const response = await api.patch(`/${props.type}ById/${props.survey._id}`, updatedData);
@@ -95,16 +99,15 @@ const updateSurvey = async () => {
   }
 };
 
+//File Upload
 creator.onUploadFile.add(async (_, options) => {
   console.log('Files:', options.files);
   const formData = new FormData();
 
   // FormData vorbereiten
   options.files.forEach((file: File) => {
-    console.log('File:', file);
     formData.append('file', file);
   });
-  console.log(formData);
 
   // FormData wird vor dem await vorbereitet, sodass es vor dem API-Aufruf ausgeführt wird
   try {

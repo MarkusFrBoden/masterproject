@@ -173,6 +173,10 @@ import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
 import { EUDmaJSON } from '../../components/EUDma_json.js'
 
+//current user
+let UserName = localStorage.getItem('userName') ||'';
+
+
 //language prefix
 const filename = 'EdihDmaView'
 
@@ -212,9 +216,9 @@ let newDmaTitle = "";
 let PostDma = ref<DMA>({
     "title": "",
     "createdFor": "",
-    "createdBy": "Markus Boden",
+    "createdBy": UserName,
     "createdAt": new Date(),
-    "updatedBy": "Markus Boden",
+    "updatedBy": "",
     "updatedAt": new Date(),
     "responses": [],
     "SurveyJson": {}

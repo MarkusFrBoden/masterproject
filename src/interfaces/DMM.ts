@@ -1,9 +1,10 @@
 export interface DMM {
     _id?: String;
     title: String;
-    akonym:String;
+    akronym:String;
     targetGroup: String;
     applicationArea:String;
+    demand:String;
     primarySources:String;
     differentiation:String;
     evaluation:String;
@@ -12,6 +13,9 @@ export interface DMM {
     authors: [{ name: string; organization: string; email: string; }];
     foundations: String;
     descriptions: String;
+    descriptionsImageLink: String;
+    calculations: String;
+    calculationsImageLink: String;
     createdBy: String;
     createdAt: Date;
     updatedBy: String;

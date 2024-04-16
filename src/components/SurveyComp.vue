@@ -56,6 +56,42 @@ watch(
 //Use Emit - Reply results
 survey.onComplete.add(sendResults);
 
+
+//Enable Picture Upload
+const api = inject('api') as any;
+
+survey.onUploadFiles.add(async (_, options) => {
+  console.log('Triggert');
+    console.log('Files:', options.files);
+    const formData = new FormData();
+
+    // FormData vorbereiten
+    options.files.forEach((file) => {
+      formData.append('file', file);
+    });
+
+    console.log(formData);
+    // FormData wird vor dem await vorbereitet, sodass es vor dem API-Aufruf ausgeführt wird
+    try {
+      const response = await api.post('/upload', formData);
+      console.log('File uploaded successfully:', response.data.filePath);
+      /* const data = await response.json();
+      console.log('File uploaded successfully:', data.filePath); 
+      options.callback(
+        "success", '/masterproject/backend'+response.data.filePath
+      );*/
+      options.callback(
+        options.files.map((file) => ({
+          file: file,
+          content: '/masterproject/backend' + response.data.filePath
+        }))
+      );
+    } catch (error) {
+      console.error('Error saving Picture:', error);
+      options.callback([], ['An error occurred during file upload.']);
+    }
+  });
+
 </script>
 
 <template>

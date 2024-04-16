@@ -47,6 +47,7 @@ const getUser = async () => {
         const response = await api.get('/UserByMailAndPassword/' + email.value + '/' + password.value);
         if (response.data) {
             localStorage.setItem('userId', response.data._id);
+            localStorage.setItem('userName', response.data.name);
             localStorage.setItem('organizationName', response.data.organization.name);
             if (response.data.organization.name === "EDIH Thuringia") {
                 router.push({ name: 'EdihHome' })
