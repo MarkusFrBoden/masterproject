@@ -70,6 +70,7 @@ let ExistingOrganization = ref<any[]>([]);
 let name = ref('');
 let email = ref('');
 let emailError = ref('');
+let showPassword = ref(false);
 let password = ref('');
 let passwordError = ref('');
 let terms = ref(true);

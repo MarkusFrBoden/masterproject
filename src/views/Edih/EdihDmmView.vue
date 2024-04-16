@@ -34,13 +34,12 @@
   <!-- create dmm interface  -->
   <div v-if="showInput" class="overlay">
     <div class="input-container">
-      <h4>{{ $t(filename + '.createInput.title') }}</h4>
-      {{ $t(filename + '.createInput.name') }} <input type="text" v-model="newDmmTitle">
+      <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="Dmm || {}" />
       <br><br>
       <div class="button-group">
         <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t(filename + '.createInput.cancel')
           }}</button>
-        <button class="btn btn-outline-secondary" @click="createDmm">{{ $t(filename + '.createInput.create') }}</button>
+        <!-- <button class="btn btn-outline-secondary" @click="createDmm">{{ $t(filename + '.createInput.create') }}</button> -->
       </div>
     </div>
   </div>
@@ -150,7 +149,8 @@ import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
-
+import { CreateDmmQuestions } from '../../components/CreateDmmQuestions_json.js'
+import SurveyComp from "../../components/SurveyComp.vue";
 
 //language prefix
 const filename = 'EdihDmmView'
@@ -170,60 +170,6 @@ const fetchData = async () => {
   }
 };
 fetchData();
-
-//Create new Dmm
-let showInput = ref(false);
-let newDmmTitle = "";
-let PostDmm = ref<DMM>({
-  "title": "",
-  "createdBy": "Markus Boden",
-  "createdAt": new Date(),
-  "updatedBy": "Markus Boden",
-  "updatedAt": new Date(),
-  "SurveyJson": {},
-  "CalculationLogic":{}
-});
-
-const createDmm = async () => {
-    try {
-        PostDmm.value.title = newDmmTitle;
-        const response = await api.post('/Dmm', PostDmm.value);
-        console.log('POST Response:', response.data);
-        showInput.value = false;
-        fetchData();
-        order.value = "updatedAt";
-        OrderIcons.value["updatedAt"] = true;
-        OrderIcons.value["updatedAtDown"] = true;
-        handleSort('updatedAt');
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-};
-
-
-//Delete Dmms
-interface deleteItems {
-  _id: string;
-  title: string;
-  createdFor: string;
-}
-let selectedItems = ref<deleteItems[]>([])
-let showDeleteOptions = ref(false);
-let showDeleteQuestion = ref(false);
-const deleteSelectedItems = async () => {
-  try {
-    const IDs = selectedItems.value.map(item => item._id);
-    console.log(IDs);
-    const response = await api.post('/deleteMultipleDmms', { dmmIds: IDs });
-    console.log('Successfully deleted dmms:', response.data);
-    fetchData();
-    showDeleteQuestion.value = false;
-    showDeleteOptions.value = false;
-    selectedItems.value = [];
-  } catch (error) {
-    console.error('Error deleting dmms:', error);
-  }
-};
 
 
 //Order Logik
@@ -298,6 +244,127 @@ let filteredDmms = computed(() => {
   }
 });
 
+
+//Create new Dmm
+let showInput = ref(false);
+let Dmm = ref<DMM>({
+    title: "",
+    akonym: "",
+    targetGroup: "",
+    applicationArea: "",
+    primarySources: "",
+    differentiation: "",
+    evaluation: "",
+    languages: "",
+    publicationDate: new Date(),
+    authors: [{name: "", organization: "", email: "" }],
+    foundations: "",
+    descriptions: "",
+    createdBy: "",
+    createdAt: new Date(),
+    updatedBy: "",
+    updatedAt: new Date(),
+    SurveyJson: {},
+    clculationLogic: {}
+});
+Dmm.value.SurveyJson = CreateDmmQuestions;
+
+//Mapping der Abfragefelder aus der DmaJS-Antwort auf die Datenbankstruktur der Organisation
+let mapping = (object: any) => {
+  const PostDmm: DMM = Dmm.value as DMM;
+  PostDmm.SurveyJson = {};
+
+  const mappings: any = {
+    "question1": (value: any) => { PostDmm.title = value; },
+    "question2": (value: any) => { PostDmm.akonym = value; },
+    "question3": (value: any) => { PostDmm.targetGroup = value; },
+    "question4": (value: any) => { PostDmm.applicationArea = value; },
+    "question5": (value: any) => { PostDmm.primarySources = value; },
+    "question6": (value: any) => { PostDmm.differentiation = value; },
+    "question7": (value: any) => { PostDmm.evaluation = value; },
+    "question8": (value: any) => { PostDmm.languages = value; },
+    "question9": (value: any) => { PostDmm.publicationDate = value; },
+    "question10-1":(value: any) => { 
+            // Hinzufügen eines neuen Autors zum Array
+            PostDmm.authors.push({ name: value, organization: "", email: "" }); 
+        },
+        "question10-2":(value: any) => { 
+            // Letzten Autor im Array aktualisieren
+            const lastAuthor = PostDmm.authors[PostDmm.authors.length - 1];
+            if (lastAuthor) {
+                lastAuthor.organization = value; 
+            }
+        },
+        "question10-3":(value: any) => { 
+            // Letzten Autor im Array aktualisieren
+            const lastAuthor = PostDmm.authors[PostDmm.authors.length - 1];
+            if (lastAuthor) {
+                lastAuthor.email = value; 
+            }
+        },
+    "question11": (value: any) => { PostDmm.foundations = value; },
+    "question12": (value: any) => { PostDmm.descriptions = value; }
+  };
+
+  applyMappings(object, mappings);
+
+  return PostDmm;
+};
+
+function applyMappings(obj:any, mappings:any) {
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                applyMappings(obj[key], mappings);
+            } else if (mappings[key]) {
+                mappings[key](obj[key]);
+            }
+        }
+    }
+}
+
+
+const handleDmmCompleted = async (results: any) => {
+  console.log(results);
+  const PostDmm: DMM = mapping(results);
+  if(PostDmm.authors[0].name === "" && PostDmm.authors[0].organization === "" && PostDmm.authors[0].email === ""){
+    PostDmm.authors.shift();
+  }
+  try {
+        const response = await api.post('/Dmm', PostDmm);
+        showInput.value = false;
+        fetchData();
+        order.value = "updatedAt";
+        OrderIcons.value["updatedAt"] = true;
+        handleSort('updatedAt');
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+//Delete Dmms
+interface deleteItems {
+  _id: string;
+  title: string;
+  createdFor: string;
+}
+let selectedItems = ref<deleteItems[]>([])
+let showDeleteOptions = ref(false);
+let showDeleteQuestion = ref(false);
+const deleteSelectedItems = async () => {
+  try {
+    const IDs = selectedItems.value.map(item => item._id);
+    console.log(IDs);
+    const response = await api.post('/deleteMultipleDmms', { dmmIds: IDs });
+    console.log('Successfully deleted dmms:', response.data);
+    fetchData();
+    showDeleteQuestion.value = false;
+    showDeleteOptions.value = false;
+    selectedItems.value = [];
+  } catch (error) {
+    console.error('Error deleting dmms:', error);
+  }
+};
 </script>
 
 <style scoped>
@@ -329,14 +396,16 @@ let filteredDmms = computed(() => {
 }
 
 .input-container {
-  position: fixed;
-  top: 30%;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
   padding: 16px;
   border: 1px solid #919191;
   border-radius: 12px;
+  width: 1000px;
+  height: 800px;
 }
 
 .dark .input-container {
@@ -356,6 +425,7 @@ let filteredDmms = computed(() => {
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
+  overflow-y: auto;
 }
 
 .delete-selected {

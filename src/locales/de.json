@@ -123,8 +123,9 @@
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
     "button":{
-      "editDmm":"DMM bearbeiten",
-      "viewDmm":"DMM-Vorschau"
+      "editDmm":"DMM-Fragen bearbeiten",
+      "viewDmm":"DMM-Vorschau",
+      "editDmmLogic":"Auswertung bearbeiten"
     }
   },
   "UserHomeView": {

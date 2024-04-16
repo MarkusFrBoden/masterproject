@@ -4,6 +4,8 @@ import { watch, inject, onMounted, ref, type Ref } from 'vue';
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 import { useI18n } from 'vue-i18n';
+//import { settings } from "survey-core";
+
 
 //Accept Props - Request survey
 let props = defineProps({
@@ -37,6 +39,9 @@ const headerchange = () => {
   }
 }
 
+//Use SuveyJS Global Settings for MaxWidth
+//settings.maxWidth = "1200px";
+
 //Use and watch themes and language
 onMounted(() => {
   headerchange()
@@ -56,3 +61,6 @@ survey.onComplete.add(sendResults);
 <template>
   <SurveyComponent :model="survey" />
 </template>
+
+<style scoped>
+</style>

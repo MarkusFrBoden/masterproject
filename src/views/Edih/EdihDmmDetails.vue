@@ -1,6 +1,6 @@
 <template>
     <div v-if="dmm">
-        <h3>{{ dmm.title }} -  {{ $t(filename+'.organization') }} {{ dmm.createdFor }}</h3>
+        <h2>{{ dmm.title }} </h2>
             <br>
     
             <h4>{{ $t(filename+'.dmmData') }}</h4>
@@ -11,11 +11,14 @@
 
             <br><br>
             <div class="button-group">
-                <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showSurvey = false; fetchData()">
+                <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showLogic= false; showSurvey = false; fetchData()">
                 {{ $t(filename+'.button.editDmm') }}
                 </button>
-                <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; showSurveyCreator = false; fetchData()">
+                <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey;showLogic= false; showSurveyCreator = false; fetchData()">
                 {{ $t(filename+'.button.viewDmm') }}
+                </button>
+                <button class="btn btn-outline-secondary" @click="showLogic = !showLogic;showSurvey= false; showSurveyCreator = false;">
+                {{ $t(filename+'.button.editDmmLogic') }}
                 </button>
             </div>
 
@@ -26,6 +29,9 @@
             </div>
             <div v-if="showSurveyCreator">
                 <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "dmm" :type = "'Dmm'"/>
+            </div>
+            <div v-if="showLogic">
+                Auswertungslogik
             </div>
             
     </div>
@@ -65,6 +71,7 @@ fetchData();
 //Enable Survey and Survey Creator Comp
 let showSurvey = ref(false);
 let showSurveyCreator = ref(false);
+let showLogic = ref(false);
 
 
 </script>

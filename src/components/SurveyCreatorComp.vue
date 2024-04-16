@@ -78,18 +78,6 @@ creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {
     callback(saveNo, false);
   }
 };
-const saveSurveyManually = async () => {
-  try {
-    const response = await updateSurvey();
-    if (response.status === 200) {
-      console.log('Survey saved successfully.');
-    } else {
-      console.error('Error saving survey: Unexpected response status');
-    }
-  } catch (error) {
-    console.error('Error saving survey:', error);
-  }
-};
 
 const updateSurvey = async () => {
   try {
@@ -133,7 +121,5 @@ creator.onUploadFile.add(async (_, options) => {
 </script>
 
 <template>
-  <button @click="saveSurveyManually">Manually Save Survey</button>
-  <br><br>
   <SurveyCreatorComponent :model="creator" />
 </template>

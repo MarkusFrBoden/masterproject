@@ -78,7 +78,7 @@
       <!-- Input für Informationen über die Organisation  -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
-          <SurveyComp @dmaCompleted="handleDmaCompleted" :survey="dma || {}" />
+          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dma || {}" />
           <br>
           <div class="button-group">
             <button class="btn btn-outline-secondary custom-button" @click="showInput = false;">{{
@@ -183,7 +183,7 @@ dma.value = {
   "responses": [],
   "SurveyJson": {}
 };
-dma.value.DmaJson = EUDmaJSONModul1;
+dma.value.SurveyJson = EUDmaJSONModul1;
 
 
 //Test ob alle Organisationsinformationen befüllt sind - sonst Anzeige im UI
