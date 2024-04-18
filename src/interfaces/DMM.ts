@@ -2,6 +2,7 @@ export interface DMM {
     _id?: String;
     title: String;
     akronym:String;
+    published:boolean;
     targetGroup: String;
     applicationArea:String;
     demand:String;
@@ -21,6 +22,6 @@ export interface DMM {
     updatedBy: String;
     updatedAt: Date;
     SurveyJson: any;
-    clculationLogic: any;
+    calculationLogic: any;
     [key: string]: any;
 }

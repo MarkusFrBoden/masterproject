@@ -37,6 +37,8 @@
             <h4>{{ $t(filename + '.createInput.title') }}</h4>
             {{ $t(filename + '.createInput.name') }} <input type="text" v-model="newDmaTitle">
             <br>
+            Welche DMM sollen geladen werden?
+            <!-- create dma from DMM  -->
             EU-Dma automatisch laden?<input type="checkbox" v-model="addEUDma">
             <br><br>
             <div class="button-group">
@@ -80,45 +82,45 @@
                 <div class="col" id="title">
                     <button class="flex-container" @click="handleSort('title')">
                         <b>{{ $t(filename + '.list.column1') }}</b>
-                        <div v-if="OrderIcons.title">
-                            <SortAlphaDown v-if="!OrderIcons.titleDown" />
-                            <SortAlphaDownAlt v-if="OrderIcons.titleDown" />
+                        <div v-if="OrderIcons.title || OrderIcons.titleDown">
+                            <SortAlphaDown v-if="OrderIcons.title" />
+                            <SortAlphaDownAlt v-else />
                         </div>
                     </button>
                 </div>
                 <div class="col" id="createdBy">
                     <button class="flex-container" @click="handleSort('createdBy')">
                         <b>{{ $t(filename + '.list.column2') }}</b>
-                        <div v-if="OrderIcons.createdBy">
-                            <SortAlphaDown v-if="!OrderIcons.createdByDown" />
-                            <SortAlphaDownAlt v-if="OrderIcons.createdByDown" />
+                        <div v-if="OrderIcons.createdBy || OrderIcons.createdByDown">
+                            <SortAlphaDown v-if="OrderIcons.createdBy" />
+                            <SortAlphaDownAlt v-else />
                         </div>
                     </button>
                 </div>
                 <div class="col" id="createdAt">
                     <button class="flex-container" @click="handleSort('createdAt')">
                         <b>{{ $t(filename + '.list.column3') }}</b>
-                        <div v-if="OrderIcons.createdAt">
-                            <SortNumericDown v-if="!OrderIcons.createdAtDown" />
-                            <SortNumericDownAlt v-if="OrderIcons.createdAtDown" />
+                        <div v-if="OrderIcons.createdAt || OrderIcons.createdAtDown">
+                            <SortNumericDown v-if="OrderIcons.createdAt" />
+                            <SortNumericDownAlt v-else />
                         </div>
                     </button>
                 </div>
                 <div class="col" id="updatedBy">
                     <button class="flex-container" @click="handleSort('updatedBy')">
                         <b>{{ $t(filename + '.list.column4') }}</b>
-                        <div v-if="OrderIcons.updatedBy">
-                            <SortAlphaDown v-if="!OrderIcons.updatedByDown" />
-                            <SortAlphaDownAlt v-if="OrderIcons.updatedByDown" />
+                        <div v-if="OrderIcons.updatedBy || OrderIcons.updatedByDown">
+                            <SortAlphaDown v-if="OrderIcons.updatedBy" />
+                            <SortAlphaDownAlt v-else />
                         </div>
                     </button>
                 </div>
                 <div class="col" id="updatedAt">
                     <button class="flex-container" @click="handleSort('updatedAt')">
                         <b>{{ $t(filename + '.list.column5') }}</b>
-                        <div v-if="OrderIcons.updatedAt">
-                            <SortNumericDown v-if="!OrderIcons.updatedAtDown" />
-                            <SortNumericDownAlt v-if="OrderIcons.updatedAtDown" />
+                        <div v-if="OrderIcons.updatedAt || OrderIcons.updatedAtDown">
+                            <SortNumericDown v-if="OrderIcons.updatedAt" />
+                            <SortNumericDownAlt v-else />
                         </div>
                     </button>
                 </div>
@@ -132,7 +134,7 @@
                                 :value="{ _id: dma._id, title: dma.title, createdFor: dma.createdFor }" />
                         </div>
                         <div class="col">
-                            <RouterLink :to="{ name: 'EdihDmaDetails', params: { id: dma._id?.toString() } }">
+                            <RouterLink :to="{ name: 'UserDmaDetails', params: { id: dma._id?.toString() } }">
                                 <a href="">{{ dma.title }}</a>
                             </RouterLink>
                         </div>
@@ -163,11 +165,19 @@ import { EUDmaJSON } from '../../components/EUDma_json.js'
 //language prefix
 const filename = 'UserDmaView'
 
+//enable api via global variable
+const api = inject('api') as any;
+
 //inject darkmode 
 const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 
-//Get first data
-const api = inject('api') as any;
+//show and hide elements
+let showInput = ref(false);
+let showDeleteOptions = ref(false);
+let showDeleteQuestion = ref(false);
+
+//get start data
+let currentUserOrganization = localStorage.getItem('organizationName') ||'';
 const dmas = ref<DMA[]>([]);
 const fetchData = async () => {
     try {
@@ -179,11 +189,9 @@ const fetchData = async () => {
 };
 fetchData();
 
-//Create new Dma
-let addEUDma = ref(false);
-let showInput = ref(false);
+//create new dma
 let newDmaTitle = "";
-let newDmaOrganisation = "";
+let addEUDma = ref(false);
 let PostDma = ref<DMA>({
     "title": "",
     "createdFor": "",
@@ -198,33 +206,28 @@ let PostDma = ref<DMA>({
 const createDma = async () => {
     try {
         PostDma.value.title = newDmaTitle;
-        PostDma.value.createdFor = newDmaOrganisation;
+        PostDma.value.createdFor = currentUserOrganization;
         if (addEUDma) {
             PostDma.value.SurveyJson = EUDmaJSON
         };
         const response = await api.post('/Dma', PostDma.value);
         console.log('POST Response:', response.data);
         showInput.value = false;
-        fetchData();
-        order.value = "updatedAt";
+        await fetchData();
         OrderIcons.value["updatedAt"] = true;
-        OrderIcons.value["updatedAtDown"] = true;
         handleSort('updatedAt');
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
 
-
-//Delete Dmas
+//delete dmas
 interface deleteItems {
     _id: string;
     title: string;
     createdFor: string;
 }
 let selectedItems = ref<deleteItems[]>([])
-let showDeleteOptions = ref(false);
-let showDeleteQuestion = ref(false);
 const deleteSelectedItems = async () => {
     try {
         const IDs = selectedItems.value.map(item => item._id);
@@ -240,27 +243,50 @@ const deleteSelectedItems = async () => {
     }
 };
 
-
-//Order Logik
-let order = ref<keyof DMA>('updatedAt');
+// ---------------------------------------------------- sort & filter ---------------------------------------------------------------
+//order
 let isAscending = ref<boolean>(true);
+const sortBy = ref('updatedAt');
+type OrderIconsType = {
+  [key: string]: boolean;
+}
 
 const orderedDmas = computed(() => {
-    return [...dmas.value].sort((a: DMA, b: DMA) => {
-        const result = a[order.value] > b[order.value] ? 1 : -1;
-        return isAscending.value ? result : -result;
-    });
+  return [...dmas.value].sort((a, b) => {
+    let aValue, bValue;
+    switch (sortBy.value) {
+      case 'title':
+        aValue = a.title.toLowerCase();
+        bValue = b.title.toLowerCase();
+        break;
+      case 'createdBy':
+        aValue = a.createdBy.toLowerCase();
+        bValue = b.createdBy.toLowerCase();
+        break;
+      case 'createdAt':
+        aValue = a.createdAt;
+        bValue = b.createdAt;
+        break;
+      case 'updatedBy':
+        aValue = a.updatedBy.toLowerCase();
+        bValue = b.updatedBy.toLowerCase();
+        break;
+      case 'updatedAt':
+        aValue = a.updatedAt;
+        bValue = b.updatedAt;
+        break;
+      default:
+        aValue = '';
+        bValue = '';
+    }
+    const result = aValue > bValue ? 1 : -1;
+    return isAscending.value ? result : -result;
+  });
 });
-
-type OrderIconsType = {
-    [key: string]: boolean;
-}
 
 const OrderIcons = ref<OrderIconsType>({
     "title": false,
     "titleDown": false,
-    "createdFor": false,
-    "createdForDown": false,
     "createdBy": false,
     "createdByDown": false,
     "createdAt": false,
@@ -268,35 +294,29 @@ const OrderIcons = ref<OrderIconsType>({
     "updatedBy": false,
     "updatedByDown": false,
     "updatedAt": true,
-    "updatedAtDown": true,
+    "updatedAtDown": false,
 });
 
 const handleSort = (columnId: string) => {
-    Object.keys(OrderIcons.value).forEach((key) => {
-        if (key !== columnId && key !== columnId + "Down") {
-            OrderIcons.value[key] = false;
-        }
-    });
-    if (!OrderIcons.value[columnId]) {
-        OrderIcons.value[columnId] = true;
-        order.value = columnId;
-        isAscending.value = true;
+  Object.keys(OrderIcons.value).forEach((key) => {
+    if (key !== columnId && key !== columnId + "Down") {
+      OrderIcons.value[key] = false;
     }
-    else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) {
-        OrderIcons.value[columnId + "Down"] = true;
-        order.value = columnId;
-        isAscending.value = false;
-    }
-    else {
-        OrderIcons.value[columnId] = false;
-        OrderIcons.value[columnId + "Down"] = false;
-        isAscending.value = false;
-    }
+  });
+  if (!OrderIcons.value[columnId]) {
+    OrderIcons.value[columnId] = true;
+    OrderIcons.value[columnId + "Down"] = false;
+    sortBy.value = columnId;
+    isAscending.value = true;
+  } else {
+    isAscending.value = !isAscending.value;
+    OrderIcons.value[columnId] = false;
+  }
+  OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
 }
 handleSort('updatedAt');
 
-
-//Filter logik
+//filter
 let filterText = ref('');
 
 let filteredDmas = computed(() => {

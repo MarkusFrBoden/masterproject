@@ -2,14 +2,11 @@
   <div>
     <h3>{{ $t(filename + '.h3') }} {{ ExistingUser?.name }}</h3>
   </div>
-
   <br>
 
-  <!-- Informationen über die Organisation  -->
-
+  <!-- organization informations  -->
   <h4>{{ $t(filename + '.h4') }} {{ ExistingUser?.organization.name }}</h4>
   <br>
-
   <div class="row">
     <div class="col">
       <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
@@ -28,9 +25,7 @@
           </div>
         </div>
       </div>
-
       <br>
-
       <div class="leftbox">
         <h6>{{ $t(filename + '.OrgaInformations.address.title') }}</h6>
         <div v-for="(value, key) in ExistingUser?.organization.address" :key="key">
@@ -46,9 +41,7 @@
           </div>
         </div>
       </div>
-
       <br>
-
       <div class="leftbox">
         <h6>{{ $t(filename + '.OrgaInformations.contact.title') }}</h6>
         <div v-for="(value, key) in ExistingUser?.organization.contactPerson" :key="key">
@@ -64,21 +57,23 @@
           </div>
         </div>
       </div>
-
       <br>
-      <div v-if="allInputs === false">
+
+      <!-- show message for missing organization information  -->
+      <div v-if="allInformation === false">
         <em>{{ $t(filename + '.OrgaInformations.notAllInformation') }}</em>
       </div>
 
+      <!-- button edit organization information  -->
       <br>
       <button class="btn btn-outline-secondary" @click="showInput = !showInput">{{
         $t(filename + '.button.editInformation') }}</button>
       <br><br>
 
-      <!-- Input für Informationen über die Organisation  -->
+      <!-- edit organization interfact -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
-          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dma || {}" />
+          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="organizationQuestions || {}" />
           <br>
           <div class="button-group">
             <button class="btn btn-outline-secondary custom-button" @click="showInput = false;">{{
@@ -88,13 +83,13 @@
       </div>
     </div>
 
-    <!-- Dashboard Durchgeführte DMAs  -->
+    <!-- organizationQuestions dashboard  -->
     <div class="col">
       <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
 
       <div class="rightbox">
         <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br>
       </div>
       <br>
       <div class="rightbox">
@@ -116,16 +111,132 @@
 import { ref, inject, watch } from 'vue';
 import type { User } from "../../interfaces/User.js"
 import SurveyComp from "../../components/SurveyComp.vue";
-import { EUDmaJSONModul1 } from '../../components/EUDma_Modul1_json.js'
+import { GetOrganizationInformation } from '../../components/GetOrganizationInformation.js'
 import type { DMA } from "../../interfaces/DMA.js"
 import { useI18n } from 'vue-i18n';
 import type { languageMapping } from "../../interfaces/languageMapping.js"
 
 
-//language prefix
+//filename for language tags
 const filename = 'UserHomeView'
 
-//language key mappings
+//enable api via global variable
+const api = inject('api') as any;
+
+//show and hide elements
+let showInput = ref(false);
+let allInformation = ref(false);
+
+//get start data
+let UserId = localStorage.getItem('userId');
+let ExistingUser = ref<User>();
+const getUser = async () => {
+  try {
+    const response = await api.get('/UserById/' + UserId);
+    ExistingUser.value = response.data;
+  } catch (err) {
+    console.error('Error fetching data:', err);
+  }
+};
+getUser()
+
+//mapping from surveyJs answers to patchUser object
+let mapping = (object: any) => {
+  const patchUser: User = ExistingUser.value as User;
+  delete patchUser._id;
+
+  const mappings: any = {
+    "EU-1-1-2": (value: any) => { patchUser.organization.name = value; },
+    "EU-1-1-3": (value: any) => { patchUser.organization.identificationNumber = value; },
+    "EU-1-1-4": (value: any) => { patchUser.organization.contactPerson.name = value; },
+    "EU-1-1-5": (value: any) => { patchUser.organization.contactPerson.role = value; },
+    "EU-1-1-6": (value: any) => { patchUser.organization.contactPerson.email = value; },
+    "EU-1-1-7": (value: any) => { patchUser.organization.contactPerson.telephone = value; },
+    "EU-1-1-8": (value: any) => { patchUser.organization.website = value; },
+    "EU-1-1-9": (value: any) => { patchUser.organization.type = value; },
+    "EU-1-1-10": (value: any) => { patchUser.organization.size = value; },
+    "EU-1-2-13-1": (value: any) => { patchUser.organization.primarySektor = value; },
+    "EU-1-2-13-2": (value: any) => { patchUser.organization.secondarySektor = value; },
+    "text1": (value: any) => { patchUser.organization.address.street = value; },
+    "text2": (value: any) => { patchUser.organization.address.postalcode = value; },
+    "text3": (value: any) => { patchUser.organization.address.city = value; },
+    "text4": (value: any) => { patchUser.organization.address.country = value; }
+  };
+
+  for (const key in mappings) {
+    if (object.hasOwnProperty(key)) {
+      mappings[key](object[key]);
+    }
+    if (object["EU-1-1-11"] && object["EU-1-1-11"].hasOwnProperty(key)) {
+      mappings[key](object["EU-1-1-11"][key]);
+    }
+  }
+
+  return patchUser;
+};
+
+//patch user with new organization data
+const patchUserFunction = async (data: any) => {
+  try {
+    const response = await api.patch('/UserById/' + UserId, data);
+    console.log('Daten erfolgreich an die Route gesendet:', response.data);
+    getUser()
+  } catch (err) {
+    console.error('Error patchching data:', err);
+  }
+};
+
+const handleDmaCompleted = (results: any) => {
+  const patchUser: User = mapping(results);
+  patchUserFunction(patchUser)
+};
+
+//use surveyJs questions
+const organizationQuestions = ref<any>();
+organizationQuestions.value = {
+  "SurveyJson": {}
+};
+organizationQuestions.value.SurveyJson = GetOrganizationInformation;
+
+//use existing organization information for default values in questionaire
+watch([ExistingUser, organizationQuestions], ([user]) => {
+  if (user && organizationQuestions.value) {
+    allInformation.value = checkValues(user.organization);
+    //organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.identificationNumber;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[0].defaultValue = user.organization?.contactPerson.name;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[1].defaultValue = user.organization?.contactPerson.role;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[2].defaultValue = user.organization?.contactPerson.email;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[3].defaultValue = user.organization?.contactPerson.telephone;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[2].defaultValue = user.organization?.website;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.type;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.size;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text1 = user.organization?.address.street;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text2 = user.organization?.address.postalcode;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text3 = user.organization?.address.city;
+    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text4 = user.organization?.address.country;
+    organizationQuestions.value.SurveyJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
+    organizationQuestions.value.SurveyJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
+  }
+});
+
+//check if all organization information are filled
+const checkValues = (obj: any): boolean => {
+  for (const key in obj) {
+    if (key !== 'PIC') {
+      if (typeof obj[key] === 'object') {
+        if (!checkValues(obj[key])) {
+          return false;
+        }
+      } else if (!obj[key] || obj[key] === "") {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
+//language key mappings for for-loops of organization data in html
 const { t } = useI18n();
 const languageMappings: languageMapping = {
   "name": filename + '.OrgaInformations.organization.name',
@@ -142,8 +253,8 @@ const languageMappings: languageMapping = {
   "country": filename + '.OrgaInformations.address.street',
   "primarySektor": filename + '.OrgaInformations.organization.primarySector',
   "secondarySektor": filename + '.OrgaInformations.organization.secondarySector',
-  "PIC":"",
-  "euDmaStatus": ""
+  "PIC": "",
+  "euDmaStatus": filename + '.OrgaInformations.organization.euDmaStatus'
 }
 
 const getLanguageKey = (key: keyof languageMapping) => {
@@ -152,129 +263,6 @@ const getLanguageKey = (key: keyof languageMapping) => {
   }
   return key;
 }
-
-//Get Start Data
-const api = inject('api') as any;
-let ExistingUser = ref<User>();
-let UserId = localStorage.getItem('userId');
-
-const getUser = async () => {
-  try {
-    const response = await api.get('/UserById/' + UserId);
-    ExistingUser.value = response.data;
-  } catch (err) {
-    console.error('Error fetching data:', err);
-  }
-};
-getUser()
-
-//Input für Organisationsdaten vorbereiten (Typ Dma)
-let showInput = ref(false);
-let allInputs = ref(false);
-
-const dma = ref<DMA>();
-dma.value = {
-  "title": "",
-  "createdFor": "",
-  "createdBy": "",
-  "createdAt": new Date(),
-  "updatedBy": "",
-  "updatedAt": new Date(),
-  "responses": [],
-  "SurveyJson": {}
-};
-dma.value.SurveyJson = EUDmaJSONModul1;
-
-
-//Test ob alle Organisationsinformationen befüllt sind - sonst Anzeige im UI
-const checkValues = (obj: any): boolean => {
-  for (const key in obj) {
-    if (key !== 'PIC') {
-      if (typeof obj[key] === 'object') {
-        if (!checkValues(obj[key])) {
-          return false;
-        }
-      } else if (!obj[key] || obj[key] === "") {
-        return false;
-      }
-    }
-  }
-  return true;
-};
-
-//Bereits befüllte Informationen werden in Bearbeitungsabfrage als DefaultValue gesetzt
-watch([ExistingUser, dma], ([user]) => {
-  if (user && dma.value) {
-    allInputs.value = checkValues(user.organization);
-    dma.value.DmaJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
-    dma.value.DmaJson.pages[0].elements[0].elements[1].defaultValue = user.organization?.identificationNumber;
-    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[0].defaultValue = user.organization?.contactPerson.name;
-    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[1].defaultValue = user.organization?.contactPerson.role;
-    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[2].defaultValue = user.organization?.contactPerson.email;
-    dma.value.DmaJson.pages[0].elements[0].elements[2].elements[3].defaultValue = user.organization?.contactPerson.telephone;
-    dma.value.DmaJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.website;
-    dma.value.DmaJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.type;
-    dma.value.DmaJson.pages[0].elements[0].elements[5].defaultValue = user.organization?.size;
-    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text1 = user.organization?.address.street;
-    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text2 = user.organization?.address.postalcode;
-    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text3 = user.organization?.address.city;
-    dma.value.DmaJson.pages[0].elements[0].elements[6].defaultValue.text4 = user.organization?.address.country;
-    dma.value.DmaJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
-    dma.value.DmaJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
-  }
-});
-
-//Mapping der Abfragefelder aus der DmaJS-Antwort auf die Datenbankstruktur der Organisation
-let mapping = (object: any) => {
-  const User: User = ExistingUser.value as User;
-  delete User._id;
-
-  const mappings: any = {
-    "EU-1-1-2": (value: any) => { User.organization.name = value; },
-    "EU-1-1-3": (value: any) => { User.organization.identificationNumber = value; },
-    "EU-1-1-4": (value: any) => { User.organization.contactPerson.name = value; },
-    "EU-1-1-5": (value: any) => { User.organization.contactPerson.role = value; },
-    "EU-1-1-6": (value: any) => { User.organization.contactPerson.email = value; },
-    "EU-1-1-7": (value: any) => { User.organization.contactPerson.telephone = value; },
-    "EU-1-1-8": (value: any) => { User.organization.website = value; },
-    "EU-1-1-9": (value: any) => { User.organization.type = value; },
-    "EU-1-1-10": (value: any) => { User.organization.size = value; },
-    "EU-1-2-13-1": (value: any) => { User.organization.primarySektor = value; },
-    "EU-1-2-13-2": (value: any) => { User.organization.secondarySektor = value; },
-    "text1": (value: any) => { User.organization.address.street = value; },
-    "text2": (value: any) => { User.organization.address.postalcode = value; },
-    "text3": (value: any) => { User.organization.address.city = value; },
-    "text4": (value: any) => { User.organization.address.country = value; }
-  };
-
-  for (const key in mappings) {
-    if (object.hasOwnProperty(key)) {
-      mappings[key](object[key]);
-    }
-    if (object["EU-1-1-11"] && object["EU-1-1-11"].hasOwnProperty(key)) {
-      mappings[key](object["EU-1-1-11"][key]);
-    }
-  }
-
-  return User;
-};
-
-//PatchUser bei beenden des Inputs, sollten Änderungen vorgenommen worden sein 
-const patchUser = async (data: any) => {
-  try {
-    const response = await api.patch('/UserById/' + UserId, data);
-    console.log('Daten erfolgreich an die Route gesendet:', response.data);
-    getUser()
-  } catch (err) {
-    console.error('Error patchching data:', err);
-  }
-};
-
-const handleDmaCompleted = (results: any) => {
-  const User: User = mapping(results);
-  patchUser(User)
-};
-
 </script>
 
 <style scoped>

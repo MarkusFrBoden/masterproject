@@ -2,7 +2,6 @@
   <div>
     <h3>{{ $t(filename + '.h3') }}</h3>
   </div>
-
   <br>
 
   <!-- buttons for create and delete dmm  -->
@@ -25,8 +24,8 @@
       {{ $t(filename + '.button.exitDelete') }}
     </button>
   </div>
-
   <br>
+
   <!-- input for filter  -->
   <input v-model="filterText" type="text" placeholder="Filter"
     :class="{ 'colored-placeholder': darkmode, 'noncolored-placeholder': !darkmode }" />
@@ -34,12 +33,11 @@
   <!-- create dmm interface  -->
   <div v-if="showInput" class="overlay">
     <div class="input-container">
-      <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="Dmm || {}" />
+      <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="createDmmInterface || {}" />
       <br><br>
       <div class="button-group">
         <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t(filename + '.createInput.cancel')
           }}</button>
-        <!-- <button class="btn btn-outline-secondary" @click="createDmm">{{ $t(filename + '.createInput.create') }}</button> -->
       </div>
     </div>
   </div>
@@ -55,7 +53,7 @@
       <br>
       <div class="button-group">
         <button class="btn btn-outline-secondary" @click="showDeleteQuestion = false;">{{
-          $t(filename +'.deleteInput.cancel') }}</button>
+          $t(filename + '.deleteInput.cancel') }}</button>
         <button class="btn btn-outline-secondary" @click="deleteSelectedItems">{{ $t(filename + '.deleteInput.delete')
           }}</button>
       </div>
@@ -74,45 +72,45 @@
       <div class="col" id="akronym">
         <button class="flex-container" @click="handleSort('akronym')">
           <b>{{ $t(filename + '.list.column1') }}</b>
-          <div v-if="OrderIcons.akronym">
-            <SortAlphaDown v-if="!OrderIcons.akronymDown" />
-            <SortAlphaDownAlt v-if="OrderIcons.akronymDown" />
+          <div v-if="OrderIcons.akronym || OrderIcons.akronymDown">
+            <SortAlphaDown v-if="OrderIcons.akronym" />
+            <SortAlphaDownAlt v-else />
           </div>
         </button>
       </div>
       <div class="col" id="createdBy">
         <button class="flex-container" @click="handleSort('createdBy')">
           <b>{{ $t(filename + '.list.column3') }}</b>
-          <div v-if="OrderIcons.createdBy">
-            <SortAlphaDown v-if="!OrderIcons.createdByDown" />
-            <SortAlphaDownAlt v-if="OrderIcons.createdByDown" />
+          <div v-if="OrderIcons.createdBy || OrderIcons.createdByDown">
+            <SortAlphaDown v-if="OrderIcons.createdBy" />
+            <SortAlphaDownAlt v-else />
           </div>
         </button>
       </div>
       <div class="col" id="createdAt">
         <button class="flex-container" @click="handleSort('createdAt')">
           <b>{{ $t(filename + '.list.column4') }}</b>
-          <div v-if="OrderIcons.createdAt">
-            <SortNumericDown v-if="!OrderIcons.createdAtDown" />
-            <SortNumericDownAlt v-if="OrderIcons.createdAtDown" />
+          <div v-if="OrderIcons.createdAt || OrderIcons.createdAtDown">
+            <SortNumericDown v-if="OrderIcons.createdAt" />
+            <SortNumericDownAlt v-else />
           </div>
         </button>
       </div>
       <div class="col" id="updatedBy">
         <button class="flex-container" @click="handleSort('updatedBy')">
           <b>{{ $t(filename + '.list.column5') }}</b>
-          <div v-if="OrderIcons.updatedBy">
-            <SortAlphaDown v-if="!OrderIcons.updatedByDown" />
-            <SortAlphaDownAlt v-if="OrderIcons.updatedByDown" />
+          <div v-if="OrderIcons.updatedBy || OrderIcons.updatedByDown">
+            <SortAlphaDown v-if="OrderIcons.updatedBy" />
+            <SortAlphaDownAlt v-else />
           </div>
         </button>
       </div>
       <div class="col" id="updatedAt">
         <button class="flex-container" @click="handleSort('updatedAt')">
           <b>{{ $t(filename + '.list.column6') }}</b>
-          <div v-if="OrderIcons.updatedAt">
-            <SortNumericDown v-if="!OrderIcons.updatedAtDown" />
-            <SortNumericDownAlt v-if="OrderIcons.updatedAtDown" />
+          <div v-if="OrderIcons.updatedAt || OrderIcons.updatedAtDown">
+            <SortNumericDown v-if="OrderIcons.updatedAt" />
+            <SortNumericDownAlt v-else />
           </div>
         </button>
       </div>
@@ -130,7 +128,7 @@
           <div class="col">
             <RouterLink :to="{ name: 'EdihDmmDetails', params: { id: dmm._id?.toString() } }">
               <a href="">{{ dmm.akronym }}</a>
-            </RouterLink> 
+            </RouterLink>
           </div>
           <div class="col">{{ dmm.createdBy }}</div>
           <div class="col">{{ dmm.createdAt }}</div>
@@ -140,6 +138,7 @@
       </li>
     </transition-group>
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -152,17 +151,22 @@ import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
 import { CreateDmmQuestions } from '../../components/CreateDmmQuestions_json.js'
 import SurveyComp from "../../components/SurveyComp.vue";
 
-//language prefix
+//filename for language tags
 const filename = 'EdihDmmView'
 
-//current user
-let UserName = localStorage.getItem('userName') ||'';
+//enable api via global variable
+const api = inject('api') as any;
 
-//inject darkmode 
+//show and hide elements
+let showInput = ref(false);
+let showDeleteOptions = ref(false);
+let showDeleteQuestion = ref(false);
+
+//inject darkmode for filter class
 const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 
-//Get first data
-const api = inject('api') as any;
+//get start data
+let currentUserName = localStorage.getItem('userName') || '';
 const dmms = ref<DMM[]>([]);
 const fetchData = async () => {
   try {
@@ -174,34 +178,195 @@ const fetchData = async () => {
 };
 fetchData();
 
+//questions for surveyJs create dmm interface
+let createDmmInterface = ref({
+  SurveyJson: {}
+})
+createDmmInterface.value.SurveyJson = CreateDmmQuestions;
 
-//Order Logik
-let order = ref<keyof DMM>('akronym');
-let isAscending = ref<boolean>(true);
+//enable new dmm
+let postDmm = ref<DMM>({
+  title: "",
+  akronym: "",
+  published: false,
+  targetGroup: "",
+  applicationArea: "",
+  demand: "",
+  primarySources: "",
+  differentiation: "",
+  evaluation: "",
+  languages: "",
+  publicationDate: new Date(),
+  authors: [{ name: "", organization: "", email: "" }],
+  foundations: "",
+  descriptions: "",
+  descriptionsImageLink: "",
+  calculations: "",
+  calculationsImageLink: "",
+  createdBy: currentUserName,
+  createdAt: new Date(),
+  updatedBy: "",
+  updatedAt: new Date(),
+  SurveyJson: {},
+  calculationLogic: {}
+});
 
+//mapping for surveyJs create dmm interface answers to new postDmm
+let mapping = (object: any) => {
+  const mappings: any = {
+    "question1": (value: any) => { postDmm.value.title = value; },
+    "question2": (value: any) => { postDmm.value.akronym = value; },
+    "question3": (value: any) => { postDmm.value.targetGroup = value; },
+    "question4": (value: any) => { postDmm.value.applicationArea = value; },
+    "question5": (value: any) => { postDmm.value.demand = value; },
+    "question6": (value: any) => { postDmm.value.primarySources = value; },
+    "question7": (value: any) => { postDmm.value.differentiation = value; },
+    "question8": (value: any) => { postDmm.value.evaluation = value; },
+    "question9": (value: any) => { postDmm.value.languages = value; },
+    "question10": (value: any) => { postDmm.value.publicationDate = value; },
+    "question11_1": (value: any) => {
+      postDmm.value.authors.push({ name: value, organization: "", email: "" });
+    },
+    "question11_2": (value: any) => {
+      const lastAuthor = postDmm.value.authors[postDmm.value.authors.length - 1];
+      if (lastAuthor) {
+        lastAuthor.organization = value;
+      }
+    },
+    "question11_3": (value: any) => {
+      const lastAuthor = postDmm.value.authors[postDmm.value.authors.length - 1];
+      if (lastAuthor) {
+        lastAuthor.email = value;
+      }
+    },
+    "question12": (value: any) => { postDmm.value.foundations = value; },
+    "question13": (value: any) => { postDmm.value.descriptions = value; },
+    "question14": (value: any) => { postDmm.value.descriptionsImageLink = value; },
+    "question15": (value: any) => { postDmm.value.calculations = value; },
+    "question16": (value: any) => { postDmm.value.calculationsImageLink = value; },
+  };
+
+  applyMappings(object, mappings);
+
+  return postDmm;
+};
+
+function applyMappings(obj: any, mappings: any) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        applyMappings(obj[key], mappings);
+      } else if (mappings[key]) {
+        mappings[key](obj[key]);
+      }
+    }
+  }
+}
+
+//enable picture upload and delete everything exept the link
+const transformObject = async (obj: any) => {
+  let transformedObj = { ...obj };
+  for (const key in transformedObj) {
+    if (Array.isArray(transformedObj[key]) && transformedObj[key].length === 1 && typeof transformedObj[key][0] === 'object') {
+      transformedObj[key] = transformedObj[key][0].content;
+    } else if (typeof transformedObj[key] === 'object') {
+      transformedObj[key] = await transformObject(transformedObj[key]);
+    }
+  }
+  return transformedObj;
+};
+
+//post new dmm
+const handleDmmCompleted = async (results: any) => {
+  let newResults = await transformObject(results);
+  mapping(newResults);
+  if (postDmm.value.authors[0].name === "" && postDmm.value.authors[0].organization === "" && postDmm.value.authors[0].email === "") {
+    postDmm.value.authors.shift();
+  }
+  try {
+    const response = await api.post('/Dmm', postDmm.value);
+    console.log(response.data);
+    showInput.value = false;
+    await fetchData();
+    OrderIcons.value["updatedAt"] = true;
+    handleSort('updatedAt');
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+//delete dmms
+interface deleteItems {
+  _id: string;
+  title: string;
+  createdFor: string;
+}
+let selectedItems = ref<deleteItems[]>([])
+const deleteSelectedItems = async () => {
+  try {
+    const IDs = selectedItems.value.map(item => item._id);
+    console.log(IDs);
+    const response = await api.post('/deleteMultipleDmms', { dmmIds: IDs });
+    console.log('Successfully deleted dmms:', response.data);
+    fetchData();
+    showDeleteQuestion.value = false;
+    showDeleteOptions.value = false;
+    selectedItems.value = [];
+  } catch (error) {
+    console.error('Error deleting dmms:', error);
+  }
+};
+
+// ---------------------------------------------------- sort & filter ---------------------------------------------------------------
+//order
+let isAscending = ref<boolean>(false);
+const sortBy = ref('updatedAt');
+type OrderIconsType = {
+  [key: string]: boolean;
+}
 const orderedDmms = computed(() => {
-  return [...dmms.value].sort((a: DMM, b: DMM) => {
-    const result = a[order.value] > b[order.value] ? 1 : -1;
+  return [...dmms.value].sort((a, b) => {
+    let aValue, bValue;
+    switch (sortBy.value) {
+      case 'akronym':
+        aValue = a.akronym.toLowerCase();
+        bValue = b.akronym.toLowerCase();
+        break;
+      case 'createdBy':
+        aValue = a.createdBy.toLowerCase();
+        bValue = b.createdBy.toLowerCase();
+        break;
+      case 'createdAt':
+        aValue = a.createdAt;
+        bValue = b.createdAt;
+        break;
+      case 'updatedBy':
+        aValue = a.updatedBy.toLowerCase();
+        bValue = b.updatedBy.toLowerCase();
+        break;
+      case 'updatedAt':
+        aValue = a.updatedAt;
+        bValue = b.updatedAt;
+        break;
+      default:
+        aValue = '';
+        bValue = '';
+    }
+    const result = aValue > bValue ? 1 : -1;
     return isAscending.value ? result : -result;
   });
 });
 
-type OrderIconsType = {
-  [key: string]: boolean;
-}
-
 const OrderIcons = ref<OrderIconsType>({
   "akronym": false,
   "akronymDown": false,
-  "createdFor": false,
-  "createdForDown": false,
   "createdBy": false,
   "createdByDown": false,
   "createdAt": false,
   "createdAtDown": false,
   "updatedBy": false,
   "updatedByDown": false,
-  "updatedAt": true,
+  "updatedAt": false,
   "updatedAtDown": true,
 });
 
@@ -213,24 +378,17 @@ const handleSort = (columnId: string) => {
   });
   if (!OrderIcons.value[columnId]) {
     OrderIcons.value[columnId] = true;
-    order.value = columnId;
-    isAscending.value = true;
-  }
-  else if (OrderIcons.value[columnId] && !OrderIcons.value[columnId + "Down"]) {
-    OrderIcons.value[columnId + "Down"] = true;
-    order.value = columnId;
-    isAscending.value = false;
-  }
-  else {
-    OrderIcons.value[columnId] = false;
     OrderIcons.value[columnId + "Down"] = false;
-    isAscending.value = false;
+    sortBy.value = columnId;
+    isAscending.value = true;
+  } else {
+    isAscending.value = !isAscending.value;
+    OrderIcons.value[columnId] = false;
   }
+  OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
 }
-handleSort('updatedAt');
 
-
-//Filter logik
+//filter
 let filterText = ref('');
 
 let filteredDmms = computed(() => {
@@ -247,151 +405,6 @@ let filteredDmms = computed(() => {
   }
 });
 
-
-//Create new Dmm
-let showInput = ref(false);
-let Dmm = ref<DMM>({
-    title: "",
-    akronym: "",
-    targetGroup: "",
-    applicationArea: "",
-    demand:"",
-    primarySources: "",
-    differentiation: "",
-    evaluation: "",
-    languages: "",
-    publicationDate: new Date(),
-    authors: [{name: "", organization: "", email: "" }],
-    foundations: "",
-    descriptions: "",
-    descriptionsImageLink:"",
-    calculations:"",
-    calculationsImageLink:"",
-    createdBy: UserName,
-    createdAt: new Date(),
-    updatedBy: "",
-    updatedAt: new Date(),
-    SurveyJson: {},
-    clculationLogic: {}
-});
-Dmm.value.SurveyJson = CreateDmmQuestions;
-
-//Mapping der Abfragefelder aus der DmaJS-Antwort auf die Datenbankstruktur der Organisation
-let mapping = (object: any) => {
-  const PostDmm: DMM = Dmm.value as DMM;
-  PostDmm.SurveyJson = {};
-
-  const mappings: any = {
-    "question1": (value: any) => { PostDmm.title = value; },
-    "question2": (value: any) => { PostDmm.akronym = value; },
-    "question3": (value: any) => { PostDmm.targetGroup = value; },
-    "question4": (value: any) => { PostDmm.applicationArea = value; },
-    "question5": (value: any) => { PostDmm.demand = value; },
-    "question6": (value: any) => { PostDmm.primarySources = value; },
-    "question7": (value: any) => { PostDmm.differentiation = value; },
-    "question8": (value: any) => { PostDmm.evaluation = value; },
-    "question9": (value: any) => { PostDmm.languages = value; },
-    "question10": (value: any) => { PostDmm.publicationDate = value; },
-    "question11-1":(value: any) => { 
-            // Hinzufügen eines neuen Autors zum Array
-            PostDmm.authors.push({ name: value, organization: "", email: "" }); 
-        },
-        "question11-2":(value: any) => { 
-            // Letzten Autor im Array aktualisieren
-            const lastAuthor = PostDmm.authors[PostDmm.authors.length - 1];
-            if (lastAuthor) {
-                lastAuthor.organization = value; 
-            }
-        },
-        "question11-3":(value: any) => { 
-            // Letzten Autor im Array aktualisieren
-            const lastAuthor = PostDmm.authors[PostDmm.authors.length - 1];
-            if (lastAuthor) {
-                lastAuthor.email = value; 
-            }
-        },
-    "question12": (value: any) => { PostDmm.foundations = value; },
-    "question13": (value: any) => { PostDmm.descriptions = value; },
-    "question14": (value: any) => { PostDmm.descriptionsImageLink = value; },
-    "question15": (value: any) => { PostDmm.calculations = value; },
-    "question16": (value: any) => { PostDmm.calculationsImageLink = value; },
-  };
-
-  applyMappings(object, mappings);
-
-  return PostDmm;
-};
-
-function applyMappings(obj:any, mappings:any) {
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            if (typeof obj[key] === 'object' && obj[key] !== null) {
-                applyMappings(obj[key], mappings);
-            } else if (mappings[key]) {
-                mappings[key](obj[key]);
-            }
-        }
-    }
-}
-
-//Delete Picture Data exept the link
-const transformObject = async (obj: any) => {
-  let transformedObj = { ...obj };
-  for (const key in transformedObj) {
-    if (Array.isArray(transformedObj[key]) && transformedObj[key].length === 1 && typeof transformedObj[key][0] === 'object') {
-      transformedObj[key] = transformedObj[key][0].content;
-    } else if (typeof transformedObj[key] === 'object') {
-      transformedObj[key] = await transformObject(transformedObj[key]);
-    }
-  }
-  return transformedObj;
-};
-
-const handleDmmCompleted = async (results: any) => {
-  console.log('resultsstart',results);
-  let newResults = await transformObject(results);
-  console.log('results after funktion', newResults); 
-  const PostDmm: DMM = mapping(newResults);
-  console.log('PostDmm', PostDmm);
-  if(PostDmm.authors[0].name === "" && PostDmm.authors[0].organization === "" && PostDmm.authors[0].email === ""){
-    PostDmm.authors.shift();
-  }
-  try {
-        const response = await api.post('/Dmm', PostDmm);
-        console.log(response.data);
-        showInput.value = false;
-        fetchData();
-        order.value = "updatedAt";
-        OrderIcons.value["updatedAt"] = true;
-        handleSort('updatedAt');
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-};
-
-//Delete Dmms
-interface deleteItems {
-  _id: string;
-  title: string;
-  createdFor: string;
-}
-let selectedItems = ref<deleteItems[]>([])
-let showDeleteOptions = ref(false);
-let showDeleteQuestion = ref(false);
-const deleteSelectedItems = async () => {
-  try {
-    const IDs = selectedItems.value.map(item => item._id);
-    console.log(IDs);
-    const response = await api.post('/deleteMultipleDmms', { dmmIds: IDs });
-    console.log('Successfully deleted dmms:', response.data);
-    fetchData();
-    showDeleteQuestion.value = false;
-    showDeleteOptions.value = false;
-    selectedItems.value = [];
-  } catch (error) {
-    console.error('Error deleting dmms:', error);
-  }
-};
 </script>
 
 <style scoped>
@@ -468,6 +481,4 @@ const deleteSelectedItems = async () => {
 .flex-container b {
   margin-right: 8px;
 }
-
-
 </style>

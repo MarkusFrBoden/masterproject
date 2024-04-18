@@ -1,4 +1,4 @@
-const EUDmaJSONModul1 = {
+const GetOrganizationInformation = {
     "locale": "de",
     "title": {
         "de": "Kundeninformationen",
@@ -16,15 +16,6 @@ const EUDmaJSONModul1 = {
                         "en": "General Data"
                     },
                     "elements": [
-                        {
-                            "type": "text",
-                            "name": "EU-1-1-2",
-                            "title": {
-                                "de": "Name der vom EDIH unterstützten Einrichtung",
-                                "en": "Name of the organisation supported by the EDIH"
-                            },
-                            "defaultValue": "" 
-                        },
                         {
                             "type": "text",
                             "name": "EU-1-1-3",
@@ -401,4 +392,4 @@ const EUDmaJSONModul1 = {
     "fitToContainer": true
 }
 
-export { EUDmaJSONModul1 };
+export { GetOrganizationInformation };

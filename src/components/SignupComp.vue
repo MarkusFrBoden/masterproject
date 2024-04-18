@@ -1,47 +1,60 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        <div v-if="showPopup" class="overlay">
-            <div class="popup">
-                <p>Neuer Nutzer wurde angelegt!</p>
-            </div>
-        </div>
 
-        <label>Organisation:</label>
+        <!-- signup form  -->
+       <label>{{ $t(filename + '.organization') }}</label>
         <input type="text" required v-model="organization">
         <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
-        <label>Benutzername:</label>
+        <label>{{ $t(filename + '.username') }}</label>
         <input type="text" required v-model="name">
 
-        <label>Email:</label>
+        <label>{{ $t(filename + '.email') }}</label>
         <input type="email" required v-model="email" >
         <div v-if="emailError" class="error">{{ emailError }}</div>
 
-        <label>Password:</label>
+        <label>{{ $t(filename + '.password') }}</label>
         <input type="password" required v-model="password">
         <div v-if="passwordError" class="error">{{ passwordError }}</div>
 
         <div class="terms">
             <input type="checkbox" required v-model="terms">
-            <label>Accept <a href="#">terms and conditions</a></label>
+            <label>{{ $t(filename + '.accept') }}<a href="#">{{ $t(filename + '.terms') }}</a></label>
+        </div>
+
+        <!-- message that user was created  -->
+        <div v-if="showPopup" class="overlay">
+            <div class="popup">
+                <p>{{ $t(filename + '.newUser') }}</p>
+            </div>
         </div>
     </form>
 
+    <!-- submit button  -->
     <div class="submit">
-        <button @click="handleSubmit">Create an Account</button>
+        <button @click="handleSubmit">{{ $t(filename + '.button.create') }}</button>
         <br><br>
         <div v-if="showLoginLink">
-            <a href="#" @click="Account">You have already an Account?</a>
+            <a href="#" @click="Account">{{ $t(filename + '.button.existingUser') }}</a>
         </div>
-        
     </div>
+
 </template>
 
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import type { User } from "../interfaces/User.js"
 
-//Accept Props
+//filename for language tags
+const filename = 'SignupComp'
+
+//enable api via global variable
+const api = inject('api') as any;
+
+//show and hide elements
+let showPopup = ref(false);
+
+//accept props from LoginView
 let props = defineProps({
     existingAccount: {
         type: Boolean,
@@ -53,7 +66,7 @@ let props = defineProps({
     }
 })
 
-//Component Emits
+//accept and trigger emit from LoginView with updateExistingAccount
 const emit = defineEmits<{
     updateExistingAccount: [value: boolean]
 }>()
@@ -62,22 +75,8 @@ const Account = () => {
     console.log("Account ausgeführt")
 };
 
-//Create Account Logik
-const api = inject('api') as any;
-
+//check for existing email
 let ExistingUser = ref<any[]>([]);
-let ExistingOrganization = ref<any[]>([]);
-let name = ref('');
-let email = ref('');
-let emailError = ref('');
-let showPassword = ref(false);
-let password = ref('');
-let passwordError = ref('');
-let terms = ref(true);
-let organization = ref('');
-let organizationError = ref('');
-let showPopup = ref(false);
-
 const getUser = async () => {
     try {
         const response = await api.get('/UserByMail/' + email.value);
@@ -87,6 +86,8 @@ const getUser = async () => {
     }
 };
 
+//check for existing organization
+let ExistingOrganization = ref<any[]>([]);
 const getOrganisation = async () => {
     try {
         const response = await api.get('/OrganizationByName/' + organization.value);
@@ -95,6 +96,16 @@ const getOrganisation = async () => {
         console.error('Error fetching data:', err);
     }
 };
+
+//crate new user and organization
+let name = ref('');
+let email = ref('');
+let emailError = ref('');
+let password = ref('');
+let passwordError = ref('');
+let terms = ref(true);
+let organization = ref('');
+let organizationError = ref('');
 
 const CreateAccount = async () => {
     try {

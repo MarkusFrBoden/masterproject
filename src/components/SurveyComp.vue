@@ -1,13 +1,18 @@
+<template>
+  <SurveyComponent :model="survey" />
+</template>
+
 <script setup lang="ts">
 import { Model } from 'survey-core';
 import { watch, inject, onMounted, ref, type Ref } from 'vue';
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 import { useI18n } from 'vue-i18n';
-//import { settings } from "survey-core";
 
+//enable api via global variable
+const api = inject('api') as any;
 
-//Accept Props - Request survey
+//accept survey props from calling components
 let props = defineProps({
   survey: {
     type: Object,
@@ -15,7 +20,7 @@ let props = defineProps({
   }
 })
 
-//Define Emits - Send back results
+//define emit to send back survey results to calling components
 const emit = defineEmits<{
   surveyCompleted: [value: any]
 }>()
@@ -24,11 +29,11 @@ const sendResults = () => {
   emit('surveyCompleted', results);
 };
 
-//Create Survey Model
+//create survey model
 const survey = new Model(props.survey.SurveyJson);
 const { locale } = useI18n();
 
-//Define themes and language and watcher for changes
+//define themes and language and watcher for changes
 const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 const headerchange = () => {
   survey.locale = locale.value;
@@ -39,10 +44,7 @@ const headerchange = () => {
   }
 }
 
-//Use SuveyJS Global Settings for MaxWidth
-//settings.maxWidth = "1200px";
-
-//Use and watch themes and language
+//use and watch themes and language
 onMounted(() => {
   headerchange()
 });
@@ -53,33 +55,21 @@ watch(
   }
 );
 
-//Use Emit - Reply results
+//use emit to reply results
 survey.onComplete.add(sendResults);
 
 
-//Enable Picture Upload
-const api = inject('api') as any;
-
+//enable picture upload
 survey.onUploadFiles.add(async (_, options) => {
   console.log('Triggert');
     console.log('Files:', options.files);
     const formData = new FormData();
-
-    // FormData vorbereiten
     options.files.forEach((file) => {
       formData.append('file', file);
     });
-
-    console.log(formData);
-    // FormData wird vor dem await vorbereitet, sodass es vor dem API-Aufruf ausgeführt wird
     try {
       const response = await api.post('/upload', formData);
       console.log('File uploaded successfully:', response.data.filePath);
-      /* const data = await response.json();
-      console.log('File uploaded successfully:', data.filePath); 
-      options.callback(
-        "success", '/masterproject/backend'+response.data.filePath
-      );*/
       options.callback(
         options.files.map((file) => ({
           file: file,
@@ -93,10 +83,3 @@ survey.onUploadFiles.add(async (_, options) => {
   });
 
 </script>
-
-<template>
-  <SurveyComponent :model="survey" />
-</template>
-
-<style scoped>
-</style>

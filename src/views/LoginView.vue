@@ -1,4 +1,5 @@
 <template>
+    <!-- differ between login and signup  -->
     <div class="user-login-view">
         <div v-if="existingAccount === true">
             <LoginComp :existingAccount="existingAccount" @updateExistingAccount="updateExistingAccount"/> 
@@ -13,8 +14,8 @@
 import LoginComp from '../components/LoginComp.vue';
 import SignupComp from '../components/SignupComp.vue';
 
+//give prop existingAccount and emit updateExistingAccout to children
 let existingAccount = true;
-
 const updateExistingAccount = (newValue: boolean)=> {
     existingAccount = newValue;
 }

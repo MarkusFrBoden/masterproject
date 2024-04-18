@@ -1,75 +1,95 @@
 {
-  "welcome": "Wilkommen in der Applikation!",
+  "welcome": "Wilkommen in der Sprachverwaltung der Applikation!",
+  "LoginComp": {
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "login": "Login",
+    "newHere": "Neu hier? Erstelle einen Account"
+  },
+  "SignupComp": {
+    "organization": "Organisation:",
+    "username": "Benutzername:",
+    "email": "Email:",
+    "password": "Passwort:",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "accept": "Zustimmung: ",
+    "newUser": "Neuer Nutzer wurde angelegt!",
+    "button": {
+      "create": "Erstelle deinen Account",
+      "existingUser": "Du hast bereits einen Account?"
+    }
+  },
   "EdihHomeView": {
     "title": "Start",
     "h3": "Hallo",
-    "h4":"Deine Organisation: ",
-    "OrgaInformations":{
-      "title":"Organisationen",
-      "list":{
+    "h4": "Deine Organisation: ",
+    "OrgaInformations": {
+      "title": "Organisationen",
+      "list": {
         "column0": "Löschen",
         "column1": "Name",
         "column2": "Kontakt-Mail",
-        "column3": "EU-Status"}
-    },
-    "DmaInformations":{
-      "title":"Informationen über durchgeführte DMAs",
-      "overview":{
-        "title":"Übersicht"
-      },
-      "maturity":{
-        "title":"Reifegrad nach der EU"
-      },
-      "lastDma":{
-        "title":"Übersicht über letzte DMAs"
+        "column3": "EU-Status"
       }
     },
-    "deleteInput":{
-      "title":"Sollen die folgenden Organisationen mit ihrem Nutzer wirklich gelöscht werden?",
-      "userMail":"Benutzer: ",
-      "organization":"Name: ",
-      "delete":"Löschen",
-      "cancel":"Abbrechen"
+    "DmaInformations": {
+      "title": "Informationen über durchgeführte DMAs",
+      "overview": {
+        "title": "Übersicht"
+      },
+      "maturity": {
+        "title": "Reifegrad nach der EU"
+      },
+      "lastDma": {
+        "title": "Übersicht über letzte DMAs"
+      }
     },
-    "button":{
-      "editInformation":"Organisation erstellen",
-      "endInput":"Beenden",
-      "deleteOrga":"Organisation löschen",
-      "exitDelete":"Löschen beenden",
-      "deleteSelected":"Löschen"
+    "deleteInput": {
+      "title": "Sollen die folgenden Organisationen mit ihrem Nutzer wirklich gelöscht werden?",
+      "userMail": "Benutzer: ",
+      "organization": "Name: ",
+      "delete": "Löschen",
+      "cancel": "Abbrechen"
+    },
+    "button": {
+      "editInformation": "Organisation erstellen",
+      "endInput": "Beenden",
+      "deleteOrga": "Organisation löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Löschen"
     }
   },
   "EdihDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
-    "button":{
-      "createDma":"DMA erstellen",
-      "deleteDma":"DMA löschen",
-      "exitDelete":"Löschen beenden",
-      "deleteSelected":"Ausgewählte löschen"
+    "button": {
+      "createDma": "DMA erstellen",
+      "deleteDma": "DMA löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Ausgewählte löschen"
     },
-    "createInput":{
-      "title":"Neues DMA erstellen",
-      "name":"Bezeichnung: ",
-      "organization":"Organisation: ",
-      "cancel":"Abbrechen",
-      "create":"Erstellen"
+    "createInput": {
+      "title": "Neues DMA erstellen",
+      "name": "Bezeichnung: ",
+      "organization": "Organisation: ",
+      "cancel": "Abbrechen",
+      "create": "Erstellen"
     },
-    "deleteInput":{
-      "title":"Sollen die folgenden DMAs wirklich gelöscht werden?",
-      "name":"Bezeichnung: ",
-      "organization":"Organisation: ",
-      "cancel":"Abbrechen",
-      "delete":"Löschen"
+    "deleteInput": {
+      "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
+      "name": "Bezeichnung: ",
+      "organization": "Organisation: ",
+      "cancel": "Abbrechen",
+      "delete": "Löschen"
     },
-    "list":{
-    "column0": "Löschen",
-    "column1": "Bezeichnung",
-    "column2": "Organisation",
-    "column3": "Ersteller",
-    "column4": "Erstellt am",
-    "column5": "Bearbeitet von",
-    "column6": "Bearbeitet am"
+    "list": {
+      "column0": "Löschen",
+      "column1": "Bezeichnung",
+      "column2": "Organisation",
+      "column3": "Ersteller",
+      "column4": "Erstellt am",
+      "column5": "Bearbeitet von",
+      "column6": "Bearbeitet am"
     }
   },
   "EdihDmaDetails": {
@@ -79,41 +99,41 @@
     "createdAt": "Erstellt am: ",
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
-    "button":{
-      "editDma":"DMA bearbeiten",
-      "viewDma":"DMA-Vorschau",
-      "sendDma":"DMA versenden"
+    "button": {
+      "editDma": "DMA bearbeiten",
+      "viewDma": "DMA-Vorschau",
+      "sendDma": "DMA versenden"
     }
   },
   "EdihDmmView": {
     "title": "DMMs",
     "h3": "DMM-Übersicht",
-    "button":{
-      "createDmm":"DMM erstellen",
-      "deleteDmm":"DMM löschen",
-      "exitDelete":"Löschen beenden",
-      "deleteSelected":"Ausgewählte löschen"
+    "button": {
+      "createDmm": "DMM erstellen",
+      "deleteDmm": "DMM löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Ausgewählte löschen"
     },
-    "createInput":{
-      "title":"Neues DMM erstellen",
-      "name":"Bezeichnung: ",
-      "cancel":"Abbrechen",
-      "create":"Erstellen"
+    "createInput": {
+      "title": "Neues DMM erstellen",
+      "name": "Bezeichnung: ",
+      "cancel": "Abbrechen",
+      "create": "Erstellen"
     },
-    "deleteInput":{
-      "title":"Sollen die folgenden DMMs wirklich gelöscht werden?",
-      "name":"Bezeichnung: ",
-      "cancel":"Abbrechen",
-      "delete":"Löschen",
-      "organization":"Organisation: "
+    "deleteInput": {
+      "title": "Sollen die folgenden DMMs wirklich gelöscht werden?",
+      "name": "Bezeichnung: ",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "organization": "Organisation: "
     },
-    "list":{
-    "column0": "Löschen",
-    "column1": "Akronym",
-    "column3": "Ersteller",
-    "column4": "Erstellt am",
-    "column5": "Bearbeitet von",
-    "column6": "Bearbeitet am"
+    "list": {
+      "column0": "Löschen",
+      "column1": "Akronym",
+      "column3": "Ersteller",
+      "column4": "Erstellt am",
+      "column5": "Bearbeitet von",
+      "column6": "Bearbeitet am"
     }
   },
   "EdihDmmDetails": {
@@ -123,90 +143,119 @@
     "createdAt": "Erstellt am: ",
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
-    "button":{
-      "editDmm":"DMM-Fragen bearbeiten",
-      "viewDmm":"DMM-Vorschau",
-      "editDmmLogic":"Auswertung bearbeiten"
+    "button": {
+      "editDmm": "DMM-Fragen bearbeiten",
+      "viewDmm": "DMM-Vorschau",
+      "editDmmLogic": "Auswertung bearbeiten",
+      "editDmmInformation": "DMM-Informationen bearbeiten",
+      "publishDmm": "DMM verbergen",
+      "hideDmm": "DMM veröffentlichen",
+      "endInput": "Beenden"
+    },
+    "dmmInformation": {
+      "name": "Name",
+      "akronym": "Akronym",
+      "status": "Status",
+      "authors": {
+        "title": "Autor(en)",
+        "name": "Name",
+        "organization": "Organisation",
+        "email": "Email"
+      },
+      "published": "Veröffentlicht",
+      "hided": "Nicht veröffentlicht",
+      "targetGroup": "Zielgruppe",
+      "applicationArea": "Anwendungsbereich",
+      "damand": "Allgemeiner DMM-Bedarf für den Anwendungsbereich",
+      "evaluationMethod": "Evaluierungsmethode",
+      "languages": "Verfügbare Sprachen",
+      "publicationDate": "Veröffentlichungsdatum",
+      "primarySources": "Primäre Quellen und ihr Verwendungszweck",
+      "differentation": "Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell",
+      "foundation": "Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)",
+      "description": "Reifegrad und seine Dimensionen sowie deren Granularität und Pfade",
+      "calculation": "Beschreibung der Auswertungslogik"
     }
   },
   "UserHomeView": {
     "title": "Start",
     "h3": "Hallo",
-    "h4":"Deine Organisation: ",
-    "OrgaInformations":{
-      "title":"Allgemeine Informationen",
-      "organization":{
-        "title":"Organisation",
-        "name":"Name: ",
-        "id":"ID-Nummer: ",
-        "website":"Website: ",
-        "type":"Organisationsart: ",
-        "size":"Organisationsgröße: ",
-        "primarySector":"Primärer Sektor",
-        "secondarySector":"Sekundärer Sektor"
+    "h4": "Deine Organisation: ",
+    "OrgaInformations": {
+      "title": "Allgemeine Informationen",
+      "organization": {
+        "title": "Organisation",
+        "name": "Name: ",
+        "id": "ID-Nummer: ",
+        "website": "Website: ",
+        "type": "Organisationsart: ",
+        "size": "Organisationsgröße: ",
+        "primarySector": "Primärer Sektor: ",
+        "secondarySector": "Sekundärer Sektor: ",
+        "euDmaStatus": "EU-DMA Status: "
       },
-      "address":{
-        "title":"Adresse",
-        "street":"Straße: ",
-        "postalcode":"Postleitzahl: ",
-        "city":"Stadt: ",
-        "country":"Land: "
+      "address": {
+        "title": "Adresse",
+        "street": "Straße: ",
+        "postalcode": "Postleitzahl: ",
+        "city": "Stadt: ",
+        "country": "Land: "
       },
-      "contact":{
-        "title":"Kontaktperson",
-        "role":"Funktion: ",
-        "email":"E-Mail-Adresse: ",
-        "tel":"Telefonnummer: "
+      "contact": {
+        "title": "Kontaktperson",
+        "role": "Funktion: ",
+        "email": "E-Mail-Adresse: ",
+        "tel": "Telefonnummer: "
       },
-      "notAllInformation":"Nicht alle Informationen vorhanden!"
+      "notAllInformation": "Nicht alle Informationen vorhanden!"
     },
-    "DmaInformations":{
-      "title":"Informationen über durchgeführte DMAs",
-      "overview":{
-        "title":"Übersicht"
+    "DmaInformations": {
+      "title": "Informationen über durchgeführte DMAs",
+      "overview": {
+        "title": "Übersicht"
       },
-      "maturity":{
-        "title":"Reifegrad nach der EU"
+      "maturity": {
+        "title": "Reifegrad nach der EU"
       },
-      "lastDma":{
-        "title":"Übersicht über letzte DMAs"
+      "lastDma": {
+        "title": "Übersicht über letzte DMAs"
       }
     },
-    "button":{
-      "editInformation":"Informationen bearbeiten",
-      "endInput":"Beenden"
+    "button": {
+      "editInformation": "Informationen bearbeiten",
+      "endInput": "Beenden"
     }
   },
   "UserDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
-    "noDma":"Noch kein DMA angelegt",
-    "button":{
-      "createDma":"DMA erstellen",
-      "deleteDma":"DMA löschen",
-      "exitDelete":"Löschen beenden",
-      "deleteSelected":"Ausgewählte löschen"
+    "noDma": "Noch kein DMA angelegt",
+    "button": {
+      "createDma": "DMA erstellen",
+      "deleteDma": "DMA löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Ausgewählte löschen"
     },
-    "createInput":{
-      "title":"Neues DMA erstellen",
-      "name":"Bezeichnung: ",
-      "cancel":"Abbrechen",
-      "create":"Erstellen"
+    "createInput": {
+      "title": "Neues DMA erstellen",
+      "name": "Bezeichnung: ",
+      "cancel": "Abbrechen",
+      "create": "Erstellen"
     },
-    "deleteInput":{
-      "title":"Sollen die folgenden DMAs wirklich gelöscht werden?",
-      "name":"Bezeichnung: ",
-      "organization":"Organisation: ",
-      "cancel":"Abbrechen",
-      "delete":"Löschen"
+    "deleteInput": {
+      "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
+      "name": "Bezeichnung: ",
+      "organization": "Organisation: ",
+      "cancel": "Abbrechen",
+      "delete": "Löschen"
     },
-    "list":{
-    "column0": "Löschen",
-    "column1": "Bezeichnung",
-    "column2": "Ersteller",
-    "column3": "Erstellt am",
-    "column4": "Bearbeitet von",
-    "column5": "Bearbeitet am"
+    "list": {
+      "column0": "Löschen",
+      "column1": "Bezeichnung",
+      "column2": "Ersteller",
+      "column3": "Erstellt am",
+      "column4": "Bearbeitet von",
+      "column5": "Bearbeitet am"
     }
   },
   "UserDmaDetails": {
@@ -216,10 +265,8 @@
     "createdAt": "Erstellt am: ",
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
-    "button":{
-      "editDma":"DMA bearbeiten",
-      "viewDma":"DMA-Vorschau",
-      "sendDma":"DMA versenden"
+    "button": {
+      "viewDma": "DMA-Vorschau"
     }
   },
   "UserDmmView": {

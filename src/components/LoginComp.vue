@@ -1,16 +1,18 @@
 <template>
+    <!-- login form  -->
     <form>
-        <label>Email:</label>
+        <label>{{ $t(filename + '.email') }}</label>
         <input type="email" required v-model="email">
 
-        <label>Password:</label>
+        <label>{{ $t(filename + '.password') }}:</label>
         <input type="password" required v-model="password">
         <div v-if="loginError" class="error">{{ loginError }}</div>
     </form>
+    <!-- link to signup  -->
     <div class="submit">
-        <button @click="getUser">Login</button>
+        <button @click="getUser">{{ $t(filename + '.login') }}</button>
         <br><br>
-        <a href="#" @click="noAccount">New here? Create an Account</a>
+        <a href="#" @click="noAccount">{{ $t(filename + '.newHere') }}</a>
     </div>
 </template>
 
@@ -18,7 +20,13 @@
 import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 
-//Accept Props
+//filename for language tags
+const filename = 'LoginComp'
+
+//enable api via global variable
+const api = inject('api') as any;
+
+//accept props from LoginView with existingAccount
 let props = defineProps({
     existingAccount: {
         type: Boolean,
@@ -26,7 +34,7 @@ let props = defineProps({
     }
 })
 
-//Component Emits
+//accept and trigger emit from LoginView with updateExistingAccount
 const emit = defineEmits<{
     updateExistingAccount: [value: boolean]
 }>()
@@ -34,14 +42,11 @@ const noAccount = () => {
     emit("updateExistingAccount", !props.existingAccount);
 };
 
-//Login Logik
+//get user data and login to edih or user side and set local Storage
 let email = ref('');
 let password = ref('');
 let loginError = ref('');
 let router = useRouter();
-
-//Get data
-const api = inject('api') as any;
 const getUser = async () => {
     try {
         const response = await api.get('/UserByMailAndPassword/' + email.value + '/' + password.value);

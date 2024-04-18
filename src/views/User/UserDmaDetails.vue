@@ -1,36 +1,28 @@
 <template>
     <div v-if="dma">
-        <h3>{{ dma.title }} -  {{ $t(filename+'.organization') }} {{ dma.createdFor }}</h3>
-            <br>
-    
-            <h4>{{ $t(filename+'.dmaData') }}</h4>
-            {{ $t(filename+'.creator') }} {{ dma.createdBy }} ||
-            {{ $t(filename+'.createdAt') }} {{ dma.createdAt }} ||
-            {{ $t(filename+'.editor') }} {{ dma.updatedBy }} ||
-            {{ $t(filename+'.editedAt') }} {{ dma.updatedAt }} 
+        <h3>{{ dma.title }} - {{ $t(filename + '.organization') }} {{ dma.createdFor }}</h3>
+        <br>
 
-            <br><br>
-            <div class="button-group">
-                <button class="btn btn-outline-secondary" @click="showSurveyCreator = !showSurveyCreator; showSurvey = false; fetchData()">
-                {{ $t(filename+'.button.editDma') }}
-                </button>
-                <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; showSurveyCreator = false; fetchData()">
-                {{ $t(filename+'.button.viewDma') }}
-                </button>
-                <button class="btn btn-outline-secondary">
-                {{ $t(filename+'.button.sendDma') }}
-                </button>
-            </div>
+        <h4>{{ $t(filename + '.dmaData') }}</h4>
+        {{ $t(filename + '.creator') }} {{ dma.createdBy }} ||
+        {{ $t(filename + '.createdAt') }} {{ dma.createdAt }} ||
+        {{ $t(filename + '.editor') }} {{ dma.updatedBy }} ||
+        {{ $t(filename + '.editedAt') }} {{ dma.updatedAt }}
 
-            <br>
+        <!-- button for view -->
+        <br><br>
+        <div class="button-group">
+            <button class="btn btn-outline-secondary" @click="showSurvey = !showSurvey; fetchData()">
+                {{ $t(filename + '.button.viewDma') }}
+            </button>
+        </div>
+        <br>
 
-            <div v-if="showSurvey">
-                <SurveyComp :survey = "dma"/>
-            </div>
-            <div v-if="showSurveyCreator">
-                <SurveyCreatorComp @triggerRefresh="fetchData" :survey = "dma" :type = "'Dma'"/>
-            </div>
-            
+        <!-- survey js components for view dma  -->
+        <div v-if="showSurvey">
+            <SurveyComp :survey="dma" />
+        </div>
+
     </div>
     <div v-else>
         Loading...
@@ -41,18 +33,22 @@
 import { ref } from "vue";
 import type { DMA } from "../../interfaces/DMA.js"
 import SurveyComp from "../../components/SurveyComp.vue";
-import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
 
-//language prefix
+//filename for language tags
 const filename = 'UserDmaDetails'
 
-//Import Data for Single Dma by ID
+//show and hide elements
+let showSurvey = ref(false);
+
+//accept props from UserDmaView with dma id
 const props = defineProps({
     id: {
         type: String,
         required: true,
     }
 });
+
+//get start data
 const dma = ref<DMA>();
 const fetchData = async () => {
     try {
@@ -65,11 +61,6 @@ const fetchData = async () => {
     }
 };
 fetchData();
-
-//Enable Survey and Survey Creator Comp
-let showSurvey = ref(false);
-let showSurveyCreator = ref(false);
-
 
 </script>
 

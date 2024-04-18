@@ -2,6 +2,20 @@
     <div v-if="dmm">
         <h2>{{ dmm.akronym }} </h2>
         <br>
+
+        <!-- buttons for editing dmm information, question...  -->
+        <button class="btn btn-outline-secondary" @click="showInput = !showInput;">
+            {{ $t(filename + '.button.editDmmInformation') }}
+        </button>
+        <button class="btn btn-outline-secondary" @click="published = !published; simplePatch()">
+            <div v-if="published">
+                {{ $t(filename + '.button.publishDmm') }}
+            </div>
+            <div v-else>
+                {{ $t(filename + '.button.hideDmm') }}
+            </div>
+        </button>
+        <br><br>
         <div class="button-group">
             <button class="btn btn-outline-secondary"
                 @click="showSurveyCreator = !showSurveyCreator; showLogic = false; showSurvey = false; fetchData()">
@@ -16,26 +30,50 @@
                 {{ $t(filename + '.button.editDmmLogic') }}
             </button>
         </div>
-        <br>
+        <br><br>
 
+        <!-- information about the dmm  -->
         <div class="box">
             <div class="dma-list">
-                <h6>Name</h6>
+                <h6>{{ $t(filename + '.dmmInformation.name') }}</h6>
                 {{ dmm.title }}
                 <hr class="line">
-                <h6>Akronym</h6>
-                {{ dmm.akronym }}
-                <hr class="line">
-                <h6>Autor</h6>
                 <div class="row">
                     <div class="col">
-                        <u>Name</u>
+                        <h6>{{ $t(filename + '.dmmInformation.akronym') }}</h6>
                     </div>
                     <div class="col">
-                        <u>Organisation</u>
+                        <h6>{{ $t(filename + '.dmmInformation.status') }}</h6>
                     </div>
                     <div class="col">
-                        <u>Email</u>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ dmm.akronym }}
+                    </div>
+                    <div class="col">
+                        <div v-if="dmm.published">
+                            {{ $t(filename + '.dmmInformation.published') }}
+                        </div>
+                        <div v-else>
+                            {{ $t(filename + '.dmmInformation.hided') }}
+                        </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <hr class="line">
+                <h6>{{ $t(filename + '.dmmInformation.authors.title') }}</h6>
+                <div class="row">
+                    <div class="col">
+                        <u>{{ $t(filename + '.dmmInformation.authors.name') }}</u>
+                    </div>
+                    <div class="col">
+                        <u>{{ $t(filename + '.dmmInformation.authors.organization') }}</u>
+                    </div>
+                    <div class="col">
+                        <u>{{ $t(filename + '.dmmInformation.authors.email') }}</u>
                     </div>
                 </div>
                 <div v-for="autors in dmm.authors">
@@ -52,66 +90,92 @@
                     </div>
                 </div>
                 <hr class="line">
-                <h6>Zielgruppe</h6>
+                <h6>{{ $t(filename + '.dmmInformation.targetGroup') }}</h6>
                 {{ dmm.targetGroup }}
                 <hr class="line">
-                <h6>Anwendungsbereich</h6>
+                <h6>{{ $t(filename + '.dmmInformation.applicationArea') }}</h6>
                 {{ dmm.applicationArea }}
                 <hr class="line">
-                <h6>Allgemeiner DMM-Bedarf für den Anwendungsbereich</h6>
+                <h6>{{ $t(filename + '.dmmInformation.damand') }}</h6>
                 {{ dmm.demand }}
                 <hr class="line">
-                <h6>Evaluierungsmethode</h6>
+                <h6>{{ $t(filename + '.dmmInformation.evaluationMethod') }}</h6>
                 {{ dmm.evaluation }}
                 <hr class="line">
-                <h6>Verfügbare Sprachen</h6>
+                <h6>{{ $t(filename + '.dmmInformation.languages') }}</h6>
                 {{ dmm.languages }}
                 <hr class="line">
-                <h6>Veröffentlichungsdatum</h6>
+                <h6>{{ $t(filename + '.dmmInformation.publicationDate') }}</h6>
                 {{ dmm.publicationDate }}
             </div>
         </div>
-
         <div class="box">
             <div class="dma-list">
-                <h6>Primäre Quellen und ihr Verwendungszweck</h6>
+                <h6>{{ $t(filename + '.dmmInformation.primarySources') }}</h6>
                 {{ dmm.primarySources }}
                 <hr class="line">
-                <h6>Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell</h6>
+                <h6>{{ $t(filename + '.dmmInformation.differentation') }}</h6>
                 {{ dmm.differentiation }}
             </div>
         </div>
-
         <div class="box">
             <div class="dma-list">
-                <h6>Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)</h6>
+                <h6>{{ $t(filename + '.dmmInformation.foundation') }}</h6>
                 {{ dmm.foundations }}
                 <hr class="line">
-                <h6>Reifegrad und seine Dimensionen sowie deren Granularität und Pfade</h6>
+                <h6>{{ $t(filename + '.dmmInformation.description') }}</h6>
                 {{ dmm.descriptions }}
                 <div v-if="dmm.descriptionsImageLink">
                     <img :src="dmm.descriptionsImageLink.toString()" alt="Uploaded Image" class="image">
                 </div>
                 <hr class="line">
-                <h6>Beschreibung der Auswertungslogik</h6>
+                <h6>{{ $t(filename + '.dmmInformation.calculation') }}</h6>
                 {{ dmm.calculations }}
                 <div v-if="dmm.calculationsImageLink">
                     <img :src="dmm.calculationsImageLink.toString()" alt="Uploaded Image" class="image">
                 </div>
             </div>
         </div>
-
-
         <br>
 
-        <div v-if="showSurvey">
-            <SurveyComp :survey="dmm" />
+        <!-- update dmm information interface  -->
+        <div v-if="showInput" class="overlay">
+            <div class="input-container">
+                <SurveyComp @surveyCompleted="handleDmmPatch" :survey="updateDmmQuestions || {}" />
+            </div>
+            <div class="button-container">
+                <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">
+                    {{ $t(filename + '.button.endInput') }}</button>
+            </div>
         </div>
-        <div v-if="showSurveyCreator">
-            <SurveyCreatorComp @triggerRefresh="fetchData" :survey="dmm" :type="'Dmm'" />
+
+        <!-- view and update dmm question interfaces  -->
+        <div v-if="showSurvey" class="overlay">
+            <div class="input-container">
+                <SurveyComp :survey="dmm" />
+            </div>
+            <div class="button-container">
+                <button class="btn btn-outline-secondary custom-button2" @click="showSurvey = false;">
+                    {{ $t(filename + '.button.endInput') }}</button>
+            </div>
         </div>
-        <div v-if="showLogic">
-            Auswertungslogik
+        <div v-if="showSurveyCreator" class="overlay">
+            <div class="input-container">
+                <SurveyCreatorComp @triggerRefresh="fetchData" :survey="dmm" :type="'Dmm'" />
+            </div>
+            <div class="button-container">
+                <button class="btn btn-outline-secondary custom-button2" @click="showSurveyCreator = false;">
+                    {{ $t(filename + '.button.endInput') }}</button>
+            </div>
+        </div>
+        <div v-if="showLogic" class="overlay">
+            <div class="input-container">
+                Auswertungslogik
+            </div>
+            <div class="button-container">
+                <button class="btn btn-outline-secondary custom-button2" @click="showLogic = false;">
+                    {{ $t(filename + '.button.endInput') }}</button>
+            </div>
         </div>
 
     </div>
@@ -121,22 +185,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, inject } from "vue";
 import type { DMM } from "../../interfaces/DMM.js"
 import SurveyComp from "../../components/SurveyComp.vue";
 import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
+import { CreateDmmQuestions } from "@/components/CreateDmmQuestions_json.js";
 
 //language prefix
 const filename = 'EdihDmmDetails'
 
+//enable api via global variable
+const api = inject('api') as any;
 
-//Import Data for Single Dmm by ID
+//accept props from EdihDmmView with dmm id
 const props = defineProps({
     id: {
         type: String,
         required: true,
     }
 });
+
+//show and hide elements
+let showInput = ref(false);
+let showSurvey = ref(false);
+let showSurveyCreator = ref(false);
+let showLogic = ref(false);
+
+//get start data
 const dmm = ref<DMM>();
 const fetchData = async () => {
     try {
@@ -149,11 +224,144 @@ const fetchData = async () => {
 };
 fetchData();
 
-//Enable Survey and Survey Creator Comp
-let showSurvey = ref(false);
-let showSurveyCreator = ref(false);
-let showLogic = ref(false);
+//mapping from surveyJs answers to patchDmm object
+let mapping = (object: any) => {
+    const patchDmm: DMM = { ...(dmm.value || {}) } as DMM;
+    patchDmm.SurveyJson = {};
+    patchDmm.authors = [{ name: "", organization: "", email: "" }];
 
+    const mappings: any = {
+        "question1": (value: any) => { patchDmm.title = value; },
+        "question2": (value: any) => { patchDmm.akronym = value; },
+        "question3": (value: any) => { patchDmm.targetGroup = value; },
+        "question4": (value: any) => { patchDmm.applicationArea = value; },
+        "question5": (value: any) => { patchDmm.demand = value; },
+        "question6": (value: any) => { patchDmm.primarySources = value; },
+        "question7": (value: any) => { patchDmm.differentiation = value; },
+        "question8": (value: any) => { patchDmm.evaluation = value; },
+        "question9": (value: any) => { patchDmm.languages = value; },
+        "question10": (value: any) => { patchDmm.publicationDate = value; },
+        "question11_1": (value: any) => {
+            patchDmm.authors.push({ name: value, organization: "", email: "" });
+        },
+        "question11_2": (value: any) => {
+            const lastAuthor = patchDmm.authors[patchDmm.authors.length - 1];
+            if (lastAuthor) {
+                lastAuthor.organization = value;
+            }
+        },
+        "question11_3": (value: any) => {
+            const lastAuthor = patchDmm.authors[patchDmm.authors.length - 1];
+            if (lastAuthor) {
+                lastAuthor.email = value;
+            }
+        },
+        "question12": (value: any) => { patchDmm.foundations = value; },
+        "question13": (value: any) => { patchDmm.descriptions = value; },
+        "question14": (value: any) => { patchDmm.descriptionsImageLink = value; },
+        "question15": (value: any) => { patchDmm.calculations = value; },
+        "question16": (value: any) => { patchDmm.calculationsImageLink = value; },
+    };
+
+    applyMappings(object, mappings);
+
+    return patchDmm;
+};
+
+function applyMappings(obj: any, mappings: any) {
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                applyMappings(obj[key], mappings);
+            } else if (mappings[key]) {
+                mappings[key](obj[key]);
+            }
+        }
+    }
+}
+
+//delete picture informations exept the upload links
+const transformObject = async (obj: any) => {
+    let transformedObj = { ...obj };
+    for (const key in transformedObj) {
+        if (Array.isArray(transformedObj[key]) && transformedObj[key].length === 1 && typeof transformedObj[key][0] === 'object') {
+            transformedObj[key] = transformedObj[key][0].content;
+        } else if (typeof transformedObj[key] === 'object') {
+            transformedObj[key] = await transformObject(transformedObj[key]);
+        }
+    }
+    return transformedObj;
+};
+
+//patch dmm
+const patchDmmFunction = async (data: any) => {
+    try {
+        if (dmm.value) {
+            const response = await api.patch('/DmmById/' + dmm.value._id, data);
+            console.log('dmm patch success:', response.data);
+            fetchData()
+        } else { console.error('dmm null or undefined'); }
+    } catch (err) {
+        console.error('Error patchching data:', err);
+    }
+};
+
+const handleDmmPatch = (results: any) => {
+    const PatchDmm: DMM = mapping(results);
+    delete PatchDmm._id;
+    if (PatchDmm.authors[0].name === "" && PatchDmm.authors[0].organization === "" && PatchDmm.authors[0].email === "") {
+        PatchDmm.authors.shift();
+    }
+    patchDmmFunction(PatchDmm)
+};
+
+
+//use surveyJs questions
+let updateDmmQuestions = ref();
+updateDmmQuestions.value = {
+    "SurveyJson": {}
+};
+updateDmmQuestions.value.SurveyJson = { ...CreateDmmQuestions };
+
+//use existing dmm information for default values in questionaire
+watch([dmm, updateDmmQuestions], ([dmm]) => {
+    if (dmm && updateDmmQuestions.value) {
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[0].defaultValue = dmm.title;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[1].defaultValue = dmm.akronym;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[2].defaultValue = dmm.targetGroup;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[3].defaultValue = dmm.demand;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[4].defaultValue = dmm.applicationArea;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[5].defaultValue = dmm.primarySources;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[6].defaultValue = dmm.differentiation;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[7].defaultValue = dmm.evaluation;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[8].defaultValue = dmm.languages;
+        updateDmmQuestions.value.SurveyJson.pages[0].elements[9].defaultValue = dmm.publicationDate;
+        if (dmm.authors && Array.isArray(dmm.authors) && dmm.authors.length > 0) {
+            if (dmm.authors.length > 0) {
+                for (let i = 0; i < dmm.authors.length; i++) {
+                    updateDmmQuestions.value.SurveyJson.pages[0].elements[10].defaultValue[i].question11_1 = dmm.authors[i].name;
+                    updateDmmQuestions.value.SurveyJson.pages[0].elements[10].defaultValue[i].question11_2 = dmm.authors[i].organization;
+                    updateDmmQuestions.value.SurveyJson.pages[0].elements[10].defaultValue[i].question11_3 = dmm.authors[i].email;
+                }
+            }
+        }
+        updateDmmQuestions.value.SurveyJson.pages[1].elements[0].defaultValue = dmm.foundations;
+        updateDmmQuestions.value.SurveyJson.pages[1].elements[1].defaultValue = dmm.descriptions;
+        updateDmmQuestions.value.SurveyJson.pages[1].elements[2].defaultValue = dmm.descriptionsImageLink;
+        updateDmmQuestions.value.SurveyJson.pages[1].elements[3].defaultValue = dmm.calculations;
+        updateDmmQuestions.value.SurveyJson.pages[1].elements[4].defaultValue = dmm.calculationsImageLink;
+    }
+});
+
+
+//simple patch of dmm publication status
+let published = ref(false);
+const simplePatch = () => {
+    let patchDmm = {
+        "published": published.value
+    }
+    patchDmmFunction(patchDmm)
+};
 
 </script>
 
@@ -183,13 +391,78 @@ let showLogic = ref(false);
     border-top: 1px solid #000;
     margin-top: 5px;
     margin-bottom: 8px;
+    z-index: 1;
+}
+
+.dark .line {
+    border-top: 2px solid #9b9b9b;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    z-index: 1;
 }
 
 .image {
-    display: block; 
-    margin: 0 auto; 
+    display: block;
+    margin: 0 auto;
     width: 80%;
     max-width: 800px;
-    height: auto; 
+    height: auto;
+}
+
+.input-container {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #919191;
+    border-radius: 12px;
+    width: 90%;
+    height: 90%;
+}
+
+.dark .input-container {
+    background: #16171d;
+}
+
+.input-container input {
+    margin-bottom: 8px;
+    border: 1px solid #919191;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    overflow-y: auto;
+    z-index: 2;
+}
+
+.custom-button2 {
+    color: black !important;
+    background-color: #eceaea !important;
+}
+
+.custom-button2:hover {
+    color: black !important;
+    background-color: #858484 !important;
+}
+
+.dark .custom-button,
+.dark .custom-button2 {
+    color: #72bbff !important;
+    background-color: #020b3d !important;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 </style>

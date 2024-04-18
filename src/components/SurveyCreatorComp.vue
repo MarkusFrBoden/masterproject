@@ -1,9 +1,10 @@
-<!-- components/SurveyCreator.vue -->
+<template>
+  <SurveyCreatorComponent :model="creator" />
+</template>
+
 <script setup lang="ts">
 import 'survey-core/defaultV2.min.css';
 import "survey-creator-core/survey-creator-core.min.css";
-/* import "survey-core/survey.i18n.js";
-import "survey-creator-core/survey-creator-core.i18n.js"; */
 import { SurveyCreatorModel } from "survey-creator-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
@@ -12,10 +13,10 @@ import { watch, inject, onMounted, ref, type Ref } from 'vue';
 import { BorderlessDark } from "survey-core/themes";
 import { BorderlessLight } from "survey-core/themes";
 
-//get current User
-let UserName = localStorage.getItem('userName');
+//enable api via global variable
+const api = inject('api') as any;
 
-//Accept Props
+//accept survey props from calling components
 let props = defineProps({
   survey: {
     type: Object,
@@ -27,26 +28,32 @@ let props = defineProps({
   }
 })
 
-//Accept Emits
+//define emit to update dmm or dma
 const emit = defineEmits(['triggerRefresh'])
 
+//get current user for updated by
+let UserName = localStorage.getItem('userName');
+
+
+//add language option
+const { locale } = useI18n();
+editorLocalization.currentLocale = locale.value;
+
+//limit the number of showing locales in survey.locale property editor
+surveyLocalization.supportedLocales = ["en", "de"];
+
+//add suvey creator options
 const options = {
   showLogicTab: true,
   isAutoSave: true,
   showTranslationTab: true
 };
 
-//Add language option
-const { locale } = useI18n();
-editorLocalization.currentLocale = locale.value;
-
-//Limited the number of showing locales in survey.locale property editor
-surveyLocalization.supportedLocales = ["en", "de"];
-
+//create survey creator model
 const creator = new SurveyCreatorModel(options);
 creator.JSON = props.survey.SurveyJson;
 
-//Define themes and language and watcher for changes
+//define themes and language and watcher for changes
 const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 const headerchange = () => {
   creator.locale = locale.value;
@@ -56,7 +63,7 @@ const headerchange = () => {
     creator.theme = BorderlessDark;
   }
 }
-//Use and watch themes and language
+//use and watch themes and language
 onMounted(() => {
   headerchange();
 });
@@ -67,8 +74,7 @@ watch(
   }
 );
 
-const api = inject('api') as any;
-
+//update dma or dmm after changes
 creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {
   try {
     const response = await updateSurvey();
@@ -99,17 +105,13 @@ const updateSurvey = async () => {
   }
 };
 
-//File Upload
+//enable file upload
 creator.onUploadFile.add(async (_, options) => {
   console.log('Files:', options.files);
   const formData = new FormData();
-
-  // FormData vorbereiten
   options.files.forEach((file: File) => {
     formData.append('file', file);
   });
-
-  // FormData wird vor dem await vorbereitet, sodass es vor dem API-Aufruf ausgeführt wird
   try {
     const response = await api.post('/upload', formData);
     console.log('File uploaded successfully:', response.data.filePath);
@@ -119,10 +121,6 @@ creator.onUploadFile.add(async (_, options) => {
   }
 });
 
-
-
 </script>
 
-<template>
-  <SurveyCreatorComponent :model="creator" />
-</template>
+

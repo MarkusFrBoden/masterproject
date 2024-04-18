@@ -1,6 +1,7 @@
 require('dotenv').config()
 const {MongoClient} = require('mongodb')
 
+//create mongodb database connection
 let dbConnection
 let uri = process.env.API_URI
 

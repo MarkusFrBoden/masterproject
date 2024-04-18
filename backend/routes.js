@@ -3,8 +3,8 @@ const multer = require('multer');
 const { ObjectId } = require('mongodb');
 const { connectToDb, getDb } = require('./db');
 
+//create exproess router for internal API routes
 const router = express.Router();
-
 connectToDb((err) => {
     if (!err) {
         db = getDb();
@@ -12,6 +12,7 @@ connectToDb((err) => {
 });
 
 // ---------------------------- User ----------------------------------
+//Get
 router.get('/UsersOverview', (req, res) => {
     let users = []
 
@@ -101,6 +102,7 @@ router.patch('/UserById/:id', (req, res) => {
 
 
 // ------------------------ Organization -------------------------------
+//Get
 router.get('/OrganizationByName/:organizationName', (req, res) => {
     db.collection('users')
         .findOne({ 'organization.name': req.params.organizationName })
@@ -316,8 +318,8 @@ router.patch('/DmmById/:id', (req, res) => {
             .then(result => {
                 res.status(200).json(result);
             })
-            .catch(() => {
-                res.status(500).json({ error: 'Could not update the document' });
+            .catch((err) => {
+                res.status(500).json({ error: 'Could not update the document', err });
             });
     } else {
         res.status(500).json({ error: 'Not a valid doc id' })
@@ -345,24 +347,22 @@ router.post('/deleteMultipleDmms', async (req, res) => {
     }
 });
 
-// Enable Picture Upload to backend file System
-// Konfiguration für Multer
+// -------------------------- local file system -----------------------------------
+// enable picture upload to backend file system
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Speicherort für die hochgeladenen Dateien
+        cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // Dateiname für die hochgeladene Datei
+        cb(null, Date.now() + '-' + file.originalname);
     }
 });
 const upload = multer({ storage: storage });
 
-// Endpunkt für Dateiuploads
 router.post('/upload', upload.single('file'), (req, res) => {
-    // Hier wird die hochgeladene Datei im Dateisystem gespeichert
     const filename = req.file.filename;
-    // Der Dateipfad oder Dateiname wird zurückgegeben
     res.json({ filePath: `/uploads/${filename}` });
 });
 
+//export route instance
 module.exports = router;

@@ -6,13 +6,11 @@ const cors = require('cors');
 // init app & middleware
 const app = express()
 app.use(cors());
-
 app.use(express.json({ limit: '10mb' }));
 app.use('/', routes);
 
 // db connection
 let db
-
 connectToDb((err) => {
     if (!err) {
         app.listen(3000, () => {
