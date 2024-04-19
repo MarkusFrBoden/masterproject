@@ -6,6 +6,7 @@ import EdihDmmDetails from '../views/Edih/EdihDmmDetails.vue'
 import UserHomeView from '../views/User/UserHomeView.vue'
 import UserDmaView from '../views/User/UserDmaView.vue'
 import UserDmaDetails from '../views/User/UserDmaDetails.vue'
+import UserDmmDetails from '../views/User/UserDmmDetails.vue'
 import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
@@ -71,6 +72,13 @@ const router = createRouter({
       path: '/UserDmm',
       name: 'UserDmm',
       component: () => import('../views/User/UserDmmView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/UserDmmDetails/:id',
+      name: 'UserDmmDetails',
+      component: UserDmmDetails,
+      props: true,
       meta: { requiresAuth: true }
     }
   ]

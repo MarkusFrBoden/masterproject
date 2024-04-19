@@ -265,14 +265,29 @@ router.patch('/DmaById/:id', (req, res) => {
 // -------------------------- DMM-Moduls -----------------------------------
 //Get
 router.get('/DmmOverview', (req, res) => {
-    let dmas = []
+    let dmms = []
 
     db.collection('DMMs')
         .find()
         .sort({ createdAt: 1 })
-        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title,"akronym": dma.akronym, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt }))
+        .forEach(dmm => dmms.push({ "_id": dmm._id, "title": dmm.title,"akronym": dmm.akronym, "createdBy": dmm.createdBy, "createdAt": dmm.createdAt, "updatedBy": dmm.updatedBy, "updatedAt": dmm.updatedAt }))
         .then(() => {
-            res.status(200).json(dmas)
+            res.status(200).json(dmms)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the documents' })
+        })
+})
+
+router.get('/PublishedDmm', (req, res) => {
+    let dmms = []
+
+    db.collection('DMMs')
+        .find({ published: true })
+        .sort({ createdAt: 1 })
+        .forEach(dmm => dmms.push({ "_id": dmm._id, "title": dmm.title,"akronym": dmm.akronym, "createdBy": dmm.createdBy, "createdAt": dmm.createdAt, "updatedBy": dmm.updatedBy, "updatedAt": dmm.updatedAt }))
+        .then(() => {
+            res.status(200).json(dmms)
         })
         .catch(() => {
             res.status(500).json({ error: 'Could not fetch the documents' })

@@ -366,103 +366,13 @@ const simplePatch = () => {
 </script>
 
 <style scoped>
-.box {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 0 auto 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    width: 90%;
-}
-
-.dark .box {
-    background: #020b3d;
-}
-
-.box h6 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.line {
-    border-top: 1px solid #000;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    z-index: 1;
-}
-
-.dark .line {
-    border-top: 2px solid #9b9b9b;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    z-index: 1;
-}
-
-.image {
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 800px;
-    height: auto;
-}
-
+/* Input container customization*/ 
 .input-container {
     position: absolute;
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 16px;
-    border: 1px solid #919191;
-    border-radius: 12px;
     width: 90%;
     height: 90%;
-}
-
-.dark .input-container {
-    background: #16171d;
-}
-
-.input-container input {
-    margin-bottom: 8px;
-    border: 1px solid #919191;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-    overflow-y: auto;
-    z-index: 2;
-}
-
-.custom-button2 {
-    color: black !important;
-    background-color: #eceaea !important;
-}
-
-.custom-button2:hover {
-    color: black !important;
-    background-color: #858484 !important;
-}
-
-.dark .custom-button,
-.dark .custom-button2 {
-    color: #72bbff !important;
-    background-color: #020b3d !important;
-}
-
-.button-container {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 </style>

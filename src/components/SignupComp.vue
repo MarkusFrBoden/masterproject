@@ -191,6 +191,10 @@ form {
     border-radius: 10px;
 }
 
+.dark form{
+    background-color: #020b3d;
+}
+
 label {
     color: #aaa;
     display: inline-block;
@@ -210,6 +214,12 @@ select {
     border: none;
     border-bottom: 1px solid #ddd;
     color: #555;
+}
+
+.dark input,
+.dark select {
+  background-color: #020b3d;
+  color: #72bbff;
 }
 
 input[type="checkbox"] {

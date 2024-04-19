@@ -70,6 +70,8 @@ import BoxWithRightArrowIn from './components/icons/BoxWithRightArrowIn.vue';
 import HouseWithDoor from './components/icons/HouseWithDoor.vue';
 import { useRouter } from 'vue-router';
 
+
+
 //use global variable darkmode for all pages
 const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 
@@ -103,15 +105,4 @@ const logout = () => {
 
 <style>
 @import "./styles/global.css";
-
-.input-container {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 16px;
-  border: 1px solid #919191;
-  border-radius: 12px;
-}
 </style>

@@ -28,8 +28,7 @@
 
     <br>
     <!-- input for filter  -->
-    <input v-model="filterText" type="text" placeholder="Filter"
-        :class="{ 'colored-placeholder': darkmode, 'noncolored-placeholder': !darkmode }" />
+    <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
 
     <!-- create dma interface  -->
     <div v-if="showInput" class="overlay">
@@ -71,7 +70,7 @@
 
     <!-- dma list, filtered and sorted  -->
     <div v-if="filteredDmas.length > 0">
-        <div class="dma-list">
+        <div class="list">
             <!-- header with sort logic part  -->
             <div class="row">
                 <div v-if="showDeleteOptions" class="col">
@@ -154,7 +153,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Ref, ref, inject, computed } from 'vue';
+import { ref, inject, computed } from 'vue';
 import type { DMA } from "../../interfaces/DMA.js"
 import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
@@ -167,9 +166,6 @@ const filename = 'UserDmaView'
 
 //enable api via global variable
 const api = inject('api') as any;
-
-//inject darkmode 
-const darkmode: Ref<boolean> = inject('darkmode') || ref(false);
 
 //show and hide elements
 let showInput = ref(false);
@@ -336,74 +332,4 @@ let filteredDmas = computed(() => {
 </script>
 
 <style scoped>
-.dma-list {
-    max-width: 960px;
-    margin: 40px auto;
-}
-
-.dma-list ul {
-    padding: 0
-}
-
-.list-move {
-    transition: all 0.5s;
-}
-
-.dma-list li {
-    list-style-type: none;
-    background: white;
-    padding: 16px;
-    margin: 16px 0;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.dark .dma-list li {
-    background: #020b3d;
-}
-
-.input-container {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 16px;
-    border: 1px solid #919191;
-    border-radius: 12px;
-}
-
-.dark .input-container {
-    background: #16171d;
-}
-
-.input-container input {
-    margin-bottom: 8px;
-    border: 1px solid #919191;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-}
-
-.delete-selected {
-    color: rgb(214, 69, 69);
-}
-
-.flex-container {
-    display: flex;
-    align-items: center;
-    background: none;
-}
-
-.flex-container b {
-    margin-right: 8px;
-}
 </style>
