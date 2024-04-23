@@ -25,7 +25,7 @@
         </button>
     </div>
     <br>
-
+ 
     <!-- input for filter  -->
     <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
 
@@ -43,9 +43,15 @@
                 </select>
             </div>
             <br>
-            Welche DMM sollen geladen werden?
             <!-- create dma from DMM  -->
-            EU-Dma automatisch laden?<input type="checkbox" v-model="addEUDma">
+            <div v-if="dmms.length > 0">
+                Welche DMMs sollen geladen werden?
+                <br>
+                <div v-for="dmm in dmms" :key="dmm._id?.toString()">
+                    {{ dmm.akronym }} anfügen? <input type="checkbox" :value="{ id: dmm._id, akronym: dmm.akronym }"
+                        v-model="selectedDmms">
+                </div>
+            </div>
             <br><br>
             <div class="button-group">
                 <button class="btn btn-outline-secondary" @click="showInput = false;">{{
@@ -167,6 +173,7 @@
 <script setup lang="ts">
 import { ref, inject, computed } from 'vue';
 import type { DMA } from "../../interfaces/DMA.js"
+import type { DMM } from "../../interfaces/DMM.js"
 import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
@@ -185,7 +192,7 @@ let showDeleteOptions = ref(false);
 let showDeleteQuestion = ref(false);
 
 //get start data
-let currentUserName = localStorage.getItem('userName') ||'';
+let currentUserName = localStorage.getItem('userName') || '';
 const dmas = ref<DMA[]>([]);
 const fetchData = async () => {
     try {
@@ -208,10 +215,27 @@ const getOrganizations = async () => {
 };
 getOrganizations();
 
+//get start data
+const dmms = ref<DMM[]>([]);
+const fetchDmm = async () => {
+    try {
+        const response = await api.get('/PublishedDmm');
+        dmms.value = response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+fetchDmm();
+
 //create new dma
-let newDmaOrganisation = ref<string>('');
+let newDmaOrganisation = "";
 let newDmaTitle = "";
-let addEUDma = ref(false);
+interface selectedDmms {
+    id: string;
+    akronym: string;
+}
+const selectedDmms = ref<selectedDmms[]>([]);
+
 let PostDma = ref<DMA>({
     "title": "",
     "createdFor": "",
@@ -226,17 +250,45 @@ let PostDma = ref<DMA>({
 const createDma = async () => {
     try {
         PostDma.value.title = newDmaTitle;
-        PostDma.value.createdFor = newDmaOrganisation.value;
-        if (addEUDma.value === true) {
-            PostDma.value.SurveyJson = {/* EUDmaJSON */}
-            console.log(PostDma.value.SurveyJson)
-        };
+        PostDma.value.createdFor = newDmaOrganisation;
+        if (selectedDmms.value.length > 0) {
+            if (selectedDmms.value.length === 1) {
+                try {
+                    const response = await fetch('http://localhost:3000/DmmById/' + selectedDmms.value[0].id);
+                    const data: DMM = await response.json();
+                    PostDma.value.SurveyJson = data.SurveyJson;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            } else {
+                selectedDmms.value.sort((a, b) => {
+                    if (a.akronym === "EUPSO") return -1;
+                    if (b.akronym === "EUPSO") return 1;
+                    return 0;
+                });
+                for (const dmm of selectedDmms.value) {
+                    try {
+                        const response = await fetch('http://localhost:3000/DmmById/' + dmm.id);
+                        const data: DMM = await response.json();
+                        if (PostDma.value.SurveyJson.pages) {
+                                PostDma.value.SurveyJson.pages.push(...data.SurveyJson.pages);
+                        } else {
+                            PostDma.value.SurveyJson = data.SurveyJson;
+                        }
+                    } catch (error) {
+                        console.error('Error fetching data:', error);
+                    }
+                }
+            }
+        } else {
+            PostDma.value.SurveyJson = {};
+        }
         const response = await api.post('/Dma', PostDma.value);
         console.log('POST Response:', response.data);
         showInput.value = false;
         await fetchData();
-        OrderIcons.value["updatedAtDown"] = true;
-        handleSort('updatedAt');
+        //OrderIcons.value["updatedAt"] = true;
+        //handleSort('updatedAtDown');
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -270,44 +322,44 @@ const deleteSelectedItems = async () => {
 let isAscending = ref<boolean>(true);
 const sortBy = ref('updatedAt');
 type OrderIconsType = {
-  [key: string]: boolean;
+    [key: string]: boolean;
 }
 
 const orderedDmas = computed(() => {
-  return [...dmas.value].sort((a, b) => {
-    let aValue, bValue;
-    switch (sortBy.value) {
-      case 'title':
-        aValue = a.title.toLowerCase();
-        bValue = b.title.toLowerCase();
-        break;
-     case 'createdFor':
-        aValue = a.createdFor.toLowerCase();
-        bValue = b.createdFor.toLowerCase();
-        break;
-      case 'createdBy':
-        aValue = a.createdBy.toLowerCase();
-        bValue = b.createdBy.toLowerCase();
-        break;
-      case 'createdAt':
-        aValue = a.createdAt;
-        bValue = b.createdAt;
-        break;
-      case 'updatedBy':
-        aValue = a.updatedBy.toLowerCase();
-        bValue = b.updatedBy.toLowerCase();
-        break;
-      case 'updatedAt':
-        aValue = a.updatedAt;
-        bValue = b.updatedAt;
-        break;
-      default:
-        aValue = '';
-        bValue = '';
-    }
-    const result = aValue > bValue ? 1 : -1;
-    return isAscending.value ? result : -result;
-  });
+    return [...dmas.value].sort((a, b) => {
+        let aValue, bValue;
+        switch (sortBy.value) {
+            case 'title':
+                aValue = a.title.toLowerCase();
+                bValue = b.title.toLowerCase();
+                break;
+            case 'createdFor':
+                aValue = a.createdFor.toLowerCase();
+                bValue = b.createdFor.toLowerCase();
+                break;
+            case 'createdBy':
+                aValue = a.createdBy.toLowerCase();
+                bValue = b.createdBy.toLowerCase();
+                break;
+            case 'createdAt':
+                aValue = a.createdAt;
+                bValue = b.createdAt;
+                break;
+            case 'updatedBy':
+                aValue = a.updatedBy.toLowerCase();
+                bValue = b.updatedBy.toLowerCase();
+                break;
+            case 'updatedAt':
+                aValue = a.updatedAt;
+                bValue = b.updatedAt;
+                break;
+            default:
+                aValue = '';
+                bValue = '';
+        }
+        const result = aValue > bValue ? 1 : -1;
+        return isAscending.value ? result : -result;
+    });
 });
 
 const OrderIcons = ref<OrderIconsType>({
@@ -326,21 +378,21 @@ const OrderIcons = ref<OrderIconsType>({
 });
 
 const handleSort = (columnId: string) => {
-  Object.keys(OrderIcons.value).forEach((key) => {
-    if (key !== columnId && key !== columnId + "Down") {
-      OrderIcons.value[key] = false;
+    Object.keys(OrderIcons.value).forEach((key) => {
+        if (key !== columnId && key !== columnId + "Down") {
+            OrderIcons.value[key] = false;
+        }
+    });
+    if (!OrderIcons.value[columnId]) {
+        OrderIcons.value[columnId] = true;
+        OrderIcons.value[columnId + "Down"] = false;
+        sortBy.value = columnId;
+        isAscending.value = true;
+    } else {
+        isAscending.value = !isAscending.value;
+        OrderIcons.value[columnId] = false;
     }
-  });
-  if (!OrderIcons.value[columnId]) {
-    OrderIcons.value[columnId] = true;
-    OrderIcons.value[columnId + "Down"] = false;
-    sortBy.value = columnId;
-    isAscending.value = true;
-  } else {
-    isAscending.value = !isAscending.value;
-    OrderIcons.value[columnId] = false;
-  }
-  OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
+    OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
 }
 handleSort('updatedAtDown');
 
@@ -363,5 +415,4 @@ let filteredDmas = computed(() => {
 
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

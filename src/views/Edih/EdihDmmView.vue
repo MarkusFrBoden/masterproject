@@ -141,7 +141,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Ref, ref, inject, computed } from 'vue';
+import { ref, inject, computed } from 'vue';
 import type { DMM } from "../../interfaces/DMM.js"
 import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
