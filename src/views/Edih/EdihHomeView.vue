@@ -251,16 +251,6 @@ handleSort('name');
 </script>
 
 <style scoped>
-/* Input container customization*/ 
-.input-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 800px;
-}
-
 /* Custom dma list */ 
 .list li {
   background: rgba(214, 206, 206, 0.692) !important;

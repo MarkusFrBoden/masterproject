@@ -6,6 +6,7 @@
 import 'survey-core/defaultV2.min.css';
 import "survey-creator-core/survey-creator-core.min.css";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { Serializer } from "survey-core";
 import { editorLocalization } from "survey-creator-core";
 import { surveyLocalization } from 'survey-core';
 import { useI18n } from 'vue-i18n';
@@ -34,13 +35,17 @@ const emit = defineEmits(['triggerRefresh'])
 //get current user for updated by
 let UserName = localStorage.getItem('userName');
 
-
 //add language option
 const { locale } = useI18n();
 editorLocalization.currentLocale = locale.value;
 
 //limit the number of showing locales in survey.locale property editor
 surveyLocalization.supportedLocales = ["en", "de"];
+
+//make name properties (keys) read-only
+Serializer.findProperty("question","name").readOnly = true;
+Serializer.findProperty("panel", "name").readOnly = true;
+Serializer.findProperty("page", "name").readOnly = true;
 
 //add suvey creator options
 const options = {
@@ -73,6 +78,28 @@ watch(
     headerchange();
   }
 );
+
+//use pre defined keys for new dmm pages, questions and panels
+if(props.type === 'Dmm'){
+var questionCounter = creator.survey.getAllQuestions().length+1;
+var panelCounter = creator.survey.getAllPanels().length+1;
+var pageCounter = creator.survey.pages.length+1;
+creator.onQuestionAdded.add(function(sender, options){
+        var q = options.question;
+        q.name = props.survey.akronym + "Question" + questionCounter;
+        questionCounter ++;
+    });
+creator.onPanelAdded.add(function(sender, options){
+        var p = options.panel;
+        p.name = props.survey.akronym + "Panel" + panelCounter;
+        panelCounter ++;
+    });
+creator.onPageAdded.add(function(sender, options){
+        var p = options.page;
+        p.name = props.survey.akronym + "Page" + pageCounter;
+        pageCounter ++;
+    });
+}
 
 //update dma or dmm after changes
 creator.saveSurveyFunc = async (saveNo: number, callback: Function) => {

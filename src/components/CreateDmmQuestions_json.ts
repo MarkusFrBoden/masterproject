@@ -26,7 +26,26 @@ const CreateDmmQuestions = {
                     "name": "question2",
                     "title": "Akronym",
                     "isRequired": true,
-                    "defaultValue": ""
+                    "defaultValue": "",
+                    "validators": [
+                        {
+                         "type": "text",
+                         "text": {
+                          "default": "Please choose an acronym from 7 numbers and letters",
+                          "de": "Bitte wählen Sie ein Akronym aus 7 Zahlen und Buchstaben"
+                         },
+                         "minLength": 3,
+                         "maxLength": 7
+                        },
+                        {
+                         "type": "regex",
+                         "text": {
+                          "default": "Please choose an acronym from 7 numbers and letters",
+                          "de": "Bitte wählen Sie ein Akronym aus 7 Zahlen und Buchstaben"
+                         },
+                         "regex": "^[a-zA-Z0-9]*$"
+                        }
+                       ]
                 },
                 {
                     "type": "comment",
@@ -205,8 +224,8 @@ const CreateDmmQuestions = {
                     "type": "comment",
                     "name": "question15",
                     "title": {
-                        "default": "Description of the maturity level, its dimensions and their granularity",
-                        "de": "Beschreibung des Reifegrads, der Dimensionen und deren Granularität"
+                        "default": "Description of the evaluation logic",
+                        "de": "Beschreibung der Auswertungslogik"
                     },
                     "defaultValue": ""
                 },

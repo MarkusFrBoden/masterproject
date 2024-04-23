@@ -315,8 +315,7 @@ const handleDmmPatch = (results: any) => {
     patchDmmFunction(PatchDmm)
 };
 
-
-//use surveyJs questions
+//use surveyJs questions for dmm informations
 let updateDmmQuestions = ref();
 updateDmmQuestions.value = {
     "SurveyJson": {}

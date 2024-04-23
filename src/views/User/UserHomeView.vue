@@ -268,7 +268,6 @@ const getLanguageKey = (key: keyof languageMapping) => {
 <style scoped>
 /* Input container customization*/ 
 .input-container {
-  position: absolute;
   top: 50%;
   left: 50%;
   width: 800px;

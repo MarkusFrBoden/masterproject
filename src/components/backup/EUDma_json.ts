@@ -17,15 +17,15 @@ const EUDmaJSON = {
     },
     "pages": [
         {
-            "name": "page1",
+            "name": "EUPSOPage1",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel1",
+                    "name": "EUPSOPanel1",
                     "elements": [
                         {
                             "type": "text",
-                            "name": "EU.1.1.1",
+                            "name": "EUPSOQuestion1",
                             "title": {
                                 "de": "Datum",
                                 "en": "Date"
@@ -34,7 +34,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.2",
+                            "name": "EUPSOQuestion2",
                             "title": {
                                 "de": "Name der vom EDIH unterstützten Einrichtung",
                                 "en": "Name of the organisation supported by the EDIH"
@@ -42,7 +42,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.3",
+                            "name": "EUPSOQuestion3",
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
@@ -50,7 +50,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.4",
+                            "name": "EUPSOQuestion4",
                             "title": {
                                 "de": "Kontaktperson",
                                 "en": "Contact person"
@@ -58,7 +58,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.5",
+                            "name": "EUPSOQuestion5",
                             "title": {
                                 "de": "Funktion in der Einrichtung",
                                 "en": "Role in the organisation"
@@ -66,7 +66,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.6",
+                            "name": "EUPSOQuestion6",
                             "title": {
                                 "de": "E-Mail-Adresse",
                                 "en": "Email address"
@@ -75,7 +75,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.7",
+                            "name": "EUPSOQuestion7",
                             "title": {
                                 "de": "Telefonnummer",
                                 "en": "Telephone:"
@@ -84,7 +84,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.8",
+                            "name": "EUPSOQuestion8",
                             "title": {
                                 "de": "Website",
                                 "en": "Website"
@@ -93,28 +93,28 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU.1.1.9",
+                            "name": "EUPSOQuestion9",
                             "title": {
                                 "de": "Art der öffentlichen Einrichtung",
                                 "en": "Type of public sector organisation"
                             },
                             "choices": [
                                 {
-                                    "value": "nationalAuthority",
+                                    "value": "Item 1",
                                     "text": {
                                         "de": "Nationale Behörde",
                                         "en": "National authority"
                                     }
                                 },
                                 {
-                                    "value": "regionalAuthority",
+                                    "value": "Item 2",
                                     "text": {
                                         "de": "Regional-/Landesbehörde",
                                         "en": "Regional authority"
                                     }
                                 },
                                 {
-                                    "value": "provinceMunicipalAuthority",
+                                    "value": "Item 3",
                                     "text": {
                                         "de": "Provinz-/Gemeindebehörde",
                                         "en": "Province/municipal authority"
@@ -131,7 +131,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU.1.1.10",
+                            "name": "EUPSOQuestion10",
                             "title": {
                                 "de": "Zahl der Beschäftigten der Einrichtung",
                                 "en": "Organisation’s staff size"
@@ -162,7 +162,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "multipletext",
-                            "name": "EU.1.1.11",
+                            "name": "EUPSOQuestion11",
                             "title": {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
@@ -200,7 +200,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "text",
-                            "name": "EU.1.1.12",
+                            "name": "EUPSOQuestion12",
                             "title": {
                                 "de": "PIC-Nummer",
                                 "en": "PIC number"
@@ -218,15 +218,15 @@ const EUDmaJSON = {
                 },
                 {
                     "type": "panel",
-                    "name": "panel2",
+                    "name": "EUPSOPanel2",
                     "elements": [
                         {
                             "type": "panel",
-                            "name": "EU.1.2.13",
+                            "name": "EUPSOPanel3",
                             "elements": [
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU.1.2.13.1",
+                                    "name": "EUPSOQuestion13",
                                     "title": {
                                         "de": "Primär (eine Option obligatorisch)",
                                         "en": "Primary (one mandatory)"
@@ -307,7 +307,7 @@ const EUDmaJSON = {
                                 },
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU.1.2.13.2",
+                                    "name": "EUPSOQuestion14",
                                     "title": {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"
@@ -409,11 +409,11 @@ const EUDmaJSON = {
             }
         },
         {
-            "name": "page2",
+            "name": "EUPSOPage2",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel3",
+                    "name": "EUPSOPanel4",
                     "elements": [
                         {
                             "type": "image",
@@ -439,15 +439,15 @@ const EUDmaJSON = {
             }
         },
         {
-            "name": "page3",
+            "name": "EUPSOPage3",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel4",
+                    "name": "EUPSOPanel5",
                     "elements": [
                         {
                             "type": "checkbox",
-                            "name": "EU.2.1.1",
+                            "name": "EUPSOQuestion15",
                             "title": {
                                 "de": "Welche Vorkehrungen wurden getroffen, um Ihre Einrichtung auf die (weitere) Digitalisierung vorzubereiten? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "In which of the following ways is your organisation prepared for (more) digitalisation? Please select all options that apply"
@@ -527,7 +527,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "matrixdropdown",
-                            "name": "EU.2.1.2",
+                            "name": "EUPSOQuestion16",
                             "title": {
                                 "de": "In welchen der folgenden operativen Bereiche hat Ihre Einrichtung bereits in die Digitalisierung investiert, und in welchen Bereichen plant sie, in Zukunft zu investieren? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "In which of the following operational areas has your organisation already invested in digitalisation and in which ones does it plan to invest in the future? Please select all options that apply"
@@ -543,8 +543,8 @@ const EUDmaJSON = {
                                 {
                                     "name": "Column 2",
                                     "title": {
-                                        "de": "Investition geplant",
-                                        "en": "Plan to invest"
+                                        "de": "(weitere) Investition geplant",
+                                        "en": "(further) Plan to invest"
                                     }
                                 }
                             ],
@@ -617,15 +617,15 @@ const EUDmaJSON = {
             ]
         },
         {
-            "name": "page4",
+            "name": "EUPSOPage4",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel5",
+                    "name": "EUPSOPanel6",
                     "elements": [
                         {
                             "type": "checkbox",
-                            "name": "EU.2.2.3",
+                            "name": "EUPSOQuestion17",
                             "title": {
                                 "de": "Welche der folgenden digitalen Technologien und Lösungen werden von Ihrer Einrichtung bereits eingesetzt? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "Which of the following digital technologies and solutions are already used by your organisation? Please select all options that apply"
@@ -698,7 +698,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "checkbox",
-                            "name": "EU.2.2.4",
+                            "name": "EUPSOQuestion18",
                             "title": {
                                 "de": "Welche der folgenden fortgeschrittenen digitalen Technologien werden von Ihrer Einrichtung bereits eingesetzt? Bitte wählen Sie alle zutreffenden Optionen anhand der vorgegebenen Skala aus",
                                 "en": "Which of the following advanced digital technologies are already used by your organisation? Please choose all options that apply using the provided scale"
@@ -771,15 +771,15 @@ const EUDmaJSON = {
             ]
         },
         {
-            "name": "page5",
+            "name": "EUPSOPage5",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel6",
+                    "name": "EUPSOPanel7",
                     "elements": [
                         {
                             "type": "checkbox",
-                            "name": "EU.2.3.5",
+                            "name": "EUPSOQuestion19",
                             "title": {
                                 "de": "Was tut Ihre Einrichtung, um ihre Beschäftigten für die Digitalisierung zu qualifizieren und weiterzubilden? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "What does your organisation do to re-skill and up-skill its staff for digitalisation? Please select all options that apply"
@@ -838,7 +838,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "checkbox",
-                            "name": "EU.2.3.6",
+                            "name": "EUPSOQuestion20",
                             "title": {
                                 "de": "Wie bindet Ihre Einrichtung bei der Einführung neuer digitaler Lösungen ihre Beschäftigten und Endnutzer (Bürgerinnen und Bürger/Unternehmen im Falle digitaler öffentlicher Dienste) ein und befähigt sie? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "When adopting new digital solutions, how does your organisation engage and empower its staff and end-users (citizens/businesses in case of digital public services)? Please select all options that apply"
@@ -925,15 +925,15 @@ const EUDmaJSON = {
             ]
         },
         {
-            "name": "page6",
+            "name": "EUPSOPage6",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel7",
+                    "name": "EUPSOPanel8",
                     "elements": [
                         {
                             "type": "checkbox",
-                            "name": "EU.2.4.7",
+                            "name": "EUPSOQuestion21",
                             "title": {
                                 "de": "Wie werden die Daten Ihrer Einrichtung verwaltet (hinsichtlich Speicherung, Organisation, Zugriff und Nutzung)? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "How are your organisation’s data managed (i.e. stored, organised, accessed and exploited)? Please select all options that apply"
@@ -1006,7 +1006,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "checkbox",
-                            "name": "EU.2.4.8",
+                            "name": "EUPSOQuestion22",
                             "title": {
                                 "de": "Sind die Daten Ihrer Einrichtung ausreichend gesichert? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "Are your organisations’ data sufficiently secured? Please select all options that apply"
@@ -1065,15 +1065,15 @@ const EUDmaJSON = {
             ]
         },
         {
-            "name": "page7",
+            "name": "EUPSOPage7",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel8",
+                    "name": "EUPSOPanel9",
                     "elements": [
                         {
                             "type": "matrix",
-                            "name": "EU.2.5.9",
+                            "name": "EUPSOQuestion23",
                             "title": {
                                 "de": "Was unternimmt Ihre Organisation bei der Digitalisierung von Prozessen und Dienstleistungen, um Daten, Informationen und Wissen mit anderen öffentlichen Einrichtungen auszutauschen? Bitte wählen Sie alle Optionen, die für Ihre Einrichtung gelten, anhand der angegebenen Skala aus",
                                 "en": "While digitalising processes and services, what does your organization do to share data, information and knowledge with other public sector organizations? Please select all options that apply to your organisation using the provided scale"
@@ -1082,24 +1082,24 @@ const EUDmaJSON = {
                                 {
                                     "value": "Column 1",
                                     "text": {
-                                        "de": "Bereits umgesetzt",
-                                        "en": "Already implemented"
-                                    }
-                                },
-                                {
-                                    "value": "Column 2",
-                                    "text": {
                                         "de": "Nicht umgesetzt und/oder keine Umsetzungspläne",
                                         "en": "Not implemented and/or no plans to implement"
                                     }
                                 },
                                 {
-                                    "value": "Column 3",
+                                    "value": "Column 2",
                                     "text": {
                                         "de": "Plan zur Umsetzung",
                                         "en": "Plan to implement"
                                     }
-                                }
+                                },
+                                {
+                                    "value": "Column 3",
+                                    "text": {
+                                        "de": "Bereits umgesetzt",
+                                        "en": "Already implemented"
+                                    }
+                                }  
                             ],
                             "rows": [
                                 {
@@ -1225,15 +1225,15 @@ const EUDmaJSON = {
             ]
         },
         {
-            "name": "page8",
+            "name": "EUPSOPage8",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "panel9",
+                    "name": "EUPSOPanel10",
                     "elements": [
                         {
                             "type": "checkbox",
-                            "name": "EU.2.6.10",
+                            "name": "EUPSOQuestion24",
                             "title": {
                                 "de": "Wie nutzt Ihre Einrichtung digitale Technologien, um zur ökologischen Nachhaltigkeit beizutragen? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "How does your organisation make use of digital technologies to contribute to environmental sustainability? Please select all options that apply"
@@ -1306,7 +1306,7 @@ const EUDmaJSON = {
                         },
                         {
                             "type": "matrix",
-                            "name": "EU.2.6.11",
+                            "name": "EUPSOQuestion25",
                             "title": {
                                 "de": "Berücksichtigt Ihre Einrichtung bei ihren Digitalisierungsentscheidungen und digitalen Abläufen auch die Auswirkungen auf die Umwelt? Bitte bewerten Sie alle zutreffenden Optionen",
                                 "en": "Is your organisation taking into account environmental impacts in its digital choices and practices? Please grade all options that apply using this scale"
@@ -1383,7 +1383,6 @@ const EUDmaJSON = {
     ],
     "showQuestionNumbers": "off",
     "showProgressBar": "top",
-    "showPreviewBeforeComplete": "showAllQuestions",
     "widthMode": "static",
     "width": "900",
     "fitToContainer": true

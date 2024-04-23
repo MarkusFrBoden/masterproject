@@ -155,11 +155,11 @@
 <script setup lang="ts">
 import { ref, inject, computed } from 'vue';
 import type { DMA } from "../../interfaces/DMA.js"
+import type { DMM } from "../../interfaces/DMM.js"
 import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
-import { EUDmaJSON } from '../../components/EUDma_json.js'
 
 //language prefix
 const filename = 'UserDmaView'
@@ -186,6 +186,17 @@ const fetchData = async () => {
 fetchData();
 
 //create new dma
+const dmms = ref<DMM[]>([]);
+const fetchDMMs = async () => {
+  try {
+    const response = await api.get('/PublishedDmm');
+    dmms.value = response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+fetchDMMs();
+
 let newDmaTitle = "";
 let addEUDma = ref(false);
 let PostDma = ref<DMA>({
@@ -204,7 +215,7 @@ const createDma = async () => {
         PostDma.value.title = newDmaTitle;
         PostDma.value.createdFor = currentUserOrganization;
         if (addEUDma) {
-            PostDma.value.SurveyJson = EUDmaJSON
+            PostDma.value.SurveyJson = {/* EUDmaJSON */}
         };
         const response = await api.post('/Dma', PostDma.value);
         console.log('POST Response:', response.data);

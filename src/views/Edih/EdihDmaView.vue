@@ -171,7 +171,7 @@ import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
-import { EUDmaJSON } from '../../components/EUDma_json.js'
+//import { EUDmaJSON } from '../../components/EUDma_json.js'
 
 //filename for language tags
 const filename = 'EdihDmaView'
@@ -228,14 +228,13 @@ const createDma = async () => {
         PostDma.value.title = newDmaTitle;
         PostDma.value.createdFor = newDmaOrganisation.value;
         if (addEUDma.value === true) {
-            PostDma.value.SurveyJson = EUDmaJSON
+            PostDma.value.SurveyJson = {/* EUDmaJSON */}
             console.log(PostDma.value.SurveyJson)
         };
         const response = await api.post('/Dma', PostDma.value);
         console.log('POST Response:', response.data);
         showInput.value = false;
         await fetchData();
-        OrderIcons.value["updatedAt"] = true;
         OrderIcons.value["updatedAtDown"] = true;
         handleSort('updatedAt');
     } catch (error) {
@@ -343,7 +342,7 @@ const handleSort = (columnId: string) => {
   }
   OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
 }
-handleSort('updatedAt');
+handleSort('updatedAtDown');
 
 //filter
 let filterText = ref('');

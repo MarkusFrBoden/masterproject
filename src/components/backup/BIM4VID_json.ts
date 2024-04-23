@@ -1,9 +1,9 @@
-const EUDmaJSONModul1 = {
+const BIM4VID = {
     "title": "BIM4VID",
     "description": "BIM-DMM-Modul für Verkehrs-Infrastrukturbehörden in Deutschland",
     "pages": [
      {
-      "name": "page1",
+      "name": "BIM4VIDPage1",
       "elements": [
        {
         "type": "html",
@@ -12,7 +12,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "radiogroup",
-        "name": "question1",
+        "name": "BIM4VIDQuestion1",
         "title": "Welche stellte die höchste von Ihnen betreute Straßenklasse dar?",
         "description": "Der Masterplan BIM Bundesfernstraßen",
         "choices": [
@@ -34,11 +34,11 @@ const EUDmaJSONModul1 = {
       "title": "Selbsteinschätzung nach Masterplan"
      },
      {
-      "name": "page2",
+      "name": "BIM4VIDPage2",
       "elements": [
        {
         "type": "panel",
-        "name": "dimension1",
+        "name": "BIM4VIDPanel1",
         "elements": [
          {
           "type": "html",
@@ -55,7 +55,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question2",
+          "name": "BIM4VIDQuestion2",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -103,7 +103,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question3",
+          "name": "BIM4VIDQuestion3",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -151,7 +151,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question4",
+          "name": "BIM4VIDQuestion4",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -190,11 +190,11 @@ const EUDmaJSONModul1 = {
       "title": "Selbsteinschätzung nach dem Masterplan"
      },
      {
-      "name": "page3",
+      "name": "BIM4VIDPage3",
       "elements": [
        {
         "type": "panel",
-        "name": "panel2",
+        "name": "BIM4VIDPanel2",
         "elements": [
          {
           "type": "image",
@@ -206,7 +206,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question5",
+          "name": "BIM4VIDQuestion5",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -244,7 +244,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel1",
+        "name": "BIM4VIDPanel3",
         "elements": [
          {
           "type": "html",
@@ -261,7 +261,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question6",
+          "name": "BIM4VIDQuestion6",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -309,7 +309,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question7",
+          "name": "BIM4VIDQuestion7",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -347,7 +347,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel3",
+        "name": "BIM4VIDPanel4",
         "elements": [
          {
           "type": "html",
@@ -364,7 +364,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question8",
+          "name": "BIM4VIDQuestion8",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -412,7 +412,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question9",
+          "name": "BIM4VIDQuestion9",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -450,7 +450,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel4",
+        "name": "BIM4VIDPanel5",
         "elements": [
          {
           "type": "html",
@@ -467,7 +467,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question10",
+          "name": "BIM4VIDQuestion10",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -515,7 +515,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question11",
+          "name": "BIM4VIDQuestion11",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -553,7 +553,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel5",
+        "name": "BIM4VIDPanel6",
         "elements": [
          {
           "type": "html",
@@ -570,7 +570,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question12",
+          "name": "BIM4VIDQuestion12",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -618,7 +618,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question13",
+          "name": "BIM4VIDQuestion13",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -656,7 +656,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel7",
+        "name": "BIM4VIDPanel7",
         "elements": [
          {
           "type": "html",
@@ -673,7 +673,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question14",
+          "name": "BIM4VIDQuestion14",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -721,7 +721,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question15",
+          "name": "BIM4VIDQuestion15",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -759,7 +759,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel6",
+        "name": "BIM4VIDPanel8",
         "elements": [
          {
           "type": "html",
@@ -776,7 +776,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question16",
+          "name": "BIM4VIDQuestion16",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -824,7 +824,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question17",
+          "name": "BIM4VIDQuestion17",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -862,7 +862,7 @@ const EUDmaJSONModul1 = {
        },
        {
         "type": "panel",
-        "name": "panel9",
+        "name": "BIM4VIDPanel9",
         "elements": [
          {
           "type": "html",
@@ -879,7 +879,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question18",
+          "name": "BIM4VIDQuestion18",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -927,7 +927,7 @@ const EUDmaJSONModul1 = {
          },
          {
           "type": "rating",
-          "name": "question19",
+          "name": "BIM4VIDQuestion19",
           "title": " ",
           "hideNumber": true,
           "autoGenerate": false,
@@ -973,4 +973,4 @@ const EUDmaJSONModul1 = {
     "fitToContainer": true
    }
 
-export { EUDmaJSONModul1 };
+export { BIM4VID };
