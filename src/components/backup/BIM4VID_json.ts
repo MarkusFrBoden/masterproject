@@ -28,7 +28,8 @@ const BIM4VID = {
           "value": "Item 3",
           "text": "Kreisstraßen"
          }
-        ]
+        ],
+        "isRequired":true
        }
       ],
       "title": "Selbsteinschätzung nach Masterplan"
@@ -86,7 +87,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -134,7 +136,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -182,7 +185,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ]
        }
@@ -237,7 +241,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "BIM-Ziele und -Strategie"
@@ -292,7 +297,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -340,7 +346,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Struktur, Organisation und Management"
@@ -395,7 +402,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -443,7 +451,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Menschen und Unternehmenskultur"
@@ -498,7 +507,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -546,7 +556,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Regulierungen und Verträge"
@@ -601,7 +612,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -649,7 +661,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Stakeholder"
@@ -704,7 +717,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -752,7 +766,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Prozesse"
@@ -807,7 +822,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -855,7 +871,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "IT-Infrastruktur"
@@ -910,7 +927,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          },
          {
           "type": "html",
@@ -958,7 +976,8 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6
+          "rateMax": 6,
+          "isRequired":true
          }
         ],
         "title": "Technologie und Daten"
@@ -970,7 +989,8 @@ const BIM4VID = {
     "showProgressBar": "top",
     "widthMode": "static",
     "width": "80%",
-    "fitToContainer": true
+    "fitToContainer": true,
+    "questionTitlePattern": "numTitle",
    }
 
 export { BIM4VID };

@@ -89,21 +89,21 @@ const GetOrganizationInformation = {
                             },
                             "choices": [
                                 {
-                                    "value": "nationalAuthority",
+                                    "value": "Item 1",
                                     "text": {
                                         "de": "Nationale Behörde",
                                         "en": "National authority"
                                     }
                                 },
                                 {
-                                    "value": "regionalAuthority",
+                                    "value": "Item 2",
                                     "text": {
                                         "de": "Regional-/Landesbehörde",
                                         "en": "Regional authority"
                                     }
                                 },
                                 {
-                                    "value": "provinceMunicipalAuthority",
+                                    "value": "Item 3",
                                     "text": {
                                         "de": "Provinz-/Gemeindebehörde",
                                         "en": "Province/municipal authority"
@@ -388,6 +388,7 @@ const GetOrganizationInformation = {
     "showProgressBar": "top",
     "showPreviewBeforeComplete": false,
     "widthMode": "static",
+    "questionTitlePattern": "numTitle",
     "width": "900",
     "fitToContainer": true
 }

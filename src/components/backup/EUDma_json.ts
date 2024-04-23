@@ -1,6 +1,3 @@
-import imagede from "../assets/EUDma-Module_German.png"
-import imageen from "../assets/EUDma-Modules_English.png";
-
 const EUDmaJSON = {
     "locale": "de",
     "title": {
@@ -30,7 +27,9 @@ const EUDmaJSON = {
                                 "de": "Datum",
                                 "en": "Date"
                             },
-                            "inputType": "date"
+                            "inputType": "date",
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
                             "type": "text",
@@ -38,7 +37,9 @@ const EUDmaJSON = {
                             "title": {
                                 "de": "Name der vom EDIH unterstützten Einrichtung",
                                 "en": "Name of the organisation supported by the EDIH"
-                            }
+                            },
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
                             "type": "text",
@@ -46,41 +47,58 @@ const EUDmaJSON = {
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "name": "EUPSOQuestion4",
-                            "title": {
-                                "de": "Kontaktperson",
-                                "en": "Contact person"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "name": "EUPSOQuestion5",
-                            "title": {
-                                "de": "Funktion in der Einrichtung",
-                                "en": "Role in the organisation"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "name": "EUPSOQuestion6",
-                            "title": {
-                                "de": "E-Mail-Adresse",
-                                "en": "Email address"
                             },
-                            "inputType": "email"
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
-                            "type": "text",
-                            "name": "EUPSOQuestion7",
-                            "title": {
-                                "de": "Telefonnummer",
-                                "en": "Telephone:"
-                            },
-                            "inputType": "tel"
+                            "type": "panel",
+                            "name": "EUPSOPanel2",
+                            "description": "Kontaktperson",
+                            "elements": [
+                                {
+                                    "type": "text",
+                                    "name": "EUPSOQuestion4",
+                                    "title": {
+                                        "de": "Name",
+                                        "en": "Name"
+                                    },
+                                    "defaultValue": "",
+                                    "isRequired": true
+                                },
+                                {
+                                    "type": "text",
+                                    "name": "EUPSOQuestion5",
+                                    "title": {
+                                        "de": "Funktion in der Einrichtung",
+                                        "en": "Role in the organisation"
+                                    },
+                                    "defaultValue": "",
+                                    "isRequired": true
+                                },
+                                {
+                                    "type": "text",
+                                    "name": "EUPSOQuestion6",
+                                    "title": {
+                                        "de": "E-Mail-Adresse",
+                                        "en": "Email address"
+                                    },
+                                    "inputType": "email",
+                                    "defaultValue": "",
+                                    "isRequired": true
+                                },
+                                {
+                                    "type": "text",
+                                    "name": "EUPSOQuestion7",
+                                    "title": {
+                                        "de": "Telefonnummer",
+                                        "en": "Telephone:"
+                                    },
+                                    "inputType": "tel",
+                                    "defaultValue": "",
+                                    "isRequired": true
+                                },
+                            ]
                         },
                         {
                             "type": "text",
@@ -89,7 +107,9 @@ const EUDmaJSON = {
                                 "de": "Website",
                                 "en": "Website"
                             },
-                            "inputType": "url"
+                            "inputType": "url",
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
                             "type": "radiogroup",
@@ -127,7 +147,9 @@ const EUDmaJSON = {
                                         "en": "Other"
                                     }
                                 }
-                            ]
+                            ],
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
                             "type": "radiogroup",
@@ -158,7 +180,9 @@ const EUDmaJSON = {
                                         "en": "Large-size (250 or more)"
                                     }
                                 }
-                            ]
+                            ],
+                            "defaultValue": "",
+                            "isRequired": true
                         },
                         {
                             "type": "multipletext",
@@ -167,6 +191,13 @@ const EUDmaJSON = {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
                             },
+                            "defaultValue": {
+                                "text1": " ",
+                                "text2": " ",
+                                "text3": " ",
+                                "text4": " "
+                            },
+                            "isRequired": true,
                             "items": [
                                 {
                                     "name": "text1",
@@ -218,11 +249,12 @@ const EUDmaJSON = {
                 },
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel2",
+                    "name": "EUPSOPanel3",
                     "elements": [
                         {
                             "type": "panel",
-                            "name": "EUPSOPanel3",
+                            "name": "EUPSOPanel4",
+                            "isRequired": true,
                             "elements": [
                                 {
                                     "type": "radiogroup",
@@ -312,6 +344,7 @@ const EUDmaJSON = {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"
                                     },
+                                    "isRequired": true,
                                     "choices": [
                                         {
                                             "value": "Item 1",
@@ -413,14 +446,14 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel4",
+                    "name": "EUPSOPanel5",
                     "elements": [
                         {
                             "type": "image",
                             "name": "Digital Maturity Assessment Framework for Public Sector Organisations (PSOs)",
                             "imageLink": {
-                                "de": imagede,
-                                "en": imageen
+                                "de": "/masterproject/backend/uploads/1713787799222-EU-DMA-PSO-M2.jpg",
+                                "en": "/masterproject/backend/uploads/1713787799223-EU-DMA-PSO-M2.jpg"
                             },
                             "altText": "Source: EC JRC own elaboration",
                             "imageHeight": 330,
@@ -443,7 +476,7 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel5",
+                    "name": "EUPSOPanel6",
                     "elements": [
                         {
                             "type": "checkbox",
@@ -452,6 +485,7 @@ const EUDmaJSON = {
                                 "de": "Welche Vorkehrungen wurden getroffen, um Ihre Einrichtung auf die (weitere) Digitalisierung vorzubereiten? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "In which of the following ways is your organisation prepared for (more) digitalisation? Please select all options that apply"
                             },
+                            "isRequired": true,
                             "choices": [
                                 {
                                     "value": "Item 1",
@@ -499,7 +533,7 @@ const EUDmaJSON = {
                                     "value": "Item 7",
                                     "text": {
                                         "de": "Interne und externe operative Prozesse können angepasst werden, wenn die Digitalisierung dies erfordert",
-                                        "en": "Internal and external operational processes can be adapted if required by digitalisation"
+                                        "en": "Internal and external operational processes can be adapted if isRequired by digitalisation"
                                     }
                                 },
                                 {
@@ -532,19 +566,20 @@ const EUDmaJSON = {
                                 "de": "In welchen der folgenden operativen Bereiche hat Ihre Einrichtung bereits in die Digitalisierung investiert, und in welchen Bereichen plant sie, in Zukunft zu investieren? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "In which of the following operational areas has your organisation already invested in digitalisation and in which ones does it plan to invest in the future? Please select all options that apply"
                             },
+                            "isRequired": true,
                             "columns": [
                                 {
                                     "name": "Column 1",
                                     "title": {
-                                        "de": "Investition getätigt",
-                                        "en": "Already invested"
+                                        "de": "Investition geplant",
+                                        "en": "Plan to invest"
                                     }
                                 },
                                 {
                                     "name": "Column 2",
                                     "title": {
-                                        "de": "(weitere) Investition geplant",
-                                        "en": "(further) Plan to invest"
+                                        "de": "Investition getätigt",
+                                        "en": "Already invested"
                                     }
                                 }
                             ],
@@ -621,7 +656,7 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel6",
+                    "name": "EUPSOPanel7",
                     "elements": [
                         {
                             "type": "checkbox",
@@ -630,6 +665,7 @@ const EUDmaJSON = {
                                 "de": "Welche der folgenden digitalen Technologien und Lösungen werden von Ihrer Einrichtung bereits eingesetzt? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "Which of the following digital technologies and solutions are already used by your organisation? Please select all options that apply"
                             },
+                            "isRequired": true,
                             "choices": [
                                 {
                                     "value": "Item 1",
@@ -697,64 +733,119 @@ const EUDmaJSON = {
                             ]
                         },
                         {
-                            "type": "checkbox",
+                            "type": "matrixdropdown",
                             "name": "EUPSOQuestion18",
                             "title": {
                                 "de": "Welche der folgenden fortgeschrittenen digitalen Technologien werden von Ihrer Einrichtung bereits eingesetzt? Bitte wählen Sie alle zutreffenden Optionen anhand der vorgegebenen Skala aus",
                                 "en": "Which of the following advanced digital technologies are already used by your organisation? Please choose all options that apply using the provided scale"
                             },
+                            "isRequired": true,
+                            "columns": [
+                                {
+                                    "name": "Column 1",
+                                    "title": {
+                                        "de": "Skala",
+                                        "en": "Scale"
+                                    }
+                                }
+                            ],
                             "choices": [
                                 {
                                     "value": "Item 1",
+                                    "text": {
+                                        "de": "0-Nicht genutzt",
+                                        "en": "0-Not used"
+                                    }
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": {
+                                        "de": "1-In Abwägung",
+                                        "en": "1-Consider to use"
+                                    }
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": {
+                                        "de": "2-Pilotprojekt",
+                                        "en": "2-Prototyping"
+                                    }
+                                },
+                                {
+                                    "value": "Item 4",
+                                    "text": {
+                                        "de": "3-Testen",
+                                        "en": "3-Testing"
+                                    }
+                                },
+                                {
+                                    "value": "Item 5",
+                                    "text": {
+                                        "de": "4-Implementierung",
+                                        "en": "4-Implementing"
+                                    }
+                                },
+                                {
+                                    "value": "Item 6",
+                                    "text": {
+                                        "de": "5-Operativ",
+                                        "en": "5-Operational"
+                                    }
+                                }
+                            ],
+                            "cellType": "radiogroup",
+                            "rows": [
+                                {
+                                    "value": "Row 1",
                                     "text": {
                                         "de": "Künstliche Intelligenz (z. B. maschinelles Lernen, Deep Learning; Experten- und regelbasierte Systeme; Cognitive Computing, prädiktive Analytik; robotergestützte Prozessautomatisierung; Sprachdatenverarbeitung, Textauswertung, maschinelles Sehen)",
                                         "en": "Artificial Intelligence (e.g. Machine learning, Deep learning; Expert and Rule based systems; Cognitive computing, predictive analytics; Robotic process automation; Natural Language Processing, Text Mining, Computer Vision)"
                                     }
                                 },
                                 {
-                                    "value": "Item 2",
+                                    "value": "Row 2",
                                     "text": {
                                         "de": "Kommunikationstechnologien (z. B. 5G-Netze und Handgeräte; Software-definierte Netze)",
                                         "en": "Communication Technologies (e.g. 5G Networks and Handheld Devices; Software Defined Networks)"
                                     }
                                 },
                                 {
-                                    "value": "Item 3",
+                                    "value": "Row 3",
                                     "text": {
                                         "de": "Recheninfrastrukturen (z. B. Hochleistungsrechnen; Cloud-Computing; Edge-Computing)",
                                         "en": "Computing Infrastructures (e.g. High Performance Computing; Cloud Computing; Edge Computing)"
                                     }
                                 },
                                 {
-                                    "value": "Item 4",
+                                    "value": "Row 4",
                                     "text": {
                                         "de": "Distributed-Ledger-Technologien (z. B. Blockchain; sonstige Distributed-Ledger-Technologien)",
                                         "en": "Distributed Ledger Technologies (e.g. Blockchain; Other Distributed Ledger Technologies)"
                                     }
                                 },
                                 {
-                                    "value": "Item 5",
+                                    "value": "Row 5",
                                     "text": {
                                         "de": "Digitale Identität und Sicherheit (z. B. Firewall und Protokolle; Antiviren- und Vulnerabilitätsscanner; biometrisches Screening; Cloud-orientierte Cybersicherheit; fortgeschrittene Benutzeranalyse; mobile Identifizierung; Rahmen für digitale Identität)",
                                         "en": "Digital Identity and Security (e.g. Firewall and Protocols; Antivirus and Vulnerability Scanners; Biometric Screening; Cloud-oriented Cybersecurity; Advanced User Analytics; Mobile ID; Digital Identity Frameworks)"
                                     }
                                 },
                                 {
-                                    "value": "Item 6",
+                                    "value": "Row 6",
                                     "text": {
                                         "de": "Immersive Technologien (z. B. erweiterte Realität; virtuelle Realität)",
                                         "en": "Immersive technologies (e.g. Augmented Reality; Virtual Reality)"
                                     }
                                 },
                                 {
-                                    "value": "Item 7",
+                                    "value": "Row 7",
                                     "text": {
                                         "de": "Internet der Dinge und intelligente Geräte (z. B. Mobilgeräte, am Körper getragene Geräte (Wearables) und Sensoren; Plattformen für das Internet der Dinge)",
                                         "en": "Internet of things and Smart Devices (e.g. Mobile Devices, Wearables and Sensors; Internet of Things Platforms)"
                                     }
                                 },
                                 {
-                                    "value": "Item 8",
+                                    "value": "Row 8",
                                     "text": {
                                         "de": "Software und Servicetechnologien (z. B. API, Webdienste, Mikrodienste einschließlich Register und Marktplätze; Enterprise-Service-Bus-Technologien und Dienstprogramme für staatliche Dienstleistungen)",
                                         "en": "Software and Service Technologies (e.g. APIs, Web Services, Microservices including Registries and Marketplace; Enterprise Service Bus Technologies and Government Service Utilities)"
@@ -775,11 +866,12 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel7",
+                    "name": "EUPSOPanel8",
                     "elements": [
                         {
                             "type": "checkbox",
                             "name": "EUPSOQuestion19",
+                            "isRequired": true,
                             "title": {
                                 "de": "Was tut Ihre Einrichtung, um ihre Beschäftigten für die Digitalisierung zu qualifizieren und weiterzubilden? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "What does your organisation do to re-skill and up-skill its staff for digitalisation? Please select all options that apply"
@@ -839,6 +931,7 @@ const EUDmaJSON = {
                         {
                             "type": "checkbox",
                             "name": "EUPSOQuestion20",
+                            "isRequired": true,
                             "title": {
                                 "de": "Wie bindet Ihre Einrichtung bei der Einführung neuer digitaler Lösungen ihre Beschäftigten und Endnutzer (Bürgerinnen und Bürger/Unternehmen im Falle digitaler öffentlicher Dienste) ein und befähigt sie? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "When adopting new digital solutions, how does your organisation engage and empower its staff and end-users (citizens/businesses in case of digital public services)? Please select all options that apply"
@@ -929,11 +1022,12 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel8",
+                    "name": "EUPSOPanel9",
                     "elements": [
                         {
                             "type": "checkbox",
                             "name": "EUPSOQuestion21",
+                            "isRequired": true,
                             "title": {
                                 "de": "Wie werden die Daten Ihrer Einrichtung verwaltet (hinsichtlich Speicherung, Organisation, Zugriff und Nutzung)? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "How are your organisation’s data managed (i.e. stored, organised, accessed and exploited)? Please select all options that apply"
@@ -1007,6 +1101,7 @@ const EUDmaJSON = {
                         {
                             "type": "checkbox",
                             "name": "EUPSOQuestion22",
+                            "isRequired": true,
                             "title": {
                                 "de": "Sind die Daten Ihrer Einrichtung ausreichend gesichert? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "Are your organisations’ data sufficiently secured? Please select all options that apply"
@@ -1069,38 +1164,33 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel9",
+                    "name": "EUPSOPanel10",
                     "elements": [
                         {
-                            "type": "matrix",
+                            "type": "matrixdropdown",
                             "name": "EUPSOQuestion23",
+                            "isRequired": true,
                             "title": {
                                 "de": "Was unternimmt Ihre Organisation bei der Digitalisierung von Prozessen und Dienstleistungen, um Daten, Informationen und Wissen mit anderen öffentlichen Einrichtungen auszutauschen? Bitte wählen Sie alle Optionen, die für Ihre Einrichtung gelten, anhand der angegebenen Skala aus",
                                 "en": "While digitalising processes and services, what does your organization do to share data, information and knowledge with other public sector organizations? Please select all options that apply to your organisation using the provided scale"
                             },
                             "columns": [
                                 {
-                                    "value": "Column 1",
-                                    "text": {
-                                        "de": "Nicht umgesetzt und/oder keine Umsetzungspläne",
-                                        "en": "Not implemented and/or no plans to implement"
-                                    }
-                                },
-                                {
-                                    "value": "Column 2",
-                                    "text": {
+                                    "name": "Column 1",
+                                    "title": {
                                         "de": "Plan zur Umsetzung",
                                         "en": "Plan to implement"
                                     }
                                 },
                                 {
-                                    "value": "Column 3",
-                                    "text": {
+                                    "name": "Column 2",
+                                    "title": {
                                         "de": "Bereits umgesetzt",
                                         "en": "Already implemented"
                                     }
-                                }  
+                                }
                             ],
+                            "cellType": "boolean",
                             "rows": [
                                 {
                                     "value": "Row 1",
@@ -1229,11 +1319,12 @@ const EUDmaJSON = {
             "elements": [
                 {
                     "type": "panel",
-                    "name": "EUPSOPanel10",
+                    "name": "EUPSOPanel11",
                     "elements": [
                         {
                             "type": "checkbox",
                             "name": "EUPSOQuestion24",
+                            "isRequired": true,
                             "title": {
                                 "de": "Wie nutzt Ihre Einrichtung digitale Technologien, um zur ökologischen Nachhaltigkeit beizutragen? Bitte wählen Sie alle zutreffenden Optionen aus",
                                 "en": "How does your organisation make use of digital technologies to contribute to environmental sustainability? Please select all options that apply"
@@ -1307,6 +1398,7 @@ const EUDmaJSON = {
                         {
                             "type": "matrix",
                             "name": "EUPSOQuestion25",
+                            "isRequired": true,
                             "title": {
                                 "de": "Berücksichtigt Ihre Einrichtung bei ihren Digitalisierungsentscheidungen und digitalen Abläufen auch die Auswirkungen auf die Umwelt? Bitte bewerten Sie alle zutreffenden Optionen",
                                 "en": "Is your organisation taking into account environmental impacts in its digital choices and practices? Please grade all options that apply using this scale"
@@ -1385,7 +1477,8 @@ const EUDmaJSON = {
     "showProgressBar": "top",
     "widthMode": "static",
     "width": "900",
-    "fitToContainer": true
+    "fitToContainer": true,
+    "questionTitlePattern": "numTitle",
 };
 
 export { EUDmaJSON };

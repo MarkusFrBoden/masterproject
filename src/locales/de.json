@@ -72,6 +72,8 @@
       "title": "Neues DMA erstellen",
       "name": "Bezeichnung: ",
       "organization": "Organisation: ",
+      "loadDMM":"Welche DMMs sollen geladen werden?",
+      "add":" anfügen? ",
       "cancel": "Abbrechen",
       "create": "Erstellen"
     },
@@ -101,8 +103,8 @@
     "editedAt": "Bearbeitet am: ",
     "button": {
       "editDma": "DMA bearbeiten",
-      "viewDma": "DMA-Vorschau",
-      "sendDma": "DMA versenden"
+      "viewDma": "DMA durchführen",
+      "DmaAnswers": "DMA-Antworten"
     }
   },
   "EdihDmmView": {
@@ -246,6 +248,8 @@
       "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
       "name": "Bezeichnung: ",
       "organization": "Organisation: ",
+      "loadDMM":"Welche DMMs sollen geladen werden?",
+      "add":" anfügen? ",
       "cancel": "Abbrechen",
       "delete": "Löschen"
     },
@@ -266,7 +270,8 @@
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
     "button": {
-      "viewDma": "DMA-Vorschau"
+      "viewDma": "DMA durchführen",
+      "DmaAnswers": "DMA-Antworten"
     }
   },
   "UserDmmView": {

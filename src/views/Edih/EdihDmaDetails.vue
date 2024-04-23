@@ -21,14 +21,14 @@
                 {{ $t(filename + '.button.viewDma') }}
             </button>
             <button class="btn btn-outline-secondary">
-                {{ $t(filename + '.button.sendDma') }}
+                {{ $t(filename + '.button.DmaAnswers') }}
             </button>
         </div>
         <br>
 
         <!-- survey js components for edit and view dma  -->
         <div v-if="showSurvey">
-            <SurveyComp :survey="dmaDetails" />
+            <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dmaDetails" />
         </div>
         <div v-if="showSurveyCreator">
             <SurveyCreatorComp @triggerRefresh="fetchData" :survey="dmaDetails" :type="'DMA'" />
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import type { DMA } from "../../interfaces/DMA.js"
 import SurveyComp from "../../components/SurveyComp.vue";
 import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
@@ -49,10 +49,12 @@ import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
 //filename for language tags
 const filename = 'EdihDmaDetails'
 
+//enable api via global variable
+const api = inject('api') as any;
+
 //show and hide elements
 let showSurvey = ref(false);
 let showSurveyCreator = ref(false);
-
 
 //accept props from EdihDmaView with dma id
 const props = defineProps({
@@ -63,18 +65,46 @@ const props = defineProps({
 });
 
 //get start data
+let currentUserName = localStorage.getItem('userName') || '';
 const dmaDetails = ref<DMA>();
 const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:3000/DmaById/' + props.id);
-        dmaDetails.value = await response.json();
+        const response = await api.get('/DmaById/' + props.id);
+        dmaDetails.value = await response.data;
     } catch (err: any) {
         console.error(err.message);
     }
 };
 fetchData();
 
+//patch with new dma answers
+const handleDmaCompleted = async (results: any) => {
+    let data = [];
+    if (dmaDetails.value?.responses) {
+        for (const response of dmaDetails.value.responses) {
+            data.push(response);
+        }
+    }
+    let newResponse = {
+        "responseDate": new Date(),
+        "responseClient": currentUserName,
+        "data": results
+    };
+    data.push(newResponse);
+    let patchResponses = {
+        responses: data
+    };
+    try {
+        if (dmaDetails.value) {
+            const response = await api.patch('/DmaById/' + dmaDetails.value._id, patchResponses);
+            console.log('dmm patch success:', response.data);
+            fetchData()
+        } else { console.error('dmm null or undefined'); }
+    } catch (err) {
+        console.error('Error patchching data:', err);
+    }
+};
+
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

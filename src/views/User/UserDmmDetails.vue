@@ -137,7 +137,7 @@ const props = defineProps({
 const dmm = ref<DMM>();
 const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:3000/DmmById/' + props.id);
+        const response = await api.get('/DmmById/' + props.id);
         const data: DMM = await response.json();
         dmm.value = data;
     } catch (err: any) {

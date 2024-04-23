@@ -45,10 +45,10 @@
             <br>
             <!-- create dma from DMM  -->
             <div v-if="dmms.length > 0">
-                Welche DMMs sollen geladen werden?
+                {{$t(filename + '.createInput.loadDMM') }}
                 <br>
                 <div v-for="dmm in dmms" :key="dmm._id?.toString()">
-                    {{ dmm.akronym }} anfügen? <input type="checkbox" :value="{ id: dmm._id, akronym: dmm.akronym }"
+                    {{ dmm.akronym }} {{$t(filename + '.createInput.add') }} <input type="checkbox" :value="{ id: dmm._id, akronym: dmm.akronym }"
                         v-model="selectedDmms">
                 </div>
             </div>
@@ -178,7 +178,6 @@ import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
-//import { EUDmaJSON } from '../../components/EUDma_json.js'
 
 //filename for language tags
 const filename = 'EdihDmaView'
@@ -254,8 +253,8 @@ const createDma = async () => {
         if (selectedDmms.value.length > 0) {
             if (selectedDmms.value.length === 1) {
                 try {
-                    const response = await fetch('http://localhost:3000/DmmById/' + selectedDmms.value[0].id);
-                    const data: DMM = await response.json();
+                    const response = await api.get('/DmmById/' + selectedDmms.value[0].id);
+                    const data: DMM = await response.data;
                     PostDma.value.SurveyJson = data.SurveyJson;
                 } catch (error) {
                     console.error('Error fetching data:', error);
@@ -268,8 +267,8 @@ const createDma = async () => {
                 });
                 for (const dmm of selectedDmms.value) {
                     try {
-                        const response = await fetch('http://localhost:3000/DmmById/' + dmm.id);
-                        const data: DMM = await response.json();
+                        const response = await api.get('/DmmById/' + dmm.id);
+                        const data: DMM = await response.data;
                         if (PostDma.value.SurveyJson.pages) {
                                 PostDma.value.SurveyJson.pages.push(...data.SurveyJson.pages);
                         } else {
@@ -287,8 +286,6 @@ const createDma = async () => {
         console.log('POST Response:', response.data);
         showInput.value = false;
         await fetchData();
-        //OrderIcons.value["updatedAt"] = true;
-        //handleSort('updatedAtDown');
     } catch (error) {
         console.error('Error fetching data:', error);
     }

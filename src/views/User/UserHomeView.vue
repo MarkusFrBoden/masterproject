@@ -109,12 +109,11 @@
 
 <script setup lang="ts">
 import { ref, inject, watch } from 'vue';
-import type { User } from "../../interfaces/User.js"
 import SurveyComp from "../../components/SurveyComp.vue";
-import { GetOrganizationInformation } from '../../components/GetOrganizationInformation.js'
-import type { DMA } from "../../interfaces/DMA.js"
 import { useI18n } from 'vue-i18n';
+import { GetOrganizationInformation } from '../../components/CreateOrgaInformation_json.js'
 import type { languageMapping } from "../../interfaces/languageMapping.js"
+import type { User } from "../../interfaces/User.js"
 
 
 //filename for language tags
