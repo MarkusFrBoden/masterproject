@@ -32,7 +32,7 @@
   <!-- create dmm interface  -->
   <div v-if="showInput" class="overlay">
     <div class="input-container">
-      <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="createDmmInterface || {}" />
+      <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="createDmmInterface || {}" surveyMode="edit"/>
       <br><br>
       <div class="button-group">
         <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t(filename + '.createInput.cancel')

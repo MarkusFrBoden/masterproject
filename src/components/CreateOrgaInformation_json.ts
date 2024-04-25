@@ -18,12 +18,12 @@ const GetOrganizationInformation = {
                     "elements": [
                         {
                             "type": "text",
-                            "name": "EU-1-1-3",
+                            "name": "EUPSOQuestion3",
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
                             },
-                            "defaultValue": "" 
+                            "defaultValue": ""
                         },
                         {
                             "type": "panel",
@@ -32,57 +32,57 @@ const GetOrganizationInformation = {
                             "elements": [
                                 {
                                     "type": "text",
-                                    "name": "EU-1-1-4",
+                                    "name": "EUPSOQuestion4",
                                     "title": {
                                         "de": "Name",
                                         "en": "Name"
                                     },
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU-1-1-5",
+                                    "name": "EUPSOQuestion5",
                                     "title": {
                                         "de": "Funktion in der Einrichtung",
                                         "en": "Role in the organisation"
                                     },
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU-1-1-6",
+                                    "name": "EUPSOQuestion6",
                                     "title": {
                                         "de": "E-Mail-Adresse",
                                         "en": "Email address"
                                     },
                                     "inputType": "email",
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EU-1-1-7",
+                                    "name": "EUPSOQuestion7",
                                     "title": {
                                         "de": "Telefonnummer",
                                         "en": "Telephone:"
                                     },
                                     "inputType": "tel",
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 },
                             ]
                         },
                         {
                             "type": "text",
-                            "name": "EU-1-1-8",
+                            "name": "EUPSOQuestion8",
                             "title": {
                                 "de": "Website",
                                 "en": "Website"
                             },
                             "inputType": "url",
-                            "defaultValue": "" 
+                            "defaultValue": ""
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU-1-1-9",
+                            "name": "EUPSOQuestion9",
                             "title": {
                                 "de": "Art der öffentlichen Einrichtung",
                                 "en": "Type of public sector organisation"
@@ -117,11 +117,11 @@ const GetOrganizationInformation = {
                                     }
                                 }
                             ],
-                            "defaultValue": "" 
+                            "defaultValue": ""
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EU-1-1-10",
+                            "name": "EUPSOQuestion10",
                             "title": {
                                 "de": "Zahl der Beschäftigten der Einrichtung",
                                 "en": "Organisation’s staff size"
@@ -149,21 +149,16 @@ const GetOrganizationInformation = {
                                     }
                                 }
                             ],
-                            "defaultValue": "" 
+                            "defaultValue": ""
                         },
                         {
                             "type": "multipletext",
-                            "name": "EU-1-1-11",
+                            "name": "EUPSOQuestion11",
                             "title": {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
                             },
-                            "defaultValue": {
-                                "text1": "",
-                                "text2": "",
-                                "text3": "",
-                                "text4": ""
-                            },
+                            "defaultValue": {},
                             "items": [
                                 {
                                     "name": "text1",
@@ -207,7 +202,7 @@ const GetOrganizationInformation = {
                     "elements": [
                         {
                             "type": "panel",
-                            "name": "EU-1-2-13",
+                            "name": "panel3",
                             "title": {
                                 "de": "Zu welchem der folgenden großen Regierungsbereiche gehört Ihre Einrichtung? Bitte wählen Sie bis zu zwei Optionen aus",
                                 "en": "In which of the following government broad areas does your organisation belong2? Please select up to two options"
@@ -215,7 +210,7 @@ const GetOrganizationInformation = {
                             "elements": [
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU-1-2-13-1",
+                                    "name": "EUPSOQuestion13",
                                     "title": {
                                         "de": "Primär (eine Option obligatorisch)",
                                         "en": "Primary (one mandatory)"
@@ -293,11 +288,11 @@ const GetOrganizationInformation = {
                                         }
                                     ],
                                     "showOtherItem": true,
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 },
                                 {
                                     "type": "radiogroup",
-                                    "name": "EU-1-2-13-2",
+                                    "name": "EUPSOQuestion14",
                                     "title": {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"
@@ -375,7 +370,7 @@ const GetOrganizationInformation = {
                                         }
                                     ],
                                     "showOtherItem": true,
-                                    "defaultValue": "" 
+                                    "defaultValue": ""
                                 }
                             ]
                         }

@@ -138,7 +138,7 @@ const dmm = ref<DMM>();
 const fetchData = async () => {
     try {
         const response = await api.get('/DmmById/' + props.id);
-        const data: DMM = await response.json();
+        const data: DMM = await response.data;
         dmm.value = data;
     } catch (err: any) {
         console.error(err.message);
@@ -149,47 +149,5 @@ fetchData();
 </script>
 
 <style scoped>
-.box {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 0 auto 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    width: 90%;
-}
-
-.dark .box {
-    background: #020b3d;
-}
-
-.box h6 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.line {
-    border-top: 1px solid #000;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    z-index: 1;
-}
-
-.dark .line {
-    border-top: 2px solid #9b9b9b;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    z-index: 1;
-}
-
-.image {
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 800px;
-    height: auto;
-}
 
 </style>

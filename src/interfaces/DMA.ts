@@ -6,7 +6,8 @@ export interface DMA {
     createdAt: Date;
     updatedBy: String;
     updatedAt: Date;
-    responses: Array<{ [key: string]: any }>;
+    euDMA:String;
+    responses: any;
     SurveyJson: any;
     [key: string]: any;
 }

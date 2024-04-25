@@ -28,7 +28,7 @@
 
         <!-- survey js components for edit and view dma  -->
         <div v-if="showSurvey">
-            <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dmaDetails" />
+            <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dmaDetails" surveyMode="edit"/>
         </div>
         <div v-if="showSurveyCreator">
             <SurveyCreatorComp @triggerRefresh="fetchData" :survey="dmaDetails" :type="'DMA'" />

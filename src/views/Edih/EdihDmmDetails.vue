@@ -141,7 +141,7 @@
         <!-- update dmm information interface  -->
         <div v-if="showInput" class="overlay">
             <div class="input-container">
-                <SurveyComp @surveyCompleted="handleDmmPatch" :survey="updateDmmQuestions || {}" />
+                <SurveyComp @surveyCompleted="handleDmmPatch" :survey="updateDmmQuestions || {}" surveyMode="edit"/>
             </div>
             <div class="button-container">
                 <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">
@@ -152,7 +152,7 @@
         <!-- view and update dmm question interfaces  -->
         <div v-if="showSurvey" class="overlay">
             <div class="input-container">
-                <SurveyComp :survey="dmm" />
+                <SurveyComp :survey="dmm" surveyMode="edit"/>
             </div>
             <div class="button-container">
                 <button class="btn btn-outline-secondary custom-button2" @click="showSurvey = false;">

@@ -243,7 +243,8 @@ let PostDma = ref<DMA>({
     "updatedBy": "",
     "updatedAt": new Date(),
     "responses": [],
-    "SurveyJson": {}
+    "SurveyJson": {},
+    "euDMA":"false"
 });
 
 const createDma = async () => {

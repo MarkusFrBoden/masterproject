@@ -129,6 +129,30 @@ router.get('/OrganizationOverview', (req, res) => {
         });
 });
 
+
+//Patch
+router.patch('/OrganizationDmaStatusById/:id', (req, res) => {
+    const updates = req.body
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('users')
+            .updateOne(
+                { _id: new ObjectId(req.params.id) },
+                { $set: { "organization.euDmaStatus": updates.organization.euDmaStatus } }
+            )
+            .then(result => {
+                res.status(200).json(result);
+            })
+            .catch(() => {
+                res.status(500).json({ error: 'Could not update the document' });
+            });
+    } else {
+        res.status(500).json({ error: 'Not a valid doc id' })
+    }
+})
+
+
+//Post
 router.post('/deleteMultipleOrganizations', async (req, res) => {
     const orgaNames = req.body.orgaNames;
     if (!orgaNames || !Array.isArray(orgaNames)) {
@@ -164,20 +188,29 @@ router.get('/DmaOverview', (req, res) => {
         })
 })
 
-router.get('/DmaByOrganization/:organizationName', (req, res) => {
-    let dmas = []
+router.get('/DmaByOrganization/:organizationName', async (req, res) => {
+    try {
+        const dmas = await db.collection('DMAs')
+            .find({ createdFor: req.params.organizationName })
+            .sort({ createdAt: 1 })
+            .toArray();
 
-    db.collection('DMAs')
-        .find({ createdFor: req.params.organizationName })
-        .sort({ createdAt: 1 })
-        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt }))
-        .then(() => {
-            res.status(200).json(dmas)
-        })
-        .catch(() => {
-            res.status(500).json({ error: 'Could not fetch the documents' })
-        })
-})
+        const formattedDmas = dmas.map(dma => ({
+            _id: dma._id,
+            title: dma.title,
+            createdBy: dma.createdBy,
+            createdAt: dma.createdAt,
+            updatedBy: dma.updatedBy,
+            updatedAt: dma.updatedAt,
+            euDMA: dma.euDMA
+        }));
+
+        res.status(200).json(formattedDmas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Could not fetch the documents' });
+    }
+}); 
 
 router.get('/DmaById/:id', (req, res) => {
     if (ObjectId.isValid(req.params.id)) {

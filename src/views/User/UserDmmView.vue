@@ -4,7 +4,7 @@
   </div>
   <br>
 
-  <!-- buttons for create and delete dmm  -->
+  <!-- buttons for page navigation  -->
   <div>
     <button class="btn" :class="{ 'btn-outline-secondary': !showDmm, 'btn-secondary': showDmm }"
       @click="showDmm = true">

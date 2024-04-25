@@ -212,7 +212,7 @@
       "notAllInformation": "Nicht alle Informationen vorhanden!"
     },
     "DmaInformations": {
-      "title": "Informationen über durchgeführte DMAs",
+      "title": "Informationen über durchgeführte EU-DMAs",
       "overview": {
         "title": "Übersicht"
       },
@@ -241,6 +241,13 @@
     "createInput": {
       "title": "Neues DMA erstellen",
       "name": "Bezeichnung: ",
+      "loadDMM":"Welche DMMs sollen geladen werden?",
+      "add":" anfügen? ",
+      "euDma":"Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
+      "nextEuDma":"Ihr nächstes DMA: ",
+      "euDmaYes1":"Ja, ",
+      "euDmaYes2":" für die EU durchführen",
+      "euDmaNo":"Nein, ich möchte das DMA intern durchführen",
       "cancel": "Abbrechen",
       "create": "Erstellen"
     },
@@ -255,11 +262,12 @@
     },
     "list": {
       "column0": "Löschen",
-      "column1": "Bezeichnung",
-      "column2": "Ersteller",
-      "column3": "Erstellt am",
-      "column4": "Bearbeitet von",
-      "column5": "Bearbeitet am"
+      "column1": "EU-DMA",
+      "column2": "Bezeichnung",
+      "column3": "Ersteller",
+      "column4": "Erstellt am",
+      "column5": "Bearbeitet von",
+      "column6": "Bearbeitet am"
     }
   },
   "UserDmaDetails": {
@@ -270,8 +278,23 @@
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
     "button": {
-      "viewDma": "DMA durchführen",
-      "DmaAnswers": "DMA-Antworten"
+      "DmaAnswers": "Antworten anschauen",
+      "startDMA":"DMA starten",
+      "stopDMA":"Abbrechen(Fortschritt geht verloren!)",
+      "closeEuAnswers":"Verlassen"
+    },
+    "results":{
+      "euAnswers":"EU-Ergebnisse",
+      "bim4vidAnswers":"BIM4VID-Ergebnisse",
+      "overview":"Dimensionsübersicht",
+      "title":"-Ergebnis",
+      "dimension1":"Digitale Strategie und Investitionen",
+      "dimension2":"Bereitschaft für den digitalen Wandel",
+      "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
+      "dimension4":"Datenverwaltung und -sicherheit",
+      "dimension5":"Interoperabilität",
+      "dimension6":"Grüne Digitalisierung",
+      "text":"Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
     }
   },
   "UserDmmView": {

@@ -57,7 +57,6 @@
           </div>
         </div>
       </div>
-      <br>
 
       <!-- show message for missing organization information  -->
       <div v-if="allInformation === false">
@@ -73,7 +72,7 @@
       <!-- edit organization interfact -->
       <div v-if="showInput" class="overlay">
         <div class="input-container">
-          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="organizationQuestions || {}" />
+          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="organizationQuestions || {}" surveyMode="edit" />
           <br>
           <div class="button-group">
             <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
@@ -89,7 +88,19 @@
 
       <div class="rightbox">
         <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-        <br><br><br><br><br><br><br><br>
+
+        <div v-if="ExistingUser?.organization.euDmaStatus !== '0'" class="col">
+          <div v-if="ExistingUser?.organization.euDmaStatus === 'T0'">
+            <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
+          </div>
+          <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T1'">
+            <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
+          </div>
+          <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T2'">
+            <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
+          </div>
+        </div>
+        <br><br>
       </div>
       <br>
       <div class="rightbox">
@@ -197,25 +208,38 @@ organizationQuestions.value = {
 };
 organizationQuestions.value.SurveyJson = GetOrganizationInformation;
 
+// rekursive function to assign defaultValues to element names
+function updateDefaultValueByName(element: any, name: string, newValue: any): void {
+  if (element.name === name) {
+    element.defaultValue = newValue;
+  } else if (element.elements) {
+    for (const nestedElement of element.elements) {
+      updateDefaultValueByName(nestedElement, name, newValue);
+    }
+  }
+}
+
 //use existing organization information for default values in questionaire
 watch([ExistingUser, organizationQuestions], ([user]) => {
   if (user && organizationQuestions.value) {
     allInformation.value = checkValues(user.organization);
-    //organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.name;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[0].defaultValue = user.organization?.identificationNumber;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[0].defaultValue = user.organization?.contactPerson.name;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[1].defaultValue = user.organization?.contactPerson.role;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[2].defaultValue = user.organization?.contactPerson.email;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[1].elements[3].defaultValue = user.organization?.contactPerson.telephone;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[2].defaultValue = user.organization?.website;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[3].defaultValue = user.organization?.type;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[4].defaultValue = user.organization?.size;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text1 = user.organization?.address.street;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text2 = user.organization?.address.postalcode;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text3 = user.organization?.address.city;
-    organizationQuestions.value.SurveyJson.pages[0].elements[0].elements[5].defaultValue.text4 = user.organization?.address.country;
-    organizationQuestions.value.SurveyJson.pages[0].elements[1].elements[0].elements[0].defaultValue = user.organization?.primarySektor;
-    organizationQuestions.value.SurveyJson.pages[0].elements[1].elements[0].elements[1].defaultValue = user.organization?.secondarySektor;
+    const topLevelElement = organizationQuestions.value.SurveyJson.pages[0]
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion3', user.organization?.identificationNumber);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion4', user.organization?.contactPerson.name);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion5', user.organization?.contactPerson.role);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion6', user.organization?.contactPerson.email);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion7', user.organization?.contactPerson.telephone);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion8', user.organization?.website);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion9', user.organization?.type);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion10', user.organization?.size);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion11', {
+      "text1": user.organization?.address.street,
+      "text2": user.organization?.address.postalcode,
+      "text3": user.organization?.address.city,
+      "text4": user.organization?.address.country,
+    });
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion13', user.organization?.primarySektor);
+    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion14', user.organization?.secondarySektor);
   }
 });
 
@@ -265,11 +289,24 @@ const getLanguageKey = (key: keyof languageMapping) => {
 </script>
 
 <style scoped>
-/* Input container customization*/ 
+/* Input container customization*/
 .input-container {
   top: 50%;
   left: 50%;
   width: 800px;
   height: 800px;
 }
+
+.image {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.leftbox {
+    margin-left: 40px
+}
+.rightbox {
+  margin-right: 40px
+}
+
 </style>

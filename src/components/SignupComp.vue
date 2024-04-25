@@ -134,7 +134,7 @@ const CreateAccount = async () => {
                 PIC: "",
                 primarySektor: "",
                 secondarySektor: "",
-                euDmaStatus:"start"
+                euDmaStatus:"0"
             },
             termsAccepted: terms.value
         });

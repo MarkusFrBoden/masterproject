@@ -17,6 +17,10 @@ let props = defineProps({
   survey: {
     type: Object,
     required: true
+  },
+  surveyMode: {
+    type: String,
+    required: true
   }
 })
 
@@ -31,6 +35,7 @@ const sendResults = () => {
 
 //create survey model
 const survey = new Model(props.survey.SurveyJson);
+survey.mode = props.surveyMode;
 const { locale } = useI18n();
 
 //define themes and language and watcher for changes
