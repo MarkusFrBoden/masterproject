@@ -2,7 +2,7 @@
     <form @submit.prevent="handleSubmit">
 
         <!-- signup form  -->
-       <label>{{ $t(filename + '.organization') }}</label>
+        <label>{{ $t(filename + '.organization') }}</label>
         <input type="text" required v-model="organization">
         <div v-if="organizationError" class="error">{{ organizationError }}</div>
 
@@ -10,7 +10,7 @@
         <input type="text" required v-model="name">
 
         <label>{{ $t(filename + '.email') }}</label>
-        <input type="email" required v-model="email" >
+        <input type="email" required v-model="email">
         <div v-if="emailError" class="error">{{ emailError }}</div>
 
         <label>{{ $t(filename + '.password') }}</label>
@@ -134,7 +134,14 @@ const CreateAccount = async () => {
                 PIC: "",
                 primarySektor: "",
                 secondarySektor: "",
-                euDmaStatus:"0"
+                euDmaStatus: "0",
+                euDmaResults: [],
+                lastDma: {
+                    id: "",
+                    title: "",
+                    createdBy: "",
+                    createdAt: ""
+                }
             },
             termsAccepted: terms.value
         });
@@ -156,11 +163,11 @@ const handleSubmit = async () => {
     emailError.value = '';
     passwordError.value = '';
     organizationError.value = '';
-    await getUser(); 
+    await getUser();
     await getOrganisation();
     if (ExistingUser.value) {
         emailError.value = 'A User with this email exists';
-    } else if(ExistingOrganization.value){
+    } else if (ExistingOrganization.value) {
         organizationError.value = 'This Organization already exists';
     } else {
         passwordError.value = password.value.length > 5 ? '' : 'Password must be at least 6 chars long';
@@ -191,7 +198,7 @@ form {
     border-radius: 10px;
 }
 
-.dark form{
+.dark form {
     background-color: #020b3d;
 }
 
@@ -218,8 +225,8 @@ select {
 
 .dark input,
 .dark select {
-  background-color: #020b3d;
-  color: #72bbff;
+    background-color: #020b3d;
+    color: #72bbff;
 }
 
 input[type="checkbox"] {

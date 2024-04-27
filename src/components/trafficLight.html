@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0"> 
+	<link rel="stylesheet" href="style.css"> 
+	<title>Traffic Light Animation</title> 
+	<style> 
+		body { 
+			display: flex; 
+			justify-content: center; 
+			align-items: center; 
+			height: 100vh; 
+			margin: 0; 
+			background-color: #f0f0f0; 
+		} 
+
+		.traffic-signal { 
+			width: 100px; 
+			height: 300px; 
+			background-color: #333; 
+			border-radius: 10px; 
+			display: flex; 
+			flex-direction: column; 
+			justify-content: space-between; 
+			align-items: center; 
+		} 
+
+		.light { 
+			width: 60px; 
+			height: 60px; 
+			border-radius: 50%; 
+			margin: 10px; 
+			transition: background-color 0.9s; 
+		} 
+
+		@keyframes blinkRed { 
+
+			0%, 
+			49% { 
+				background-color: red; 
+			} 
+
+			50%, 
+			100% { 
+				background-color: black; 
+			} 
+		} 
+
+		@keyframes blinkYellow { 
+
+			0%, 
+			49% { 
+				background-color: yellow; 
+			} 
+
+			50%, 
+			100% { 
+				background-color: black; 
+			} 
+		} 
+
+		@keyframes blinkGreen { 
+
+			0%, 
+			49% { 
+				background-color: green; 
+			} 
+
+			50%, 
+			100% { 
+				background-color: black; 
+			} 
+		} 
+
+		.red { 
+			background-color: red; 
+			animation: blinkRed 9s infinite; 
+		} 
+
+		.yellow { 
+			background-color: yellow; 
+			animation: blinkYellow 9s infinite; 
+			animation-delay: 3s; 
+		} 
+
+		.green { 
+			background-color: green; 
+			animation: blinkGreen 9s infinite; 
+			animation-delay: 6s; 
+		} 
+	</style> 
+</head> 
+
+<body> 
+	<div class="traffic-signal"> 
+		<div class="light red animate"></div> 
+		<div class="light yellow"></div> 
+		<div class="light green"></div> 
+	</div> 
+</body> 
+
+</html>

@@ -182,7 +182,20 @@
   "UserHomeView": {
     "title": "Start",
     "h3": "Hallo",
-    "h4": "Deine Organisation: ",
+    "h4": "Deine Organisation:",
+    "total":"Gesamtindex: ",
+    "dmaStatus":"DMA-Status:",
+    "results":{
+      "title":"-Ergebnis",
+      "dimension1":"Digitale Strategie und Investitionen",
+      "dimension2":"Digitale Bereitschaft",
+      "dimension3":"Menschen im Mittelpunkt",
+      "dimension4":"Datenverwaltung und -sicherheit",
+      "dimension5":"Interoperabilität",
+      "dimension6":"Grüne Digitalisierung",
+      "total":"Gesamtindex",
+      "missing":"Zu erreichen"
+    },
     "OrgaInformations": {
       "title": "Allgemeine Informationen",
       "organization": {
@@ -209,10 +222,12 @@
         "email": "E-Mail-Adresse: ",
         "tel": "Telefonnummer: "
       },
-      "notAllInformation": "Nicht alle Informationen vorhanden!"
+      "notAllInformation": "Nicht alle Informationen vorhanden!",
+      "addInformation": "Bitte ergänzen Sie Informationen!",
+      "startEuDma":"Starten Sie jetzt ihr erstes EU-DMA"
     },
     "DmaInformations": {
-      "title": "Informationen über durchgeführte EU-DMAs",
+      "title": "Durchgeführte EU-DMAs",
       "overview": {
         "title": "Übersicht"
       },
@@ -220,18 +235,34 @@
         "title": "Reifegrad nach der EU"
       },
       "lastDma": {
-        "title": "Übersicht über letzte DMAs"
+        "title": "Ihr neuestes DMA"
       }
     },
     "button": {
       "editInformation": "Informationen bearbeiten",
-      "endInput": "Beenden"
+      "endInput": "Beenden",
+      "startDma":"Zu den DMAs"
     }
   },
   "UserDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
+    "Dmas":"Verfügbare DMA",
+    "Infos":"Allgemeine Informationen",
     "noDma": "Noch kein DMA angelegt",
+    "Information":{
+      "title1":"Digitale Transformation",
+      "digitalization":"Der englische Begriff digitization bezeichnet im Allgemeinen den technischen Prozess der Umwandlung von analogen Daten in digitale Daten. In einem weiteren, organisatorischen Kontext umfasst die Digitalisierung hingegen eine Vielzahl von Veränderungen, sowohl auf individueller Ebene als auch im Hinblick auf die Organisation von Unternehmen und deren Prozesse. Die Digitale Transformation beschreibt einen tiefgreifenden digitalen Wandel auf vielen Ebenen im Unternehmen. Der Wandel umfasst sowohl die Nutzung digitaler Technologien zur Verbesserung bestehender Prozesse als auch die Erforschung neuer digitaler Innovationen, die das Geschäftsmodell potenziell umgestalten können. Im Gegensatz zur Digitalisierung haben Digitale Transformationen nicht nur das Ziel, neue digitale Technologien in Unternehmen einzuführen, sondern sie haben eine strategische Perspektive mit spezifisch definierten Zielen. Sie stellen die gesteuerte Anpassung von Unternehmen dar, welche die Digitalisierung vorantreibt. Folglich stellt die Digitalisierung eine notwendige, jedoch nicht hinreichende Bedingung für die digitale Transformation dar. ",
+      "digitalization-img":"src/assets/digitalization_1_DE.png",
+      "title2":"Digitale Reifegradmodelle",
+      "digitalMaturity":"Die Digitale Transformation erfordert eine grundlegende Änderung des aktuellen Geschäftsmodells. Dafür müssen Unternehmen zunächst ihr aktuelles Geschäftsmodell im Hinblick auf neu entstehende Möglichkeiten bewerten und es gegebenenfalls an aktuelle digitale Entwicklungen anpassen. Für diese Geschäftsmodellbewertung wurde das Konzept der digitalen Reife eingeführt. Digitale Reifegradmodelle (DMM) stellen eine Methode zur Messung des aktuellen Zustandes einer Organisation in Bezug auf die digitale Transformation, die digitale Strategie, den Einsatz von Technologie und die Geschäftsprozessimplementierung dar. Die Messung des aktuellen Stands der durchgeführten digitalen Transformation von Unternehmen steht im Zentrum von digitalen Reifegradmodellen. Der Prozess der Erfassung wird als Digital Maturity Assessment (DMA) bezeichnet. Digitale Reifegradmodelle ermöglichen die Erfassung von digitalen Reifegraden mittels der Durchführung von Digital Maturity Assessments (DMA). Die Reifegrade dienen dabei als Ausgangspunkt für Benchmarking-Aktivitäten sowie zur Evaluierung der Effektivität von digitalen Transformationsprozessen.",
+      "digitalMaturity-img":"src/assets/digitalization_2_DE.png",
+      "literatur":"Empfohlene Literatur",
+      "source1":"The Extended Digital Maturity Model",
+      "source2":"Stages in Digital Business Transformation",
+      "source3":"Management Models of Digital Transformation",
+      "source4":"What makes a useful Maturity Model?"
+    },
     "button": {
       "createDma": "DMA erstellen",
       "deleteDma": "DMA löschen",
@@ -280,7 +311,7 @@
     "button": {
       "DmaAnswers": "Antworten anschauen",
       "startDMA":"DMA starten",
-      "stopDMA":"Abbrechen(Fortschritt geht verloren!)",
+      "stopDMA":"Abbrechen (Fortschritt geht verloren!)",
       "closeEuAnswers":"Verlassen"
     },
     "results":{
@@ -331,3 +362,5 @@
     "dmaToolDescription":"Mit diesem DMA-Tool bieten wir unseren Kunden die Möglichkeit, DMAs selbständig durchzuführen. So können sie ihren digitalen Reifegrad selbst bestimmen und haben anschließend direkten Zugriff auf die Ergebnisse. Das EDIH verwendet die EU-relevanten DMA-Ergebnisse für die Weiterleitung an die EU zu den Zeitpunkten T0, T1 und T3, die für die Empfänger von EDIH-Dienstleistungen obligatorisch sind. Neben den Standard-DMAs der EU bieten wir thematisch vertiefte Reifegradmodelle an, um Ihre digitalen Fähigkeiten für Ihren spezifischen Bereich gezielt bestimmen zu können."
   }}
 }
+
+

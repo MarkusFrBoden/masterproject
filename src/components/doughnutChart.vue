@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <Doughnut :data="props.data" :options="options" />
-    </div>
+    <div :style="{ height: height, width: width }">
+    <Doughnut :data="data" :options="options" />
+</div>
 </template>
 
 <script setup lang="ts">
@@ -16,6 +16,14 @@ let props = defineProps({
     data: {
     required: true,
     type: Object as () => doughnutChartData
+  },
+  height:{
+    required: false,
+    type: String
+  },
+  width:{
+    required: false,
+    type: String
   }
 })
   

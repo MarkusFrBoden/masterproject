@@ -11,5 +11,5 @@ interface Dataset {
     pointBorderColor: string;
     pointHoverBackgroundColor: string;
     pointHoverBorderColor: string;
-    data: number[];
+    data: any;
   }

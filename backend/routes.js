@@ -135,11 +135,19 @@ router.patch('/OrganizationDmaStatusById/:id', (req, res) => {
     const updates = req.body
 
     if (ObjectId.isValid(req.params.id)) {
+        const filter = { _id: new ObjectId(req.params.id) };
+        const updateDmaStatus = { $set: { "organization.euDmaStatus": updates.organization.euDmaStatus } };
+        const updateDmaResults = { $push: { "organization.euDmaResults": updates.organization.euDmaResults } };
+        const updateLastDma = { $set: { "organization.lastDma": updates.organization.lastDma } };
+
         db.collection('users')
-            .updateOne(
-                { _id: new ObjectId(req.params.id) },
-                { $set: { "organization.euDmaStatus": updates.organization.euDmaStatus } }
-            )
+            .updateOne(filter, updateDmaStatus)
+            .then(() => {
+                return db.collection('users').updateOne(filter, updateDmaResults);
+            })
+            .then(() => {
+                return db.collection('users').updateOne(filter, updateLastDma);
+            })
             .then(result => {
                 res.status(200).json(result);
             })
@@ -149,8 +157,7 @@ router.patch('/OrganizationDmaStatusById/:id', (req, res) => {
     } else {
         res.status(500).json({ error: 'Not a valid doc id' })
     }
-})
-
+});
 
 //Post
 router.post('/deleteMultipleOrganizations', async (req, res) => {
@@ -192,7 +199,7 @@ router.get('/DmaByOrganization/:organizationName', async (req, res) => {
     try {
         const dmas = await db.collection('DMAs')
             .find({ createdFor: req.params.organizationName })
-            .sort({ createdAt: 1 })
+            .sort({ createdAt: -1 })
             .toArray();
 
         const formattedDmas = dmas.map(dma => ({

@@ -8,7 +8,7 @@
         <div class="row">
           <div id="mouve" class="col">
             <div class="btn-group">
-              <button class="btn btn-outline-secondary" @click="$router.push({ name: 'home' })">
+              <button class="btn btn-outline-secondary" @click="$router.push({ name: type + 'Home' })">
                 <HouseWithDoor />
               </button>
               <button class="btn btn-outline-secondary" @click="$router.go(-1)">
@@ -23,9 +23,9 @@
           <!-- router links  -->
           <div id="nav" class="col">
             <nav>
-              <router-link :to="{ name: type + 'Home' }">{{ $t(type+'HomeView.title') }}</router-link> |
-              <router-link :to="{ name: type + 'Dma' }">{{ $t(type+'DmaView.title') }}</router-link> |
-              <router-link :to="{ name: type + 'Dmm' }">{{ $t(type+'DmmView.title') }}</router-link>
+              <router-link :to="{ name: type + 'Home' }">{{ $t(type + 'HomeView.title') }}</router-link> |
+              <router-link :to="{ name: type + 'Dma' }">{{ $t(type + 'DmaView.title') }}</router-link> |
+              <router-link :to="{ name: type + 'Dmm' }">{{ $t(type + 'DmmView.title') }}</router-link>
             </nav>
           </div>
 
@@ -54,7 +54,8 @@
       </div>
     </header>
 
-    <RouterView />
+      <RouterView />
+
   </div>
 
 </template>

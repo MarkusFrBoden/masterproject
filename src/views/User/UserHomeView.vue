@@ -4,117 +4,209 @@
   </div>
   <br>
 
-  <!-- organization informations  -->
+  <!-- home informations  -->
   <h4>{{ $t(filename + '.h4') }} {{ ExistingUser?.organization.name }}</h4>
   <br>
-  <div class="row">
-    <div class="col">
-      <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
-      <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization" :key="key">
-          <div v-if="value && key !== 'contactPerson' && key !== 'address'">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
+  <div class="container">
+
+    <div class="row">
+      <!-- organization -->
+      <div class="col">
+        <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
+        <div class="leftbox" style="height: 350px;">
+          <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
+          <div v-for="(value, key) in ExistingUser?.organization" :key="key">
+            <div
+              v-if="value && key !== 'contactPerson' && key !== 'address' && key !== 'euDmaResults' && key !== 'lastDma'">
+              <div class="row">
+                <div class="col">
+                  <span>{{ getLanguageKey(key) }}</span>
+                </div>
+                <div class="col">
+                  <span>{{ value }}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <br>
-      <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.address.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization.address" :key="key">
-          <div v-if="value">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
-              </div>
-            </div>
+          <!-- show message for missing organization information  -->
+          <div v-if="allInformation === false">
+            <br>
+            <em>{{ $t(filename + '.OrgaInformations.addInformation') }}</em>
           </div>
         </div>
       </div>
-      <br>
-      <div class="leftbox">
-        <h6>{{ $t(filename + '.OrgaInformations.contact.title') }}</h6>
-        <div v-for="(value, key) in ExistingUser?.organization.contactPerson" :key="key">
-          <div v-if="value">
-            <div class="row">
-              <div class="col">
-                <span>{{ getLanguageKey(key) }}</span>
-              </div>
-              <div class="col">
-                <span>{{ value }}</span>
+      <!-- EU-DMAs -->
+      <div class="col">
+        <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
+        <div class="rightbox" style="height: 350px;">
+          <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
+          <div v-if="ExistingUser">
+            <div v-if="ExistingUser.organization.euDmaResults.length > 0">
+              <div v-if="radarChartDataValues.datasets.length > 0">
+                <div>
+                  <radarChart :data="radarChartDataValues" height="300px" width="400px" />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- show message for missing organization information  -->
-      <div v-if="allInformation === false">
-        <em>{{ $t(filename + '.OrgaInformations.notAllInformation') }}</em>
-      </div>
-
-      <!-- button edit organization information  -->
-      <br>
-      <button class="btn btn-outline-secondary" @click="showInput = !showInput">{{
-        $t(filename + '.button.editInformation') }}</button>
-      <br><br>
-
-      <!-- edit organization interfact -->
-      <div v-if="showInput" class="overlay">
-        <div class="input-container">
-          <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="organizationQuestions || {}" surveyMode="edit" />
-          <br>
-          <div class="button-group">
-            <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
-              $t(filename + '.button.endInput') }}</button>
+            <div v-else>
+              <em>{{ $t(filename + '.OrgaInformations.startEuDma') }}</em>
+              <br> <br>
+              <button class="btn btn-outline-secondary" @click="$router.push({ name: 'UserDma' })">{{ $t(filename +
+                '.button.startDma') }}</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- organizationQuestions dashboard  -->
-    <div class="col">
-      <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
-
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-
-        <div v-if="ExistingUser?.organization.euDmaStatus !== '0'" class="col">
-          <div v-if="ExistingUser?.organization.euDmaStatus === 'T0'">
-            <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
-          </div>
-          <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T1'">
-            <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
-          </div>
-          <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T2'">
-            <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
+    <div class="row">
+      <!-- adress -->
+      <div class="col">
+        <div class="leftbox" style="height: 210px;">
+          <h6>{{ $t(filename + '.OrgaInformations.address.title') }}</h6>
+          <div v-for="(value, key) in ExistingUser?.organization.address" :key="key">
+            <div v-if="value">
+              <div class="row">
+                <div class="col">
+                  <span>{{ getLanguageKey(key) }}</span>
+                </div>
+                <div class="col">
+                  <span>{{ value }}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <br><br>
       </div>
-      <br>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.maturity.title') }}</h6>
-        <br><br><br><br>
+      <!-- eu maturity -->
+      <div class="col">
+        <div class="rightbox" style="height: 210px;">
+          <h6>{{ $t(filename + '.DmaInformations.maturity.title') }}</h6>
+          <div v-if="ExistingUser">
+            <div v-if="ExistingUser.organization.euDmaResults.length > 0">
+              <div class="row">
+                <div class="col" style="text-align: center;">
+                  <div>
+                    <br>
+                    {{ $t(filename + '.total') }}
+                    <br>
+                  </div>
+                  <span style="font-size: 50px; color:  #41B883;">{{ UserEuDmaValue }}</span>
+                </div>
+                <div class="col">
+                  <div v-if="doughnutChartDataValue.datasets.length > 0">
+                    <div>
+                      <doughnutChart :data="doughnutChartDataValue" height="150px" width="150px" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <br>
+                  {{ $t(filename + '.dmaStatus') }}
+                  <br>
+                  <div v-if="ExistingUser?.organization.euDmaStatus !== '0'" class="col">
+                    <div v-if="ExistingUser?.organization.euDmaStatus === 'T0'">
+                      <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
+                    </div>
+                    <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T1'">
+                      <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
+                    </div>
+                    <div v-else-if="ExistingUser?.organization.euDmaStatus === 'T2'">
+                      <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
+                    </div>
+                    <div v-else>
+                      <img class="image" src="../../assets/nodma.png" alt="noEudma">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              comming soon...
+            </div>
+          </div>
+        </div>
       </div>
-      <br>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.lastDma.title') }}</h6>
-        <br><br><br><br>
-      </div>
+    </div>
 
+    <div class="row">
+      <!-- contact person -->
+      <div class="col">
+        <div class="leftbox" style="height: 180px;">
+          <h6>{{ $t(filename + '.OrgaInformations.contact.title') }}</h6>
+          <div v-for="(value, key) in ExistingUser?.organization.contactPerson" :key="key">
+            <div v-if="value">
+              <div class="row">
+                <div class="col">
+                  <span>{{ getLanguageKey(key) }}</span>
+                </div>
+                <div class="col">
+                  <span>{{ value }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- last dma -->
+      <div class="col">
+        <div class="rightbox" style="height: 180px;">
+          <h6>{{ $t(filename + '.DmaInformations.lastDma.title') }}</h6>
+          <div v-if="ExistingUser">
+            <div v-if="ExistingUser.organization.euDmaResults.length > 0">
+              <div class="list">
+                <li>
+                  <div class="row">
+                    <div class="col"><b>name</b></div>
+                    <div class="col"><b>by</b></div>
+                    <div class="col"><b>at</b></div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <RouterLink
+                        :to="{ name: 'UserDmaDetails', params: { id: ExistingUser.organization.lastDma.id.toString() } }">
+                        <a href="">{{ ExistingUser.organization.lastDma.title }}</a>
+                      </RouterLink>
+                    </div>
+                    <div class="col">{{ ExistingUser.organization.lastDma.createdBy }}</div>
+                    <div class="col">{{ ExistingUser.organization.lastDma.createdAt }}</div>
+                  </div>
+                </li>
+              </div>
+            </div>
+            <div v-else>
+              comming soon...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- show message for missing organization information  -->
+    <div v-if="allInformation === false">
+      <em>{{ $t(filename + '.OrgaInformations.notAllInformation') }}</em>
+    </div>
+
+    <!-- button edit organization information  -->
+    <br>
+    <button class="btn btn-outline-secondary" @click="showInput = !showInput">{{
+      $t(filename + '.button.editInformation') }}</button>
+    <br><br>
+
+    <!-- edit organization interfact -->
+    <div v-if="showInput" class="overlay">
+      <div class="input-container">
+        <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="organizationQuestions || {}" surveyMode="edit" />
+        <br>
+        <div class="button-group">
+          <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
+            $t(filename + '.button.endInput') }}</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <br><br>
 
 </template>
 
@@ -125,7 +217,10 @@ import { useI18n } from 'vue-i18n';
 import { GetOrganizationInformation } from '../../components/CreateOrgaInformation_json.js'
 import type { languageMapping } from "../../interfaces/languageMapping.js"
 import type { User } from "../../interfaces/User.js"
-
+import type { radarChartData } from "../../interfaces/radarChartData.js"
+import type { doughnutChartData } from "../../interfaces/doughnutChartData.js"
+import doughnutChart from "../../components/doughnutChart.vue";
+import radarChart from "../../components/radarChart.vue";
 
 //filename for language tags
 const filename = 'UserHomeView'
@@ -133,40 +228,97 @@ const filename = 'UserHomeView'
 //enable api via global variable
 const api = inject('api') as any;
 
+//use I18n for language keys
+const { t } = useI18n();
+
 //show and hide elements
 let showInput = ref(false);
 let allInformation = ref(false);
 
 //get start data
-let UserId = localStorage.getItem('userId');
+const UserId = localStorage.getItem('userId');
 let ExistingUser = ref<User>();
 const getUser = async () => {
   try {
     const response = await api.get('/UserById/' + UserId);
     ExistingUser.value = response.data;
+    createChartData();
   } catch (err) {
     console.error('Error fetching data:', err);
   }
 };
 getUser()
 
+//create form data
+//format radar and doughnut> chart data
+let UserEuDmaValue = ref<Number>();
+let doughnutChartDataValue = ref<doughnutChartData>({
+  labels: [t(filename + '.results.total'), t(filename + '.results.missing')],
+  datasets: []
+}
+)
+let radarChartDataValues = ref<radarChartData>({
+  labels: [t(filename + '.results.dimension1'),
+  t(filename + '.results.dimension2'),
+  t(filename + '.results.dimension3'),
+  t(filename + '.results.dimension4'),
+  t(filename + '.results.dimension5'),
+  t(filename + '.results.dimension6')],
+  datasets: []
+});
+const createChartData = () => {
+  if (ExistingUser.value && ExistingUser.value.organization.euDmaResults.length > 0) {
+    let dmaResults = ExistingUser.value?.organization.euDmaResults
+    for (let i = 0; i < dmaResults.length; i++) {
+      radarChartDataValues.value.datasets.push(
+        {
+          label: ExistingUser.value?.organization.euDmaResults[i].dmaStatus + t(filename + '.results.title'),
+          backgroundColor: 'rgba(179,181,198,0.2)',
+          borderColor: 'rgba(179,181,198,1)',
+          pointBackgroundColor: 'rgba(179,181,198,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(179,181,198,1)',
+          data: [dmaResults[i].dim1, dmaResults[i].dim2, dmaResults[i].dim3, dmaResults[i].dim4, dmaResults[i].dim5, dmaResults[i].dim6]
+        }
+      );
+    }
+    function sumDimsForHighestStatus(data: any) {
+      let sum = 0;
+      for (const item of data) {
+        if (item.dmaStatus === ExistingUser.value?.organization.euDmaStatus) {
+          sum = item.dim1 + item.dim2 + item.dim3 + item.dim4 + item.dim5 + item.dim6;
+        }
+      }
+      return sum;
+    }
+    const currentEuDmaValue = (sumDimsForHighestStatus(ExistingUser.value.organization.euDmaResults)) / 6;
+    UserEuDmaValue.value = Math.round(currentEuDmaValue);
+    doughnutChartDataValue.value.datasets.push(
+      {
+        backgroundColor: ['#41B883', '#E46651'],
+        data: [currentEuDmaValue, 100 - currentEuDmaValue]
+      }
+    )
+  }
+}
+
 //mapping from surveyJs answers to patchUser object
 let mapping = (object: any) => {
-  const patchUser: User = ExistingUser.value as User;
+  let patchUser: User = ExistingUser.value as User;
   delete patchUser._id;
 
   const mappings: any = {
-    "EU-1-1-2": (value: any) => { patchUser.organization.name = value; },
-    "EU-1-1-3": (value: any) => { patchUser.organization.identificationNumber = value; },
-    "EU-1-1-4": (value: any) => { patchUser.organization.contactPerson.name = value; },
-    "EU-1-1-5": (value: any) => { patchUser.organization.contactPerson.role = value; },
-    "EU-1-1-6": (value: any) => { patchUser.organization.contactPerson.email = value; },
-    "EU-1-1-7": (value: any) => { patchUser.organization.contactPerson.telephone = value; },
-    "EU-1-1-8": (value: any) => { patchUser.organization.website = value; },
-    "EU-1-1-9": (value: any) => { patchUser.organization.type = value; },
-    "EU-1-1-10": (value: any) => { patchUser.organization.size = value; },
-    "EU-1-2-13-1": (value: any) => { patchUser.organization.primarySektor = value; },
-    "EU-1-2-13-2": (value: any) => { patchUser.organization.secondarySektor = value; },
+    "EUPSOQuestion3": (value: any) => { patchUser.organization.identificationNumber = value; },
+    "EUPSOQuestion4": (value: any) => { patchUser.organization.contactPerson.name = value; },
+    "EUPSOQuestion5": (value: any) => { patchUser.organization.contactPerson.role = value; },
+    "EUPSOQuestion6": (value: any) => { patchUser.organization.contactPerson.email = value; },
+    "EUPSOQuestion7": (value: any) => { patchUser.organization.contactPerson.telephone = value; },
+    "EUPSOQuestion8": (value: any) => { patchUser.organization.website = value; },
+    "EUPSOQuestion9": (value: any) => { patchUser.organization.type = value; },
+    "EUPSOQuestion10": (value: any) => { patchUser.organization.size = value; },
+    "EUPSOQuestion13": (value: any) => { patchUser.organization.primarySektor = value; },
+    "EUPSOQuestion14": (value: any) => { patchUser.organization.secondarySektor = value; },
     "text1": (value: any) => { patchUser.organization.address.street = value; },
     "text2": (value: any) => { patchUser.organization.address.postalcode = value; },
     "text3": (value: any) => { patchUser.organization.address.city = value; },
@@ -177,8 +329,8 @@ let mapping = (object: any) => {
     if (object.hasOwnProperty(key)) {
       mappings[key](object[key]);
     }
-    if (object["EU-1-1-11"] && object["EU-1-1-11"].hasOwnProperty(key)) {
-      mappings[key](object["EU-1-1-11"][key]);
+    if (object["EUPSOQuestion11"] && object["EUPSOQuestion11"].hasOwnProperty(key)) {
+      mappings[key](object["EUPSOQuestion11"][key]);
     }
   }
 
@@ -260,7 +412,6 @@ const checkValues = (obj: any): boolean => {
 };
 
 //language key mappings for for-loops of organization data in html
-const { t } = useI18n();
 const languageMappings: languageMapping = {
   "name": filename + '.OrgaInformations.organization.name',
   "identificationNumber": filename + '.OrgaInformations.organization.id',
@@ -277,7 +428,8 @@ const languageMappings: languageMapping = {
   "primarySektor": filename + '.OrgaInformations.organization.primarySector',
   "secondarySektor": filename + '.OrgaInformations.organization.secondarySector',
   "PIC": "",
-  "euDmaStatus": filename + '.OrgaInformations.organization.euDmaStatus'
+  "euDmaStatus": filename + '.OrgaInformations.organization.euDmaStatus',
+  "lastDma": ""
 }
 
 const getLanguageKey = (key: keyof languageMapping) => {
@@ -302,11 +454,18 @@ const getLanguageKey = (key: keyof languageMapping) => {
   max-height: 100px;
 }
 
-.leftbox {
-    margin-left: 40px
+/* Custom dma list */
+.list {
+  margin: 20px auto !important;
 }
-.rightbox {
-  margin-right: 40px
+
+.list li {
+  background: rgba(214, 206, 206, 0.692) !important;
+}
+
+.dark .list li {
+  list-style-type: none;
+  background: rgba(54, 48, 95, 0.692) !important;
 }
 
 </style>

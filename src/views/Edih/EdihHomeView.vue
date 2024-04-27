@@ -251,7 +251,7 @@ handleSort('name');
 </script>
 
 <style scoped>
-/* Custom dma list */ 
+/* Custom list */ 
 .list li {
   background: rgba(214, 206, 206, 0.692) !important;
 }

@@ -11,16 +11,22 @@ body {
   background: #dee6ee;
   background-image: url('../assets/EuropeanStarsBlue.png');
   background-position: center top 350px;
-  background-size: cover;
+  background-size: auto cover;
   background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 .dark {
   background: #16171d;
   color: #72bbff;
   background-image: url('../assets/EuropeanStarsBlack.png');
   background-position: center top 350px;
-  background-size: cover;
+  background-size: auto cover;
   background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 
@@ -115,26 +121,24 @@ button {
 .box {
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 20px;
   width: 90%;
+  margin: 0 10px;
 }
 .leftbox {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
+  margin: 0 10px;
 }
 .rightbox {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
+  margin: 0 10px;
 }
 
 .box, .leftbox, .rightbox {
   width: calc(100% - 20px);
-  margin: 0 10px;
+  padding: 20px;
   margin-bottom: 20px;
   text-align: left;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 10px;
 }
 
 .dark .box,

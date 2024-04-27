@@ -19,7 +19,7 @@
 
   <div v-if="showDmm">
     <!-- input for filter  -->
-    <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" /> 
+    <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
 
     <!-- dmm list, filtered and sorted  -->
     <!-- header with sort logic part  -->
@@ -92,51 +92,65 @@
   </div>
 
   <div v-else>
-    <div class="box">
-      <div class="row">
-      <div class="col-10">
-        <b>EDIH Thuringia</b>
-        <br>
-        {{ $t(filename + '.EDIHInformation.edihDescription') }}
-      </div>
-      <div class="col">
-        <img src="/EDIH-Thuringia-Pink.png" alt="EDIH pink" style="max-width: 100%;  margin-left: auto; margin-right: auto; ">
-      </div>
-    </div>
-    </div>
-    <div class="box">
-      <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <a href="https://edih.digital/moodle/course/index.php?categoryid=1" target="_blank" class="custom-btn"> <h3><b> {{ $t(filename + '.EDIHInformation.edihButtons.learn') }}</b></h3></a>
-        </div>
-        <div class="col">
-          <a href="https://edih.digital/moodle/course/index.php?categoryid=2" target="_blank" class="custom-btn"><h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.test') }}</b></h3></a>
-        </div>
-        <div class="col">
-          <a href="https://edih.digital/moodle/course/index.php?categoryid=4" target="_blank"
-            class="custom-btn"><h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.invest') }}</b></h3></a>
-        </div>
-        <div class="col">
-          <a href="https://edih.digital/moodle/course/index.php?categoryid=5" target="_blank" class="custom-btn"><h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.connect') }}</b></h3></a>
+    <div class="container">
+      <div class="box">
+        <div class="row">
+          <div class="col-10">
+            <b>EDIH Thuringia</b>
+            <br>
+            {{ $t(filename + '.EDIHInformation.edihDescription') }}
+          </div>
+          <div class="col">
+            <img src="/EDIH-Thuringia-Pink.png" alt="EDIH pink"
+              style="max-width: 100%;  margin-left: auto; margin-right: auto; ">
+          </div>
         </div>
       </div>
-    </div>
-    </div>
+      <div class="box">
+        <div class="row justify-content-between">
+          <div class="container text-center">
+            <div class="row">
+              <div class="col">
+                <a href="https://edih.digital/moodle/course/index.php?categoryid=1" target="_blank" class="custom-btn">
+                  <h3><b> {{ $t(filename + '.EDIHInformation.edihButtons.learn') }}</b></h3>
+                </a>
+              </div>
+              <div class="col">
+                <a href="https://edih.digital/moodle/course/index.php?categoryid=2" target="_blank" class="custom-btn">
+                  <h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.test') }}</b></h3>
+                </a>
+              </div>
+              <div class="col">
+                <a href="https://edih.digital/moodle/course/index.php?categoryid=4" target="_blank" class="custom-btn">
+                  <h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.invest') }}</b></h3>
+                </a>
+              </div>
+              <div class="col">
+                <a href="https://edih.digital/moodle/course/index.php?categoryid=5" target="_blank" class="custom-btn">
+                  <h3><b>{{ $t(filename + '.EDIHInformation.edihButtons.connect') }}</b></h3>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="box">
-      {{ $t(filename + '.EDIHInformation.dmmDescription.part1') }} <a
-        href="https://european-digital-innovation-hubs.ec.europa.eu/knowledge-hub/guidance-documents/overview-digital-maturity-assessment-dma"
-        target="_blank"> {{ $t(filename + '.EDIHInformation.dmmDescription.link') }}</a>  {{ $t(filename + '.EDIHInformation.dmmDescription.part2') }}
-      <br> {{ $t(filename + '.EDIHInformation.dmmDescription.aim1') }}
-      <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim2') }}
-      <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim3') }}
-      <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim4') }}
-    </div>
+      <div class="box">
+        {{ $t(filename + '.EDIHInformation.dmmDescription.part1') }} <a
+          href="https://european-digital-innovation-hubs.ec.europa.eu/knowledge-hub/guidance-documents/overview-digital-maturity-assessment-dma"
+          target="_blank"> {{ $t(filename + '.EDIHInformation.dmmDescription.link') }}</a> {{ $t(filename +
+            '.EDIHInformation.dmmDescription.part2') }}
+        <br> {{ $t(filename + '.EDIHInformation.dmmDescription.aim1') }}
+        <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim2') }}
+        <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim3') }}
+        <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim4') }}
+      </div>
 
-    <div class="box">
-      {{ $t(filename + '.EDIHInformation.dmaToolDescription') }}
-  </div>
+      <div class="box">
+        {{ $t(filename + '.EDIHInformation.dmaToolDescription') }}
+      </div>
+
+    </div>
 
   </div>
 
@@ -170,7 +184,6 @@ const fetchData = async () => {
   }
 };
 fetchData();
-
 
 // ---------------------------------------------------- sort & filter ---------------------------------------------------------------
 //order
@@ -279,8 +292,7 @@ let filteredDmms = computed(() => {
   color: #ff6869;
 }
 
-.dark .btn-secondary{
+.dark .btn-secondary {
   background-color: #01051b;
 }
-
 </style>
