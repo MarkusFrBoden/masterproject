@@ -24,114 +24,139 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
+  <div class="container">
+    <div class="row">
+      <div class="col">
 
-      <!-- organization list  -->
-      <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
-      <div class="leftbox">
-        <div class="list">
-          <!-- header  -->
-          <div class="row">
-            <div v-if="showDeleteOptions" class="col">
-              <button class="custom-button">
-                <b>{{ $t(filename + '.OrgaInformations.list.column0') }}</b>
-              </button>
+        <!-- organization list  -->
+        <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
+        <div class="leftbox">
+          <div class="list">
+            <!-- header  -->
+            <div class="row">
+              <div v-if="showDeleteOptions" class="col">
+                <button class="custom-button">
+                  <b>{{ $t(filename + '.OrgaInformations.list.column0') }}</b>
+                </button>
+              </div>
+              <div class="col" id="name">
+                <button class="custom-button" @click="handleSort('name')">
+                  <b>{{ $t(filename + '.OrgaInformations.list.column1') }}</b>
+                  <div v-if="OrderIcons.name || OrderIcons.nameDown" class="sort-icon">
+                    <SortAlphaDown v-if="OrderIcons.name" />
+                    <SortAlphaDownAlt v-else />
+                  </div>
+                </button>
+              </div>
+              <div class="col" id="contactMail">
+                <button class="custom-button" @click="handleSort('contactMail')">
+                  <b>{{ $t(filename + '.OrgaInformations.list.column2') }}</b>
+                  <div v-if="OrderIcons.contactMail || OrderIcons.contactMailDown" class="sort-icon">
+                    <SortAlphaDown v-if="OrderIcons.contactMail" />
+                    <SortAlphaDownAlt v-else />
+                  </div>
+                </button>
+              </div>
+              <div class="col" id="dmaStatus">
+                <button class="custom-button" @click="handleSort('dmaStatus')">
+                  <b>{{ $t(filename + '.OrgaInformations.list.column3') }}</b>
+                  <div v-if="OrderIcons.dmaStatus || OrderIcons.dmaStatusDown" class="sort-icon">
+                    <SortAlphaDown v-if="OrderIcons.dmaStatus" />
+                    <SortAlphaDownAlt v-else />
+                  </div>
+                </button>
+              </div>
             </div>
-            <div class="col" id="name">
-              <button class="custom-button" @click="handleSort('name')">
-                <b>{{ $t(filename + '.OrgaInformations.list.column1') }}</b>
-                <div v-if="OrderIcons.name || OrderIcons.nameDown" class="sort-icon">
-                  <SortAlphaDown v-if="OrderIcons.name" />
-                  <SortAlphaDownAlt v-else />
-                </div>
-              </button>
-            </div>
-            <div class="col" id="contactMail">
-              <button class="custom-button" @click="handleSort('contactMail')">
-                <b>{{ $t(filename + '.OrgaInformations.list.column2') }}</b>
-                <div v-if="OrderIcons.contactMail || OrderIcons.contactMailDown" class="sort-icon">
-                  <SortAlphaDown v-if="OrderIcons.contactMail" />
-                  <SortAlphaDownAlt v-else />
-                </div>
-              </button>
-            </div>
-            <div class="col" id="dmaStatus">
-              <button class="custom-button" @click="handleSort('dmaStatus')">
-                <b>{{ $t(filename + '.OrgaInformations.list.column3') }}</b>
-                <div v-if="OrderIcons.dmaStatus || OrderIcons.dmaStatusDown" class="sort-icon">
-                  <SortAlphaDown v-if="OrderIcons.dmaStatus" />
-                  <SortAlphaDownAlt v-else />
-                </div>
-              </button>
-            </div>
-          </div>
-          <!-- content  -->
-          <transition-group name="list">
-            <li v-for="organization in orderedOrganizations" :key="organization._id">
-              <div class="row">
-                <div v-if="showDeleteOptions" class="col">
-                  <input type="checkbox" v-model="selectedItems" :value="{ _id: organization._id }" />
-                </div>
-                <div class="col">
-                  {{ organization._id }}
-                  <!-- <RouterLink :to="{ name: 'EdihOrganizationDetails', params: { id: organization._id?.toString() } }">
+            <!-- content  -->
+            <transition-group name="list">
+              <li v-for="organization in orderedOrganizations" :key="organization._id">
+                <div class="row">
+                  <div v-if="showDeleteOptions" class="col">
+                    <input type="checkbox" v-model="selectedItems" :value="{ _id: organization._id }" />
+                  </div>
+                  <div class="col">
+                    {{ organization._id }}
+                    <!-- <RouterLink :to="{ name: 'EdihOrganizationDetails', params: { id: organization._id?.toString() } }">
                         <a href="">{{ organization.name }}</a>
                     </RouterLink> -->
+                  </div>
+                  <div class="col">{{ organization.organization.contactPerson.email }}</div>
+                  <div class="col">{{ organization.organization.euDmaStatus }}</div>
                 </div>
-                <div class="col">{{ organization.organization.contactPerson.email }}</div>
-                <div class="col">{{ organization.organization.euDmaStatus }}</div>
-              </div>
-            </li>
-          </transition-group>
-        </div>
-      </div>
-      <br>
-
-      <!-- button and interface create organization and user -->
-      <button class="btn btn-outline-secondary " @click="showInput = !showInput">{{
-        $t(filename + '.button.editInformation') }}</button>
-      <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
-        @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
-        {{ $t(filename + '.button.exitDelete') }}
-      </button>
-      <div v-if="showInput" class="overlay">
-        <div class="input-container">
-          <SignupComp :existingAccount="true" :showLoginLink="false" />
-          <br>
-          <div class="button-group">
-            <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
-              $t(filename + '.button.endInput') }}</button>
+              </li>
+            </transition-group>
           </div>
         </div>
-      </div>
+        <br>
 
-      <!-- button and interface delete organization and user  -->
-      <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
-        @click="showDeleteOptions = !showDeleteOptions">
-        <div v-if="!showDeleteOptions">{{ $t(filename + '.button.deleteOrga') }}</div>
-        <div v-else> {{ $t(filename + '.button.exitDelete') }}</div>
-      </button>
-      <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
-        <div class="delete-selected">
-          {{ $t(filename + '.button.deleteSelected') }}
+        <!-- button and interface create organization and user -->
+        <button class="btn btn-outline-secondary " @click="showInput = !showInput">{{
+          $t(filename + '.button.editInformation') }}</button>
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0"
+          @click="selectedItems = []; showDeleteOptions = !showDeleteOptions">
+          {{ $t(filename + '.button.exitDelete') }}
+        </button>
+        <div v-if="showInput" class="overlay">
+          <div class="input-container">
+            <SignupComp :existingAccount="true" :showLoginLink="false" />
+            <br>
+            <div class="button-group">
+              <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{
+                $t(filename + '.button.endInput') }}</button>
+            </div>
+          </div>
         </div>
-      </button>
-    </div>
 
-    <!-- Dashboard Durchgeführte DMAs  -->
-    <div class="col">
-      <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-        Übersicht über Anzahl durchgeführter DMAs auf T0, T1, T2 und weiterer
-        <br><br><br><br><br><br><br>
+        <!-- button and interface delete organization and user  -->
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length === 0"
+          @click="showDeleteOptions = !showDeleteOptions">
+          <div v-if="!showDeleteOptions">{{ $t(filename + '.button.deleteOrga') }}</div>
+          <div v-else> {{ $t(filename + '.button.exitDelete') }}</div>
+        </button>
+        <button class="btn btn-outline-secondary" v-if="selectedItems.length > 0" @click="showDeleteQuestion = true">
+          <div class="delete-selected">
+            {{ $t(filename + '.button.deleteSelected') }}
+          </div>
+        </button>
       </div>
-      <br>
-      <div class="rightbox">
-        <h6>{{ $t(filename + '.DmaInformations.lastDma.title') }}</h6>
-        Liste mit den letzten drei DMA
-        <br><br><br><br>
+
+      <!-- Dashboard Durchgeführte DMAs  -->
+      <div class="col">
+        <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
+        <div class="rightbox" >
+          <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
+          Anzahl durchgeführter EU-DMAs
+          <div class="container" >
+            <div class="row">
+              <div class="col">
+                <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
+              </div>
+              <div class="col">
+                <br>
+                <span style="font-size: 50px; color:  #41B883;"> {{ dmaTValues.T0 }}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
+              </div>
+              <div class="col">
+                <br>
+                <span style="font-size: 50px; color:  #41B883;"> {{ dmaTValues.T1 }}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
+              </div>
+              <div class="col">
+                <br>
+                <span style="font-size: 50px; color:  #41B883;"> {{ dmaTValues.T2 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
       </div>
     </div>
   </div>
@@ -168,6 +193,19 @@ const getOrganizations = async () => {
   }
 };
 getOrganizations();
+
+let dmaTValues = ref<any>([]);
+const getdmaTValues = async () => {
+  try {
+    const response = await api.get('/DmaTValues');
+    dmaTValues.value = response.data;
+  } catch (err) {
+    console.error('error while fetching data:', err);
+  }
+};
+getdmaTValues();
+
+
 
 //delete user and organization
 interface deleteItems {
@@ -251,7 +289,7 @@ handleSort('name');
 </script>
 
 <style scoped>
-/* Custom list */ 
+/* Custom list */
 .list li {
   background: rgba(214, 206, 206, 0.692) !important;
 }
@@ -261,4 +299,9 @@ handleSort('name');
   background: rgba(54, 48, 95, 0.692) !important;
 }
 
+.image {
+  max-width: 100px;
+  max-height: 100px;
+  margin: 10px;
+}
 </style>

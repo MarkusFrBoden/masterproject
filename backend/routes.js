@@ -186,7 +186,7 @@ router.get('/DmaOverview', (req, res) => {
     db.collection('DMAs')
         .find()
         .sort({ createdAt: 1 })
-        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title, "createdFor": dma.createdFor, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt }))
+        .forEach(dma => dmas.push({ "_id": dma._id, "title": dma.title, "createdFor": dma.createdFor, "createdBy": dma.createdBy, "createdAt": dma.createdAt, "updatedBy": dma.updatedBy, "updatedAt": dma.updatedAt, "euDMA" : dma.euDMA}))
         .then(() => {
             res.status(200).json(dmas)
         })
@@ -232,6 +232,41 @@ router.get('/DmaById/:id', (req, res) => {
     } else {
         res.status(500).json({ error: 'Not a valid doc id' })
     }
+});
+
+
+// Get
+router.get('/DmaTValues', (req, res) => {
+    db.collection('DMAs')
+        .aggregate([
+            {
+                $group: {
+                    _id: "$euDMA",
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $match: {
+                    _id: { $in: ["T0", "T1", "T2"] }
+                }
+            }
+        ])
+        .toArray()
+        .then(dmaCounts => {
+            const counts = {
+                T0: 0,
+                T1: 0,
+                T2: 0
+            };
+            dmaCounts.forEach(({ _id, count }) => {
+                counts[_id] = count;
+            });
+            res.status(200).json(counts);
+        })
+        .catch(error => {
+            console.error('Error fetching document counts:', error);
+            res.status(500).json({ error: 'Could not fetch the document counts' });
+        });
 });
 
 //Post

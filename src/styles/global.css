@@ -46,13 +46,18 @@ body {
 }
 nav a {
   font-weight: bold;
+  font-size:larger;
   color: #67788a;
+  transition: color 0.3s;
 }
 nav a.router-link-exact-active {
   color: #2365c8;
 }
 .dark nav a.router-link-exact-active {
   color: #72bbff;
+}
+nav a:hover {
+  color: #ff6869;
 }
 /* router position */
 #mouve {
@@ -186,7 +191,10 @@ button {
 }
 
 
-
+/* links */
+a {
+  text-decoration: none;
+}
 
 /* overlay for inputs */
 .overlay {

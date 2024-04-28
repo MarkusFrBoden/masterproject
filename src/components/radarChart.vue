@@ -59,19 +59,19 @@ if (props.data.datasets.length > 0) {
       dataset.pointHoverBackgroundColor = '#fff';
       dataset.pointHoverBorderColor = 'rgba(179,181,198,1)';
     } else if (i === 1) {
-      dataset.backgroundColor = 'rgba(144, 238, 144, 0.2)';
-      dataset.borderColor = 'rgba(144, 238, 144, 1)';
-      dataset.pointBackgroundColor = 'rgba(144, 238, 144, 1)';
-      dataset.pointBorderColor = '#fff';
-      dataset.pointHoverBackgroundColor = '#fff';
-      dataset.pointHoverBorderColor = 'rgba(144, 238, 144, 1)';
-    } else if (i === 2) {
       dataset.backgroundColor = 'rgba(173, 216, 230, 0.2)';
       dataset.borderColor = 'rgba(173, 216, 230, 1)';
       dataset.pointBackgroundColor = 'rgba(173, 216, 230, 1)';
       dataset.pointBorderColor = '#fff';
       dataset.pointHoverBackgroundColor = '#fff';
       dataset.pointHoverBorderColor = 'rgba(173, 216, 230, 1)';
+    } else if (i === 2) {
+      dataset.backgroundColor = 'rgba(144, 238, 144, 0.2)';
+      dataset.borderColor = 'rgba(144, 238, 144, 1)';
+      dataset.pointBackgroundColor = 'rgba(144, 238, 144, 1)';
+      dataset.pointBorderColor = '#fff';
+      dataset.pointHoverBackgroundColor = '#fff';
+      dataset.pointHoverBorderColor = 'rgba(144, 238, 144, 1)';
     }
   }
 }

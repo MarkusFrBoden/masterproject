@@ -89,16 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="showResultDetails" class="overlay">
-                <div class="input-container">
-                    <SurveyComp :survey="dmaDetails" surveyMode="Display" />
-                </div>
-                <div class="button-container">
-                    <button class="btn btn-outline-secondary custom-button2" @click="showResultDetails = false">{{
-                        $t(filename + '.button.closeEuAnswers') }}</button>
-                </div>
-            </div>
-            <!-- check if it includes EU questions  -->
+            <!-- BIM4VID Answers  -->
             <div v-else>
                 <!-- show answers and results  -->
                 <h5> {{ $t(filename + '.results.bim4vidAnswers') }}</h5>
@@ -266,11 +257,19 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <i>{{ $t(filename + '.results.text') }}</i>
+             <!-- show previous survey js answers  -->
             <br><br>
+            <div v-if="showResultDetails" class="overlay">
+                <div class="input-container">
+                    <SurveyComp :survey="dmaDetails" surveyMode="Display" />
+                </div>
+                <div class="button-container">
+                    <button class="btn btn-outline-secondary custom-button2" @click="showResultDetails = false">{{
+                        $t(filename + '.button.closeEuAnswers') }}</button>
+                </div>
+            </div>
         </div>
         <div v-else>
             <!-- survey js component for submit dma  -->
@@ -281,13 +280,18 @@
                 </button>
             </div>
             <div v-if="showSurvey" class="overlay">
+
                 <div class="input-container">
                     <SurveyComp @surveyCompleted="handleDmaCompleted" :survey="dmaDetails" surveyMode="edit" />
                 </div>
                 <div class="button-container">
-                    <button class="btn btn-outline-secondary custom-button2" @click="showSurvey = false">{{
-                        $t(filename
-                            + '.button.stopDMA') }}</button>
+                    <button class="btn btn-outline-secondary custom-button2" @click="showSurvey = false">
+                        {{ $t(filename + '.button.stopDMA') }}
+                    </button> 
+                    <select class="btn btn-outline-secondary custom-button2" v-model="$i18n.locale">
+                        <option value="en">EN</option>
+                        <option value="de">DE</option>
+                    </select>
                 </div>
             </div>
             <br><br>
@@ -296,7 +300,6 @@
     <div v-else>
         Loading...
     </div>
-
 </template>
 
 <script setup lang="ts">
@@ -628,7 +631,9 @@ const calculation = () => {
                     }
                 }
             }
-        } else if (checkForKey(dmaDetails.value.SurveyJson.pages[1], 'BIM4VIDQuestion2')) {
+        }
+      
+        if (checkForKey(dmaDetails.value.SurveyJson.pages[1], 'BIM4VIDQuestion2') || checkForKey(dmaDetails.value.SurveyJson.pages[9], 'BIM4VIDQuestion2')) {
             //Calculation BIM4VID
             const responses: any = dmaDetails.value.responses[0].data;
             for (let i = 2; i < 19; i++) {
@@ -663,6 +668,7 @@ const patchOrganization = () => {
         api.patch('/OrganizationDmaStatusById/' + UserId, ({ "organization": { "euDmaStatus": dmaDetails.value.euDMA, "euDmaResults": newEuResults.value, "lastDma": { "id": dmaDetails.value._id, "title": dmaDetails.value.title, "createdBy": dmaDetails.value.createdBy, "createdAt": dmaDetails.value.createdAt } } }));
     }
 }
+
 </script>
 
 <style scoped>
@@ -676,11 +682,15 @@ const patchOrganization = () => {
     height: 900px;
 }
 
-.leftbox {
-    text-align: center;
+.box {
+    text-align: center
 }
 
-.rightbox {
-    text-align: center;
+.button-container button,
+.button-container select {
+    margin: 0 30px;
 }
+
+
 </style>
+

@@ -35,7 +35,7 @@
       <SurveyComp @surveyCompleted="handleDmmCompleted" :survey="createDmmInterface || {}" surveyMode="edit"/>
       <br><br>
       <div class="button-group">
-        <button class="btn btn-outline-secondary" @click="showInput = false;">{{ $t(filename + '.createInput.cancel')
+        <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">{{ $t(filename + '.createInput.cancel')
           }}</button>
       </div>
     </div>

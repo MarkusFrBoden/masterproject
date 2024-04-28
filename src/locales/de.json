@@ -103,8 +103,19 @@
     "editedAt": "Bearbeitet am: ",
     "button": {
       "editDma": "DMA bearbeiten",
-      "viewDma": "DMA durchführen",
-      "DmaAnswers": "DMA-Antworten"
+      "viewDma": "DMA-Vorschau"
+    },
+    "results":{
+      "euAnswers":"EU-Ergebnisse",
+      "bim4vidAnswers":"BIM4VID-Ergebnisse",
+      "overview":"Dimensionsübersicht",
+      "title":"-Ergebnis",
+      "dimension1":"Digitale Strategie und Investitionen",
+      "dimension2":"Bereitschaft für den digitalen Wandel",
+      "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
+      "dimension4":"Datenverwaltung und -sicherheit",
+      "dimension5":"Interoperabilität",
+      "dimension6":"Grüne Digitalisierung"
     }
   },
   "EdihDmmView": {
@@ -207,7 +218,38 @@
         "size": "Organisationsgröße: ",
         "primarySector": "Primärer Sektor: ",
         "secondarySector": "Sekundärer Sektor: ",
-        "euDmaStatus": "EU-DMA Status: "
+        "euDmaStatus": "EU-DMA Status: ",
+        "values":{
+          "size1":"Kleine Belegschaft",
+          "size2":"Mittlere Belegschaft",
+          "size3":"Große Belegschaft",
+          "type1":"Nationale Behörde",
+          "type2":"Regional-/Landesbehörde",
+          "type3":"Provinz-/Gemeindebehörde",
+          "type4":"Öffentliche Insitution",
+          "primarySector1":"Dienstleistungen der allgemeinen öffentlichen Verwaltung",
+          "primarySector2":"Verteidigung",
+          "primarySector3":"Öffentliche Ordnung und Sicherheit",
+          "primarySector4":"Wirtschaftliche Angelegenheiten",
+          "primarySector5":"Umweltschutz",
+          "primarySector6":"Wohnungswesen",
+          "primarySector7":"Gesundheit",
+          "primarySector8":"Freizeitgestaltung, Sport, Kultur und Religion",
+          "primarySector9":"Bildungswesen",
+          "primarySector10":"Sozialschutz",
+          "primarySector11":"Anderweitiger Sektor",
+          "secondarySector":"Dienstleistungen der allgemeinen öffentlichen Verwaltung",
+          "secondarySector2":"Verteidigung",
+          "secondarySector3":"Öffentliche Ordnung und Sicherheit",
+          "secondarySector4":"Wirtschaftliche Angelegenheiten",
+          "secondarySector5":"Umweltschutz",
+          "secondarySector6":"Wohnungswesen",
+          "secondarySector7":"Gesundheit",
+          "secondarySector8":"Freizeitgestaltung, Sport, Kultur und Religion",
+          "secondarySector9":"Bildungswesen",
+          "secondarySector10":"Sozialschutz",
+          "secondarySector11":"Anderweitiger Sektor"
+        }
       },
       "address": {
         "title": "Adresse",
@@ -235,7 +277,10 @@
         "title": "Reifegrad nach der EU"
       },
       "lastDma": {
-        "title": "Ihr neuestes DMA"
+        "title": "Ihr neuestes DMA",
+        "name":"Name",
+        "createdBy":"Erstellt von",
+        "createdAt":"Erstellt am"
       }
     },
     "button": {
@@ -255,7 +300,7 @@
       "digitalization":"Der englische Begriff digitization bezeichnet im Allgemeinen den technischen Prozess der Umwandlung von analogen Daten in digitale Daten. In einem weiteren, organisatorischen Kontext umfasst die Digitalisierung hingegen eine Vielzahl von Veränderungen, sowohl auf individueller Ebene als auch im Hinblick auf die Organisation von Unternehmen und deren Prozesse. Die Digitale Transformation beschreibt einen tiefgreifenden digitalen Wandel auf vielen Ebenen im Unternehmen. Der Wandel umfasst sowohl die Nutzung digitaler Technologien zur Verbesserung bestehender Prozesse als auch die Erforschung neuer digitaler Innovationen, die das Geschäftsmodell potenziell umgestalten können. Im Gegensatz zur Digitalisierung haben Digitale Transformationen nicht nur das Ziel, neue digitale Technologien in Unternehmen einzuführen, sondern sie haben eine strategische Perspektive mit spezifisch definierten Zielen. Sie stellen die gesteuerte Anpassung von Unternehmen dar, welche die Digitalisierung vorantreibt. Folglich stellt die Digitalisierung eine notwendige, jedoch nicht hinreichende Bedingung für die digitale Transformation dar. ",
       "digitalization-img":"src/assets/digitalization_1_DE.png",
       "title2":"Digitale Reifegradmodelle",
-      "digitalMaturity":"Die Digitale Transformation erfordert eine grundlegende Änderung des aktuellen Geschäftsmodells. Dafür müssen Unternehmen zunächst ihr aktuelles Geschäftsmodell im Hinblick auf neu entstehende Möglichkeiten bewerten und es gegebenenfalls an aktuelle digitale Entwicklungen anpassen. Für diese Geschäftsmodellbewertung wurde das Konzept der digitalen Reife eingeführt. Digitale Reifegradmodelle (DMM) stellen eine Methode zur Messung des aktuellen Zustandes einer Organisation in Bezug auf die digitale Transformation, die digitale Strategie, den Einsatz von Technologie und die Geschäftsprozessimplementierung dar. Die Messung des aktuellen Stands der durchgeführten digitalen Transformation von Unternehmen steht im Zentrum von digitalen Reifegradmodellen. Der Prozess der Erfassung wird als Digital Maturity Assessment (DMA) bezeichnet. Digitale Reifegradmodelle ermöglichen die Erfassung von digitalen Reifegraden mittels der Durchführung von Digital Maturity Assessments (DMA). Die Reifegrade dienen dabei als Ausgangspunkt für Benchmarking-Aktivitäten sowie zur Evaluierung der Effektivität von digitalen Transformationsprozessen.",
+      "digitalMaturity":"Die Digitale Transformation erfordert eine grundlegende Änderung des aktuellen Geschäftsmodells. Dafür müssen Unternehmen zunächst ihr aktuelles Geschäftsmodell im Hinblick auf neu entstehende Möglichkeiten bewerten und es gegebenenfalls an aktuelle digitale Entwicklungen anpassen. Für diese Geschäftsmodellbewertung wurde das Konzept der digitalen Reife eingeführt. Digitale Reifegradmodelle (DMM) stellen eine Methode zur Messung des aktuellen Zustandes einer Organisation in Bezug auf die digitale Transformation, die digitale Strategie, den Einsatz von Technologie und die Geschäftsprozessimplementierung dar. Die Messung des aktuellen Stands der durchgeführten digitalen Transformation von Unternehmen steht im Zentrum von digitalen Reifegradmodellen. Digitale Reifegradmodelle ermöglichen die Erfassung von digitalen Reifegraden mittels der Durchführung von Digital Maturity Assessments (DMA). Die Reifegrade dienen dabei als Ausgangspunkt für Benchmarking-Aktivitäten sowie zur Evaluierung der Effektivität von digitalen Transformationsprozessen.",
       "digitalMaturity-img":"src/assets/digitalization_2_DE.png",
       "literatur":"Empfohlene Literatur",
       "source1":"The Extended Digital Maturity Model",

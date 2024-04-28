@@ -83,6 +83,7 @@
 
     <!-- dma list, filtered and sorted  -->
     <!-- header with sort logic part  -->
+    <div class="container">
     <div class="list">
         <div class="row">
             <div v-if="showDeleteOptions" class="col">
@@ -90,6 +91,15 @@
                     <b>{{ $t(filename + '.list.column0') }}</b>
                 </button>
             </div>
+            <div class="col" id="euDMA">
+                        <button class="flex-container" @click="handleSort('euDMA')">
+                            <b>{{ $t(filename + '.list.column1') }}</b>
+                            <div v-if="OrderIcons.euDMA || OrderIcons.euDMADown">
+                                <SortAlphaDown v-if="OrderIcons.euDMA" />
+                                <SortAlphaDownAlt v-else />
+                            </div>
+                        </button>
+                    </div>
             <div class="col" id="title">
                 <button class="flex-container" @click="handleSort('title')">
                     <b>{{ $t(filename + '.list.column1') }}</b>
@@ -154,6 +164,20 @@
                         <input type="checkbox" v-model="selectedItems"
                             :value="{ _id: dma._id, title: dma.title, createdFor: dma.createdFor }" />
                     </div>
+                    <div v-if="dma.euDMA !== 'false' || dma.euDMA !== '0'" class="col">
+                                <div v-if="dma.euDMA === 'T0'">
+                                    <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
+                                </div>
+                                <div v-else-if="dma.euDMA === 'T1'">
+                                    <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
+                                </div>
+                                <div v-else-if="dma.euDMA === 'T2'">
+                                    <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="col"></div>
+                            </div>
                     <div class="col">
                         <RouterLink :to="{ name: 'EdihDmaDetails', params: { id: dma._id?.toString() } }">
                             <a href="">{{ dma.title }}</a>
@@ -168,6 +192,7 @@
             </li>
         </transition-group>
     </div>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -239,9 +264,9 @@ let PostDma = ref<DMA>({
     "title": "",
     "createdFor": "",
     "createdBy": currentUserName,
-    "createdAt": new Date(),
+    "createdAt": new Date().toLocaleString(),
     "updatedBy": "",
-    "updatedAt": new Date(),
+    "updatedAt": "",
     "responses": [],
     "SurveyJson": {},
     "euDMA":"false"
@@ -413,4 +438,14 @@ let filteredDmas = computed(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.image {
+    width: 70px;
+    height: 70px;
+    margin-left: 10px;
+}
+
+.col{
+    width: 140px;
+}
+</style>

@@ -23,7 +23,105 @@
                   <span>{{ getLanguageKey(key) }}</span>
                 </div>
                 <div class="col">
-                  <span>{{ value }}</span>
+                                  
+                  <div v-if="key === 'type'">
+                    <div v-if="value === 'Item 1'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.type1') }}
+                    </div>
+                    <div v-else-if="value === 'Item 2'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.type2') }}
+                    </div>
+                    <div v-else-if="value === 'Item 3'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.type3') }}
+                    </div>
+                    <div v-else>
+                      {{ $t(filename + '.OrgaInformations.organization.values.type4') }}
+                    </div>
+                  </div>
+                  <div v-else-if="key === 'size'">
+                    <div v-if="value === 'Item 1'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.size1') }}
+                    </div>
+                    <div v-else-if="value === 'Item 2'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.size2') }}
+                    </div>
+                    <div v-else-if="value === 'Item 3'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.size3') }}
+                    </div>
+                  </div>
+                  <div v-else-if="key === 'primarySektor'">
+                    <div v-if="value === 'Item 1'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector1') }}
+                    </div>
+                    <div v-else-if="value === 'Item 2'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector2') }}
+                    </div>
+                    <div v-else-if="value === 'Item 3'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector3') }}
+                    </div>
+                    <div v-if="value === 'Item 4'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector4') }}
+                    </div>
+                    <div v-else-if="value === 'Item 5'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector5') }}
+                    </div>
+                    <div v-else-if="value === 'Item 6'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector6') }}
+                    </div>
+                    <div v-if="value === 'Item 7'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector7') }}
+                    </div>
+                    <div v-else-if="value === 'Item 8'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector8') }}
+                    </div>
+                    <div v-else-if="value === 'Item 9'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector9') }}
+                    </div>
+                    <div v-else-if="value === 'Item 10'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector10') }}
+                    </div>
+                    <div v-else-if="value === 'other'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector11') }}
+                    </div>
+                  </div>
+                  <div v-else-if="key === 'secondarySektor'">
+                    <div v-if="value === 'Item 1'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector1') }}
+                    </div>
+                    <div v-else-if="value === 'Item 2'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector2') }}
+                    </div>
+                    <div v-else-if="value === 'Item 3'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector3') }}
+                    </div>
+                    <div v-if="value === 'Item 4'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector4') }}
+                    </div>
+                    <div v-else-if="value === 'Item 5'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector5') }}
+                    </div>
+                    <div v-else-if="value === 'Item 6'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector6') }}
+                    </div>
+                    <div v-if="value === 'Item 7'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector7') }}
+                    </div>
+                    <div v-else-if="value === 'Item 8'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector8') }}
+                    </div>
+                    <div v-else-if="value === 'Item 9'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector9') }}
+                    </div>
+                    <div v-else-if="value === 'Item 10'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector10') }}
+                    </div>
+                    <div v-else-if="value === 'other'">
+                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector11') }}
+                    </div>
+                  </div>
+                  <div v-else>
+                    <span>{{ value }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -157,9 +255,9 @@
               <div class="list">
                 <li>
                   <div class="row">
-                    <div class="col"><b>name</b></div>
-                    <div class="col"><b>by</b></div>
-                    <div class="col"><b>at</b></div>
+                    <div class="col"><b>{{ $t(filename + '.DmaInformations.lastDma.name') }}</b></div>
+                    <div class="col"><b>{{ $t(filename + '.DmaInformations.lastDma.createdBy') }}</b></div>
+                    <div class="col"><b>{{ $t(filename + '.DmaInformations.lastDma.createdAt') }}</b></div>
                   </div>
                   <div class="row">
                     <div class="col">
@@ -467,5 +565,4 @@ const getLanguageKey = (key: keyof languageMapping) => {
   list-style-type: none;
   background: rgba(54, 48, 95, 0.692) !important;
 }
-
 </style>

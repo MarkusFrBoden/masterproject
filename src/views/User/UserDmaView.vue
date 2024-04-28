@@ -197,7 +197,7 @@
                                 <input type="checkbox" v-model="selectedItems"
                                     :value="{ _id: dma._id, title: dma.title, createdFor: dma.createdFor }" />
                             </div>
-                            <div v-if="dma.euDMA !== '0'" class="col">
+                            <div v-if="dma.euDMA !== 'false' || dma.euDMA !== '0'" class="col">
                                 <div v-if="dma.euDMA === 'T0'">
                                     <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
                                 </div>
@@ -384,9 +384,9 @@ let PostDma = ref<DMA>({
     "title": "",
     "createdFor": "",
     "createdBy": currentUserName!,
-    "createdAt": new Date(),
-    "updatedBy": currentUserName!,
-    "updatedAt": new Date(),
+    "createdAt": new Date().toLocaleString(),
+    "updatedBy": "",
+    "updatedAt": "",
     "euDMA": "false",
     "responses": [],
     "SurveyJson": {}

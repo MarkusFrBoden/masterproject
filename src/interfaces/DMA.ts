@@ -3,9 +3,9 @@ export interface DMA {
     title: String;
     createdFor: String;
     createdBy: String;
-    createdAt: Date;
+    createdAt: String;
     updatedBy: String;
-    updatedAt: Date;
+    updatedAt: String;
     euDMA:String;
     responses: any;
     SurveyJson: any;
