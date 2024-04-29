@@ -44,18 +44,18 @@
     "title": "Start",
     "h3": "Hallo",
     "h4": "Deine Organisation:",
-    "total":"Gesamtindex: ",
-    "dmaStatus":"DMA-Status:",
-    "results":{
-      "title":"-Ergebnis",
-      "dimension1":"Digitale Strategie und Investitionen",
-      "dimension2":"Digitale Bereitschaft",
-      "dimension3":"Menschen im Mittelpunkt",
-      "dimension4":"Datenverwaltung und -sicherheit",
-      "dimension5":"Interoperabilität",
-      "dimension6":"Grüne Digitalisierung",
-      "total":"Gesamtindex",
-      "missing":"Zu erreichen"
+    "total": "Gesamtindex: ",
+    "dmaStatus": "DMA-Status:",
+    "results": {
+      "title": "-Ergebnis",
+      "dimension1": "Digitale Strategie und Investitionen",
+      "dimension2": "Digitale Bereitschaft",
+      "dimension3": "Menschen im Mittelpunkt",
+      "dimension4": "Datenverwaltung und -sicherheit",
+      "dimension5": "Interoperabilität",
+      "dimension6": "Grüne Digitalisierung",
+      "total": "Gesamtindex",
+      "missing": "Zu erreichen"
     },
     "OrgaInformations": {
       "title": "Allgemeine Informationen",
@@ -69,36 +69,36 @@
         "primarySector": "Primärer Sektor: ",
         "secondarySector": "Sekundärer Sektor: ",
         "euDmaStatus": "EU-DMA Status: ",
-        "values":{
-          "size1":"Kleine Belegschaft",
-          "size2":"Mittlere Belegschaft",
-          "size3":"Große Belegschaft",
-          "type1":"Nationale Behörde",
-          "type2":"Regional-/Landesbehörde",
-          "type3":"Provinz-/Gemeindebehörde",
-          "type4":"Öffentliche Insitution",
-          "primarySector1":"Dienstleistungen der allgemeinen öffentlichen Verwaltung",
-          "primarySector2":"Verteidigung",
-          "primarySector3":"Öffentliche Ordnung und Sicherheit",
-          "primarySector4":"Wirtschaftliche Angelegenheiten",
-          "primarySector5":"Umweltschutz",
-          "primarySector6":"Wohnungswesen",
-          "primarySector7":"Gesundheit",
-          "primarySector8":"Freizeitgestaltung, Sport, Kultur und Religion",
-          "primarySector9":"Bildungswesen",
-          "primarySector10":"Sozialschutz",
-          "primarySector11":"Anderweitiger Sektor",
-          "secondarySector":"Dienstleistungen der allgemeinen öffentlichen Verwaltung",
-          "secondarySector2":"Verteidigung",
-          "secondarySector3":"Öffentliche Ordnung und Sicherheit",
-          "secondarySector4":"Wirtschaftliche Angelegenheiten",
-          "secondarySector5":"Umweltschutz",
-          "secondarySector6":"Wohnungswesen",
-          "secondarySector7":"Gesundheit",
-          "secondarySector8":"Freizeitgestaltung, Sport, Kultur und Religion",
-          "secondarySector9":"Bildungswesen",
-          "secondarySector10":"Sozialschutz",
-          "secondarySector11":"Anderweitiger Sektor"
+        "values": {
+          "size1": "Kleine Belegschaft",
+          "size2": "Mittlere Belegschaft",
+          "size3": "Große Belegschaft",
+          "type1": "Nationale Behörde",
+          "type2": "Regional-/Landesbehörde",
+          "type3": "Provinz-/Gemeindebehörde",
+          "type4": "Öffentliche Insitution",
+          "primarySector1": "Dienstleistungen der allgemeinen öffentlichen Verwaltung",
+          "primarySector2": "Verteidigung",
+          "primarySector3": "Öffentliche Ordnung und Sicherheit",
+          "primarySector4": "Wirtschaftliche Angelegenheiten",
+          "primarySector5": "Umweltschutz",
+          "primarySector6": "Wohnungswesen",
+          "primarySector7": "Gesundheit",
+          "primarySector8": "Freizeitgestaltung, Sport, Kultur und Religion",
+          "primarySector9": "Bildungswesen",
+          "primarySector10": "Sozialschutz",
+          "primarySector11": "Anderweitiger Sektor",
+          "secondarySector": "Dienstleistungen der allgemeinen öffentlichen Verwaltung",
+          "secondarySector2": "Verteidigung",
+          "secondarySector3": "Öffentliche Ordnung und Sicherheit",
+          "secondarySector4": "Wirtschaftliche Angelegenheiten",
+          "secondarySector5": "Umweltschutz",
+          "secondarySector6": "Wohnungswesen",
+          "secondarySector7": "Gesundheit",
+          "secondarySector8": "Freizeitgestaltung, Sport, Kultur und Religion",
+          "secondarySector9": "Bildungswesen",
+          "secondarySector10": "Sozialschutz",
+          "secondarySector11": "Anderweitiger Sektor"
         }
       },
       "address": {
@@ -116,7 +116,7 @@
       },
       "notAllInformation": "Nicht alle Informationen vorhanden!",
       "addInformation": "Bitte ergänzen Sie Informationen!",
-      "startEuDma":"Starten Sie jetzt ihr erstes EU-DMA"
+      "startEuDma": "Starten Sie jetzt ihr erstes EU-DMA"
     },
     "DmaInformations": {
       "title": "Durchgeführte EU-DMAs",
@@ -128,18 +128,18 @@
       },
       "lastDma": {
         "title": "Ihr neuestes DMA",
-        "name":"Name",
-        "createdBy":"Erstellt von",
-        "createdAt":"Erstellt am"
+        "name": "Name",
+        "createdBy": "Erstellt von",
+        "createdAt": "Erstellt am"
       }
     },
     "button": {
       "editInformation": "Informationen bearbeiten",
       "endInput": "Beenden",
-      "startDma":"Zu den DMAs"
+      "startDma": "Zu den DMAs"
     }
   },
-  "DmaView":{
+  "DmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
     "button": {
@@ -152,15 +152,15 @@
       "title": "Neues DMA erstellen",
       "name": "Bezeichnung: ",
       "organization": "Organisation: ",
-      "loadDMM":"Welche DMMs sollen geladen werden?",
-      "add":" anfügen? ",
+      "loadDMM": "Welche DMMs sollen geladen werden?",
+      "add": " anfügen? ",
       "cancel": "Abbrechen",
       "create": "Erstellen",
-        "euDma":"Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
-        "nextEuDma":"Ihr nächstes DMA: ",
-        "euDmaYes1":"Ja, ",
-        "euDmaYes2":" für die EU durchführen",
-        "euDmaNo":"Nein, ich möchte das DMA intern durchführen"
+      "euDma": "Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
+      "nextEuDma": "Ihr nächstes DMA: ",
+      "euDmaYes1": "Ja, ",
+      "euDmaYes2": " für die EU durchführen",
+      "euDmaNo": "Nein, ich möchte das DMA intern durchführen"
     },
     "deleteInput": {
       "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
@@ -224,21 +224,21 @@
   "UserDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
-    "Dmas":"Verfügbare DMA",
-    "Infos":"Allgemeine Informationen",
+    "Dmas": "Verfügbare DMA",
+    "Infos": "Allgemeine Informationen",
     "noDma": "Noch kein DMA angelegt",
-    "Information":{
-      "title1":"Digitale Transformation",
-      "digitalization":"Der englische Begriff digitization bezeichnet im Allgemeinen den technischen Prozess der Umwandlung von analogen Daten in digitale Daten. In einem weiteren, organisatorischen Kontext umfasst die Digitalisierung hingegen eine Vielzahl von Veränderungen, sowohl auf individueller Ebene als auch im Hinblick auf die Organisation von Unternehmen und deren Prozesse. Die Digitale Transformation beschreibt einen tiefgreifenden digitalen Wandel auf vielen Ebenen im Unternehmen. Der Wandel umfasst sowohl die Nutzung digitaler Technologien zur Verbesserung bestehender Prozesse als auch die Erforschung neuer digitaler Innovationen, die das Geschäftsmodell potenziell umgestalten können. Im Gegensatz zur Digitalisierung haben Digitale Transformationen nicht nur das Ziel, neue digitale Technologien in Unternehmen einzuführen, sondern sie haben eine strategische Perspektive mit spezifisch definierten Zielen. Sie stellen die gesteuerte Anpassung von Unternehmen dar, welche die Digitalisierung vorantreibt. Folglich stellt die Digitalisierung eine notwendige, jedoch nicht hinreichende Bedingung für die digitale Transformation dar. ",
-      "digitalization-img":"src/assets/digitalization_1_DE.png",
-      "title2":"Digitale Reifegradmodelle",
-      "digitalMaturity":"Die Digitale Transformation erfordert eine grundlegende Änderung des aktuellen Geschäftsmodells. Dafür müssen Unternehmen zunächst ihr aktuelles Geschäftsmodell im Hinblick auf neu entstehende Möglichkeiten bewerten und es gegebenenfalls an aktuelle digitale Entwicklungen anpassen. Für diese Geschäftsmodellbewertung wurde das Konzept der digitalen Reife eingeführt. Digitale Reifegradmodelle (DMM) stellen eine Methode zur Messung des aktuellen Zustandes einer Organisation in Bezug auf die digitale Transformation, die digitale Strategie, den Einsatz von Technologie und die Geschäftsprozessimplementierung dar. Die Messung des aktuellen Stands der durchgeführten digitalen Transformation von Unternehmen steht im Zentrum von digitalen Reifegradmodellen. Digitale Reifegradmodelle ermöglichen die Erfassung von digitalen Reifegraden mittels der Durchführung von Digital Maturity Assessments (DMA). Die Reifegrade dienen dabei als Ausgangspunkt für Benchmarking-Aktivitäten sowie zur Evaluierung der Effektivität von digitalen Transformationsprozessen.",
-      "digitalMaturity-img":"src/assets/digitalization_2_DE.png",
-      "literatur":"Empfohlene Literatur",
-      "source1":"The Extended Digital Maturity Model",
-      "source2":"Stages in Digital Business Transformation",
-      "source3":"Management Models of Digital Transformation",
-      "source4":"What makes a useful Maturity Model?"
+    "Information": {
+      "title1": "Digitale Transformation",
+      "digitalization": "Der englische Begriff digitization bezeichnet im Allgemeinen den technischen Prozess der Umwandlung von analogen Daten in digitale Daten. In einem weiteren, organisatorischen Kontext umfasst die Digitalisierung hingegen eine Vielzahl von Veränderungen, sowohl auf individueller Ebene als auch im Hinblick auf die Organisation von Unternehmen und deren Prozesse. Die Digitale Transformation beschreibt einen tiefgreifenden digitalen Wandel auf vielen Ebenen im Unternehmen. Der Wandel umfasst sowohl die Nutzung digitaler Technologien zur Verbesserung bestehender Prozesse als auch die Erforschung neuer digitaler Innovationen, die das Geschäftsmodell potenziell umgestalten können. Im Gegensatz zur Digitalisierung haben Digitale Transformationen nicht nur das Ziel, neue digitale Technologien in Unternehmen einzuführen, sondern sie haben eine strategische Perspektive mit spezifisch definierten Zielen. Sie stellen die gesteuerte Anpassung von Unternehmen dar, welche die Digitalisierung vorantreibt. Folglich stellt die Digitalisierung eine notwendige, jedoch nicht hinreichende Bedingung für die digitale Transformation dar. ",
+      "digitalization-img": "src/assets/digitalization_1_DE.png",
+      "title2": "Digitale Reifegradmodelle",
+      "digitalMaturity": "Die Digitale Transformation erfordert eine grundlegende Änderung des aktuellen Geschäftsmodells. Dafür müssen Unternehmen zunächst ihr aktuelles Geschäftsmodell im Hinblick auf neu entstehende Möglichkeiten bewerten und es gegebenenfalls an aktuelle digitale Entwicklungen anpassen. Für diese Geschäftsmodellbewertung wurde das Konzept der digitalen Reife eingeführt. Digitale Reifegradmodelle (DMM) stellen eine Methode zur Messung des aktuellen Zustandes einer Organisation in Bezug auf die digitale Transformation, die digitale Strategie, den Einsatz von Technologie und die Geschäftsprozessimplementierung dar. Die Messung des aktuellen Stands der durchgeführten digitalen Transformation von Unternehmen steht im Zentrum von digitalen Reifegradmodellen. Digitale Reifegradmodelle ermöglichen die Erfassung von digitalen Reifegraden mittels der Durchführung von Digital Maturity Assessments (DMA). Die Reifegrade dienen dabei als Ausgangspunkt für Benchmarking-Aktivitäten sowie zur Evaluierung der Effektivität von digitalen Transformationsprozessen.",
+      "digitalMaturity-img": "src/assets/digitalization_2_DE.png",
+      "literatur": "Empfohlene Literatur",
+      "source1": "The Extended Digital Maturity Model",
+      "source2": "Stages in Digital Business Transformation",
+      "source3": "Management Models of Digital Transformation",
+      "source4": "What makes a useful Maturity Model?"
     },
     "button": {
       "createDma": "DMA erstellen",
@@ -249,13 +249,13 @@
     "createInput": {
       "title": "Neues DMA erstellen",
       "name": "Bezeichnung: ",
-      "loadDMM":"Welche DMMs sollen geladen werden?",
-      "add":" anfügen? ",
-      "euDma":"Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
-      "nextEuDma":"Ihr nächstes DMA: ",
-      "euDmaYes1":"Ja, ",
-      "euDmaYes2":" für die EU durchführen",
-      "euDmaNo":"Nein, ich möchte das DMA intern durchführen",
+      "loadDMM": "Welche DMMs sollen geladen werden?",
+      "add": " anfügen? ",
+      "euDma": "Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
+      "nextEuDma": "Ihr nächstes DMA: ",
+      "euDmaYes1": "Ja, ",
+      "euDmaYes2": " für die EU durchführen",
+      "euDmaNo": "Nein, ich möchte das DMA intern durchführen",
       "cancel": "Abbrechen",
       "create": "Erstellen"
     },
@@ -263,8 +263,8 @@
       "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
       "name": "Bezeichnung: ",
       "organization": "Organisation: ",
-      "loadDMM":"Welche DMMs sollen geladen werden?",
-      "add":" anfügen? ",
+      "loadDMM": "Welche DMMs sollen geladen werden?",
+      "add": " anfügen? ",
       "cancel": "Abbrechen",
       "delete": "Löschen"
     },
@@ -278,7 +278,7 @@
       "column6": "Bearbeitet am"
     }
   },
-  "DmaDetails":{
+  "DmaDetails": {
     "organization": "Unternehmen: ",
     "dmaData": "DMA Details",
     "creator": "Ersteller: ",
@@ -287,19 +287,19 @@
     "editedAt": "Bearbeitet am: ",
     "answeringUser": "Beantwortet von: ",
     "answeredAt": "Beantwortet am: ",
-    "euAnswers":"EU-Ergebnisse",
+    "euAnswers": "EU-Ergebnisse",
     "button": {
       "editDma": "DMA bearbeiten",
       "viewDma": "DMA-Vorschau",
       "DmaAnswers": "Antworten anschauen",
-      "downloadCSV":" CSV herunterladen",
-      "startDMA":"DMA starten",
-      "closeEuAnswers":"Verlassen",
-      "stopDma":"Beenden - Fortschritt geht verloren!"
+      "downloadCSV": " CSV herunterladen",
+      "startDMA": "DMA starten",
+      "closeEuAnswers": "Verlassen",
+      "stopDma": "Beenden - Fortschritt geht verloren!"
     },
-    "UserText":"Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
+    "UserText": "Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
   },
-  "EdihDmmView": {
+  "DmmView": {
     "title": "DMMs",
     "h3": "DMM-Übersicht",
     "button": {
@@ -328,41 +328,35 @@
       "column4": "Erstellt am",
       "column5": "Bearbeitet von",
       "column6": "Bearbeitet am"
+    },
+    "user": {
+      "title": "About",
+      "h3": "Über das EDIH-DMA-Tool",
+      "button": {
+        "showDmm": "Verfügbare DMM",
+        "showAbout": "Allgemeine Informationen"
+      },
+      "EDIHInformation": {
+        "edihDescription": "Wir möchten Sie auf Ihrem Weg in die digitale Zukunft begleiten. Die digitale Transformation ist in vollem Gange und bietet Unternehmen, Startups und der öffentlichen Hand enorme Chancen. Der European Digital Innovation Hub Thuringia (EDIH) unterstützt Sie dabei, diese Chancen zu nutzen und die digitale Zukunft aktiv zu gestalten.",
+        "edihButtons": {
+          "learn": "Lernen",
+          "test": "Testen",
+          "invest": "Investieren",
+          "connect": "Vernetzen"
+        },
+        "dmmDescription": {
+          "part1": "Im Rahmen der EDIH-Initiative der EU wurde ein ",
+          "link": "digitales Reifegradmodell (DMM)",
+          "part2": " mit Ausprägungen für kleine und mittlere Unternehmen (SME) und öffentliche Organisationen (PSO) erarbeitet. Die Modelle ermöglichen das durchführen von digitalen Reifegraderfassungen (DMAs). Mittels der DMAs verfolgt die EU folgende Ziele:",
+          "aim1": "1. Die Bewertung des aktuellen Stands der digitalen Reife der SME/PSO für die Ermittlung der erforderlichen EDIH-Digitalisierungsdienste.",
+          "aim2": "2. Ein Benchmarking für KMU/PSO, um ein besseres Bild der digitalen Reife im Vergleich zu Wettbewerbern zu erhalten.",
+          "aim3": "3. Die Messung und Berichterstattung über die Wirksamkeit der EDIH-Dienste.",
+          "aim4": "4. Die Bereitstellung von Feedback für politische Entscheidungen und erforderliche Korrekturmaßnahmen."
+        },
+        "dmaToolDescription": "Mit diesem DMA-Tool bieten wir unseren Kunden die Möglichkeit, DMAs selbständig durchzuführen. So können sie ihren digitalen Reifegrad selbst bestimmen und haben anschließend direkten Zugriff auf die Ergebnisse. Das EDIH verwendet die EU-relevanten DMA-Ergebnisse für die Weiterleitung an die EU zu den Zeitpunkten T0, T1 und T3, die für die Empfänger von EDIH-Dienstleistungen obligatorisch sind. Neben den Standard-DMAs der EU bieten wir thematisch vertiefte Reifegradmodelle an, um Ihre digitalen Fähigkeiten für Ihren spezifischen Bereich gezielt bestimmen zu können."
+      }
     }
   },
-  "UserDmmView": {
-    "title": "About",
-    "h3": "Über das EDIH-DMA-Tool",
-    "button": {
-      "showDmm": "Verfügbare DMM",
-      "showAbout": "Allgemeine Informationen"
-    },
-    "list": {
-      "column1": "Akronym",
-      "column3": "Ersteller",
-      "column4": "Erstellt am",
-      "column5": "Bearbeitet von",
-      "column6": "Bearbeitet am"
-    },
-    "EDIHInformation":{
-      "edihDescription":"Wir möchten Sie auf Ihrem Weg in die digitale Zukunft begleiten. Die digitale Transformation ist in vollem Gange und bietet Unternehmen, Startups und der öffentlichen Hand enorme Chancen. Der European Digital Innovation Hub Thuringia (EDIH) unterstützt Sie dabei, diese Chancen zu nutzen und die digitale Zukunft aktiv zu gestalten.",
-      "edihButtons":{
-        "learn":"Lernen",
-        "test":"Testen",
-        "invest":"Investieren",
-        "connect":"Vernetzen"
-      },
-      "dmmDescription":{
-        "part1":"Im Rahmen der EDIH-Initiative der EU wurde ein ",
-        "link":"digitales Reifegradmodell (DMM)",
-        "part2":" mit Ausprägungen für kleine und mittlere Unternehmen (SME) und öffentliche Organisationen (PSO) erarbeitet. Die Modelle ermöglichen das durchführen von digitalen Reifegraderfassungen (DMAs). Mittels der DMAs verfolgt die EU folgende Ziele:",
-        "aim1":"1. Die Bewertung des aktuellen Stands der digitalen Reife der SME/PSO für die Ermittlung der erforderlichen EDIH-Digitalisierungsdienste.",
-        "aim2":"2. Ein Benchmarking für KMU/PSO, um ein besseres Bild der digitalen Reife im Vergleich zu Wettbewerbern zu erhalten.",
-        "aim3":"3. Die Messung und Berichterstattung über die Wirksamkeit der EDIH-Dienste.",
-        "aim4":"4. Die Bereitstellung von Feedback für politische Entscheidungen und erforderliche Korrekturmaßnahmen."
-    },
-    "dmaToolDescription":"Mit diesem DMA-Tool bieten wir unseren Kunden die Möglichkeit, DMAs selbständig durchzuführen. So können sie ihren digitalen Reifegrad selbst bestimmen und haben anschließend direkten Zugriff auf die Ergebnisse. Das EDIH verwendet die EU-relevanten DMA-Ergebnisse für die Weiterleitung an die EU zu den Zeitpunkten T0, T1 und T3, die für die Empfänger von EDIH-Dienstleistungen obligatorisch sind. Neben den Standard-DMAs der EU bieten wir thematisch vertiefte Reifegradmodelle an, um Ihre digitalen Fähigkeiten für Ihren spezifischen Bereich gezielt bestimmen zu können."
-  }},
   "LoginComp": {
     "email": "E-Mail-Adresse",
     "password": "Passwort",
@@ -382,18 +376,16 @@
       "existingUser": "Du hast bereits einen Account?"
     }
   },
-  "EuResultsComp":{
-    "overview":"Dimensionsübersicht",
-    "dimension1":"Digitale Strategie und Investitionen",
-    "dimension2":"Bereitschaft für den digitalen Wandel",
-    "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
-    "dimension4":"Datenverwaltung und -sicherheit",
-    "dimension5":"Interoperabilität",
-    "dimension6":"Grüne Digitalisierung"
+  "EuResultsComp": {
+    "overview": "Dimensionsübersicht",
+    "dimension1": "Digitale Strategie und Investitionen",
+    "dimension2": "Bereitschaft für den digitalen Wandel",
+    "dimension3": "Auf den Menschen ausgerichtete Digitalisierung",
+    "dimension4": "Datenverwaltung und -sicherheit",
+    "dimension5": "Interoperabilität",
+    "dimension6": "Grüne Digitalisierung"
   },
-  "BIM4VIDResultsComp":{
-    "bim4vidAnswers":"BIM4VID-Ergebnisse"
+  "BIM4VIDResultsComp": {
+    "bim4vidAnswers": "BIM4VID-Ergebnisse"
   }
 }
-
-

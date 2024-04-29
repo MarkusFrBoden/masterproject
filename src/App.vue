@@ -25,7 +25,7 @@
             <nav>
               <router-link :to="{ name: type + 'Home' }">{{ $t(type + 'HomeView.title') }}</router-link> |
               <router-link :to="{ name: type + 'Dma' }">{{ $t('DmaView.title') }}</router-link> |
-              <router-link :to="{ name: type + 'Dmm' }">{{ $t(type + 'DmmView.title') }}</router-link>
+              <router-link :to="{ name: type + 'Dmm' }">{{ $t('DmmView.title') }}</router-link>
             </nav>
           </div>
 

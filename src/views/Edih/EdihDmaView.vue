@@ -112,7 +112,7 @@
 
     <!-- dma list, filtered and sorted  -->
     <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
-        @updateselectedItems="updateselectedItems" />
+        @updateselectedItems="updateselectedItems" type="Edih"/>
 
 </template>
 

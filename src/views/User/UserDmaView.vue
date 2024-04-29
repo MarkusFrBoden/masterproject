@@ -44,7 +44,7 @@
 
         <!-- dma list  -->
         <div v-if="dmms.length > 0">
-            <DmaList :showDeleteOptions = "showDeleteOptions" :dmas = "dmas" :showOrganization = false @updateselectedItems="updateselectedItems"/>
+            <DmaList :showDeleteOptions = "showDeleteOptions" :dmas = "dmas" :showOrganization = false @updateselectedItems="updateselectedItems" type="User"/>
         </div>
         <div v-else>
             <br>

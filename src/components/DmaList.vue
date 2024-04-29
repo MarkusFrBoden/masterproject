@@ -148,6 +148,10 @@ let props = defineProps({
     showOrganization: {
         type: Boolean,
         required: true
+    },
+    type: {
+        type: String,
+        required: true
     }
 })
 
