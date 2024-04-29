@@ -23,71 +23,73 @@
 
     <!-- dmm list, filtered and sorted  -->
     <!-- header with sort logic part  -->
-    <div class="list">
-      <div class="row">
-        <div class="col" id="akronym">
-          <button class="flex-container" @click="handleSort('akronym')">
-            <b>{{ $t(filename + '.list.column1') }}</b>
-            <div v-if="OrderIcons.akronym || OrderIcons.akronymDown">
-              <SortAlphaDown v-if="OrderIcons.akronym" />
-              <SortAlphaDownAlt v-else />
-            </div>
-          </button>
-        </div>
-        <div class="col" id="createdBy">
-          <button class="flex-container" @click="handleSort('createdBy')">
-            <b>{{ $t(filename + '.list.column3') }}</b>
-            <div v-if="OrderIcons.createdBy || OrderIcons.createdByDown">
-              <SortAlphaDown v-if="OrderIcons.createdBy" />
-              <SortAlphaDownAlt v-else />
-            </div>
-          </button>
-        </div>
-        <div class="col" id="createdAt">
-          <button class="flex-container" @click="handleSort('createdAt')">
-            <b>{{ $t(filename + '.list.column4') }}</b>
-            <div v-if="OrderIcons.createdAt || OrderIcons.createdAtDown">
-              <SortNumericDown v-if="OrderIcons.createdAt" />
-              <SortNumericDownAlt v-else />
-            </div>
-          </button>
-        </div>
-        <div class="col" id="updatedBy">
-          <button class="flex-container" @click="handleSort('updatedBy')">
-            <b>{{ $t(filename + '.list.column5') }}</b>
-            <div v-if="OrderIcons.updatedBy || OrderIcons.updatedByDown">
-              <SortAlphaDown v-if="OrderIcons.updatedBy" />
-              <SortAlphaDownAlt v-else />
-            </div>
-          </button>
-        </div>
-        <div class="col" id="updatedAt">
-          <button class="flex-container" @click="handleSort('updatedAt')">
-            <b>{{ $t(filename + '.list.column6') }}</b>
-            <div v-if="OrderIcons.updatedAt || OrderIcons.updatedAtDown">
-              <SortNumericDown v-if="OrderIcons.updatedAt" />
-              <SortNumericDownAlt v-else />
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- data with transition  -->
-      <transition-group name="list">
-        <li v-for="dmm in filteredDmms" :key="dmm._id?.toString()">
-          <div class="row">
-            <div class="col">
-              <RouterLink :to="{ name: 'UserDmmDetails', params: { id: dmm._id?.toString() } }">
-                <a href="">{{ dmm.akronym }}</a>
-              </RouterLink>
-            </div>
-            <div class="col">{{ dmm.createdBy }}</div>
-            <div class="col">{{ dmm.createdAt }}</div>
-            <div class="col">{{ dmm.updatedBy }}</div>
-            <div class="col">{{ dmm.updatedAt }}</div>
+    <div class="container">
+      <div class="list">
+        <div class="row">
+          <div class="col" id="akronym">
+            <button class="flex-container" @click="handleSort('akronym')">
+              <b>{{ $t(filename + '.list.column1') }}</b>
+              <div v-if="OrderIcons.akronym || OrderIcons.akronymDown">
+                <SortAlphaDown v-if="OrderIcons.akronym" />
+                <SortAlphaDownAlt v-else />
+              </div>
+            </button>
           </div>
-        </li>
-      </transition-group>
+          <div class="col" id="createdBy">
+            <button class="flex-container" @click="handleSort('createdBy')">
+              <b>{{ $t(filename + '.list.column3') }}</b>
+              <div v-if="OrderIcons.createdBy || OrderIcons.createdByDown">
+                <SortAlphaDown v-if="OrderIcons.createdBy" />
+                <SortAlphaDownAlt v-else />
+              </div>
+            </button>
+          </div>
+          <div class="col" id="createdAt">
+            <button class="flex-container" @click="handleSort('createdAt')">
+              <b>{{ $t(filename + '.list.column4') }}</b>
+              <div v-if="OrderIcons.createdAt || OrderIcons.createdAtDown">
+                <SortNumericDown v-if="OrderIcons.createdAt" />
+                <SortNumericDownAlt v-else />
+              </div>
+            </button>
+          </div>
+          <div class="col" id="updatedBy">
+            <button class="flex-container" @click="handleSort('updatedBy')">
+              <b>{{ $t(filename + '.list.column5') }}</b>
+              <div v-if="OrderIcons.updatedBy || OrderIcons.updatedByDown">
+                <SortAlphaDown v-if="OrderIcons.updatedBy" />
+                <SortAlphaDownAlt v-else />
+              </div>
+            </button>
+          </div>
+          <div class="col" id="updatedAt">
+            <button class="flex-container" @click="handleSort('updatedAt')">
+              <b>{{ $t(filename + '.list.column6') }}</b>
+              <div v-if="OrderIcons.updatedAt || OrderIcons.updatedAtDown">
+                <SortNumericDown v-if="OrderIcons.updatedAt" />
+                <SortNumericDownAlt v-else />
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- data with transition  -->
+        <transition-group name="list">
+          <li v-for="dmm in filteredDmms" :key="dmm._id?.toString()">
+            <div class="row">
+              <div class="col">
+                <RouterLink :to="{ name: 'UserDmmDetails', params: { id: dmm._id?.toString() } }">
+                  <a href="">{{ dmm.akronym }}</a>
+                </RouterLink>
+              </div>
+              <div class="col">{{ dmm.createdBy }}</div>
+              <div class="col">{{ dmm.createdAt }}</div>
+              <div class="col">{{ dmm.updatedBy }}</div>
+              <div class="col">{{ dmm.updatedAt }}</div>
+            </div>
+          </li>
+        </transition-group>
+      </div>
     </div>
   </div>
 

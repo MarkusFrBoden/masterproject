@@ -120,7 +120,7 @@ import { ref, inject } from "vue";
 import type { DMM } from "../../interfaces/DMM.js"
 
 //language prefix
-const filename = 'EdihDmmDetails'
+const filename = 'DmmDetails'
 
 //enable api via global variable
 const api = inject('api') as any;

@@ -193,7 +193,7 @@ import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
 import { PatchDmmQuestions } from "@/components/staticQuestions/PatchDmmQuestions_json.js";
 
 //language prefix
-const filename = 'EdihDmmDetails'
+const filename = 'DmmDetails'
 
 //enable api via global variable
 const api = inject('api') as any;

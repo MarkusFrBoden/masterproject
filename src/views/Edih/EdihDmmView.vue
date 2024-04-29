@@ -61,6 +61,7 @@
 
   <!-- dmm list, filtered and sorted  -->
   <!-- header with sort logic part  -->
+  <div class="container">
   <div class="list">
     <div class="row">
       <div v-if="showDeleteOptions" class="col">
@@ -137,6 +138,7 @@
       </li>
     </transition-group>
   </div>
+</div>
 
 </template>
 

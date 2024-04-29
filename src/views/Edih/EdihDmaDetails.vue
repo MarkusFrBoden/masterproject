@@ -7,11 +7,12 @@
         {{ $t(filename + '.createdAt') }} {{ dmaDetails.createdAt }} ||
         {{ $t(filename + '.editor') }} {{ dmaDetails.updatedBy }} ||
         {{ $t(filename + '.editedAt') }} {{ dmaDetails.updatedAt }}
-    
+
         <div>
             <!-- check dma includes responses  -->
             <div v-if="dmaDetails.responses.length > 0">
-                {{ $t(filename + '.answeringUser') }} {{ dmaDetails.responses[0].responseClient }} || {{ $t(filename + '.answeredAt') }} {{ dmaDetails.responses[0].responseDate }}
+                {{ $t(filename + '.answeringUser') }} {{ dmaDetails.responses[0].responseClient }} || {{ $t(filename +
+                    '.answeredAt') }} {{ dmaDetails.responses[0].responseDate }}
                 <br><br>
                 <!-- EU Response  -->
                 <div v-if="dmaDetails.euDMA !== 'false'">
@@ -32,12 +33,14 @@
                     </div>
                 </div>
                 <!-- BIM4VID Response  -->
-                <div v-if="checkForKey(dmaDetails.SurveyJson.pages[0],'BIM4VIDQuestion1') || checkForKey(dmaDetails.SurveyJson.pages[8],'BIM4VIDQuestion1')" >
+              <div
+              v-if="(dmaDetails.SurveyJson.pages[0] && checkForKey(dmaDetails.SurveyJson.pages[0], 'BIM4VIDQuestion1')) || (dmaDetails.SurveyJson.pages[8] && checkForKey(dmaDetails.SurveyJson.pages[8], 'BIM4VIDQuestion1'))">
                     <!-- render BIM4VID results -->
                     <div v-if="trafficLightKPI">
                         <BIM4VIDResultsComp :trafficLightKPI="trafficLightKPI" />
                     </div>
                 </div>
+                {{ dmaDetails.SurveyJson.pages[0] }}
             </div>
             <div v-else>
                 <!-- enable creator if no responses  -->
@@ -132,6 +135,7 @@ const props = defineProps({
 
 //get start data
 let currentUserName = localStorage.getItem('userName') || '';
+let UserId = localStorage.getItem('userId');
 const dmaDetails = ref<DMA>();
 const fetchData = async () => {
     try {
@@ -146,7 +150,7 @@ fetchData();
 
 // rekursive function to check for key
 function checkForKey(element: any, name: string): boolean {
-    if (element.name === name) {
+    if ( element.name === name) {
         return true;
     } else if (element.elements) {
         for (const nestedElement of element.elements) {
@@ -171,6 +175,8 @@ const handleDmaCompleted = async (results: any) => {
         "responseClient": currentUserName,
         "data": results
     };
+    alert(newResponse);
+    /* 
     data.push(newResponse);
     let patchResponses = {
         responses: data
@@ -183,7 +189,7 @@ const handleDmaCompleted = async (results: any) => {
         } else { console.error('dmm null or undefined'); }
     } catch (err) {
         console.error('Error patchching data:', err);
-    }
+    } */
 };
 
 //calculation of eu or bim4vid answers

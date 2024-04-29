@@ -17,9 +17,8 @@
         </button>
     </div>
     <br>
-
+ 
     <div v-if="showDma">
-
         <!-- buttons for create and delete dma  -->
         <div>
             <button class="btn btn-outline-secondary" v-if="!showDeleteOptions"
@@ -43,6 +42,15 @@
             </button>
         </div>
 
+        <!-- dma list  -->
+        <div v-if="dmms.length > 0">
+            <DmaList :showDeleteOptions = "showDeleteOptions" :dmas = "dmas" :showOrganization = false @updateselectedItems="updateselectedItems"/>
+        </div>
+        <div v-else>
+            <br>
+            {{ $t(filename + '.noDma') }}
+        </div>
+
         <!-- create dma interface  -->
         <div v-if="showInput" class="overlay">
             <div class="input-container">
@@ -58,7 +66,6 @@
                             :value="{ id: dmm._id, akronym: dmm.akronym }" v-model="selectedDmms">
                     </div>
                 </div>
-
                 <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
                     <br>
                     {{ $t(filename + '.createInput.euDma') }}
@@ -80,7 +87,6 @@
                         </label>
                     </div>
                 </div>
-
                 <br><br>
                 <div class="button-group" style="display: flex; justify-content: center;">
                     <button class="btn btn-outline-secondary" @click="showInput = false;">
@@ -120,185 +126,73 @@
             </div>
         </div>
 
-        <!-- dma list, filtered and sorted  -->
-        <div v-if="filteredDmas.length > 0">
-            <br>
-            <!-- input for filter  -->
-            <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
-
-            <div class="list">
-                <!-- header with sort logic part  -->
-                <div class="row">
-                    <div v-if="showDeleteOptions" class="col-1">
-                        <button class="flex-container">
-                            <b>{{ $t(filename + '.list.column0') }}</b>
-                        </button>
-                    </div>
-                    <div class="col" id="euDMA">
-                        <button class="flex-container" @click="handleSort('euDMA')">
-                            <b>{{ $t(filename + '.list.column1') }}</b>
-                            <div v-if="OrderIcons.euDMA || OrderIcons.euDMADown">
-                                <SortAlphaDown v-if="OrderIcons.euDMA" />
-                                <SortAlphaDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col" id="title">
-                        <button class="flex-container" @click="handleSort('title')">
-                            <b>{{ $t(filename + '.list.column2') }}</b>
-                            <div v-if="OrderIcons.title || OrderIcons.titleDown">
-                                <SortAlphaDown v-if="OrderIcons.title" />
-                                <SortAlphaDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col" id="createdBy">
-                        <button class="flex-container" @click="handleSort('createdBy')">
-                            <b>{{ $t(filename + '.list.column3') }}</b>
-                            <div v-if="OrderIcons.createdBy || OrderIcons.createdByDown">
-                                <SortAlphaDown v-if="OrderIcons.createdBy" />
-                                <SortAlphaDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col" id="createdAt">
-                        <button class="flex-container" @click="handleSort('createdAt')">
-                            <b>{{ $t(filename + '.list.column4') }}</b>
-                            <div v-if="OrderIcons.createdAt || OrderIcons.createdAtDown">
-                                <SortNumericDown v-if="OrderIcons.createdAt" />
-                                <SortNumericDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col" id="updatedBy">
-                        <button class="flex-container" @click="handleSort('updatedBy')">
-                            <b>{{ $t(filename + '.list.column5') }}</b>
-                            <div v-if="OrderIcons.updatedBy || OrderIcons.updatedByDown">
-                                <SortAlphaDown v-if="OrderIcons.updatedBy" />
-                                <SortAlphaDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col" id="updatedAt">
-                        <button class="flex-container" @click="handleSort('updatedAt')">
-                            <b>{{ $t(filename + '.list.column6') }}</b>
-                            <div v-if="OrderIcons.updatedAt || OrderIcons.updatedAtDown">
-                                <SortNumericDown v-if="OrderIcons.updatedAt" />
-                                <SortNumericDownAlt v-else />
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                <!-- data with transition  -->
-                <transition-group name="list">
-                    <li v-for="dma in filteredDmas" :key="dma._id?.toString()">
-                        <div class="row">
-                            <div v-if="showDeleteOptions" class="col">
-                                <input type="checkbox" v-model="selectedItems"
-                                    :value="{ _id: dma._id, title: dma.title, createdFor: dma.createdFor }" />
-                            </div>
-                            <div v-if="dma.euDMA !== 'false' || dma.euDMA !== '0'" class="col">
-                                <div v-if="dma.euDMA === 'T0'">
-                                    <img class="image" src="../../assets/dma_T0.png" alt="T0-Batch">
-                                </div>
-                                <div v-else-if="dma.euDMA === 'T1'">
-                                    <img class="image" src="../../assets/dma_T1.png" alt="T1-Batch">
-                                </div>
-                                <div v-else-if="dma.euDMA === 'T2'">
-                                    <img class="image" src="../../assets/dma_T2.png" alt="T2-Batch">
-                                </div>
-                            </div>
-                            <div v-else>
-                                <div class="col"></div>
-                            </div>
-                            <div class="col">
-                                <RouterLink :to="{ name: 'UserDmaDetails', params: { id: dma._id?.toString() } }">
-                                    <a href="">{{ dma.title }}</a>
-                                </RouterLink>
-                            </div>
-                            <div class="col">{{ dma.createdBy }}</div>
-                            <div class="col">{{ dma.createdAt }}</div>
-                            <div class="col">{{ dma.updatedBy }}</div>
-                            <div class="col">{{ dma.updatedAt }}</div>
-                        </div>
-                    </li>
-                </transition-group>
-            </div>
-        </div>
-        <div v-else-if="loading">Loading...</div>
-        <div v-else>
-            <br>
-            {{ $t(filename + '.noDma') }}
-        </div>
     </div>
+
     <div v-else>
         <div class="container">
-        <div class="box">
-            <b>{{ $t(filename + '.Information.title1') }}</b>
-            <br>
-            {{ $t(filename + '.Information.digitalization') }}
-            <br><br>
-            <img :src="$t(filename + '.Information.digitalization-img')" alt="digitalization-1"
-                style="max-width: 700px; display: block;  margin-left: auto; margin-right: auto; ">
-        </div>
+            <div class="box">
+                <b>{{ $t(filename + '.Information.title1') }}</b>
+                <br>
+                {{ $t(filename + '.Information.digitalization') }}
+                <br><br>
+                <img :src="$t(filename + '.Information.digitalization-img')" alt="digitalization-1"
+                    style="max-width: 700px; display: block;  margin-left: auto; margin-right: auto; ">
+            </div>
 
-        <div class="box">
-            <b>{{ $t(filename + '.Information.title2') }} </b>
-            <br>
-            {{ $t(filename + '.Information.digitalMaturity') }}
-            <br><br>
-            <img :src="$t(filename + '.Information.digitalMaturity-img')" alt="digitalization-2"
-                style="max-width: 700px; display: block; margin-left: auto; margin-right: auto; ">
-        </div>
+            <div class="box">
+                <b>{{ $t(filename + '.Information.title2') }} </b>
+                <br>
+                {{ $t(filename + '.Information.digitalMaturity') }}
+                <br><br>
+                <img :src="$t(filename + '.Information.digitalMaturity-img')" alt="digitalization-2"
+                    style="max-width: 700px; display: block; margin-left: auto; margin-right: auto; ">
+            </div>
 
-        <div class="box">
-            <b>Empfohlene Literatur </b>
-            <br><br>
-            <div class="row justify-content-between">
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col">
-                            <a href="https://aisel.aisnet.org/cgi/viewcontent.cgi?article=1027&context=ecis2011" target="_blank"
-                                class="custom-btn">
-                                <h6><b>  {{ $t(filename + '.Information.source1') }}</b></h6>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="https://www.springerprofessional.de/management-models-of-digital-transformation/19952220" target="_blank"
-                                class="custom-btn">
-                                <h6><b> {{ $t(filename + '.Information.source2') }}</b></h6>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="https://aisel.aisnet.org/cgi/viewcontent.cgi?article=1022&context=mcis2016" target="_blank"
-                                class="custom-btn">
-                                <h6><b> {{ $t(filename + '.Information.source3') }}</b></h6>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="https://www.researchgate.net/publication/367206103_The_Extended_Digital_Maturity_Model" target="_blank"
-                                class="custom-btn">
-                                <h6><b> {{ $t(filename + '.Information.source4') }}</b></h6>
-                            </a>
+            <div class="box">
+                <b>Empfohlene Literatur </b>
+                <br><br>
+                <div class="row justify-content-between">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col">
+                                <a href="https://aisel.aisnet.org/cgi/viewcontent.cgi?article=1027&context=ecis2011"
+                                    target="_blank" class="custom-btn">
+                                    <h6><b> {{ $t(filename + '.Information.source1') }}</b></h6>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="https://www.springerprofessional.de/management-models-of-digital-transformation/19952220"
+                                    target="_blank" class="custom-btn">
+                                    <h6><b> {{ $t(filename + '.Information.source2') }}</b></h6>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="https://aisel.aisnet.org/cgi/viewcontent.cgi?article=1022&context=mcis2016"
+                                    target="_blank" class="custom-btn">
+                                    <h6><b> {{ $t(filename + '.Information.source3') }}</b></h6>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="https://www.researchgate.net/publication/367206103_The_Extended_Digital_Maturity_Model"
+                                    target="_blank" class="custom-btn">
+                                    <h6><b> {{ $t(filename + '.Information.source4') }}</b></h6>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue';
+import { ref, inject } from 'vue';
 import type { DMA } from "../../interfaces/DMA.js"
 import type { DMM } from "../../interfaces/DMM.js"
 import type { User } from "../../interfaces/User.js"
-import SortNumericDown from '../../components/icons/SortNumericDown.vue';
-import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
-import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
-import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
+import DmaList from '@/components/DmaList.vue';
 
 //filename for language tags
 const filename = 'UserDmaView'
@@ -328,7 +222,7 @@ const getUser = async () => {
 getUser()
 
 const dmas = ref<DMA[]>([]);
-let loading = ref(false)
+let loading = ref(false);
 const fetchData = async () => {
     loading.value = true
     try {
@@ -451,6 +345,13 @@ interface deleteItems {
     createdFor: string;
 }
 let selectedItems = ref<deleteItems[]>([])
+
+//accept emit from child to fill selectedItems
+const updateselectedItems = (newValue: deleteItems[]) => {
+    selectedItems.value = newValue;
+    console.log('test2')
+}
+
 const deleteSelectedItems = async () => {
     try {
         const IDs = selectedItems.value.map(item => item._id);
@@ -466,129 +367,27 @@ const deleteSelectedItems = async () => {
     }
 };
 
-// ---------------------------------------------------- sort & filter ---------------------------------------------------------------
-//order
-let isAscending = ref<boolean>(true);
-const sortBy = ref('updatedAt');
-type OrderIconsType = {
-    [key: string]: boolean;
-}
-
-const orderedDmas = computed(() => {
-    return [...dmas.value].sort((a, b) => {
-        let aValue, bValue;
-        switch (sortBy.value) {
-            case 'title':
-                aValue = a.title.toLowerCase();
-                bValue = b.title.toLowerCase();
-                break;
-            case 'createdBy':
-                aValue = a.createdBy.toLowerCase();
-                bValue = b.createdBy.toLowerCase();
-                break;
-            case 'createdAt':
-                aValue = a.createdAt;
-                bValue = b.createdAt;
-                break;
-            case 'updatedBy':
-                aValue = a.updatedBy.toLowerCase();
-                bValue = b.updatedBy.toLowerCase();
-                break;
-            case 'updatedAt':
-                aValue = a.updatedAt;
-                bValue = b.updatedAt;
-                break;
-            case 'euDMA':
-                aValue = a.euDMA;
-                bValue = b.euDMA;
-                break;
-            default:
-                aValue = '';
-                bValue = '';
-        }
-        const result = aValue > bValue ? 1 : -1;
-        return isAscending.value ? result : -result;
-    });
-});
-
-const OrderIcons = ref<OrderIconsType>({
-    "title": false,
-    "titleDown": false,
-    "createdBy": false,
-    "createdByDown": false,
-    "createdAt": false,
-    "createdAtDown": false,
-    "updatedBy": false,
-    "updatedByDown": false,
-    "updatedAt": true,
-    "updatedAtDown": false,
-    "euDMA": false,
-    "euDMADown": false
-});
-
-const handleSort = (columnId: string) => {
-    Object.keys(OrderIcons.value).forEach((key) => {
-        if (key !== columnId && key !== columnId + "Down") {
-            OrderIcons.value[key] = false;
-        }
-    });
-    if (!OrderIcons.value[columnId]) {
-        OrderIcons.value[columnId] = true;
-        OrderIcons.value[columnId + "Down"] = false;
-        sortBy.value = columnId;
-        isAscending.value = true;
-    } else {
-        isAscending.value = !isAscending.value;
-        OrderIcons.value[columnId] = false;
-    }
-    OrderIcons.value[columnId + (isAscending.value ? "" : "Down")] = true;
-}
-handleSort('updatedAt');
-
-//filter
-let filterText = ref('');
-
-let filteredDmas = computed(() => {
-    if (filterText.value === '') {
-        return orderedDmas.value;
-    } else {
-        const filterLowerCase = filterText.value.toLowerCase();
-        return orderedDmas.value.filter(item =>
-            (item.title?.toLowerCase()).includes(filterLowerCase) ||
-            (item.createdFor?.toLowerCase()).includes(filterLowerCase) ||
-            (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
-            (item.updatedBy?.toLowerCase()).includes(filterLowerCase) ||
-            (item.euDMA?.toLowerCase()).includes(filterLowerCase)
-        );
-    }
-});
 
 </script>
 
 <style scoped>
-.image {
-    max-width: 70px;
-    max-height: 70px;
-    margin-left: 10px;
-}
-
 .custom-btn {
-  color: black;
-  text-decoration: none;
-  transition: color 0.3s;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .dark .custom-btn {
-  color: rgb(211, 211, 211);
-  text-decoration: none;
-  transition: color 0.3s;
+    color: rgb(211, 211, 211);
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .custom-btn:hover {
-  color: #ff6869;
+    color: #ff6869;
 }
 
 .dark .btn-secondary {
-  background-color: #01051b;
+    background-color: #01051b;
 }
 </style>

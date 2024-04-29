@@ -1,36 +1,5 @@
 {
   "welcome": "Wilkommen in der Sprachverwaltung der Applikation!",
-  "LoginComp": {
-    "email": "E-Mail-Adresse",
-    "password": "Passwort",
-    "login": "Login",
-    "newHere": "Neu hier? Erstelle einen Account"
-  },
-  "SignupComp": {
-    "organization": "Organisation:",
-    "username": "Benutzername:",
-    "email": "Email:",
-    "password": "Passwort:",
-    "terms": "Allgemeine Geschäftsbedingungen",
-    "accept": "Zustimmung: ",
-    "newUser": "Neuer Nutzer wurde angelegt!",
-    "button": {
-      "create": "Erstelle deinen Account",
-      "existingUser": "Du hast bereits einen Account?"
-    }
-  },
-  "EuResultsComp":{
-    "overview":"Dimensionsübersicht",
-    "dimension1":"Digitale Strategie und Investitionen",
-    "dimension2":"Bereitschaft für den digitalen Wandel",
-    "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
-    "dimension4":"Datenverwaltung und -sicherheit",
-    "dimension5":"Interoperabilität",
-    "dimension6":"Grüne Digitalisierung"
-  },
-  "BIM4VIDResultsComp":{
-    "bim4vidAnswers":"BIM4VID-Ergebnisse"
-  },
   "EdihHomeView": {
     "title": "Start",
     "h3": "Hallo",
@@ -69,113 +38,6 @@
       "deleteOrga": "Organisation löschen",
       "exitDelete": "Löschen beenden",
       "deleteSelected": "Löschen"
-    }
-  },
-  "EdihDmaView": {
-    "title": "DMAs",
-    "h3": "DMA-Übersicht",
-    "button": {
-      "createDma": "DMA erstellen",
-      "deleteDma": "DMA löschen",
-      "exitDelete": "Löschen beenden",
-      "deleteSelected": "Ausgewählte löschen"
-    },
-    "createInput": {
-      "title": "Neues DMA erstellen",
-      "name": "Bezeichnung: ",
-      "organization": "Organisation: ",
-      "loadDMM":"Welche DMMs sollen geladen werden?",
-      "add":" anfügen? ",
-      "cancel": "Abbrechen",
-      "create": "Erstellen"
-    },
-    "deleteInput": {
-      "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
-      "name": "Bezeichnung: ",
-      "organization": "Organisation: ",
-      "cancel": "Abbrechen",
-      "delete": "Löschen"
-    },
-    "list": {
-      "column0": "Löschen",
-      "column1": "Bezeichnung",
-      "column2": "Organisation",
-      "column3": "Ersteller",
-      "column4": "Erstellt am",
-      "column5": "Bearbeitet von",
-      "column6": "Bearbeitet am"
-    }
-  },
-  "EdihDmmView": {
-    "title": "DMMs",
-    "h3": "DMM-Übersicht",
-    "button": {
-      "createDmm": "DMM erstellen",
-      "deleteDmm": "DMM löschen",
-      "exitDelete": "Löschen beenden",
-      "deleteSelected": "Ausgewählte löschen"
-    },
-    "createInput": {
-      "title": "Neues DMM erstellen",
-      "name": "Bezeichnung: ",
-      "cancel": "Abbrechen",
-      "create": "Erstellen"
-    },
-    "deleteInput": {
-      "title": "Sollen die folgenden DMMs wirklich gelöscht werden?",
-      "name": "Bezeichnung: ",
-      "cancel": "Abbrechen",
-      "delete": "Löschen",
-      "organization": "Organisation: "
-    },
-    "list": {
-      "column0": "Löschen",
-      "column1": "Akronym",
-      "column3": "Ersteller",
-      "column4": "Erstellt am",
-      "column5": "Bearbeitet von",
-      "column6": "Bearbeitet am"
-    }
-  },
-  "EdihDmmDetails": {
-    "organization": "Unternehmen: ",
-    "dmmData": "DMM Details",
-    "creator": "Ersteller: ",
-    "createdAt": "Erstellt am: ",
-    "editor": "Bearbeitet von: ",
-    "editedAt": "Bearbeitet am: ",
-    "button": {
-      "editDmm": "DMM-Fragen bearbeiten",
-      "viewDmm": "DMM-Vorschau",
-      "editDmmLogic": "Auswertung bearbeiten",
-      "editDmmInformation": "DMM-Informationen bearbeiten",
-      "publishDmm": "DMM verbergen",
-      "hideDmm": "DMM veröffentlichen",
-      "endInput": "Beenden"
-    },
-    "dmmInformation": {
-      "name": "Name",
-      "akronym": "Akronym",
-      "status": "Status",
-      "authors": {
-        "title": "Autor(en)",
-        "name": "Name",
-        "organization": "Organisation",
-        "email": "Email"
-      },
-      "published": "Veröffentlicht",
-      "hided": "Nicht veröffentlicht",
-      "targetGroup": "Zielgruppe",
-      "applicationArea": "Anwendungsbereich",
-      "damand": "Allgemeiner DMM-Bedarf für den Anwendungsbereich",
-      "evaluationMethod": "Evaluierungsmethode",
-      "languages": "Verfügbare Sprachen",
-      "publicationDate": "Veröffentlichungsdatum",
-      "primarySources": "Primäre Quellen und ihr Verwendungszweck",
-      "differentation": "Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell",
-      "foundation": "Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)",
-      "description": "Reifegrad und seine Dimensionen sowie deren Granularität und Pfade",
-      "calculation": "Beschreibung der Auswertungslogik"
     }
   },
   "UserHomeView": {
@@ -277,6 +139,88 @@
       "startDma":"Zu den DMAs"
     }
   },
+  "DmaView":{
+    "title": "DMAs",
+    "h3": "DMA-Übersicht",
+    "button": {
+      "createDma": "DMA erstellen",
+      "deleteDma": "DMA löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Ausgewählte löschen"
+    },
+    "createInput": {
+      "title": "Neues DMA erstellen",
+      "name": "Bezeichnung: ",
+      "organization": "Organisation: ",
+      "loadDMM":"Welche DMMs sollen geladen werden?",
+      "add":" anfügen? ",
+      "cancel": "Abbrechen",
+      "create": "Erstellen",
+        "euDma":"Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
+        "nextEuDma":"Ihr nächstes DMA: ",
+        "euDmaYes1":"Ja, ",
+        "euDmaYes2":" für die EU durchführen",
+        "euDmaNo":"Nein, ich möchte das DMA intern durchführen"
+    },
+    "deleteInput": {
+      "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
+      "name": "Bezeichnung: ",
+      "organization": "Organisation: ",
+      "cancel": "Abbrechen",
+      "delete": "Löschen"
+    },
+    "list": {
+      "column0": "Löschen",
+      "column1": "EU-DMA",
+      "column2": "Bezeichnung",
+      "column3": "Organisation",
+      "column4": "Ersteller",
+      "column5": "Erstellt am",
+      "column6": "Bearbeitet von",
+      "column7": "Bearbeitet am"
+    }
+  },
+  "DmmDetails": {
+    "organization": "Unternehmen: ",
+    "dmmData": "DMM Details",
+    "creator": "Ersteller: ",
+    "createdAt": "Erstellt am: ",
+    "editor": "Bearbeitet von: ",
+    "editedAt": "Bearbeitet am: ",
+    "button": {
+      "editDmm": "DMM-Fragen bearbeiten",
+      "viewDmm": "DMM-Vorschau",
+      "editDmmLogic": "Auswertung bearbeiten",
+      "editDmmInformation": "DMM-Informationen bearbeiten",
+      "publishDmm": "DMM verbergen",
+      "hideDmm": "DMM veröffentlichen",
+      "endInput": "Beenden"
+    },
+    "dmmInformation": {
+      "name": "Name",
+      "akronym": "Akronym",
+      "status": "Status",
+      "authors": {
+        "title": "Autor(en)",
+        "name": "Name",
+        "organization": "Organisation",
+        "email": "Email"
+      },
+      "published": "Veröffentlicht",
+      "hided": "Nicht veröffentlicht",
+      "targetGroup": "Zielgruppe",
+      "applicationArea": "Anwendungsbereich",
+      "damand": "Allgemeiner DMM-Bedarf für den Anwendungsbereich",
+      "evaluationMethod": "Evaluierungsmethode",
+      "languages": "Verfügbare Sprachen",
+      "publicationDate": "Veröffentlichungsdatum",
+      "primarySources": "Primäre Quellen und ihr Verwendungszweck",
+      "differentation": "Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell",
+      "foundation": "Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)",
+      "description": "Reifegrad und seine Dimensionen sowie deren Granularität und Pfade",
+      "calculation": "Beschreibung der Auswertungslogik"
+    }
+  },
   "UserDmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
@@ -355,6 +299,37 @@
     },
     "UserText":"Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
   },
+  "EdihDmmView": {
+    "title": "DMMs",
+    "h3": "DMM-Übersicht",
+    "button": {
+      "createDmm": "DMM erstellen",
+      "deleteDmm": "DMM löschen",
+      "exitDelete": "Löschen beenden",
+      "deleteSelected": "Ausgewählte löschen"
+    },
+    "createInput": {
+      "title": "Neues DMM erstellen",
+      "name": "Bezeichnung: ",
+      "cancel": "Abbrechen",
+      "create": "Erstellen"
+    },
+    "deleteInput": {
+      "title": "Sollen die folgenden DMMs wirklich gelöscht werden?",
+      "name": "Bezeichnung: ",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "organization": "Organisation: "
+    },
+    "list": {
+      "column0": "Löschen",
+      "column1": "Akronym",
+      "column3": "Ersteller",
+      "column4": "Erstellt am",
+      "column5": "Bearbeitet von",
+      "column6": "Bearbeitet am"
+    }
+  },
   "UserDmmView": {
     "title": "About",
     "h3": "Über das EDIH-DMA-Tool",
@@ -387,7 +362,38 @@
         "aim4":"4. Die Bereitstellung von Feedback für politische Entscheidungen und erforderliche Korrekturmaßnahmen."
     },
     "dmaToolDescription":"Mit diesem DMA-Tool bieten wir unseren Kunden die Möglichkeit, DMAs selbständig durchzuführen. So können sie ihren digitalen Reifegrad selbst bestimmen und haben anschließend direkten Zugriff auf die Ergebnisse. Das EDIH verwendet die EU-relevanten DMA-Ergebnisse für die Weiterleitung an die EU zu den Zeitpunkten T0, T1 und T3, die für die Empfänger von EDIH-Dienstleistungen obligatorisch sind. Neben den Standard-DMAs der EU bieten wir thematisch vertiefte Reifegradmodelle an, um Ihre digitalen Fähigkeiten für Ihren spezifischen Bereich gezielt bestimmen zu können."
-  }}
+  }},
+  "LoginComp": {
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "login": "Login",
+    "newHere": "Neu hier? Erstelle einen Account"
+  },
+  "SignupComp": {
+    "organization": "Organisation:",
+    "username": "Benutzername:",
+    "email": "Email:",
+    "password": "Passwort:",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "accept": "Zustimmung: ",
+    "newUser": "Neuer Nutzer wurde angelegt!",
+    "button": {
+      "create": "Erstelle deinen Account",
+      "existingUser": "Du hast bereits einen Account?"
+    }
+  },
+  "EuResultsComp":{
+    "overview":"Dimensionsübersicht",
+    "dimension1":"Digitale Strategie und Investitionen",
+    "dimension2":"Bereitschaft für den digitalen Wandel",
+    "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
+    "dimension4":"Datenverwaltung und -sicherheit",
+    "dimension5":"Interoperabilität",
+    "dimension6":"Grüne Digitalisierung"
+  },
+  "BIM4VIDResultsComp":{
+    "bim4vidAnswers":"BIM4VID-Ergebnisse"
+  }
 }
 
 

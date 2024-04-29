@@ -19,7 +19,6 @@
             <br><br>
             <!-- check if it includes EU questions  -->
             <div v-if="dmaDetails.euDMA !== 'false'">
-               <!--  <div v-if="dmaDetails.SurveyJson.pages[0].checkForKey('EUPSOQuestion1')"> -->
                 <!-- show answers and results  -->
                 <h5>{{ $t(filename + '.euAnswers') }}</h5>
                 <br>
@@ -30,7 +29,8 @@
                 </div>
             </div>
             <!-- BIM4VID Response  -->
-            <div v-if="checkForKey(dmaDetails.SurveyJson.pages[0],'BIM4VIDQuestion1') || checkForKey(dmaDetails.SurveyJson.pages[8],'BIM4VIDQuestion1')" >
+            <div
+                v-if="(dmaDetails.SurveyJson.pages[0] && checkForKey(dmaDetails.SurveyJson.pages[0], 'BIM4VIDQuestion1')) || (dmaDetails.SurveyJson.pages[8] && checkForKey(dmaDetails.SurveyJson.pages[8], 'BIM4VIDQuestion1'))">
                 <!-- render BIM4VID results -->
                 <div v-if="trafficLightKPI">
                     <BIM4VIDResultsComp :trafficLightKPI="trafficLightKPI" />
