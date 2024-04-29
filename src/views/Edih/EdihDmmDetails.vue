@@ -190,7 +190,7 @@ import { ref, watch, inject } from "vue";
 import type { DMM } from "../../interfaces/DMM.js"
 import SurveyComp from "../../components/SurveyComp.vue";
 import SurveyCreatorComp from "../../components/SurveyCreatorComp.vue";
-import { CreateDmmQuestions } from "@/components/CreateDmmQuestions_json.js";
+import { PatchDmmQuestions } from "@/components/staticQuestions/PatchDmmQuestions_json.js";
 
 //language prefix
 const filename = 'EdihDmmDetails'
@@ -321,7 +321,7 @@ let updateDmmQuestions = ref();
 updateDmmQuestions.value = {
     "SurveyJson": {}
 };
-updateDmmQuestions.value.SurveyJson = { ...CreateDmmQuestions };
+updateDmmQuestions.value.SurveyJson = { ...PatchDmmQuestions };
 
 //use existing dmm information for default values in questionaire
 watch([dmm, updateDmmQuestions], ([dmm]) => {

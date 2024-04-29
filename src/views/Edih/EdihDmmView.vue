@@ -147,7 +147,7 @@ import SortNumericDown from '../../components/icons/SortNumericDown.vue';
 import SortNumericDownAlt from '../../components/icons/SortNumericDownAlt.vue';
 import SortAlphaDown from '../../components/icons/SortAlphaDown.vue';
 import SortAlphaDownAlt from '../../components/icons/SortAlphaDownAlt.vue';
-import { CreateDmmQuestions } from '../../components/CreateDmmQuestions_json.js'
+import { CreateDmmQuestions } from '../../components/staticQuestions/CreateDmmQuestions_json.js'
 import SurveyComp from "../../components/SurveyComp.vue";
 
 //filename for language tags
@@ -178,7 +178,7 @@ fetchData();
 let createDmmInterface = ref({
   SurveyJson: {}
 })
-createDmmInterface.value.SurveyJson = CreateDmmQuestions;
+createDmmInterface.value.SurveyJson =  { ...CreateDmmQuestions };
 
 //enable new dmm
 let postDmm = ref<DMM>({

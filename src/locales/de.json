@@ -19,6 +19,18 @@
       "existingUser": "Du hast bereits einen Account?"
     }
   },
+  "EuResultsComp":{
+    "overview":"Dimensionsübersicht",
+    "dimension1":"Digitale Strategie und Investitionen",
+    "dimension2":"Bereitschaft für den digitalen Wandel",
+    "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
+    "dimension4":"Datenverwaltung und -sicherheit",
+    "dimension5":"Interoperabilität",
+    "dimension6":"Grüne Digitalisierung"
+  },
+  "BIM4VIDResultsComp":{
+    "bim4vidAnswers":"BIM4VID-Ergebnisse"
+  },
   "EdihHomeView": {
     "title": "Start",
     "h3": "Hallo",
@@ -92,30 +104,6 @@
       "column4": "Erstellt am",
       "column5": "Bearbeitet von",
       "column6": "Bearbeitet am"
-    }
-  },
-  "EdihDmaDetails": {
-    "organization": "Unternehmen: ",
-    "dmaData": "DMA Details",
-    "creator": "Ersteller: ",
-    "createdAt": "Erstellt am: ",
-    "editor": "Bearbeitet von: ",
-    "editedAt": "Bearbeitet am: ",
-    "button": {
-      "editDma": "DMA bearbeiten",
-      "viewDma": "DMA-Vorschau"
-    },
-    "results":{
-      "euAnswers":"EU-Ergebnisse",
-      "bim4vidAnswers":"BIM4VID-Ergebnisse",
-      "overview":"Dimensionsübersicht",
-      "title":"-Ergebnis",
-      "dimension1":"Digitale Strategie und Investitionen",
-      "dimension2":"Bereitschaft für den digitalen Wandel",
-      "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
-      "dimension4":"Datenverwaltung und -sicherheit",
-      "dimension5":"Interoperabilität",
-      "dimension6":"Grüne Digitalisierung"
     }
   },
   "EdihDmmView": {
@@ -346,32 +334,26 @@
       "column6": "Bearbeitet am"
     }
   },
-  "UserDmaDetails": {
+  "DmaDetails":{
     "organization": "Unternehmen: ",
     "dmaData": "DMA Details",
     "creator": "Ersteller: ",
     "createdAt": "Erstellt am: ",
     "editor": "Bearbeitet von: ",
     "editedAt": "Bearbeitet am: ",
+    "answeringUser": "Beantwortet von: ",
+    "answeredAt": "Beantwortet am: ",
+    "euAnswers":"EU-Ergebnisse",
     "button": {
+      "editDma": "DMA bearbeiten",
+      "viewDma": "DMA-Vorschau",
       "DmaAnswers": "Antworten anschauen",
+      "downloadCSV":" CSV herunterladen",
       "startDMA":"DMA starten",
-      "stopDMA":"Abbrechen (Fortschritt geht verloren!)",
-      "closeEuAnswers":"Verlassen"
+      "closeEuAnswers":"Verlassen",
+      "stopDma":"Beenden - Fortschritt geht verloren!"
     },
-    "results":{
-      "euAnswers":"EU-Ergebnisse",
-      "bim4vidAnswers":"BIM4VID-Ergebnisse",
-      "overview":"Dimensionsübersicht",
-      "title":"-Ergebnis",
-      "dimension1":"Digitale Strategie und Investitionen",
-      "dimension2":"Bereitschaft für den digitalen Wandel",
-      "dimension3":"Auf den Menschen ausgerichtete Digitalisierung",
-      "dimension4":"Datenverwaltung und -sicherheit",
-      "dimension5":"Interoperabilität",
-      "dimension6":"Grüne Digitalisierung",
-      "text":"Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
-    }
+    "UserText":"Für eine detailiertere Auswertung des EU-DMAs kontaktieren Sie bitte das EDIH Thuringia."
   },
   "UserDmmView": {
     "title": "About",

@@ -312,13 +312,13 @@
 import { ref, inject, watch } from 'vue';
 import SurveyComp from "../../components/SurveyComp.vue";
 import { useI18n } from 'vue-i18n';
-import { GetOrganizationInformation } from '../../components/CreateOrgaInformation_json.js'
+import { GetOrganizationInformation } from '../../components/staticQuestions/CreateOrgaInformation_json.js'
 import type { languageMapping } from "../../interfaces/languageMapping.js"
 import type { User } from "../../interfaces/User.js"
 import type { radarChartData } from "../../interfaces/radarChartData.js"
 import type { doughnutChartData } from "../../interfaces/doughnutChartData.js"
-import doughnutChart from "../../components/doughnutChart.vue";
-import radarChart from "../../components/radarChart.vue";
+import doughnutChart from "../../components/charts/doughnutChart.vue";
+import radarChart from "../../components/charts/radarChart.vue";
 
 //filename for language tags
 const filename = 'UserHomeView'

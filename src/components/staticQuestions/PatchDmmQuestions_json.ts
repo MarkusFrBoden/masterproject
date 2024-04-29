@@ -1,4 +1,4 @@
-const CreateDmmQuestions = {
+const PatchDmmQuestions = {
     "title": {
         "default": "Create DMM module",
         "de": "DMM-Modul erstellen"
@@ -257,4 +257,4 @@ const CreateDmmQuestions = {
     "fitToContainer": true
 }
 
-export { CreateDmmQuestions };
+export { PatchDmmQuestions };

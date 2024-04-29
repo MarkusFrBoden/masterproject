@@ -101,7 +101,7 @@
             {{ $t(filename + '.EDIHInformation.edihDescription') }}
           </div>
           <div class="col">
-            <img src="/EDIH-Thuringia-Pink.png" alt="EDIH pink"
+            <img src="../../assets/EDIH-Thuringia-Pink.png" alt="EDIH pink"
               style="max-width: 100%;  margin-left: auto; margin-right: auto; ">
           </div>
         </div>
