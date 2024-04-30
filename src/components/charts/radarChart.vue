@@ -16,7 +16,7 @@ import {
   Colors
 } from 'chart.js';
 import { Radar } from 'vue-chartjs';
-import type { radarChartData } from "../../src/interfaces/radarChartData.js"
+import type { radarChartData } from "../../interfaces/radarChartData.js"
 
 ChartJS.register(
   RadialLinearScale,

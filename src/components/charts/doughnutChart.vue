@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs';
-import type { doughnutChartData } from "../interfaces/doughnutChartData.js"
+import type { doughnutChartData } from "../../interfaces/doughnutChartData.js"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

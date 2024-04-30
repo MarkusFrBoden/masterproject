@@ -234,8 +234,6 @@ router.get('/DmaById/:id', (req, res) => {
     }
 });
 
-
-// Get
 router.get('/DmaTValues', (req, res) => {
     db.collection('DMAs')
         .aggregate([
@@ -284,7 +282,7 @@ router.post('/Dma', (req, res) => {
 })
 
 //Delete
-router.delete('/DmaById/:id', (req, res) => {
+/* router.delete('/DmaById/:id', (req, res) => {
     if (ObjectId.isValid(req.params.id)) {
         db.collection('DMAs')
             .deleteOne({ _id: new ObjectId(req.params.id) })
@@ -317,7 +315,45 @@ router.post('/deleteMultipleDmas', async (req, res) => {
         console.error('Error deleting dmas:', error);
         res.status(500).json({ error: 'Could not delete dmas.' });
     }
+}); */
+
+//delete many dmas if its no EU-DMA
+router.post('/deleteMultipleDmas', async (req, res) => {
+    const dmaIds = req.body.dmaIds;
+    if (!dmaIds || !Array.isArray(dmaIds)) {
+        return res.status(400).json({ error: 'dmaIds is not a valid array.' });
+    }
+    const areValidIds = dmaIds.every(id => ObjectId.isValid(id));
+    if (!areValidIds) {
+        return res.status(400).json({ error: 'One or more provided dma IDs are not valid.' });
+    }
+    try {
+        for (const id of dmaIds) {
+            const dma = await getDmaById(id);
+            if (dma.euDMA != '0' && dma.euDMA != 'false') {
+                return res.status(200).json({ invalidIds: true });
+            }
+        }
+        const objectIds = dmaIds.map(id => new ObjectId(id));
+        const result = await db.collection('DMAs').deleteMany({ _id: { $in: objectIds } });
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Error deleting dmas:', error);
+        res.status(500).json({ error: 'Could not delete dmas.' });
+    }
 });
+// check if it's an EU-DMA
+async function getDmaById(id) {
+    if (ObjectId.isValid(id)) {
+        const dma = await db.collection('DMAs').findOne({ _id: new ObjectId(id) });
+        if (!dma) {
+            throw new Error(`DMA document with ID ${id} not found.`);
+        }
+        return dma;
+    } else {
+        throw new Error(`Not a valid DMA document ID: ${id}`);
+    }
+}
 
 //Patch
 router.patch('/DmaById/:id', (req, res) => {

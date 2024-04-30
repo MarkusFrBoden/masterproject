@@ -36,10 +36,11 @@
                 <span class="input-label">{{ $t(filename + '.createInput.organization') }}</span>
                 <select v-model="newDmaOrganisation">
                     <option value=""></option>
-                    <option v-for="organization in organizations" :key="organization._id" :value="organization.organization.name">{{ organization.organization.name }}</option>
+                    <option v-for="organization in organizations" :key="organization._id"
+                        :value="organization.organization.name">{{ organization.organization.name }}</option>
                 </select>
             </div>
-            {{ newDmaOrganisation  }}
+            {{ newDmaOrganisation }}
             <br>
             <!-- create dma from DMM  -->
             <div v-if="dmms.length > 0">
@@ -49,7 +50,7 @@
                     {{ dmm.akronym }} {{ $t(filename + '.createInput.add') }} <input type="checkbox"
                         :value="{ id: dmm._id, akronym: dmm.akronym }" v-model="selectedDmms">
                 </div>
-                {{ selectedDmms }} {{ newDmaOrganisation  }}
+                {{ selectedDmms }} {{ newDmaOrganisation }}
             </div>
             <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
                 <br>
@@ -112,7 +113,7 @@
 
     <!-- dma list, filtered and sorted  -->
     <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
-        @updateselectedItems="updateselectedItems" type="Edih"/>
+        @updateselectedItems="updateselectedItems" type="Edih" />
 
 </template>
 
@@ -133,6 +134,7 @@ const api = inject('api') as any;
 let showInput = ref(false);
 let showDeleteOptions = ref(false);
 let showDeleteQuestion = ref(false);
+let showalert = ref(false);
 
 //get start data
 let currentUserName = localStorage.getItem('userName') || '';
@@ -191,16 +193,16 @@ watch(selectedDmms, (newValue, oldValue) => {
     if (newValue.some(item => item.akronym === 'EUPSO')) {
         console.log('test2')
         const organizationWithEUPSO = organizations.value.find((org: any) => {
-    if (org._id === newDmaOrganisation.value ) {
-    }
-        const organizationWithEUPSO = organizations.value.find((org: any) => org._id === newDmaOrganisation.value);
-        console.log(organizationWithEUPSO);
-        if (organizationWithEUPSO) {
-            currentEuDmaStatus.value = organizationWithEUPSO.organization.euDmaStatus;
-            setEuDMAStaus();
-        }
-    });
-};
+            if (org._id === newDmaOrganisation.value) {
+            }
+            const organizationWithEUPSO = organizations.value.find((org: any) => org._id === newDmaOrganisation.value);
+            console.log(organizationWithEUPSO);
+            if (organizationWithEUPSO) {
+                currentEuDmaStatus.value = organizationWithEUPSO.organization.euDmaStatus;
+                setEuDMAStaus();
+            }
+        });
+    };
 });
 
 const setEuDMAStaus = () => {
@@ -208,7 +210,7 @@ const setEuDMAStaus = () => {
         nextEuDmaStatus.value = 'T1';
     } else if (currentEuDmaStatus.value === 'T1') {
         nextEuDmaStatus.value = 'T2';
-    }else if (currentEuDmaStatus.value === 'T2') {
+    } else if (currentEuDmaStatus.value === 'T2') {
         nextEuDmaStatus.value = 'kein EU-DMA mehr';
     }
     else {
@@ -292,13 +294,19 @@ const updateselectedItems = (newValue: deleteItems[]) => {
 const deleteSelectedItems = async () => {
     try {
         const IDs = selectedItems.value.map(item => item._id);
-        console.log(IDs);
         const response = await api.post('/deleteMultipleDmas', { dmaIds: IDs });
-        console.log('Successfully deleted dmas:', response.data);
-        await fetchData();
-        showDeleteQuestion.value = false;
-        showDeleteOptions.value = false;
-        selectedItems.value = [];
+        if (response.data.invalidIds) {
+            alert('One or more EU-DMA!');
+            showDeleteQuestion.value = false;
+            showDeleteOptions.value = false;
+            selectedItems.value = [];
+        } else {
+            console.log('Successfully deleted dmas:', response.data);
+            await fetchData();
+            showDeleteQuestion.value = false;
+            showDeleteOptions.value = false;
+            selectedItems.value = [];
+        }
     } catch (error) {
         console.error('Error deleting dmas:', error);
     }

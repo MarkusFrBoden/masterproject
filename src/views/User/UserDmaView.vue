@@ -357,11 +357,17 @@ const deleteSelectedItems = async () => {
         const IDs = selectedItems.value.map(item => item._id);
         console.log(IDs);
         const response = await api.post('/deleteMultipleDmas', { dmaIds: IDs });
-        console.log('Successfully deleted dmas:', response.data);
+        if (response.data.invalidIds) {
+            alert('One or more EU-DMA!');
+            showDeleteQuestion.value = false;
+            showDeleteOptions.value = false;
+            selectedItems.value = [];
+        } else {
         fetchData();
         showDeleteQuestion.value = false;
         showDeleteOptions.value = false;
         selectedItems.value = [];
+        }
     } catch (error) {
         console.error('Error deleting dmas:', error);
     }

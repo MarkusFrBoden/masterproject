@@ -19,8 +19,8 @@ export function BIM4VIDcalculation (
     dmaDetails: Ref<DMA | undefined>,
     trafficLightKPI: Ref<Array<string>>
 ) {
-     if (checkForKey(dmaDetails.value.SurveyJson.pages[1], 'BIM4VIDQuestion2') || checkForKey(dmaDetails.value.SurveyJson.pages[9], 'BIM4VIDQuestion2')) {
-            const responses: any = dmaDetails.value.responses[0].data;
+     if (checkForKey(dmaDetails.value?.SurveyJson.pages[1], 'BIM4VIDQuestion2') || checkForKey(dmaDetails.value?.SurveyJson.pages[9], 'BIM4VIDQuestion2')) {
+            const responses: any = dmaDetails.value?.responses[0].data;
             for (let i = 2; i < 20; i++) {
                 const response = responses[`BIM4VIDQuestion${i}`];
                 let color = 'green'; // Standardfarbe ist grün
