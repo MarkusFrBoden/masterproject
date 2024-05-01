@@ -150,13 +150,15 @@ const handleDmaCompleted = async (results: any) => {
         }
     }
     let newResponse = {
-        "responseDate": new Date(),
+        "responseDate": new Date().toLocaleString(),
         "responseClient": currentUserName,
         "data": results
     };
     data.push(newResponse);
     let patchResponses = {
-        responses: data
+        responses: data,
+        updatedBy: currentUserName!,
+        updatedAt: new Date().toLocaleString()
     };
     try {
         if (dmaDetails.value) {

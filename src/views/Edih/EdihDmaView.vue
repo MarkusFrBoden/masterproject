@@ -111,8 +111,14 @@
 
     <!-- dma list, filtered and sorted  -->
     <div v-if="!loading">
-        <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
-            @updateselectedItems="updateselectedItems" type="Edih" />
+        <div v-if="dmas.length > 0">
+            <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
+                @updateselectedItems="updateselectedItems" type="Edih" />
+        </div>
+        <div v-else>
+            <br>
+            {{ $t(filename + '.noDma') }}
+        </div>
     </div>
     <div v-else>
         <br>

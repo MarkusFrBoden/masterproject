@@ -124,7 +124,7 @@
         <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
         <div class="rightbox" >
           <h6>{{ $t(filename + '.DmaInformations.overview.title') }}</h6>
-          Anzahl durchgeführter EU-DMAs
+          {{ $t(filename + '.DmaInformations.title2') }}
           <div class="container" >
             <div class="row">
               <div class="col">

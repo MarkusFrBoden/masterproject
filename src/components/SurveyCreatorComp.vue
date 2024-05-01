@@ -121,7 +121,7 @@ const updateSurvey = async () => {
     const updatedData = {
       "SurveyJson": creator.JSON,
       "updatedBy": UserName,
-      "updatedAt": new Date()
+      "updatedAt": new Date().toLocaleString()
     };
     const response = await api.patch(`/${props.type}ById/${props.survey._id}`, updatedData);
     emit('triggerRefresh');

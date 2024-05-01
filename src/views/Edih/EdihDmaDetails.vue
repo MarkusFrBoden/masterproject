@@ -7,6 +7,7 @@
         {{ $t(filename + '.createdAt') }} {{ dmaDetails.createdAt }} ||
         {{ $t(filename + '.editor') }} {{ dmaDetails.updatedBy }} ||
         {{ $t(filename + '.editedAt') }} {{ dmaDetails.updatedAt }}
+        <br><br>
 
         <div>
             <!-- check dma includes responses  -->
@@ -169,7 +170,7 @@ const handleDmaCompleted = async (results: any) => {
         }
     }
     let newResponse = {
-        "responseDate": new Date(),
+        "responseDate": new Date().toLocaleString(),
         "responseClient": currentUserName,
         "data": results
     };

@@ -15,6 +15,7 @@
     },
     "DmaInformations": {
       "title": "Informationen über durchgeführte DMAs",
+      "title2":"Anzahl durchgeführter EU-DMAs",
       "overview": {
         "title": "Übersicht"
       },
@@ -143,6 +144,7 @@
     "title": "DMAs",
     "h3": "DMA-Übersicht",
     "Dmas": "Verfügbare DMA",
+    "noDma":"Noch keine DMAs angelegt",
     "Infos": "Allgemeine Informationen",
     "button": {
       "createDma": "DMA erstellen",

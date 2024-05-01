@@ -130,9 +130,9 @@ let postDmm = ref<DMM>({
   calculations: "",
   calculationsImageLink: "",
   createdBy: currentUserName,
-  createdAt: new Date(),
+  createdAt: new Date().toLocaleString(),
   updatedBy: "",
-  updatedAt: new Date(),
+  updatedAt: "",
   SurveyJson: {},
   calculationLogic: {}
 });

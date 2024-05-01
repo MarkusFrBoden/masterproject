@@ -97,17 +97,12 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-//Authentifizierungsstatus
+//authentification status
 function checkAuth() {
   if(localStorage.getItem('userId')){
     let isAuthenticated = true
     return isAuthenticated;
   }
 }
-
-// Löschen des LocalStorage beim schließen der Seite
-/*window.addEventListener('beforeunload', function() {
-  localStorage.removeItem('userId');
-});*/
 
 export default router

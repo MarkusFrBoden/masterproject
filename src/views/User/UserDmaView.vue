@@ -44,7 +44,7 @@
 
         <!-- dma list  -->
         <div v-if="!loading">
-            <div v-if="dmms.length > 0">
+            <div v-if="dmas.length > 0">
                 <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=false
                     @updateselectedItems="updateselectedItems" type="User" />
             </div>

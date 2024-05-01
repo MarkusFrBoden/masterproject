@@ -18,9 +18,9 @@ export interface DMM {
     calculations: String;
     calculationsImageLink: String;
     createdBy: String;
-    createdAt: Date;
+    createdAt: String;
     updatedBy: String;
-    updatedAt: Date;
+    updatedAt: String;
     SurveyJson: any;
     calculationLogic: any;
     [key: string]: any;
