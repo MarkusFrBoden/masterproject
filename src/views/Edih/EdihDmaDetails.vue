@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 //vue
-import { inject, ref } from "vue";
+import { inject, ref, watch } from "vue";
 //ts interfaces
 import type { DMA } from "../../interfaces/DMA.js"
 import type { radarChartData } from "../../interfaces/radarChartData.js"
@@ -105,6 +105,7 @@ import type { EuResult } from "../../interfaces/EuResults.js"
 //functions
 import { EUcalculation } from "../../components/functions/EuResultsCalulation.js";
 import { BIM4VIDcalculation } from "../../components/functions/BIM4VIDResultsCalulation.js";
+import { fillSurveyResponses } from "../../components/functions/surveyResponses.js";
 import { createCSVdownload } from "../../components/functions/createCSVdownload.js";
 //vue components
 import SurveyComp from "../../components/SurveyComp.vue";
@@ -203,6 +204,13 @@ const ResultCalculation = () => {
 const downloadCSV = () => {
     createCSVdownload(dmaDetails)
 };
+
+//fill defaults in surveyJS if there is already a response 
+watch(dmaDetails, (newValue, oldValue) => {
+    if (newValue && newValue.responses.length > 0) {
+        const filledDetails = fillSurveyResponses(newValue);
+    }
+});
 
 </script>
 

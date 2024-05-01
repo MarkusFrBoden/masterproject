@@ -1,6 +1,4 @@
 <template>
-    <div v-if="filteredDmms.length > 0">
-
         <!-- input for filter  -->
         <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
 
@@ -84,10 +82,6 @@
                 </transition-group>
             </div>
         </div>
-    </div>
-    <div v-else>
-        Loading...
-    </div>
 </template>
 
 <script setup lang="ts">
@@ -210,7 +204,6 @@ let filteredDmms = computed(() => {
     const filterLowerCase = filterText.value.toLowerCase();
     return orderedDmms.value.filter(item =>
       (item.akronym?.toLowerCase()).includes(filterLowerCase) ||
-      (item.createdFor?.toLowerCase()).includes(filterLowerCase) ||
       (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
       (item.updatedBy?.toLowerCase()).includes(filterLowerCase)
     );

@@ -15,6 +15,8 @@ const BIM4VID = {
         "name": "BIM4VIDQuestion1",
         "title": "Welche stellte die höchste von Ihnen betreute Straßenklasse dar?",
         "description": "Der Masterplan BIM Bundesfernstraßen",
+        "defaultValue": "Item 1",
+        "isRequired": true,
         "choices": [
          {
           "value": "Item 1",
@@ -28,8 +30,7 @@ const BIM4VID = {
           "value": "Item 3",
           "text": "Kreisstraßen"
          }
-        ],
-        "isRequired":true
+        ]
        }
       ],
       "title": "Selbsteinschätzung nach Masterplan"
@@ -59,6 +60,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion2",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -87,8 +90,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -108,6 +110,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion3",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -136,8 +140,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -157,6 +160,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion4",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -185,8 +190,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ]
        }
@@ -213,6 +217,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion5",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -241,8 +247,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "BIM-Ziele und -Strategie"
@@ -269,6 +274,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion6",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -297,8 +304,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -318,6 +324,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion7",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -346,8 +354,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Struktur, Organisation und Management"
@@ -374,6 +381,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion8",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -402,8 +411,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -423,6 +431,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion9",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -451,8 +461,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Menschen und Unternehmenskultur"
@@ -479,6 +488,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion10",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -507,8 +518,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -528,6 +538,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion11",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -556,8 +568,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Regulierungen und Verträge"
@@ -584,6 +595,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion12",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -612,8 +625,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -633,6 +645,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion13",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -661,8 +675,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Stakeholder"
@@ -689,6 +702,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion14",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -717,8 +732,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -738,6 +752,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion15",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -766,8 +782,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Prozesse"
@@ -794,6 +809,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion16",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -822,8 +839,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -843,6 +859,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion17",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -871,8 +889,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "IT-Infrastruktur"
@@ -899,6 +916,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion18",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -927,8 +946,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          },
          {
           "type": "html",
@@ -948,6 +966,8 @@ const BIM4VID = {
           "name": "BIM4VIDQuestion19",
           "title": " ",
           "hideNumber": true,
+          "defaultValue": 1,
+          "isRequired": true,
           "autoGenerate": false,
           "rateCount": 6,
           "rateValues": [
@@ -976,8 +996,7 @@ const BIM4VID = {
             "text": "5"
            }
           ],
-          "rateMax": 6,
-          "isRequired":true
+          "rateMax": 6
          }
         ],
         "title": "Technologie und Daten"
@@ -987,10 +1006,10 @@ const BIM4VID = {
      }
     ],
     "showProgressBar": "top",
+    "questionTitlePattern": "numTitle",
     "widthMode": "static",
     "width": "80%",
-    "fitToContainer": true,
-    "questionTitlePattern": "numTitle",
+    "fitToContainer": true
    }
 
 export { BIM4VID };

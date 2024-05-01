@@ -4,6 +4,7 @@
         <br>
 
         <!-- information about the dmm  -->
+        <div class="container">
         <div class="box">
             <div class="dma-list">
                 <h6>{{ $t(filename + '.dmmInformation.name') }}</h6>
@@ -107,6 +108,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <br>
 
     </div>

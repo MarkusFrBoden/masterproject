@@ -330,7 +330,7 @@ router.post('/deleteMultipleDmas', async (req, res) => {
     try {
         for (const id of dmaIds) {
             const dma = await getDmaById(id);
-            if (dma.euDMA != '0' && dma.euDMA != 'false') {
+            if (dma.euDMA != '0' && dma.euDMA != 'false' && dma.euDMA != 'kein EU-DMA mehr') {
                 return res.status(200).json({ invalidIds: true });
             }
         }

@@ -58,7 +58,14 @@
   </div>
 
   <!-- dmm list, filtered and sorted  -->
-  <DmmList :showDeleteOptions="showDeleteOptions" :dmms="dmms" @updateselectedItems="updateselectedItems" type="Edih" />
+  <div v-if="!loading">
+    <DmmList :showDeleteOptions="showDeleteOptions" :dmms="dmms" @updateselectedItems="updateselectedItems"
+      type="Edih" />
+  </div>
+  <div v-else>
+    <br>
+    Loading...
+  </div>
 
 </template>
 
@@ -84,13 +91,16 @@ let showDeleteQuestion = ref(false);
 //get start data
 let currentUserName = localStorage.getItem('userName') || '';
 const dmms = ref<DMM[]>([]);
+let loading = ref(false);
 const fetchData = async () => {
+  loading.value = true
   try {
     const response = await api.get('/DmmOverview');
     dmms.value = response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+  loading.value = false
 };
 fetchData();
 

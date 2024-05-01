@@ -1,10 +1,8 @@
 <template>
     <!-- dma list, filtered and sorted  -->
-    <div v-if="filteredDmas.length > 0">
         <br>
         <!-- input for filter  -->
         <input v-model="filterText" type="text" placeholder="Filter" class="custom-input" />
-
         <div class="container">
             <div class="list">
                 <!-- header with sort logic part  -->
@@ -101,7 +99,7 @@
                             <div class="col" v-else>
                             </div>
                             <div class="col">
-                                <RouterLink :to="{ name: 'EdihDmaDetails', params: { id: dma._id?.toString() } }">
+                                <RouterLink :to="{ name: `${type}DmaDetails`, params: { id: dma._id?.toString() } }">
                                     <a href="">{{ dma.title }}</a>
                                 </RouterLink>
                             </div>
@@ -117,10 +115,6 @@
                 </transition-group>
             </div>
         </div>
-    </div>
-<div v-else>
-Loading...
-</div>
 </template>
 
 <script setup lang="ts">
@@ -253,12 +247,22 @@ let filteredDmas = computed(() => {
         return orderedDmas.value;
     } else {
         const filterLowerCase = filterText.value.toLowerCase();
-        return orderedDmas.value.filter(item =>
-            (item.title?.toLowerCase()).includes(filterLowerCase) ||
-            (item.createdFor?.toLowerCase()).includes(filterLowerCase) ||
-            (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
-            (item.updatedBy?.toLowerCase()).includes(filterLowerCase)
-        );
+        return orderedDmas.value.filter(item => {
+            if (props.type === 'Edih') {
+                return (
+                    (item.title?.toLowerCase()).includes(filterLowerCase) ||
+                    (item.createdFor?.toLowerCase()).includes(filterLowerCase) ||
+                    (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
+                    (item.updatedBy?.toLowerCase()).includes(filterLowerCase)
+                );
+            } else {
+                return (
+                    (item.title?.toLowerCase()).includes(filterLowerCase) ||
+                    (item.createdBy?.toLowerCase()).includes(filterLowerCase) ||
+                    (item.updatedBy?.toLowerCase()).includes(filterLowerCase)
+                );
+            }
+        });
     }
 });
 

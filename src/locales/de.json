@@ -142,6 +142,8 @@
   "DmaView": {
     "title": "DMAs",
     "h3": "DMA-Übersicht",
+    "Dmas": "Verfügbare DMA",
+    "Infos": "Allgemeine Informationen",
     "button": {
       "createDma": "DMA erstellen",
       "deleteDma": "DMA löschen",
@@ -176,57 +178,9 @@
       "column3": "Organisation",
       "column4": "Ersteller",
       "column5": "Erstellt am",
-      "column6": "Bearbeitet von",
-      "column7": "Bearbeitet am"
-    }
-  },
-  "DmmDetails": {
-    "organization": "Unternehmen: ",
-    "dmmData": "DMM Details",
-    "creator": "Ersteller: ",
-    "createdAt": "Erstellt am: ",
-    "editor": "Bearbeitet von: ",
-    "editedAt": "Bearbeitet am: ",
-    "button": {
-      "editDmm": "DMM-Fragen bearbeiten",
-      "viewDmm": "DMM-Vorschau",
-      "editDmmLogic": "Auswertung bearbeiten",
-      "editDmmInformation": "DMM-Informationen bearbeiten",
-      "publishDmm": "DMM verbergen",
-      "hideDmm": "DMM veröffentlichen",
-      "endInput": "Beenden"
+      "column6": "Durchgeführt von",
+      "column7": "Durchgeführt am"
     },
-    "dmmInformation": {
-      "name": "Name",
-      "akronym": "Akronym",
-      "status": "Status",
-      "authors": {
-        "title": "Autor(en)",
-        "name": "Name",
-        "organization": "Organisation",
-        "email": "Email"
-      },
-      "published": "Veröffentlicht",
-      "hided": "Nicht veröffentlicht",
-      "targetGroup": "Zielgruppe",
-      "applicationArea": "Anwendungsbereich",
-      "damand": "Allgemeiner DMM-Bedarf für den Anwendungsbereich",
-      "evaluationMethod": "Evaluierungsmethode",
-      "languages": "Verfügbare Sprachen",
-      "publicationDate": "Veröffentlichungsdatum",
-      "primarySources": "Primäre Quellen und ihr Verwendungszweck",
-      "differentation": "Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell",
-      "foundation": "Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)",
-      "description": "Reifegrad und seine Dimensionen sowie deren Granularität und Pfade",
-      "calculation": "Beschreibung der Auswertungslogik"
-    }
-  },
-  "UserDmaView": {
-    "title": "DMAs",
-    "h3": "DMA-Übersicht",
-    "Dmas": "Verfügbare DMA",
-    "Infos": "Allgemeine Informationen",
-    "noDma": "Noch kein DMA angelegt",
     "Information": {
       "title1": "Digitale Transformation",
       "digitalization": "Der englische Begriff digitization bezeichnet im Allgemeinen den technischen Prozess der Umwandlung von analogen Daten in digitale Daten. In einem weiteren, organisatorischen Kontext umfasst die Digitalisierung hingegen eine Vielzahl von Veränderungen, sowohl auf individueller Ebene als auch im Hinblick auf die Organisation von Unternehmen und deren Prozesse. Die Digitale Transformation beschreibt einen tiefgreifenden digitalen Wandel auf vielen Ebenen im Unternehmen. Der Wandel umfasst sowohl die Nutzung digitaler Technologien zur Verbesserung bestehender Prozesse als auch die Erforschung neuer digitaler Innovationen, die das Geschäftsmodell potenziell umgestalten können. Im Gegensatz zur Digitalisierung haben Digitale Transformationen nicht nur das Ziel, neue digitale Technologien in Unternehmen einzuführen, sondern sie haben eine strategische Perspektive mit spezifisch definierten Zielen. Sie stellen die gesteuerte Anpassung von Unternehmen dar, welche die Digitalisierung vorantreibt. Folglich stellt die Digitalisierung eine notwendige, jedoch nicht hinreichende Bedingung für die digitale Transformation dar. ",
@@ -239,43 +193,6 @@
       "source2": "Stages in Digital Business Transformation",
       "source3": "Management Models of Digital Transformation",
       "source4": "What makes a useful Maturity Model?"
-    },
-    "button": {
-      "createDma": "DMA erstellen",
-      "deleteDma": "DMA löschen",
-      "exitDelete": "Löschen beenden",
-      "deleteSelected": "Ausgewählte löschen"
-    },
-    "createInput": {
-      "title": "Neues DMA erstellen",
-      "name": "Bezeichnung: ",
-      "loadDMM": "Welche DMMs sollen geladen werden?",
-      "add": " anfügen? ",
-      "euDma": "Soll die Durchführung des EU-DMAs die nächste Pflichtdurchführung für die EU sein?",
-      "nextEuDma": "Ihr nächstes DMA: ",
-      "euDmaYes1": "Ja, ",
-      "euDmaYes2": " für die EU durchführen",
-      "euDmaNo": "Nein, ich möchte das DMA intern durchführen",
-      "cancel": "Abbrechen",
-      "create": "Erstellen"
-    },
-    "deleteInput": {
-      "title": "Sollen die folgenden DMAs wirklich gelöscht werden?",
-      "name": "Bezeichnung: ",
-      "organization": "Organisation: ",
-      "loadDMM": "Welche DMMs sollen geladen werden?",
-      "add": " anfügen? ",
-      "cancel": "Abbrechen",
-      "delete": "Löschen"
-    },
-    "list": {
-      "column0": "Löschen",
-      "column1": "EU-DMA",
-      "column2": "Bezeichnung",
-      "column3": "Ersteller",
-      "column4": "Erstellt am",
-      "column5": "Bearbeitet von",
-      "column6": "Bearbeitet am"
     }
   },
   "DmaDetails": {
@@ -355,6 +272,47 @@
         },
         "dmaToolDescription": "Mit diesem DMA-Tool bieten wir unseren Kunden die Möglichkeit, DMAs selbständig durchzuführen. So können sie ihren digitalen Reifegrad selbst bestimmen und haben anschließend direkten Zugriff auf die Ergebnisse. Das EDIH verwendet die EU-relevanten DMA-Ergebnisse für die Weiterleitung an die EU zu den Zeitpunkten T0, T1 und T3, die für die Empfänger von EDIH-Dienstleistungen obligatorisch sind. Neben den Standard-DMAs der EU bieten wir thematisch vertiefte Reifegradmodelle an, um Ihre digitalen Fähigkeiten für Ihren spezifischen Bereich gezielt bestimmen zu können."
       }
+    }
+  },
+  "DmmDetails": {
+    "organization": "Unternehmen: ",
+    "dmmData": "DMM Details",
+    "creator": "Ersteller: ",
+    "createdAt": "Erstellt am: ",
+    "editor": "Bearbeitet von: ",
+    "editedAt": "Bearbeitet am: ",
+    "button": {
+      "editDmm": "DMM-Fragen bearbeiten",
+      "viewDmm": "DMM-Vorschau",
+      "editDmmLogic": "Auswertung bearbeiten",
+      "editDmmInformation": "DMM-Informationen bearbeiten",
+      "publishDmm": "DMM verbergen",
+      "hideDmm": "DMM veröffentlichen",
+      "endInput": "Beenden"
+    },
+    "dmmInformation": {
+      "name": "Name",
+      "akronym": "Akronym",
+      "status": "Status",
+      "authors": {
+        "title": "Autor(en)",
+        "name": "Name",
+        "organization": "Organisation",
+        "email": "Email"
+      },
+      "published": "Veröffentlicht",
+      "hided": "Nicht veröffentlicht",
+      "targetGroup": "Zielgruppe",
+      "applicationArea": "Anwendungsbereich",
+      "damand": "Allgemeiner DMM-Bedarf für den Anwendungsbereich",
+      "evaluationMethod": "Evaluierungsmethode",
+      "languages": "Verfügbare Sprachen",
+      "publicationDate": "Veröffentlichungsdatum",
+      "primarySources": "Primäre Quellen und ihr Verwendungszweck",
+      "differentation": "Abgrenzung zu ähnlichen Modellen, Bedarf nach neuem Modell",
+      "foundation": "Theoretische Grundlagen (Optional - Link zu wissenschaftlicher Veröffentlichung)",
+      "description": "Reifegrad und seine Dimensionen sowie deren Granularität und Pfade",
+      "calculation": "Beschreibung der Auswertungslogik"
     }
   },
   "LoginComp": {

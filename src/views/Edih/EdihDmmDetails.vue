@@ -8,7 +8,7 @@
             {{ $t(filename + '.button.editDmmInformation') }}
         </button>
         <button class="btn btn-outline-secondary" @click="published = !published; simplePatch()">
-            <div v-if="published">
+            <div v-if="published === true">
                 {{ $t(filename + '.button.publishDmm') }}
             </div>
             <div v-else>
@@ -33,115 +33,118 @@
         <br><br>
 
         <!-- information about the dmm  -->
-        <div class="box">
-            <div class="dma-list">
-                <h6>{{ $t(filename + '.dmmInformation.name') }}</h6>
-                {{ dmm.title }}
-                <hr class="line">
-                <div class="row">
-                    <div class="col">
-                        <h6>{{ $t(filename + '.dmmInformation.akronym') }}</h6>
-                    </div>
-                    <div class="col">
-                        <h6>{{ $t(filename + '.dmmInformation.status') }}</h6>
-                    </div>
-                    <div class="col">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {{ dmm.akronym }}
-                    </div>
-                    <div class="col">
-                        <div v-if="dmm.published">
-                            {{ $t(filename + '.dmmInformation.published') }}
-                        </div>
-                        <div v-else>
-                            {{ $t(filename + '.dmmInformation.hided') }}
-                        </div>
-                    </div>
-                    <div class="col">
-                    </div>
-                </div>
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.authors.title') }}</h6>
-                <div class="row">
-                    <div class="col">
-                        <u>{{ $t(filename + '.dmmInformation.authors.name') }}</u>
-                    </div>
-                    <div class="col">
-                        <u>{{ $t(filename + '.dmmInformation.authors.organization') }}</u>
-                    </div>
-                    <div class="col">
-                        <u>{{ $t(filename + '.dmmInformation.authors.email') }}</u>
-                    </div>
-                </div>
-                <div v-for="autors in dmm.authors">
+        <div class="container">
+            <div class="box">
+                <div class="dma-list">
+                    <h6>{{ $t(filename + '.dmmInformation.name') }}</h6>
+                    {{ dmm.title }}
+                    <hr class="line">
                     <div class="row">
                         <div class="col">
-                            {{ autors.name }}
+                            <h6>{{ $t(filename + '.dmmInformation.akronym') }}</h6>
                         </div>
                         <div class="col">
-                            {{ autors.organization }}
+                            <h6>{{ $t(filename + '.dmmInformation.status') }}</h6>
                         </div>
                         <div class="col">
-                            {{ autors.email }}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ dmm.akronym }}
+                        </div>
+                        <div class="col">
+                            <div v-if="dmm.published">
+                                {{ $t(filename + '.dmmInformation.published') }}
+                            </div>
+                            <div v-else>
+                                {{ $t(filename + '.dmmInformation.hided') }}
+                            </div>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.authors.title') }}</h6>
+                    <div class="row">
+                        <div class="col">
+                            <u>{{ $t(filename + '.dmmInformation.authors.name') }}</u>
+                        </div>
+                        <div class="col">
+                            <u>{{ $t(filename + '.dmmInformation.authors.organization') }}</u>
+                        </div>
+                        <div class="col">
+                            <u>{{ $t(filename + '.dmmInformation.authors.email') }}</u>
+                        </div>
+                    </div>
+                    <div v-for="autors in dmm.authors">
+                        <div class="row">
+                            <div class="col">
+                                {{ autors.name }}
+                            </div>
+                            <div class="col">
+                                {{ autors.organization }}
+                            </div>
+                            <div class="col">
+                                {{ autors.email }}
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.targetGroup') }}</h6>
+                    {{ dmm.targetGroup }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.applicationArea') }}</h6>
+                    {{ dmm.applicationArea }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.damand') }}</h6>
+                    {{ dmm.demand }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.evaluationMethod') }}</h6>
+                    {{ dmm.evaluation }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.languages') }}</h6>
+                    {{ dmm.languages }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.publicationDate') }}</h6>
+                    {{ dmm.publicationDate }}
                 </div>
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.targetGroup') }}</h6>
-                {{ dmm.targetGroup }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.applicationArea') }}</h6>
-                {{ dmm.applicationArea }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.damand') }}</h6>
-                {{ dmm.demand }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.evaluationMethod') }}</h6>
-                {{ dmm.evaluation }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.languages') }}</h6>
-                {{ dmm.languages }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.publicationDate') }}</h6>
-                {{ dmm.publicationDate }}
             </div>
-        </div>
-        <div class="box">
-            <div class="dma-list">
-                <h6>{{ $t(filename + '.dmmInformation.primarySources') }}</h6>
-                {{ dmm.primarySources }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.differentation') }}</h6>
-                {{ dmm.differentiation }}
-            </div>
-        </div>
-        <div class="box">
-            <div class="dma-list">
-                <h6>{{ $t(filename + '.dmmInformation.foundation') }}</h6>
-                {{ dmm.foundations }}
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.description') }}</h6>
-                {{ dmm.descriptions }}
-                <div v-if="dmm.descriptionsImageLink">
-                    <img :src="dmm.descriptionsImageLink.toString()" alt="Uploaded Image" class="image">
+            <div class="box">
+                <div class="dma-list">
+                    <h6>{{ $t(filename + '.dmmInformation.primarySources') }}</h6>
+                    {{ dmm.primarySources }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.differentation') }}</h6>
+                    {{ dmm.differentiation }}
                 </div>
-                <hr class="line">
-                <h6>{{ $t(filename + '.dmmInformation.calculation') }}</h6>
-                {{ dmm.calculations }}
-                <div v-if="dmm.calculationsImageLink">
-                    <img :src="dmm.calculationsImageLink.toString()" alt="Uploaded Image" class="image">
+            </div>
+            <div class="box">
+                <div class="dma-list">
+                    <h6>{{ $t(filename + '.dmmInformation.foundation') }}</h6>
+                    {{ dmm.foundations }}
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.description') }}</h6>
+                    {{ dmm.descriptions }}
+                    <div v-if="dmm.descriptionsImageLink">
+                        <img :src="dmm.descriptionsImageLink.toString()" alt="Uploaded Image" class="image">
+                    </div>
+                    <hr class="line">
+                    <h6>{{ $t(filename + '.dmmInformation.calculation') }}</h6>
+                    {{ dmm.calculations }}
+                    <div v-if="dmm.calculationsImageLink">
+                        <img :src="dmm.calculationsImageLink.toString()" alt="Uploaded Image" class="image">
+                    </div>
                 </div>
             </div>
         </div>
         <br>
 
+
         <!-- update dmm information interface  -->
         <div v-if="showInput" class="overlay">
             <div class="input-container">
-                <SurveyComp @surveyCompleted="handleDmmPatch" :survey="updateDmmQuestions || {}" surveyMode="edit"/>
+                <SurveyComp @surveyCompleted="handleDmmPatch" :survey="updateDmmQuestions || {}" surveyMode="edit" />
             </div>
             <div class="button-container">
                 <button class="btn btn-outline-secondary custom-button2" @click="showInput = false;">
@@ -152,7 +155,7 @@
         <!-- view and update dmm question interfaces  -->
         <div v-if="showSurvey" class="overlay">
             <div class="input-container">
-                <SurveyComp :survey="dmm" surveyMode="edit"/>
+                <SurveyComp :survey="dmm" surveyMode="edit" />
             </div>
             <div class="button-container">
                 <button class="btn btn-outline-secondary custom-button2" @click="showSurvey = false;">
@@ -170,7 +173,11 @@
         </div>
         <div v-if="showLogic" class="overlay">
             <div class="input-container">
-                Auswertungslogik
+                <h3>Auswertungslogik</h3>
+                <br><br>
+                <b>Still in development, coming soon...</b>
+                <br><br>
+                (No part of this demonstrator)
             </div>
             <div class="button-container">
                 <button class="btn btn-outline-secondary custom-button2" @click="showLogic = false;">
@@ -212,6 +219,15 @@ let showSurvey = ref(false);
 let showSurveyCreator = ref(false);
 let showLogic = ref(false);
 
+//simple patch of dmm publication status
+let published = ref(false);
+const simplePatch = () => {
+    let patchDmm = {
+        "published": published.value
+    }
+    patchDmmFunction(patchDmm)
+};
+
 //get start data
 const dmm = ref<DMM>();
 const fetchData = async () => {
@@ -219,6 +235,7 @@ const fetchData = async () => {
         const response = await api.get('/DmmById/' + props.id);
         const data: DMM = await response.data;
         dmm.value = data;
+        published.value = data.published;
     } catch (err: any) {
         console.error(err.message);
     }
@@ -353,20 +370,10 @@ watch([dmm, updateDmmQuestions], ([dmm]) => {
     }
 });
 
-
-//simple patch of dmm publication status
-let published = ref(false);
-const simplePatch = () => {
-    let patchDmm = {
-        "published": published.value
-    }
-    patchDmmFunction(patchDmm)
-};
-
 </script>
 
 <style scoped>
-/* Input container customization*/ 
+/* Input container customization*/
 .input-container {
     position: absolute;
     top: 48%;

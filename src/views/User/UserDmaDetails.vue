@@ -12,8 +12,7 @@
 
         <!-- check if dma was answered  -->
         <div v-if="dmaDetails.responses.length > 0">
-            <button class="btn btn-outline-secondary"
-                @click="showResultDetails = !showResultDetails; console.log('true')">
+            <button class="btn btn-outline-secondary" @click="showResultDetails = !showResultDetails;">
                 {{ $t(filename + '.button.DmaAnswers') }}
             </button>
             <br><br>
@@ -92,6 +91,7 @@ import type { EuResult } from "../../interfaces/EuResults.js"
 //functions
 import { EUcalculation } from "../../components/functions/EuResultsCalulation.js";
 import { BIM4VIDcalculation } from "../../components/functions/BIM4VIDResultsCalulation.js";
+import { fillSurveyResponses } from "../../components/functions/surveyResponses.js";
 //vue components
 import SurveyComp from "../../components/SurveyComp.vue";
 import EuResultsComp from "../../components/EuResultsComp.vue";
@@ -224,8 +224,11 @@ watch([ExistingUser, dmaDetails], ([user]) => {
                 console.log('not all default value, EU questions were specialized')
             }
         }
+        //fill defaults in surveyJS if there is already a response 
+        const filledDetails = fillSurveyResponses(dmaDetails.value);
     }
 });
+
 
 //calculation of eu or bim4vid answers
 let newEuResults = ref<EuResult>();

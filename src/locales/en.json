@@ -1,40 +1,349 @@
 {
-  "welcome": "Welcome to our application!",
-  "home": {
+  "welcome": "Welcome to the application's language management!",
+  "EdihHomeView": {
     "title": "Home",
-    "h1": "Hello"
+    "h3": "Hello",
+    "h4": "Your Organization: ",
+    "OrgaInformations": {
+      "title": "Organizations",
+      "list": {
+        "column0": "Delete",
+        "column1": "Name",
+        "column2": "Contact Email",
+        "column3": "EU Status"
+      }
+    },
+    "DmaInformations": {
+      "title": "Information about conducted DMAs",
+      "overview": {
+        "title": "Overview"
+      },
+      "maturity": {
+        "title": "Maturity according to EU"
+      },
+      "lastDma": {
+        "title": "Overview of Last DMAs"
+      }
+    },
+    "deleteInput": {
+      "title": "Do you really want to delete the following organizations with their users?",
+      "userMail": "User: ",
+      "organization": "Name: ",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "button": {
+      "editInformation": "Create Organization",
+      "endInput": "End",
+      "deleteOrga": "Delete Organization",
+      "exitDelete": "Exit Deletion",
+      "deleteSelected": "Delete"
+    }
   },
-  "EdihDmaView": {
+  "UserHomeView": {
+    "title": "Home",
+    "h3": "Hello",
+    "h4": "Your Organization:",
+    "total": "Total index: ",
+    "dmaStatus": "DMA Status:",
+    "results": {
+      "title": "Results",
+      "dimension1": "Digital Strategy and Investments",
+      "dimension2": "Digital Readiness",
+      "dimension3": "People Centricity",
+      "dimension4": "Data Management and Security",
+      "dimension5": "Interoperability",
+      "dimension6": "Green Digitalization",
+      "total": "Total Index",
+      "missing": "To Achieve"
+    },
+    "OrgaInformations": {
+      "title": "General Information",
+      "organization": {
+        "title": "Organization",
+        "name": "Name: ",
+        "id": "ID Number: ",
+        "website": "Website: ",
+        "type": "Organization Type: ",
+        "size": "Organization Size: ",
+        "primarySector": "Primary Sector: ",
+        "secondarySector": "Secondary Sector: ",
+        "euDmaStatus": "EU-DMA Status: ",
+        "values": {
+          "size1": "Small Workforce",
+          "size2": "Medium Workforce",
+          "size3": "Large Workforce",
+          "type1": "National Authority",
+          "type2": "Regional/State Authority",
+          "type3": "Provincial/Municipal Authority",
+          "type4": "Public Institution",
+          "primarySector1": "General Public Service Activities",
+          "primarySector2": "Defence",
+          "primarySector3": "Public Order and Safety",
+          "primarySector4": "Economic Affairs",
+          "primarySector5": "Environment Protection",
+          "primarySector6": "Housing",
+          "primarySector7": "Health",
+          "primarySector8": "Recreation, Culture and Religion",
+          "primarySector9": "Education",
+          "primarySector10": "Social Protection",
+          "primarySector11": "Other Sector",
+          "secondarySector1": "General Public Service Activities",
+          "secondarySector2": "Defence",
+          "secondarySector3": "Public Order and Safety",
+          "secondarySector4": "Economic Affairs",
+          "secondarySector5": "Environment Protection",
+          "secondarySector6": "Housing",
+          "secondarySector7": "Health",
+          "secondarySector8": "Recreation, Culture and Religion",
+          "secondarySector9": "Education",
+          "secondarySector10": "Social Protection",
+          "secondarySector11": "Other Sector"
+        }
+      },
+      "address": {
+        "title": "Address",
+        "street": "Street: ",
+        "postalcode": "Postal Code: ",
+        "city": "City: ",
+        "country": "Country: "
+      },
+      "contact": {
+        "title": "Contact Person",
+        "role": "Role: ",
+        "email": "Email Address: ",
+        "tel": "Telephone Number: "
+      },
+      "notAllInformation": "Not all information available!",
+      "addInformation": "Please add information!",
+      "startEuDma": "Start your first EU-DMA now"
+    },
+    "DmaInformations": {
+      "title": "Conducted EU-DMAs",
+      "overview": {
+        "title": "Overview"
+      },
+      "maturity": {
+        "title": "Maturity According to EU"
+      },
+      "lastDma": {
+        "title": "Your Latest DMA",
+        "name": "Name",
+        "createdBy": "Created By",
+        "createdAt": "Created At"
+      }
+    },
+    "button": {
+      "editInformation": "Edit Information",
+      "endInput": "End",
+      "startDma": "Go to DMAs"
+    }
+  },
+  "DmaView": {
     "title": "DMAs",
-    "h1": "DMA Overview",
-    "buttonCreateSurvey":"Create DMA",
-    "buttonDeleteSurvey":"Delete DMA",
-    "buttonExitDelete":"Exit delete",
-    "buttonDeleteSelected":"Delete selected",
-    "createInput":{
-      "title":"Create new DMA",
-      "name":"Title: ",
-      "organization":"Organization: ",
-      "cancel":"Cancel",
-      "create":"Create"
+    "h3": "DMA Overview",
+    "Dmas": "Available DMAs",
+    "Infos": "General Information",
+    "button": {
+      "createDma": "Create DMA",
+      "deleteDma": "Delete DMA",
+      "exitDelete": "Exit Deletion",
+      "deleteSelected": "Delete Selected"
     },
-    "deleteInput":{
-      "title":"Should the following DMAs really be deleted?",
-      "name":"Title: ",
-      "organization":"Organization: ",
-      "cancel":"Cancel",
-      "delete":"Delete"
+    "createInput": {
+      "title": "Create New DMA",
+      "name": "Name: ",
+      "organization": "Organization: ",
+      "loadDMM": "Which DMMs should be loaded?",
+      "add": " add? ",
+      "cancel": "Cancel",
+      "create": "Create",
+      "euDma": "Should conducting the EU-DMA be the next mandatory task for the EU?",
+      "nextEuDma": "Your next DMA: ",
+      "euDmaYes1": "Yes, conduct ",
+      "euDmaYes2": " for the EU",
+      "euDmaNo": "No, I want to conduct the DMA internally"
     },
-    "column0": "Delete",
-    "column1": "Title",
-    "column2": "Organization",
-    "column3": "Creator",
-    "column4": "Created at",
-    "column5": "Edited by",
-    "column6": "Edited at"
+    "deleteInput": {
+      "title": "Do you really want to delete the following DMAs?",
+      "name": "Name: ",
+      "organization": "Organization: ",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "list": {
+      "column0": "Delete",
+      "column1": "EU-DMA",
+      "column2": "Name",
+      "column3": "Organization",
+      "column4": "Created By",
+      "column5": "Created At",
+      "column6": "Conducted By",
+      "column7": "Conducted At"
+    },
+    "Information": {
+      "title1": "Digital Transformation",
+      "digitalization": "The term digitization generally refers to the technical process of converting analog data into digital data. In a broader organizational context, however, digitalization encompasses a variety of changes, both at an individual level and in terms of the organization of businesses and their processes. Digital transformation describes a profound digital change on many levels within a company. The transformation includes not only the use of digital technologies to improve existing processes, but also the exploration of new digital innovations that have the potential to reshape the business model. Unlike digitization, digital transformations are not only aimed at introducing new digital technologies into companies, but they have a strategic perspective with specifically defined goals. They represent the managed adaptation of companies that drives digitization forward. Consequently, digitization is a necessary but not sufficient condition for digital transformation.",
+      "digitalization-img": "src/assets/digitalization_1_EN.png",
+      "title2": "Digital Maturity Models",
+      "digitalMaturity": "Digital transformation requires a fundamental change in the current business model. For this, companies must first evaluate their current business model in terms of emerging opportunities and adapt it to current digital developments if necessary. The concept of digital maturity was introduced for this business model assessment. Digital maturity models (DMM) provide a method for measuring the current state of an organization in terms of digital transformation, digital strategy, technology adoption, and business process implementation. Measuring the current state of digital transformation carried out by companies is at the core of digital maturity models. Digital maturity models allow the capture of digital maturity levels through the execution of Digital Maturity Assessments (DMA). The maturity levels serve as a starting point for benchmarking activities and for evaluating the effectiveness of digital transformation processes.",
+      "digitalMaturity-img": "src/assets/digitalization_2_EN.png",
+      "literatur": "Recommended Literature",
+      "source1": "The Extended Digital Maturity Model",
+      "source2": "Stages in Digital Business Transformation",
+      "source3": "Management Models of Digital Transformation",
+      "source4": "What makes a useful Maturity Model?"
+    }
   },
-  "EdihDmmView": {
+  "DmaDetails": {
+    "organization": "Organization: ",
+    "dmaData": "DMA Details",
+    "creator": "Created by: ",
+    "createdAt": "Created at: ",
+    "editor": "Edited by: ",
+    "editedAt": "Edited at: ",
+    "answeringUser": "Answered by: ",
+    "answeredAt": "Answered at: ",
+    "euAnswers": "EU Results",
+    "button": {
+      "editDma": "Edit DMA",
+      "viewDma": "DMA Preview",
+      "DmaAnswers": "View Answers",
+      "downloadCSV": " Download CSV",
+      "startDMA": "Start DMA",
+      "closeEuAnswers": "Close",
+      "stopDma": "Stop - Progress will be lost!"
+    },
+    "UserText": "For a more detailed evaluation of the EU-DMA, please contact EDIH Thuringia."
+  },
+  "DmmView": {
     "title": "DMMs",
-    "h1": "DMM overview"
+    "h3": "DMM Overview",
+    "button": {
+      "createDmm": "Create DMM",
+      "deleteDmm": "Delete DMM",
+      "exitDelete": "Exit Deletion",
+      "deleteSelected": "Delete Selected"
+    },
+    "createInput": {
+      "title": "Create New DMM",
+      "name": "Name: ",
+      "cancel": "Cancel",
+      "create": "Create"
+    },
+    "deleteInput": {
+      "title": "Do you really want to delete the following DMMs?",
+      "name": "Name: ",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "organization": "Organization: "
+    },
+    "list": {
+      "column0": "Delete",
+      "column1": "Acronym",
+      "column3": "Created By",
+      "column4": "Created At",
+      "column5": "Edited By",
+      "column6": "Edited At"
+    },
+    "user": {
+      "title": "About",
+      "h3": "About the EDIH-DMA Tool",
+      "button": {
+        "showDmm": "Available DMMs",
+        "showAbout": "General Information"
+      },
+      "EDIHInformation": {
+        "edihDescription": "We want to accompany you on your journey into the digital future. Digital transformation is in full swing and offers companies, startups, and the public sector enormous opportunities. The European Digital Innovation Hub Thuringia (EDIH) supports you in seizing these opportunities and actively shaping the digital future.",
+        "edihButtons": {
+          "learn": "Learn",
+          "test": "Test",
+          "invest": "Invest",
+          "connect": "Connect"
+        },
+        "dmmDescription": {
+          "part1": "As part of the EU's EDIH initiative, a ",
+          "link": "Digital Maturity Model (DMM)",
+          "part2": " with variants for small and medium-sized enterprises (SMEs) and public sector organizations (PSO) has been developed. The models enable the execution of digital maturity assessments (DMAs). Through the DMAs, the EU aims to achieve the following goals:",
+          "aim1": "1. Assessing the current level of digital maturity of SMEs/PSOs to determine the required EDIH digitization services.",
+          "aim2": "2. Benchmarking for SMEs/PSOs to obtain a better picture of digital maturity compared to competitors.",
+          "aim3": "3. Measuring and reporting on the effectiveness of EDIH services.",
+          "aim4": "4. Providing feedback for policy decisions and necessary corrective actions."
+        },
+        "dmaToolDescription": "With this DMA tool, we offer our customers the opportunity to conduct DMAs independently. This allows them to determine their digital maturity themselves and then have direct access to the results. The EDIH uses the EU-relevant DMA results for forwarding to the EU at times T0, T1, and T3, which are mandatory for recipients of EDIH services. In addition to the standard EU DMAs, we offer specialized maturity models to enable you to specifically determine your digital capabilities for your specific area."
+      }
+    }
+  },
+  "DmmDetails": {
+    "organization": "Organization: ",
+    "dmmData": "DMM Details",
+    "creator": "Created by: ",
+    "createdAt": "Created at: ",
+    "editor": "Edited by: ",
+    "editedAt": "Edited at: ",
+    "button": {
+      "editDmm": "Edit DMM Questions",
+      "viewDmm": "DMM Preview",
+      "editDmmLogic": "Edit Evaluation",
+      "editDmmInformation": "Edit DMM Information",
+      "publishDmm": "Hide DMM",
+      "hideDmm": "Publish DMM",
+      "endInput": "End"
+    },
+    "dmmInformation": {
+      "name": "Name",
+      "acronym": "Acronym",
+      "status": "Status",
+      "authors": {
+        "title": "Author(s)",
+        "name": "Name",
+        "organization": "Organization",
+        "email": "Email"
+      },
+      "published": "Published",
+      "hided": "Not Published",
+      "targetGroup": "Target Group",
+      "applicationArea": "Application Area",
+      "damand": "General DMM demand for the application area",
+      "evaluationMethod": "Evaluation Method",
+      "languages": "Available Languages",
+      "publicationDate": "Publication Date",
+      "primarySources": "Primary Sources and their Use",
+      "differentation": "Differentiation from similar models, need for new model",
+      "foundation": "Theoretical Foundations (Optional - Link to scientific publication)",
+      "description": "Maturity level and its dimensions, as well as their granularity and paths",
+      "calculation": "Description of the evaluation logic"
+    }
+  },
+  "LoginComp": {
+    "email": "Email Address",
+    "password": "Password",
+    "login": "Login",
+    "newHere": "New here? Create an account"
+  },
+  "SignupComp": {
+    "organization": "Organization:",
+    "username": "Username:",
+    "email": "Email:",
+    "password": "Password:",
+    "terms": "Terms and Conditions",
+    "accept": "Agreement: ",
+    "newUser": "New user created!",
+    "button": {
+      "create": "Create your account",
+      "existingUser": "Already have an account?"
+    }
+  },
+  "EuResultsComp": {
+    "overview": "Dimension Overview",
+    "dimension1": "Digital Strategy and Investment",
+    "dimension2": "Readiness for Digital Transformation",
+    "dimension3": "People-Centric Digitalization",
+    "dimension4": "Data Management and Security",
+    "dimension5": "Interoperability",
+    "dimension6": "Green Digitalization"
+  },
+  "BIM4VIDResultsComp": {
+    "bim4vidAnswers": "BIM4VID Results"
   }
 }

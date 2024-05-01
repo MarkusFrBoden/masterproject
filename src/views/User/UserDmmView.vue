@@ -18,9 +18,14 @@
   <br>
 
   <div v-if="showDmm">
-
-  <!-- dmm list, filtered and sorted  -->
-  <DmmList :showDeleteOptions="false" :dmms="dmms" type="User" />
+    <!-- dmm list, filtered and sorted  -->
+    <div v-if="!loading">
+      <DmmList :showDeleteOptions="false" :dmms="dmms" type="User" />
+    </div>
+  </div>
+  <div v-else>
+    <br>
+    Loading...
   </div>
 
   <div v-else>
@@ -68,10 +73,10 @@
       </div>
 
       <div class="box">
-        {{ $t(filename + '.EDIHInformation.dmmDescription.part1') }} <a
-          href="https://european-digital-innovation-hubs.ec.europa.eu/knowledge-hub/guidance-documents/overview-digital-maturity-assessment-dma"
-          target="_blank"> {{ $t(filename + '.EDIHInformation.dmmDescription.link') }}</a> {{ $t(filename +
-            '.EDIHInformation.dmmDescription.part2') }}
+        {{ $t(filename + '.EDIHInformation.dmmDescription.part1') }}
+        <a href="https://european-digital-innovation-hubs.ec.europa.eu/knowledge-hub/guidance-documents/overview-digital-maturity-assessment-dma"
+          target="_blank"> {{ $t(filename + '.EDIHInformation.dmmDescription.link') }}</a>
+        {{ $t(filename + '.EDIHInformation.dmmDescription.part2') }}
         <br> {{ $t(filename + '.EDIHInformation.dmmDescription.aim1') }}
         <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim2') }}
         <br>{{ $t(filename + '.EDIHInformation.dmmDescription.aim3') }}
@@ -104,13 +109,16 @@ let showDmm = ref(false);
 
 //get start data
 const dmms = ref<DMM[]>([]);
+let loading = ref(false);
 const fetchData = async () => {
+  loading.value = true
   try {
     const response = await api.get('/PublishedDmm');
     dmms.value = response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+  loading.value = false
 };
 fetchData();
 

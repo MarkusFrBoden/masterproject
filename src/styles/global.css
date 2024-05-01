@@ -19,7 +19,7 @@ body {
 }
 .dark {
   background: #16171d;
-  color: #72bbff;
+  color: #96a1ac;
   background-image: url('../assets/EuropeanStarsBlack.png');
   background-position: center top 350px;
   background-size: auto cover;
@@ -194,6 +194,11 @@ button {
 /* links */
 a {
   text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ff6869;
 }
 
 /* overlay for inputs */
@@ -272,7 +277,7 @@ a {
   color: #020b3d;
   outline: none;
   background-color: #fff;
-  width: 64%;
+  width: 203px;
   padding: 6px;
   border: 1px solid #919191;
   text-align: center;

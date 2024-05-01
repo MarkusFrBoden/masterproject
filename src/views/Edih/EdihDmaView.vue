@@ -40,7 +40,6 @@
                         :value="organization.organization.name">{{ organization.organization.name }}</option>
                 </select>
             </div>
-            {{ newDmaOrganisation }}
             <br>
             <!-- create dma from DMM  -->
             <div v-if="dmms.length > 0">
@@ -50,7 +49,6 @@
                     {{ dmm.akronym }} {{ $t(filename + '.createInput.add') }} <input type="checkbox"
                         :value="{ id: dmm._id, akronym: dmm.akronym }" v-model="selectedDmms">
                 </div>
-                {{ selectedDmms }} {{ newDmaOrganisation }}
             </div>
             <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
                 <br>
@@ -112,8 +110,14 @@
     </div>
 
     <!-- dma list, filtered and sorted  -->
-    <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
-        @updateselectedItems="updateselectedItems" type="Edih" />
+    <div v-if="!loading">
+        <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=true
+            @updateselectedItems="updateselectedItems" type="Edih" />
+    </div>
+    <div v-else>
+        <br>
+        Loading...
+    </div>
 
 </template>
 
@@ -189,9 +193,7 @@ interface selectDmms {
 const selectedDmms = ref<selectDmms[]>([]);
 
 watch(selectedDmms, (newValue, oldValue) => {
-    console.log('test');
     if (newValue.some(item => item.akronym === 'EUPSO')) {
-        console.log('test2')
         const organizationWithEUPSO = organizations.value.find((org: any) => {
             if (org._id === newDmaOrganisation.value) {
             }
@@ -296,10 +298,10 @@ const deleteSelectedItems = async () => {
         const IDs = selectedItems.value.map(item => item._id);
         const response = await api.post('/deleteMultipleDmas', { dmaIds: IDs });
         if (response.data.invalidIds) {
-            alert('One or more EU-DMA!');
             showDeleteQuestion.value = false;
             showDeleteOptions.value = false;
             selectedItems.value = [];
+            alert('One or more EU-DMA!');
         } else {
             console.log('Successfully deleted dmas:', response.data);
             await fetchData();

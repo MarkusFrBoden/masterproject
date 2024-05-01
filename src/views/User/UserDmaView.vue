@@ -17,7 +17,7 @@
         </button>
     </div>
     <br>
- 
+
     <div v-if="showDma">
         <!-- buttons for create and delete dma  -->
         <div>
@@ -43,12 +43,19 @@
         </div>
 
         <!-- dma list  -->
-        <div v-if="dmms.length > 0">
-            <DmaList :showDeleteOptions = "showDeleteOptions" :dmas = "dmas" :showOrganization = false @updateselectedItems="updateselectedItems" type="User"/>
+        <div v-if="!loading">
+            <div v-if="dmms.length > 0">
+                <DmaList :showDeleteOptions="showDeleteOptions" :dmas="dmas" :showOrganization=false
+                    @updateselectedItems="updateselectedItems" type="User" />
+            </div>
+            <div v-else>
+                <br>
+                {{ $t(filename + '.noDma') }}
+            </div>
         </div>
         <div v-else>
             <br>
-            {{ $t(filename + '.noDma') }}
+            Loading...
         </div>
 
         <!-- create dma interface  -->
@@ -136,7 +143,7 @@
                 {{ $t(filename + '.Information.digitalization') }}
                 <br><br>
                 <img :src="$t(filename + '.Information.digitalization-img')" alt="digitalization-1"
-                    style="max-width: 700px; display: block;  margin-left: auto; margin-right: auto; ">
+                    style="max-width: 900px; display: block;  margin-left: auto; margin-right: auto; ">
             </div>
 
             <div class="box">
@@ -145,11 +152,11 @@
                 {{ $t(filename + '.Information.digitalMaturity') }}
                 <br><br>
                 <img :src="$t(filename + '.Information.digitalMaturity-img')" alt="digitalization-2"
-                    style="max-width: 700px; display: block; margin-left: auto; margin-right: auto; ">
+                    style="max-width: 900px; display: block; margin-left: auto; margin-right: auto; ">
             </div>
 
             <div class="box">
-                <b>Empfohlene Literatur </b>
+                <b> {{ $t(filename + '.Information.literatur') }}</b>
                 <br><br>
                 <div class="row justify-content-between">
                     <div class="container text-center">
@@ -195,7 +202,7 @@ import type { User } from "../../interfaces/User.js"
 import DmaList from '@/components/DmaList.vue';
 
 //filename for language tags
-const filename = 'UserDmaView'
+const filename = 'DmaView'
 
 //enable api via global variable
 const api = inject('api') as any;
@@ -349,7 +356,6 @@ let selectedItems = ref<deleteItems[]>([])
 //accept emit from child to fill selectedItems
 const updateselectedItems = (newValue: deleteItems[]) => {
     selectedItems.value = newValue;
-    console.log('test2')
 }
 
 const deleteSelectedItems = async () => {
@@ -363,10 +369,10 @@ const deleteSelectedItems = async () => {
             showDeleteOptions.value = false;
             selectedItems.value = [];
         } else {
-        fetchData();
-        showDeleteQuestion.value = false;
-        showDeleteOptions.value = false;
-        selectedItems.value = [];
+            fetchData();
+            showDeleteQuestion.value = false;
+            showDeleteOptions.value = false;
+            selectedItems.value = [];
         }
     } catch (error) {
         console.error('Error deleting dmas:', error);

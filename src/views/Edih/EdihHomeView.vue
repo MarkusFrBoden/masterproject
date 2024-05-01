@@ -27,7 +27,6 @@
   <div class="container">
     <div class="row">
       <div class="col">
-
         <!-- organization list  -->
         <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
         <div class="leftbox">
