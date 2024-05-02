@@ -75,9 +75,6 @@
                   </div>
                   <div class="col">
                     {{ organization._id }}
-                    <!-- <RouterLink :to="{ name: 'EdihOrganizationDetails', params: { id: organization._id?.toString() } }">
-                        <a href="">{{ organization.name }}</a>
-                    </RouterLink> -->
                   </div>
                   <div class="col">{{ organization.organization.contactPerson.email }}</div>
                   <div class="col">{{ organization.organization.euDmaStatus }}</div>

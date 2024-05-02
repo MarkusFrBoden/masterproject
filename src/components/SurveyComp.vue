@@ -78,7 +78,7 @@ survey.onUploadFiles.add(async (_, options) => {
       options.callback(
         options.files.map((file) => ({
           file: file,
-          content: '/masterproject/backend' + response.data.filePath
+          content: response.data.filePath
         }))
       );
     } catch (error) {

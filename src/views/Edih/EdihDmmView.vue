@@ -230,13 +230,19 @@ const updateselectedItems = (newValue: deleteItems[]) => {
 const deleteSelectedItems = async () => {
   try {
     const IDs = selectedItems.value.map(item => item._id);
-    console.log(IDs);
     const response = await api.post('/deleteMultipleDmms', { dmmIds: IDs });
+    if (response.data.invalidIds) {
+      showDeleteQuestion.value = false;
+      showDeleteOptions.value = false;
+      selectedItems.value = [];
+      alert('Please do not delete this DMMs :D');
+    }else {
     console.log('Successfully deleted dmms:', response.data);
-    fetchData();
+    await fetchData();
     showDeleteQuestion.value = false;
     showDeleteOptions.value = false;
     selectedItems.value = [];
+  }
   } catch (error) {
     console.error('Error deleting dmms:', error);
   }

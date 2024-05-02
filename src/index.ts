@@ -30,7 +30,7 @@ const isDark = useDark();
 const app = createApp(App)
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://masterproject-backend.up.railway.app/api/',
 });
 
 app.provide('api', api);
@@ -41,6 +41,5 @@ app.use(router)
    .use(surveyPlugin)
    .use(surveyCreatorPlugin)
    .use(i18n);
-
 
 app.mount('#app')
