@@ -35,6 +35,7 @@ const api = axios.create({
 
 app.provide('api', api);
 app.provide('darkmode', isDark);
+app.provide('serverlink', 'https://masterproject-backend.up.railway.app/')
 
 app.use(router)
    .use(surveyPlugin)

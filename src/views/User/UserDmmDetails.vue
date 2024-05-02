@@ -98,13 +98,13 @@
                 <h6>{{ $t(filename + '.dmmInformation.description') }}</h6>
                 {{ dmm.descriptions }}
                 <div v-if="dmm.descriptionsImageLink">
-                    <img :src="dmm.descriptionsImageLink.toString()" alt="Uploaded Image" class="image">
+                    <img :src="serverlink + dmm.descriptionsImageLink.toString()" alt="Uploaded Image" class="image">
                 </div>
                 <hr class="line">
                 <h6>{{ $t(filename + '.dmmInformation.calculation') }}</h6>
                 {{ dmm.calculations }}
                 <div v-if="dmm.calculationsImageLink">
-                    <img :src="dmm.calculationsImageLink.toString()" alt="Uploaded Image" class="image">
+                    <img :src="serverlink + dmm.calculationsImageLink.toString()" alt="Uploaded Image" class="image">
                 </div>
             </div>
         </div>
@@ -126,6 +126,7 @@ const filename = 'DmmDetails'
 
 //enable api via global variable
 const api = inject('api') as any;
+const serverlink =  inject('serverlink') as any;
 
 //accept props from UserDmmView with dmm id
 const props = defineProps({
