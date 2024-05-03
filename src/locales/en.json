@@ -184,10 +184,10 @@
     "Information": {
       "title1": "Digital Transformation",
       "digitalization": "The term digitization generally refers to the technical process of converting analog data into digital data. In a broader organizational context, however, digitalization encompasses a variety of changes, both at an individual level and in terms of the organization of businesses and their processes. Digital transformation describes a profound digital change on many levels within a company. The transformation includes not only the use of digital technologies to improve existing processes, but also the exploration of new digital innovations that have the potential to reshape the business model. Unlike digitization, digital transformations are not only aimed at introducing new digital technologies into companies, but they have a strategic perspective with specifically defined goals. They represent the managed adaptation of companies that drives digitization forward. Consequently, digitization is a necessary but not sufficient condition for digital transformation.",
-      "digitalization-img": "src/assets/digitalization_1_EN.png",
+      "digitalization-img": "../../assets/digitalization_1_EN.png",
       "title2": "Digital Maturity Models",
       "digitalMaturity": "Digital transformation requires a fundamental change in the current business model. For this, companies must first evaluate their current business model in terms of emerging opportunities and adapt it to current digital developments if necessary. The concept of digital maturity was introduced for this business model assessment. Digital maturity models (DMM) provide a method for measuring the current state of an organization in terms of digital transformation, digital strategy, technology adoption, and business process implementation. Measuring the current state of digital transformation carried out by companies is at the core of digital maturity models. Digital maturity models allow the capture of digital maturity levels through the execution of Digital Maturity Assessments (DMA). The maturity levels serve as a starting point for benchmarking activities and for evaluating the effectiveness of digital transformation processes.",
-      "digitalMaturity-img": "src/assets/digitalization_2_EN.png",
+      "digitalMaturity-img": "../../assets/digitalization_2_EN.png",
       "literatur": "Recommended Literature",
       "source1": "The Extended Digital Maturity Model",
       "source2": "Stages in Digital Business Transformation",

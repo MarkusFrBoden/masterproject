@@ -142,7 +142,7 @@
                 <br>
                 {{ $t(filename + '.Information.digitalization') }}
                 <br><br>
-                <img :src="$t(filename + '.Information.digitalization-img')" alt="digitalization-1"
+                <img src="../../assets/digitalization_1_DE.png" alt="digitalization-1"
                     style="max-width: 900px; display: block;  margin-left: auto; margin-right: auto; ">
             </div>
 
