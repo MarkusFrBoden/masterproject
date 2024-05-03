@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 
 //enable api via global variable
 const api = inject('api') as any;
+const serverlink =  inject('serverlink') as any;
 
 //accept survey props from calling components
 let props = defineProps({
@@ -63,7 +64,6 @@ watch(
 //use emit to reply results
 survey.onComplete.add(sendResults);
 
-
 //enable picture upload
 survey.onUploadFiles.add(async (_, options) => {
   console.log('Triggert');
@@ -78,7 +78,7 @@ survey.onUploadFiles.add(async (_, options) => {
       options.callback(
         options.files.map((file) => ({
           file: file,
-          content: response.data.filePath
+          content: serverlink + response.data.filePath
         }))
       );
     } catch (error) {

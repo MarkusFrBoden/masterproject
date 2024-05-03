@@ -50,7 +50,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion2",
-          "imageLink": "/masterproject/backend/uploads/1713259144314-MP_Implementierung.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713259144314-MP_Implementierung.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -100,7 +100,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion3",
-          "imageLink": "/masterproject/backend/uploads/1713259147598-MP_Projekteinsatz.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713259147598-MP_Projekteinsatz.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -150,7 +150,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion4",
-          "imageLink": "/masterproject/backend/uploads/1713259151762-MP_BIM-AwF.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713259151762-MP_BIM-AwF.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -207,7 +207,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion5",
-          "imageLink": "/masterproject/backend/uploads/1713257444443-01_BIM-Ziele&Strategie.png.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257444443-01_BIM-Ziele&Strategie.png.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -264,7 +264,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion6",
-          "imageLink": "/masterproject/backend/uploads/1713257448054-02_ManagementunterstÃ¼tzung.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257448054-02_ManagementunterstÃ¼tzung.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -314,7 +314,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion7",
-          "imageLink": "/masterproject/backend/uploads/1713257452074-03_BIM-Bedeutung.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257452074-03_BIM-Bedeutung.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -371,7 +371,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion8",
-          "imageLink": "/masterproject/backend/uploads/1713257632312-04_BIM-Schulungen.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257632312-04_BIM-Schulungen.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -421,7 +421,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion9",
-          "imageLink": "/masterproject/backend/uploads/1713257636277-05_BIM-Mindset.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257636277-05_BIM-Mindset.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -478,7 +478,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion10",
-          "imageLink": "/masterproject/backend/uploads/1713257717567-06_IA.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257717567-06_IA.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -528,7 +528,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion11",
-          "imageLink": "/masterproject/backend/uploads/1713257720797-07_BIM-BVB.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257720797-07_BIM-BVB.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -585,7 +585,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion12",
-          "imageLink": "/masterproject/backend/uploads/1713257780776-08_AN-UnterstÃ¼tzung.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257780776-08_AN-UnterstÃ¼tzung.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -635,7 +635,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion13",
-          "imageLink": "/masterproject/backend/uploads/1713257784640-09_BÃ¼rgerinformation.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713257784640-09_BÃ¼rgerinformation.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -692,7 +692,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion14",
-          "imageLink": "/masterproject/backend/uploads/1713258735903-10_Prozesse.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713258735903-10_Prozesse.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -742,7 +742,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion15",
-          "imageLink": "/masterproject/backend/uploads/1713258740152-11_BIM-Wissen.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713258740152-11_BIM-Wissen.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -799,7 +799,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion16",
-          "imageLink": "/masterproject/backend/uploads/1713258907485-12_Software.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713258907485-12_Software.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -849,7 +849,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion17",
-          "imageLink": "/masterproject/backend/uploads/1713258910874-13_Hardware.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713258910874-13_Hardware.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -906,7 +906,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion18",
-          "imageLink": "/masterproject/backend/uploads/1713259023095-14_CDE.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713259023095-14_CDE.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"
@@ -956,7 +956,7 @@ const BIM4VID = {
          {
           "type": "image",
           "name": "imagequestion19",
-          "imageLink": "/masterproject/backend/uploads/1713259026414-15_InteroperabilitÃ¤t.jpg",
+          "imageLink": "https://masterproject-backend.up.railway.app/uploads/1713259026414-15_InteroperabilitÃ¤t.jpg",
           "imageFit": "cover",
           "imageHeight": "auto",
           "imageWidth": "100%"

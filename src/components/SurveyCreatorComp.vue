@@ -16,6 +16,7 @@ import { BorderlessLight } from "survey-core/themes";
 
 //enable api via global variable
 const api = inject('api') as any;
+const serverlink =  inject('serverlink') as any;
 
 //accept survey props from calling components
 let props = defineProps({
@@ -142,7 +143,7 @@ creator.onUploadFile.add(async (_, options) => {
   try {
     const response = await api.post('/upload', formData);
     console.log('File uploaded successfully:', response.data.filePath);
-    options.callback("success", '/masterproject/backend'+response.data.filePath);
+    options.callback("success", serverlink + response.data.filePath);
   } catch (error) {
     console.error('Error saving Picture:', error);
   }

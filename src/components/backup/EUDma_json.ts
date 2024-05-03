@@ -449,8 +449,8 @@ const EUDmaJSON = {
           "type": "image",
           "name": "Digital Maturity Assessment Framework for Public Sector Organisations (PSOs)",
           "imageLink": {
-           "de": "/masterproject/backend/uploads/1713787799222-EU-DMA-PSO-M2.png",
-           "en": "/masterproject/backend/uploads/1713787799223-EU-DMA-PSO-M2.png"
+           "de": "https://masterproject-backend.up.railway.app/uploads/1713787799222-EU-DMA-PSO-M2.png",
+           "en": "https://masterproject-backend.up.railway.app/uploads/1713787799223-EU-DMA-PSO-M2.png"
           },
           "altText": "Source: EC JRC own elaboration",
           "imageHeight": 330,

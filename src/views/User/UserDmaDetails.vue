@@ -259,7 +259,7 @@ const patchOrganization = () => {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 900px;
-    height: 900px;
+    height: 85%;
 }
 
 .box {
