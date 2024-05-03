@@ -151,7 +151,7 @@
                 <br>
                 {{ $t(filename + '.Information.digitalMaturity') }}
                 <br><br>
-                <img :src="$t(filename + '.Information.digitalMaturity-img')" alt="digitalization-2"
+                <img src="../../assets/digitalization_2_DE.png" alt="digitalization-2"
                     style="max-width: 900px; display: block; margin-left: auto; margin-right: auto; ">
             </div>
 
