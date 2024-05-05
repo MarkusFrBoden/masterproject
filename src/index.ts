@@ -14,7 +14,7 @@ import "survey-core/defaultV2.min.css";
 import en from './locales/en.json';
 import de from './locales/de.json';
 
-//type MessageSchema = typeof de
+//create i18n language model
 const i18n = createI18n({
   legacy: false,
   locale: 'de',
@@ -25,10 +25,13 @@ const i18n = createI18n({
   }
 })
 
+//use useDark from vueuse
 const isDark = useDark();
 
+//create App
 const app = createApp(App)
 
+//use backend server link for api-requests
 const api = axios.create({
   baseURL: 'https://masterproject-backend.up.railway.app/api/',
 });

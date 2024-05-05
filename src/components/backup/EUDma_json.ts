@@ -9,8 +9,8 @@ const EUDmaJSON = {
      "en": "Target group: Public Sector Organisations Stage: T0 (prior to EDIH support start)"
     },
     "completedHtml": {
-     "de": "<h3>Danke für das ausfüllen</h3>",
-     "en": "<h3>Vielen Dank für die Teilnahme an der Umfrage</h3>"
+     "de": "<h3>Vielen Dank für die Teilnahme an der Umfrage</h3>",
+     "en": "<h3>Thank you for taking part in the survey</h3>"
     },
     "pages": [
      {

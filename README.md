@@ -1,3 +1,3 @@
-Zum Testen der Webb-Anwendung wird Google Chrome als Browser empfohlen. Benutzen Sie den Link zur Vercel-Anwendung unter About: masterproject.vercel.app. Das Frontend ist auf Vercel deployt. 
+Zum Testen der Webb-Anwendung benutzen Sie den folgenden Link zur Vercel-Anwendung: masterproject.vercel.app.
 
-Das Backend ist hier zu finden: https://github.com/MarkusFrBoden/masterproject-backend. Das Backend wird auf railway deployt.
+Der Code für das Backend ist hier zu finden: https://github.com/MarkusFrBoden/masterproject-backend. Es wird über Railway deployt.

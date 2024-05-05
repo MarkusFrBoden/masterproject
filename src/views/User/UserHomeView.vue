@@ -198,7 +198,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col" style="text-align: center;">
                   <br>
                   {{ $t(filename + '.dmaStatus') }}
                   <br>
@@ -544,7 +544,7 @@ const getLanguageKey = (key: keyof languageMapping) => {
   top: 50%;
   left: 50%;
   width: 800px;
-  height: 800px;
+  height: 85%;
 }
 
 .image {

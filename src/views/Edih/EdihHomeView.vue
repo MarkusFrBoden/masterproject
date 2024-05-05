@@ -300,4 +300,11 @@ handleSort('name');
   max-height: 100px;
   margin: 10px;
 }
+
+.rightbox{
+  min-height: 500px;
+}
+.leftbox{
+  min-height: 500px;
+}
 </style>

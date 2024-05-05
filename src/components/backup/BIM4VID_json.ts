@@ -8,7 +8,7 @@ const BIM4VID = {
        {
         "type": "html",
         "name": "explanationquestion1",
-        "html": "<h6>HTML-Beschreibung Test</h6>"
+        "html": "Dieses DMA stellt Fragen zum BIM-Implementierungsgrad in Ihrer Organisation. Im Anschluss erhalten Sie eine Auswertung in Form eines Ampelsystems. Die Berechnungsmethode ergibt sich aus der von Ihnen betreuten Straßenklasse und den im Masterplan BIM Bundesfernstraßen definierten Zielen. "
        },
        {
         "type": "radiogroup",
