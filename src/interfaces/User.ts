@@ -6,6 +6,7 @@ export interface User {
     organization: {
         name: String;
         identificationNumber: String;
+        PSO_SME: String;
         contactPerson:{
             name: String;
             role: String;

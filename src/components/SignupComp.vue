@@ -2,20 +2,33 @@
     <form @submit.prevent="handleSubmit">
 
         <!-- signup form  -->
-        <label>{{ $t(filename + '.organization') }}</label>
-        <input type="text" required v-model="organization">
-        <div v-if="organizationError" class="error">{{ organizationError }}</div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <label>{{ $t(filename + '.organization') }}</label>
+                <input type="text" required v-model="organization">
+                <div v-if="organizationError" class="error">{{ organizationError }}</div>
+            </div>
+            <div class="grid-item">
+                <label>{{ $t(filename + '.username') }}</label>
+                <input type="text" required v-model="name">
+            </div>
+            <div class="grid-item">
+                <label>{{ $t(filename + '.email') }}</label>
+                <input type="email" required v-model="email">
+                <div v-if="emailError" class="error">{{ emailError }}</div>
+            </div>
+            <div class="grid-item">
+                <label>{{ $t(filename + '.password') }}</label>
+                <input type="password" required v-model="password">
+                <div v-if="passwordError" class="error">{{ passwordError }}</div>
+            </div>
+        </div>
 
-        <label>{{ $t(filename + '.username') }}</label>
-        <input type="text" required v-model="name">
-
-        <label>{{ $t(filename + '.email') }}</label>
-        <input type="email" required v-model="email">
-        <div v-if="emailError" class="error">{{ emailError }}</div>
-
-        <label>{{ $t(filename + '.password') }}</label>
-        <input type="password" required v-model="password">
-        <div v-if="passwordError" class="error">{{ passwordError }}</div>
+        <label>{{ $t(filename + '.PSOSME') }}</label>
+        <select v-model="PSOSME" required>
+            <option value="PSO">PSO</option>
+            <option value="SME">SME</option>
+        </select>
 
         <div class="terms">
             <input type="checkbox" required v-model="terms">
@@ -103,6 +116,7 @@ let email = ref('');
 let emailError = ref('');
 let password = ref('');
 let passwordError = ref('');
+let PSOSME = ref('');
 let terms = ref(true);
 let organization = ref('');
 let organizationError = ref('');
@@ -116,6 +130,7 @@ const CreateAccount = async () => {
             organization: {
                 name: organization.value,
                 identificationNumber: "",
+                PSO_SME:PSOSME.value,
                 contactPerson: {
                     name: name.value,
                     role: "",
@@ -280,5 +295,16 @@ button {
     width: 60%;
     position: relative;
     top: -50px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
 }
 </style>

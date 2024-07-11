@@ -1,4 +1,4 @@
-const GetOrganizationInformation = {
+const GetPSOInformation = {
     "locale": "de",
     "title": {
         "de": "Kundeninformationen",
@@ -388,4 +388,4 @@ const GetOrganizationInformation = {
     "fitToContainer": true
 }
 
-export { GetOrganizationInformation };
+export { GetPSOInformation };

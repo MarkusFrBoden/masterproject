@@ -11,128 +11,258 @@
 
     <div class="row">
       <!-- organization -->
+
       <div class="col">
-        <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
-        <div class="leftbox" style="height: 350px;">
-          <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
-          <div v-for="(value, key) in ExistingUser?.organization" :key="key">
-            <div
-              v-if="value && key !== 'contactPerson' && key !== 'address' && key !== 'euDmaResults' && key !== 'lastDma'">
-              <div class="row">
-                <div class="col">
-                  <span>{{ getLanguageKey(key) }}</span>
-                </div>
-                <div class="col">
-                                  
-                  <div v-if="key === 'type'">
-                    <div v-if="value === 'Item 1'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.type1') }}
+        <div v-if="ExistingUser?.organization.PSO_SME === 'PSO'">
+          <!-- PSO -->
+          <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
+          <div class="leftbox" style="height: 350px;">
+            <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
+            <div v-for="(value, key) in ExistingUser?.organization" :key="key">
+              <div
+                v-if="value && key !== 'contactPerson' && key !== 'PSO_SME' && key !== 'address' && key !== 'euDmaResults' && key !== 'lastDma'">
+                <div class="row">
+                  <div class="col">
+                    <span>{{ getLanguageKey(key) }}</span>
+                  </div>
+                  <div class="col">
+                    <div v-if="key === 'type'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.type1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.type2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.type3') }}
+                      </div>
+                      <div v-else>
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.type4') }}
+                      </div>
                     </div>
-                    <div v-else-if="value === 'Item 2'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.type2') }}
+                    <div v-else-if="key === 'size'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.size1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.size2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.size3') }}
+                      </div>
                     </div>
-                    <div v-else-if="value === 'Item 3'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.type3') }}
+                    <div v-else-if="key === 'primarySektor'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector3') }}
+                      </div>
+                      <div v-if="value === 'Item 4'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector4') }}
+                      </div>
+                      <div v-else-if="value === 'Item 5'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector5') }}
+                      </div>
+                      <div v-else-if="value === 'Item 6'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector6') }}
+                      </div>
+                      <div v-if="value === 'Item 7'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector7') }}
+                      </div>
+                      <div v-else-if="value === 'Item 8'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector8') }}
+                      </div>
+                      <div v-else-if="value === 'Item 9'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector9') }}
+                      </div>
+                      <div v-else-if="value === 'Item 10'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector10') }}
+                      </div>
+                      <div v-else-if="value === 'other'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.primarySector11') }}
+                      </div>
+                    </div>
+                    <div v-else-if="key === 'secondarySektor'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector3') }}
+                      </div>
+                      <div v-if="value === 'Item 4'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector4') }}
+                      </div>
+                      <div v-else-if="value === 'Item 5'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector5') }}
+                      </div>
+                      <div v-else-if="value === 'Item 6'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector6') }}
+                      </div>
+                      <div v-if="value === 'Item 7'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector7') }}
+                      </div>
+                      <div v-else-if="value === 'Item 8'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector8') }}
+                      </div>
+                      <div v-else-if="value === 'Item 9'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector9') }}
+                      </div>
+                      <div v-else-if="value === 'Item 10'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector10') }}
+                      </div>
+                      <div v-else-if="value === 'other'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.PSO.secondarySector11') }}
+                      </div>
                     </div>
                     <div v-else>
-                      {{ $t(filename + '.OrgaInformations.organization.values.type4') }}
+                      <span>{{ value }}</span>
                     </div>
-                  </div>
-                  <div v-else-if="key === 'size'">
-                    <div v-if="value === 'Item 1'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.size1') }}
-                    </div>
-                    <div v-else-if="value === 'Item 2'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.size2') }}
-                    </div>
-                    <div v-else-if="value === 'Item 3'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.size3') }}
-                    </div>
-                  </div>
-                  <div v-else-if="key === 'primarySektor'">
-                    <div v-if="value === 'Item 1'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector1') }}
-                    </div>
-                    <div v-else-if="value === 'Item 2'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector2') }}
-                    </div>
-                    <div v-else-if="value === 'Item 3'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector3') }}
-                    </div>
-                    <div v-if="value === 'Item 4'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector4') }}
-                    </div>
-                    <div v-else-if="value === 'Item 5'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector5') }}
-                    </div>
-                    <div v-else-if="value === 'Item 6'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector6') }}
-                    </div>
-                    <div v-if="value === 'Item 7'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector7') }}
-                    </div>
-                    <div v-else-if="value === 'Item 8'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector8') }}
-                    </div>
-                    <div v-else-if="value === 'Item 9'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector9') }}
-                    </div>
-                    <div v-else-if="value === 'Item 10'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector10') }}
-                    </div>
-                    <div v-else-if="value === 'other'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.primarySector11') }}
-                    </div>
-                  </div>
-                  <div v-else-if="key === 'secondarySektor'">
-                    <div v-if="value === 'Item 1'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector1') }}
-                    </div>
-                    <div v-else-if="value === 'Item 2'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector2') }}
-                    </div>
-                    <div v-else-if="value === 'Item 3'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector3') }}
-                    </div>
-                    <div v-if="value === 'Item 4'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector4') }}
-                    </div>
-                    <div v-else-if="value === 'Item 5'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector5') }}
-                    </div>
-                    <div v-else-if="value === 'Item 6'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector6') }}
-                    </div>
-                    <div v-if="value === 'Item 7'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector7') }}
-                    </div>
-                    <div v-else-if="value === 'Item 8'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector8') }}
-                    </div>
-                    <div v-else-if="value === 'Item 9'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector9') }}
-                    </div>
-                    <div v-else-if="value === 'Item 10'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector10') }}
-                    </div>
-                    <div v-else-if="value === 'other'">
-                      {{ $t(filename + '.OrgaInformations.organization.values.secondarySector11') }}
-                    </div>
-                  </div>
-                  <div v-else>
-                    <span>{{ value }}</span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- show message for missing organization information  -->
-          <div v-if="allInformation === false">
-            <br>
-            <em>{{ $t(filename + '.OrgaInformations.addInformation') }}</em>
+            <!-- show message for missing organization information  -->
+            <div v-if="allInformation === false">
+              <br>
+              <em>{{ $t(filename + '.OrgaInformations.addInformation') }}</em>
+            </div>
           </div>
         </div>
+        <div v-else>
+          <!-- SME -->
+          <h5>{{ $t(filename + '.OrgaInformations.title') }}</h5>
+          <div class="leftbox" style="height: 350px;">
+            <h6>{{ $t(filename + '.OrgaInformations.organization.title') }}</h6>
+            <div v-for="(value, key) in ExistingUser?.organization" :key="key">
+              <div
+                v-if="value && key !== 'contactPerson' && key !== 'PSO_SME' && key !== 'address' && key !== 'euDmaResults' && key !== 'lastDma'">
+                <div class="row">
+                  <div class="col">
+                    <span>{{ getLanguageKey(key) }}</span>
+                  </div>
+                  <div class="col">
+                    <!-- <div v-if="key === 'type'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.type1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.type2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.type3') }}
+                      </div>
+                      <div v-else>
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.type4') }}
+                      </div>
+                    </div> -->
+                    <div v-if="key === 'size'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.size1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.size2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.size3') }}
+                      </div>
+                      <div v-else-if="value === 'Item 4'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.size4') }}
+                      </div>
+                    </div>
+                    <div v-else-if="key === 'primarySektor'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector3') }}
+                      </div>
+                      <div v-if="value === 'Item 4'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector4') }}
+                      </div>
+                      <div v-else-if="value === 'Item 5'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector5') }}
+                      </div>
+                      <div v-else-if="value === 'Item 6'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector6') }}
+                      </div>
+                      <div v-if="value === 'Item 7'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector7') }}
+                      </div>
+                      <div v-else-if="value === 'Item 8'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector8') }}
+                      </div>
+                      <div v-else-if="value === 'Item 9'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector9') }}
+                      </div>
+                      <div v-else-if="value === 'Item 10'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector10') }}
+                      </div>
+                      <div v-else-if="value === 'other'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.primarySector11') }}
+                      </div>
+                    </div>
+                    <div v-else-if="key === 'secondarySektor'">
+                      <div v-if="value === 'Item 1'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector1') }}
+                      </div>
+                      <div v-else-if="value === 'Item 2'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector2') }}
+                      </div>
+                      <div v-else-if="value === 'Item 3'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector3') }}
+                      </div>
+                      <div v-if="value === 'Item 4'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector4') }}
+                      </div>
+                      <div v-else-if="value === 'Item 5'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector5') }}
+                      </div>
+                      <div v-else-if="value === 'Item 6'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector6') }}
+                      </div>
+                      <div v-if="value === 'Item 7'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector7') }}
+                      </div>
+                      <div v-else-if="value === 'Item 8'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector8') }}
+                      </div>
+                      <div v-else-if="value === 'Item 9'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector9') }}
+                      </div>
+                      <div v-else-if="value === 'Item 10'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector10') }}
+                      </div>
+                      <div v-else-if="value === 'other'">
+                        {{ $t(filename + '.OrgaInformations.organization.values.SME.secondarySector11') }}
+                      </div>
+                    </div>
+                    <div v-else>
+                      <span>{{ value }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- show message for missing organization information  -->
+            <div v-if="allInformation === false">
+              <br>
+              <em>{{ $t(filename + '.OrgaInformations.addInformation') }}</em>
+            </div>
+          </div>
+
+        </div>
       </div>
+
       <!-- EU-DMAs -->
       <div class="col">
         <h5>{{ $t(filename + '.DmaInformations.title') }}</h5>
@@ -312,7 +442,8 @@
 import { ref, inject, watch } from 'vue';
 import SurveyComp from "../../components/SurveyComp.vue";
 import { useI18n } from 'vue-i18n';
-import { GetOrganizationInformation } from '../../components/staticQuestions/CreateOrgaInformation_json.js'
+import { GetPSOInformation } from '../../components/staticQuestions/GetPSOInformation_json.js'
+import { GetSMEInformation } from '../../components/staticQuestions/GetSMEInformation_json.js'
 import type { languageMapping } from "../../interfaces/languageMapping.js"
 import type { User } from "../../interfaces/User.js"
 import type { radarChartData } from "../../interfaces/radarChartData.js"
@@ -456,7 +587,11 @@ const organizationQuestions = ref<any>();
 organizationQuestions.value = {
   "SurveyJson": {}
 };
-organizationQuestions.value.SurveyJson = GetOrganizationInformation;
+if (ExistingUser.value?.organization.PSO_SME === 'PSO') {
+  organizationQuestions.value.SurveyJson = GetPSOInformation
+} else {
+  organizationQuestions.value.SurveyJson = GetSMEInformation
+};
 
 // rekursive function to assign defaultValues to element names
 function updateDefaultValueByName(element: any, name: string, newValue: any): void {
