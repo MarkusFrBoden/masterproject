@@ -116,6 +116,7 @@ const props = defineProps({
 });
 
 //get start data
+const PSOSME = localStorage.getItem('PSOSME');
 let currentUserName = localStorage.getItem('userName') || '';
 let UserId = localStorage.getItem('userId');
 let dmaDetails = ref<DMA>();
@@ -197,30 +198,36 @@ function checkForKey(element: any, name: string): boolean {
     return false;
 }
 
-//use organization data for default values in EUPSO questionaire
+//use organization data for default values in EUDMA questionaire
+
 watch([ExistingUser, dmaDetails], ([user]) => {
     if (user && dmaDetails.value && dmaDetails.value.SurveyJson) {
-        const topLevelElement = dmaDetails.value.SurveyJson.pages[0]
-        if (checkForKey(topLevelElement, 'EUPSOQuestion1')) {
-            try {
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion1', new Date());
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion2', user.organization?.name);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion3', user.organization?.identificationNumber);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion4', user.organization?.contactPerson.name);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion5', user.organization?.contactPerson.role);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion6', user.organization?.contactPerson.email);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion7', user.organization?.contactPerson.telephone);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion8', user.organization?.website);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion9', user.organization?.type);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion10', user.organization?.size);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion11', {
+        dmaDetails.value.SurveyJson.pages[0].elements[0].defaultValue = PSOSME;
+
+        let topLevelElement = dmaDetails.value.SurveyJson.pages[1];
+        if (PSOSME === 'SME'){
+        topLevelElement = dmaDetails.value.SurveyJson.pages[9]}
+        console.log(topLevelElement);
+        if (checkForKey(topLevelElement, `EU${PSOSME}Question1`)) {
+            try { 
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question1`, new Date());
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question2`, user.organization?.name);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question3`, user.organization?.identificationNumber);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question4`, user.organization?.contactPerson.name);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question5`, user.organization?.contactPerson.role);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question6`, user.organization?.contactPerson.email);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question7`, user.organization?.contactPerson.telephone);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question8`, user.organization?.website);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question9`, user.organization?.type);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question10`, user.organization?.size);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question11`, {
                     "text1": user.organization?.address.street,
                     "text2": user.organization?.address.postalcode,
                     "text3": user.organization?.address.city,
                     "text4": user.organization?.address.country,
                 });
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion13', user.organization?.primarySektor);
-                updateDefaultValueByName(topLevelElement, 'EUPSOQuestion14', user.organization?.secondarySektor);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question13`, user.organization?.primarySektor);
+                updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question14`, user.organization?.secondarySektor);
             }
             catch {
                 console.log('not all default value, EU questions were specialized')

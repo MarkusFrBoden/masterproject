@@ -18,7 +18,7 @@ const GetPSOInformation = {
                     "elements": [
                         {
                             "type": "text",
-                            "name": "EUPSOQuestion3",
+                            "name": "EUDMAQuestion3",
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
@@ -32,7 +32,7 @@ const GetPSOInformation = {
                             "elements": [
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion4",
+                                    "name": "EUDMAQuestion4",
                                     "title": {
                                         "de": "Name",
                                         "en": "Name"
@@ -41,7 +41,7 @@ const GetPSOInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion5",
+                                    "name": "EUDMAQuestion5",
                                     "title": {
                                         "de": "Funktion in der Einrichtung",
                                         "en": "Role in the organisation"
@@ -50,7 +50,7 @@ const GetPSOInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion6",
+                                    "name": "EUDMAQuestion6",
                                     "title": {
                                         "de": "E-Mail-Adresse",
                                         "en": "Email address"
@@ -60,7 +60,7 @@ const GetPSOInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion7",
+                                    "name": "EUDMAQuestion7",
                                     "title": {
                                         "de": "Telefonnummer",
                                         "en": "Telephone:"
@@ -72,7 +72,7 @@ const GetPSOInformation = {
                         },
                         {
                             "type": "text",
-                            "name": "EUPSOQuestion8",
+                            "name": "EUDMAQuestion8",
                             "title": {
                                 "de": "Website",
                                 "en": "Website"
@@ -82,7 +82,7 @@ const GetPSOInformation = {
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EUPSOQuestion9",
+                            "name": "EUDMAQuestion9",
                             "title": {
                                 "de": "Art der öffentlichen Einrichtung",
                                 "en": "Type of public sector organisation"
@@ -121,7 +121,7 @@ const GetPSOInformation = {
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EUPSOQuestion10",
+                            "name": "EUDMAQuestion10",
                             "title": {
                                 "de": "Zahl der Beschäftigten der Einrichtung",
                                 "en": "Organisation’s staff size"
@@ -153,7 +153,7 @@ const GetPSOInformation = {
                         },
                         {
                             "type": "multipletext",
-                            "name": "EUPSOQuestion11",
+                            "name": "EUDMAQuestion11",
                             "title": {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
@@ -210,7 +210,7 @@ const GetPSOInformation = {
                             "elements": [
                                 {
                                     "type": "radiogroup",
-                                    "name": "EUPSOQuestion13",
+                                    "name": "EUDMAQuestion13",
                                     "title": {
                                         "de": "Primär (eine Option obligatorisch)",
                                         "en": "Primary (one mandatory)"
@@ -292,7 +292,7 @@ const GetPSOInformation = {
                                 },
                                 {
                                     "type": "radiogroup",
-                                    "name": "EUPSOQuestion14",
+                                    "name": "EUDMAQuestion14",
                                     "title": {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"

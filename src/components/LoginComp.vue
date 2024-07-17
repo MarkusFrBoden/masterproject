@@ -54,6 +54,7 @@ const getUser = async () => {
             localStorage.setItem('userId', response.data._id);
             localStorage.setItem('userName', response.data.name);
             localStorage.setItem('organizationName', response.data.organization.name);
+            localStorage.setItem('PSOSME', response.data.organization.PSO_SME);
             if (response.data.organization.name === "EDIH Thuringia") {
                 router.push({ name: 'EdihHome' })
             } else {

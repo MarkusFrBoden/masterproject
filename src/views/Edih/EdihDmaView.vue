@@ -50,7 +50,7 @@
                         :value="{ id: dmm._id, akronym: dmm.akronym }" v-model="selectedDmms">
                 </div>
             </div>
-            <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
+            <div v-if="selectedDmms.some(item => item.akronym === 'EUDMA')">
                 <br>
                 {{ $t(filename + '.createInput.euDma') }}
                 <br>
@@ -75,7 +75,7 @@
                 <button class="btn btn-outline-secondary" @click="showInput = false;">
                     {{ $t(filename + '.createInput.cancel') }}
                 </button>
-                <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
+                <div v-if="selectedDmms.some(item => item.akronym === 'EUDMA')">
                     <button class="btn btn-outline-secondary"
                         @click="executeEuDmaOption !== '' ? createDma() : null; selectedDmms = []">
                         {{ $t(filename + '.createInput.create') }}
@@ -199,14 +199,14 @@ interface selectDmms {
 const selectedDmms = ref<selectDmms[]>([]);
 
 watch(selectedDmms, (newValue, oldValue) => {
-    if (newValue.some(item => item.akronym === 'EUPSO')) {
-        const organizationWithEUPSO = organizations.value.find((org: any) => {
+    if (newValue.some(item => item.akronym === 'EUDMA')) {
+        const organizationWithEUDMA = organizations.value.find((org: any) => {
             if (org._id === newDmaOrganisation.value) {
             }
-            const organizationWithEUPSO = organizations.value.find((org: any) => org._id === newDmaOrganisation.value);
-            console.log(organizationWithEUPSO);
-            if (organizationWithEUPSO) {
-                currentEuDmaStatus.value = organizationWithEUPSO.organization.euDmaStatus;
+            const organizationWithEUDMA = organizations.value.find((org: any) => org._id === newDmaOrganisation.value);
+            console.log(organizationWithEUDMA);
+            if (organizationWithEUDMA) {
+                currentEuDmaStatus.value = organizationWithEUDMA.organization.euDmaStatus;
                 setEuDMAStaus();
             }
         });
@@ -243,7 +243,7 @@ const createDma = async () => {
     try {
         PostDma.value.title = newDmaTitle;
         PostDma.value.createdFor = newDmaOrganisation.value;
-        if (selectedDmms.value.some(dmm => dmm.akronym === 'EUPSO')) {
+        if (selectedDmms.value.some(dmm => dmm.akronym === 'EUDMA')) {
             if (executeEuDmaOption.value === nextEuDmaStatus.value) {
                 PostDma.value.euDMA = nextEuDmaStatus.value;
             } else {
@@ -261,8 +261,8 @@ const createDma = async () => {
                 }
             } else {
                 selectedDmms.value.sort((a, b) => {
-                    if (a.akronym === "EUPSO") return -1;
-                    if (b.akronym === "EUPSO") return 1;
+                    if (a.akronym === "EUDMA") return -1;
+                    if (b.akronym === "EUDMA") return 1;
                     return 0;
                 });
                 for (const dmm of selectedDmms.value) {

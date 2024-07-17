@@ -93,6 +93,7 @@ let router = useRouter();
 const logout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('organizationName');
+  localStorage.removeItem('PSOSME');
   loggedIn.value = !loggedIn.value;
   router.push({ name: 'login' });
   setTimeout(async () => {

@@ -73,7 +73,7 @@
                             :value="{ id: dmm._id, akronym: dmm.akronym }" v-model="selectedDmms">
                     </div>
                 </div>
-                <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
+                <div v-if="selectedDmms.some(item => item.akronym === 'EUDMA')">
                     <br>
                     {{ $t(filename + '.createInput.euDma') }}
                     <br>
@@ -99,7 +99,7 @@
                     <button class="btn btn-outline-secondary" @click="showInput = false;">
                         {{ $t(filename + '.createInput.cancel') }}
                     </button>
-                    <div v-if="selectedDmms.some(item => item.akronym === 'EUPSO')">
+                    <div v-if="selectedDmms.some(item => item.akronym === 'EUDMA')">
                         <button class="btn btn-outline-secondary"
                             @click="executeEuDmaOption !== '' ? createDma() : null; selectedDmms = []">
                             {{ $t(filename + '.createInput.create') }}
@@ -297,7 +297,7 @@ const createDma = async () => {
     try {
         PostDma.value.title = newDmaTitle;
         PostDma.value.createdFor = currentUserOrganization;
-        if (selectedDmms.value.some(dmm => dmm.akronym === 'EUPSO')) {
+        if (selectedDmms.value.some(dmm => dmm.akronym === 'EUDMA')) {
             if (executeEuDmaOption.value === nextEuDmaStatus.value) {
                 PostDma.value.euDMA = nextEuDmaStatus.value;
             } else {
@@ -315,8 +315,8 @@ const createDma = async () => {
                 }
             } else {
                 selectedDmms.value.sort((a, b) => {
-                    if (a.akronym === "EUPSO") return -1;
-                    if (b.akronym === "EUPSO") return 1;
+                    if (a.akronym === "EUDMA") return -1;
+                    if (b.akronym === "EUDMA") return 1;
                     return 0;
                 });
                 for (const dmm of selectedDmms.value) {

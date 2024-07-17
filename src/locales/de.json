@@ -312,7 +312,7 @@
         "showAbout": "Allgemeine Informationen"
       },
       "EDIHInformation": {
-        "edihDescription": "Wir möchten Sie auf Ihrem Weg in die digitale Zukunft begleiten. Die digitale Transformation ist in vollem Gange und bietet Unternehmen, Startups und der öffentlichen Hand enorme Chancen. Der European Digital Innovation Hub Thuringia (EDIH) unterstützt Sie dabei, diese Chancen zu nutzen und die digitale Zukunft aktiv zu gestalten.",
+        "edihDescription": "Wir möchten Sie auf Ihrem Weg in die digitale Zukunft begleiten. Die digitale Transformation ist in vollem Gange und bietet Unternehmen, Startups und der öffentlichen Hand enorme Chancen. Das European Digital Innovation Hub Thuringia (EDIH) unterstützt Sie dabei, diese Chancen zu nutzen und die digitale Zukunft aktiv zu gestalten.",
         "edihButtons": {
           "learn": "Lernen",
           "test": "Testen",
@@ -324,7 +324,7 @@
           "link": "digitales Reifegradmodell (DMM)",
           "part2": " mit Ausprägungen für kleine und mittlere Unternehmen (SME) und öffentliche Organisationen (PSO) erarbeitet. Die Modelle ermöglichen das durchführen von digitalen Reifegraderfassungen (DMAs). Mittels der DMAs verfolgt die EU folgende Ziele:",
           "aim1": "1. Die Bewertung des aktuellen Stands der digitalen Reife der SME/PSO für die Ermittlung der erforderlichen EDIH-Digitalisierungsdienste.",
-          "aim2": "2. Ein Benchmarking für KMU/PSO, um ein besseres Bild der digitalen Reife im Vergleich zu Wettbewerbern zu erhalten.",
+          "aim2": "2. Ein Benchmarking für SME/PSO, um ein besseres Bild der digitalen Reife im Vergleich zu Wettbewerbern zu erhalten.",
           "aim3": "3. Die Messung und Berichterstattung über die Wirksamkeit der EDIH-Dienste.",
           "aim4": "4. Die Bereitstellung von Feedback für politische Entscheidungen und erforderliche Korrekturmaßnahmen."
         },

@@ -18,7 +18,7 @@ const GetSMEInformation = {
                     "elements": [
                         {
                             "type": "text",
-                            "name": "EUPSOQuestion3",
+                            "name": "EUDMAQuestion3",
                             "title": {
                                 "de": "Sonstige Identifizierungsnummer (Umsatzsteuer o. Ä.)",
                                 "en": "Other Identification Number (VAT or equivalent)"
@@ -32,7 +32,7 @@ const GetSMEInformation = {
                             "elements": [
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion4",
+                                    "name": "EUDMAQuestion4",
                                     "title": {
                                         "de": "Name",
                                         "en": "Name"
@@ -41,7 +41,7 @@ const GetSMEInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion5",
+                                    "name": "EUDMAQuestion5",
                                     "title": {
                                         "de": "Funktion in der Einrichtung",
                                         "en": "Role in the organisation"
@@ -50,7 +50,7 @@ const GetSMEInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion6",
+                                    "name": "EUDMAQuestion6",
                                     "title": {
                                         "de": "E-Mail-Adresse",
                                         "en": "Email address"
@@ -60,7 +60,7 @@ const GetSMEInformation = {
                                 },
                                 {
                                     "type": "text",
-                                    "name": "EUPSOQuestion7",
+                                    "name": "EUDMAQuestion7",
                                     "title": {
                                         "de": "Telefonnummer",
                                         "en": "Telephone:"
@@ -72,7 +72,7 @@ const GetSMEInformation = {
                         },
                         {
                             "type": "text",
-                            "name": "EUPSOQuestion8",
+                            "name": "EUDMAQuestion8",
                             "title": {
                                 "de": "Website",
                                 "en": "Website"
@@ -82,7 +82,7 @@ const GetSMEInformation = {
                         },
                         {
                             "type": "text",
-                            "name": "EUPSOQuestion9",
+                            "name": "EUDMAQuestion9",
                             "title": {
                                 "de": "Jahr der Unternehmensgründung",
                                 "en": "Enterprise’s foundation year"
@@ -91,7 +91,7 @@ const GetSMEInformation = {
                         },
                         {
                             "type": "radiogroup",
-                            "name": "EUPSOQuestion10",
+                            "name": "EUDMAQuestion10",
                             "title": {
                                 "de": "Zahl der Beschäftigten der Einrichtung",
                                 "en": "Organisation’s staff size"
@@ -130,7 +130,7 @@ const GetSMEInformation = {
                         },
                         {
                             "type": "multipletext",
-                            "name": "EUPSOQuestion11",
+                            "name": "EUDMAQuestion11",
                             "title": {
                                 "de": "Vollständige Anschrift",
                                 "en": "Full address"
@@ -187,7 +187,7 @@ const GetSMEInformation = {
                             "elements": [
                                 {
                                     "type": "dropdown",
-                                    "name": "EUPSOQuestion13",
+                                    "name": "EUDMAQuestion13",
                                     "title": {
                                         "de": "Primär (eine Option obligatorisch)",
                                         "en": "Primary (one mandatory)"
@@ -367,7 +367,7 @@ const GetSMEInformation = {
                                 },
                                 {
                                     "type": "dropdown",
-                                    "name": "EUPSOQuestion14",
+                                    "name": "EUDMAQuestion14",
                                     "title": {
                                         "de": "Sekundär (eine Option fakultativ)",
                                         "en": "Secondary (one optional)"

@@ -465,6 +465,7 @@ let showInput = ref(false);
 let allInformation = ref(false);
 
 //get start data
+const PSOSME = localStorage.getItem('PSOSME');
 const UserId = localStorage.getItem('userId');
 let ExistingUser = ref<User>();
 const getUser = async () => {
@@ -538,16 +539,16 @@ let mapping = (object: any) => {
   delete patchUser._id;
 
   const mappings: any = {
-    "EUPSOQuestion3": (value: any) => { patchUser.organization.identificationNumber = value; },
-    "EUPSOQuestion4": (value: any) => { patchUser.organization.contactPerson.name = value; },
-    "EUPSOQuestion5": (value: any) => { patchUser.organization.contactPerson.role = value; },
-    "EUPSOQuestion6": (value: any) => { patchUser.organization.contactPerson.email = value; },
-    "EUPSOQuestion7": (value: any) => { patchUser.organization.contactPerson.telephone = value; },
-    "EUPSOQuestion8": (value: any) => { patchUser.organization.website = value; },
-    "EUPSOQuestion9": (value: any) => { patchUser.organization.type = value; },
-    "EUPSOQuestion10": (value: any) => { patchUser.organization.size = value; },
-    "EUPSOQuestion13": (value: any) => { patchUser.organization.primarySektor = value; },
-    "EUPSOQuestion14": (value: any) => { patchUser.organization.secondarySektor = value; },
+    "EUDMAQuestion3": (value: any) => { patchUser.organization.identificationNumber = value; },
+    "EUDMAQuestion4": (value: any) => { patchUser.organization.contactPerson.name = value; },
+    "EUDMAQuestion5": (value: any) => { patchUser.organization.contactPerson.role = value; },
+    "EUDMAQuestion6": (value: any) => { patchUser.organization.contactPerson.email = value; },
+    "EUDMAQuestion7": (value: any) => { patchUser.organization.contactPerson.telephone = value; },
+    "EUDMAQuestion8": (value: any) => { patchUser.organization.website = value; },
+    "EUDMAQuestion9": (value: any) => { patchUser.organization.type = value; },
+    "EUDMAQuestion10": (value: any) => { patchUser.organization.size = value; },
+    "EUDMAQuestion13": (value: any) => { patchUser.organization.primarySektor = value; },
+    "EUDMAQuestion14": (value: any) => { patchUser.organization.secondarySektor = value; },
     "text1": (value: any) => { patchUser.organization.address.street = value; },
     "text2": (value: any) => { patchUser.organization.address.postalcode = value; },
     "text3": (value: any) => { patchUser.organization.address.city = value; },
@@ -558,8 +559,8 @@ let mapping = (object: any) => {
     if (object.hasOwnProperty(key)) {
       mappings[key](object[key]);
     }
-    if (object["EUPSOQuestion11"] && object["EUPSOQuestion11"].hasOwnProperty(key)) {
-      mappings[key](object["EUPSOQuestion11"][key]);
+    if (object["EUDMAQuestion11"] && object["EUDMAQuestion11"].hasOwnProperty(key)) {
+      mappings[key](object["EUDMAQuestion11"][key]);
     }
   }
 
@@ -587,7 +588,7 @@ const organizationQuestions = ref<any>();
 organizationQuestions.value = {
   "SurveyJson": {}
 };
-if (ExistingUser.value?.organization.PSO_SME === 'PSO') {
+if (PSOSME === 'PSO') {
   organizationQuestions.value.SurveyJson = GetPSOInformation
 } else {
   organizationQuestions.value.SurveyJson = GetSMEInformation
@@ -609,22 +610,22 @@ watch([ExistingUser, organizationQuestions], ([user]) => {
   if (user && organizationQuestions.value) {
     allInformation.value = checkValues(user.organization);
     const topLevelElement = organizationQuestions.value.SurveyJson.pages[0]
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion3', user.organization?.identificationNumber);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion4', user.organization?.contactPerson.name);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion5', user.organization?.contactPerson.role);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion6', user.organization?.contactPerson.email);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion7', user.organization?.contactPerson.telephone);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion8', user.organization?.website);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion9', user.organization?.type);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion10', user.organization?.size);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion11', {
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion3', user.organization?.identificationNumber);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion4', user.organization?.contactPerson.name);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion5', user.organization?.contactPerson.role);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion6', user.organization?.contactPerson.email);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion7', user.organization?.contactPerson.telephone);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion8', user.organization?.website);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion9', user.organization?.type);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion10', user.organization?.size);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion11', {
       "text1": user.organization?.address.street,
       "text2": user.organization?.address.postalcode,
       "text3": user.organization?.address.city,
       "text4": user.organization?.address.country,
     });
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion13', user.organization?.primarySektor);
-    updateDefaultValueByName(topLevelElement, 'EUPSOQuestion14', user.organization?.secondarySektor);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion13', user.organization?.primarySektor);
+    updateDefaultValueByName(topLevelElement, 'EUDMAQuestion14', user.organization?.secondarySektor);
   }
 });
 

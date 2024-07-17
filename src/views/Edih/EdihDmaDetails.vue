@@ -22,8 +22,7 @@
                     <button class="btn btn-outline-secondary" @click="downloadCSV">
                         {{ $t(filename + '.button.downloadCSV') }}
                     </button>
-                    <button class="btn btn-outline-secondary"
-                        @click="showResultDetails = !showResultDetails;">
+                    <button class="btn btn-outline-secondary" @click="showResultDetails = !showResultDetails;">
                         {{ $t(filename + '.button.DmaAnswers') }}
                     </button>
                     <br><br>
@@ -34,8 +33,8 @@
                     </div>
                 </div>
                 <!-- BIM4VID Response  -->
-              <div
-              v-if="(dmaDetails.SurveyJson.pages[0] && checkForKey(dmaDetails.SurveyJson.pages[0], 'BIM4VIDQuestion1')) || (dmaDetails.SurveyJson.pages[8] && checkForKey(dmaDetails.SurveyJson.pages[8], 'BIM4VIDQuestion1'))">
+                <div
+                    v-if="(dmaDetails.SurveyJson.pages[0] && checkForKey(dmaDetails.SurveyJson.pages[0], 'BIM4VIDQuestion1')) || (dmaDetails.SurveyJson.pages[8] && checkForKey(dmaDetails.SurveyJson.pages[8], 'BIM4VIDQuestion1'))">
                     <div v-if="trafficLightKPI">
                         <BIM4VIDResultsComp :trafficLightKPI="trafficLightKPI" />
                     </div>
@@ -136,10 +135,14 @@ const props = defineProps({
 //get start data
 let currentUserName = localStorage.getItem('userName') || '';
 const dmaDetails = ref<DMA>();
+let PSOSME = "PSO"
 const fetchData = async () => {
     try {
         const response = await api.get('/DmaById/' + props.id);
         dmaDetails.value = await response.data;
+        if (dmaDetails.value?.responses[0].data.EUSMEQuestion1) {
+            PSOSME = "SME"
+        }
     } catch (err: any) {
         console.error(err.message);
     }
@@ -147,9 +150,10 @@ const fetchData = async () => {
 };
 fetchData();
 
+
 // rekursive function to check for key
 function checkForKey(element: any, name: string): boolean {
-    if ( element.name === name) {
+    if (element.name === name) {
         return true;
     } else if (element.elements) {
         for (const nestedElement of element.elements) {
@@ -203,7 +207,7 @@ const ResultCalculation = () => {
 
 //enable csv download
 const downloadCSV = () => {
-    createCSVdownload(dmaDetails)
+    createCSVdownload(dmaDetails, PSOSME)
 };
 
 //fill defaults in surveyJS if there is already a response 
