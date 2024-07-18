@@ -33,13 +33,13 @@ const app = createApp(App)
 
 //use backend server link for api-requests
 const api = axios.create({
-  baseURL: 'https://masterproject-backend.up.railway.app/api/',
+  baseURL: 'https://masterproject-backend-production.up.railway.app/api/',
   //baseURL: 'http://localhost:5000/api/',
 });
 
 app.provide('api', api);
 app.provide('darkmode', isDark);
-app.provide('serverlink', 'https://masterproject-backend.up.railway.app')
+app.provide('serverlink', 'https://masterproject-backend-production.up.railway.app')
 
 app.use(router)
    .use(surveyPlugin)
