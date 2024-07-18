@@ -259,7 +259,7 @@ export function createCSVdownload(dmaDetails: Ref<DMA | undefined>, PSOSME: any)
             sponsors_staff_participation_m2_3_5: header.EUSMEQuestion19?.includes('Item 6') ? 1 : 0,
             makes_use_of_subsidised_training_m2_3_5: header.EUSMEQuestion19?.includes('Item 7') ? 1 : 0,
             //question EUSMEQuestion20
-            increases_staff_awareness_m2_3_6: header.EUSMEQuestion20?.includes('Item 1') ? 1 : 0,
+            facilitates_staff_awareness_m2_3_6: header.EUSMEQuestion20?.includes('Item 1') ? 1 : 0,
             communicates_digitalisation_m2_3_6: header.EUSMEQuestion20?.includes('Item 2') ? 1 : 0,
             monitors_staff_acceptance_m2_3_6: header.EUSMEQuestion20?.includes('Item 3') ? 1 : 0,
             involves_staff_including_m2_3_6: header.EUSMEQuestion20?.includes('Item 4') ? 1 : 0,
@@ -271,7 +271,7 @@ export function createCSVdownload(dmaDetails: Ref<DMA | undefined>, PSOSME: any)
             the_organisation_has_in_place_m2_4_7: header.EUSMEQuestion21?.includes('Item 1') ? 1 : 0,
             data_is_not_collected_digitally_m2_4_7: header.EUSMEQuestion21?.includes('Item 2') ? 1 : 0,
             relevant_data_m2_4_7: header.EUSMEQuestion21?.includes('Item 3') ? 1 : 0,
-            ddata_is_properly_integrated_m2_4_7: header.EUSMEQuestion21?.includes('Item 4') ? 1 : 0,
+            data_is_properly_integrated_m2_4_7: header.EUSMEQuestion21?.includes('Item 4') ? 1 : 0,
             data_is_accessible_m2_4_7: header.EUSMEQuestion21?.includes('Item 5') ? 1 : 0,
             collected_data_m2_4_7: header.EUSMEQuestion21?.includes('Item 6') ? 1 : 0,
             data_analytics_enriched_m2_4_7: header.EUSMEQuestion21?.includes('Item 7') ? 1 : 0,
