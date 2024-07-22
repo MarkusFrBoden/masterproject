@@ -337,11 +337,6 @@
                 </div>
               </div>
             </div>
-            <!-- show message for missing organization information  -->
-            <div v-if="allInformation === false">
-              <br>
-              <em>{{ $t(filename + '.OrgaInformations.addInformation') }}</em>
-            </div>
           </div>
 
         </div>
