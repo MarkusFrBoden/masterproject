@@ -30,16 +30,16 @@ function checkForKey(element: any, name: string): boolean {
 }
 
 //fill dma default value with responses
-export function fillSurveyResponses(dmaDetails: DMA) {
+export function fillSurveyResponses(dmaDetails: DMA, PSOSME: any) {
     const topLevel = dmaDetails.SurveyJson.pages[0];
-    if (checkForKey(topLevel, 'EUPSOQuestion1')) {
+    if (checkForKey(topLevel, `EUDMAQuestion1`)) {
         try {
             if (dmaDetails.responses.length > 0) {
                 for (let i = 0; i < dmaDetails.SurveyJson.pages.length; i++) {
                     const topLevelElement = dmaDetails.SurveyJson.pages[i];
                     const response = dmaDetails.responses[0].data;
                     for (let y = 1; y < 26; y++) {
-                        updateDefaultValueByName(topLevelElement, `EUPSOQuestion${y}`, response[`EUPSOQuestion${y}`]);
+                        updateDefaultValueByName(topLevelElement, `EU${PSOSME}Question${y}`, response[`EU${PSOSME}Question${y}`]);
                     }
                 }
             }

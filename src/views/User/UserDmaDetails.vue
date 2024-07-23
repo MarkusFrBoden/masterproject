@@ -234,7 +234,7 @@ watch([ExistingUser, dmaDetails], ([user]) => {
             }
         }
         //fill defaults in surveyJS if there is already a response 
-        const filledDetails = fillSurveyResponses(dmaDetails.value);
+        const filledDetails = fillSurveyResponses(dmaDetails.value, PSOSME);
     }
 });
 
