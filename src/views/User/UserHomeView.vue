@@ -489,11 +489,6 @@
       </div>
     </div>
 
-    <!-- show message for missing organization information  -->
-    <div v-if="allInformation === false">
-      <em>{{ $t(filename + '.OrgaInformations.notAllInformation') }}</em>
-    </div>
-
     <!-- button edit organization information  -->
     <br>
     <button class="btn btn-outline-secondary" @click="showInput = !showInput">{{
